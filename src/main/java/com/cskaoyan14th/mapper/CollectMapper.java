@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.Collect;
 import com.cskaoyan14th.bean.CollectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CollectMapper {
     long countByExample(CollectExample example);
 
@@ -27,4 +29,6 @@ public interface CollectMapper {
     int updateByPrimaryKeySelective(Collect record);
 
     int updateByPrimaryKey(Collect record);
+
+    List<Collect> selectCollectListOrder(String sort, String order);
 }

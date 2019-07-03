@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.Footprint;
 import com.cskaoyan14th.bean.FootprintExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FootprintMapper {
     long countByExample(FootprintExample example);
 
@@ -27,4 +29,6 @@ public interface FootprintMapper {
     int updateByPrimaryKeySelective(Footprint record);
 
     int updateByPrimaryKey(Footprint record);
+
+    List<Footprint> selectFootprintListOrder(String sort, String order);
 }
