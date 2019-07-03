@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Page<T> {
     List<T> items;
-    int total;
+    long total;
 
     public Page() {
     }
 
-    public Page(List<T> items, int total) {
+    public Page(List<T> items, long total) {
         this.items = items;
         this.total = total;
     }
@@ -30,11 +30,11 @@ public class Page<T> {
         this.items = items;
     }
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 }
