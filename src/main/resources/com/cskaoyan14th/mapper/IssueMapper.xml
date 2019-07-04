@@ -228,8 +228,34 @@
 
 
   <!--下面是自己写的sql语句-->
-  <select id="queryIssueList" resultType="com.cskaoyan14th.bean.Issue">
-    select * from cskaoyan_mall_issue
-    order by add_time desc
+  <resultMap id="IssueMap" type="com.cskaoyan14th.bean.Issue">
+    <id column="id" property="id"/>
+    <result column="question" property="question"/>
+    <result column="answer" property="answer"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
+  </resultMap>
+  <select id="queryIssueList" resultMap="IssueMap">
+    select id, question, answer, add_time, update_time, deleted
+    from cskaoyan_mall_issue
+    <where>
+      <if test="question != null">
+        `question` like concat('%',#{question},'%')
+      </if>
+    </where>
+    order by #{sort} #{order}
+
   </select>
+
+  <select id="selectById" resultMap="IssueMap">
+    select id, question, answer, add_time, update_time, deleted
+    from cskaoyan_mall_issue
+    where id = #{id}
+  </select>
+  <delete id="deleteById">
+    delete from cskaoyan_mall_issue
+    where
+    id = #{id}
+  </delete>
 </mapper>
