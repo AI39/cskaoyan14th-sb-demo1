@@ -19,10 +19,4 @@ public class AdminController {
         return responseVo;
     }
 
-    @RequestMapping("role/options")
-    @ResponseBody
-    public ResponseVo roleOptions(){
-        ResponseVo responseVo =  adminService.queryRoleAll();
-        return responseVo;
-    }
 }
