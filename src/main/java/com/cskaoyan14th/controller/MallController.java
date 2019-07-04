@@ -87,5 +87,22 @@ public class MallController {
         }
         return responseVo;
     }
+    @RequestMapping("issue/create")
+    @ResponseBody
+    public ResponseVo<Issue> createIssue(@RequestBody Issue issue){
+        ResponseVo<Issue> responseVo = new ResponseVo<>();
+        Issue create = issueService.createIssue(issue);
+        responseVo.setData(create);
+        if ( create != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+
+    }
 
 }

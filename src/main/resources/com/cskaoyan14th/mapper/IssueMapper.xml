@@ -258,4 +258,19 @@
     where
     id = #{id}
   </delete>
+                                                                                                                  <!--下面这三句让id自增-->
+  <insert id="inserts">
+    <selectKey keyColumn="id" keyProperty="id" resultType="int">
+    select last_insert_id();
+  </selectKey>
+    insert into cskaoyan_mall_issue
+    (question, answer,add_time, update_time)
+    values
+    (#{question}, #{answer}, #{addTime}, #{updateTime})
+  </insert>
+  <select id="selectByAnswer" resultMap="IssueMap">
+    select id, question, answer, add_time, update_time, deleted
+    from cskaoyan_mall_issue
+    where answer = #{answer}
+  </select>
 </mapper>

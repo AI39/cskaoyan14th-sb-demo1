@@ -35,4 +35,10 @@ public interface IssueMapper {
 
 
     Issue selectById(Integer id);
+
+    int createIssue(String answer, String question, String addTime, String updateTime, boolean deleted);
+
+    Issue selectByAnswer(String answer);
+
+    int inserts(Issue issue);
 }

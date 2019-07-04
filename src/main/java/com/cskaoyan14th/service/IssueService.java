@@ -15,4 +15,6 @@ public interface IssueService {
     Issue updateIssue(Issue issue);                                                                                 //编辑
 
     int deleteIssue(Issue issue);                                                                                   //删除
+
+    Issue createIssue(Issue issue);                                                                                 //添加
 }
