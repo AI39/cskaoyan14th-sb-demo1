@@ -27,4 +27,7 @@ public interface IssueMapper {
     int updateByPrimaryKeySelective(Issue record);
 
     int updateByPrimaryKey(Issue record);
+
+    /*下面是自己定义的方法*/
+    List<Issue> queryIssueList();
 }
