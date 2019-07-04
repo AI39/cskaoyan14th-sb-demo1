@@ -320,4 +320,12 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的方法-->
+  <select id="selectFeedbackListOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_feedback
+    order by #{sort} #{order}
+  </select>
 </mapper>
