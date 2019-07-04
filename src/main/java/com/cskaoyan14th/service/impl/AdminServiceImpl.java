@@ -1,7 +1,9 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Admin;
+import com.cskaoyan14th.bean.Role;
 import com.cskaoyan14th.mapper.AdminMapper;
+import com.cskaoyan14th.mapper.RoleMapper;
 import com.cskaoyan14th.service.AdminService;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -16,6 +18,8 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminMapper adminMapper;
+    @Autowired
+    RoleMapper roleMapper;
     @Override
     public ResponseVo queryAdminAll(int page, int limit) {
         ResponseVo<Page<Admin>> adminResponseVo = new ResponseVo<>();
@@ -35,5 +39,20 @@ public class AdminServiceImpl implements AdminService {
         }
 
         return adminResponseVo;
+    }
+
+    @Override
+    public ResponseVo queryRoleAll() {
+        ResponseVo<List<Role>> roleResponseVo = new ResponseVo<>();
+
+        List<Role> roleList = roleMapper.queryRoleAll();
+
+        if( roleList != null){
+            roleResponseVo.setErrno(0);
+            roleResponseVo.setErrmsg("成功");
+            roleResponseVo.setData(roleList);
+        }
+
+        return roleResponseVo;
     }
 }
