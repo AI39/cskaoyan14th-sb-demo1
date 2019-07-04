@@ -19,29 +19,6 @@ public class TestMapper extends Cskaoyan14thSbDemo1ApplicationTests {
     AdminMapper mapper;
 
     @Test
-    public void tets1(){
-        Admin admin = mapper.selectByPrimaryKey(1);
-        System.out.println(admin);
-    }
-
-
-
-    @Test
-    public void testPage(){
-        PageHelper.startPage(1,2);
-
-        AdminExample example = new AdminExample();
-        AdminExample.Criteria criteria = example.createCriteria();
-        criteria.andIdIsNotNull();
-        List<Admin> admins = mapper.selectByExample(example);
-
-        PageInfo pageInfo = new PageInfo(admins);
-
-        List list = pageInfo.getList();
-        System.out.println(list);
-    }
-
-    @Test
     public void mytest(){
         ResponseVo<List<User>> userResponseVo = new ResponseVo<>();
     }

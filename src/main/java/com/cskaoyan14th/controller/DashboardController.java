@@ -1,22 +1,22 @@
 package com.cskaoyan14th.controller;
 
-import com.cskaoyan14th.service.AdminService;
+import com.cskaoyan14th.service.impl.DashboardServiceImpl;
 import com.cskaoyan14th.vo.ResponseVo;
+import com.cskaoyan14th.vo.Total;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("admin")
-public class AdminController {
+public class DashboardController {
     @Autowired
-    AdminService adminService;
-    @RequestMapping("list")
-    @ResponseBody
-    public ResponseVo list(int page,int limit){
-        ResponseVo responseVo = adminService.queryAdminAll(page,limit);
-        return responseVo;
-    }
+    DashboardServiceImpl dashboardService;
 
+    @RequestMapping("dashboard")
+    @ResponseBody
+    public ResponseVo<Total> dashboard() {
+        Total total = dashboardService.getTotal();
+        return new ResponseVo<>(0, total, "成功");
+    }
 }

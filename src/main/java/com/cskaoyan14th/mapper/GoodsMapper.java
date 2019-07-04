@@ -1,5 +1,7 @@
 package com.cskaoyan14th.mapper;
 
+import com.cskaoyan14th.bean.CatAndBrandChildren;
+import com.cskaoyan14th.bean.CategoryForGoods;
 import com.cskaoyan14th.bean.Goods;
 import com.cskaoyan14th.bean.GoodsExample;
 import java.util.List;
@@ -33,4 +35,10 @@ public interface GoodsMapper {
     int updateByPrimaryKeyWithBLOBs(Goods record);
 
     int updateByPrimaryKey(Goods record);
+
+    /*以上为逆向工程生成*/
+
+    List<CategoryForGoods> selectCategoryForGoods();
+
+    List<CatAndBrandChildren> selectBrandsForGoods();
 }

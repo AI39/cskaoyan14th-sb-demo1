@@ -122,4 +122,22 @@ public class Ad {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "Ad{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
+                ", url='" + url + '\'' +
+                ", position=" + position +
+                ", content='" + content + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", enabled=" + enabled +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }
