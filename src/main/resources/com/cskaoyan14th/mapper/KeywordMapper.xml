@@ -272,4 +272,45 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--下面是自己写的sql语句-->
+  <resultMap id="myKeywordMap" type="com.cskaoyan14th.bean.Keyword">
+    <id column="id" property="id"/>
+    <result column="keyword" property="keyword"/>
+    <result column="url" property="url"/>
+    <result column="is_hot" property="isHot"/>
+    <result column="is_default" property="isDefault"/>
+    <result column="sort_order" property="sortOrder"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
+  </resultMap>
+  <select id="queryKeywordList" resultMap="myKeywordMap">
+    select id, keyword, url, is_hot, is_default, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_keyword
+    <where>
+      <if test="keyword != null">
+        `keyword` like concat('%',#{keyword},'%')
+      </if>
+      <if test="url != null">
+        and
+        `url` like concat('%', #{url}, '%')
+      </if>
+    </where>
+    order by #{sort} #{order}
+  </select>
+  <insert id="inserts">
+    <selectKey keyColumn="id" keyProperty="id" resultType="int">
+      select last_insert_id();
+    </selectKey>
+    insert into cskaoyan_mall_keyword
+    (keyword, url, is_hot, is_default, add_time, update_time)
+    values
+    (#{keyword}, #{url}, #{isHot}, #{isDefault}, #{addTime}, #{updateTime})
+  </insert>
+  <delete id="deleteById">
+    delete from cskaoyan_mall_keyword
+    where
+    id = #{id}
+  </delete>
 </mapper>

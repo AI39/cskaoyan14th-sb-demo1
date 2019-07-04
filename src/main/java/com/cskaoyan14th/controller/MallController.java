@@ -2,6 +2,7 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Category;
 import com.cskaoyan14th.bean.Issue;
+import com.cskaoyan14th.bean.Keyword;
 import com.cskaoyan14th.bean.Region;
 import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.vo.Page;
@@ -39,7 +40,9 @@ public class MallController {
    public ResponseVo<Page<>> regionList(int page, int limit){
         regionService.queryRegionList(page, limit);
     }*/
-   /*通用问题*/
+
+
+   /*通用问题，共有四个方法实现*/
     @RequestMapping("issue/list")
     @ResponseBody
     public ResponseVo<Page<Issue>> issueList(int page, int limit, String question, String sort, String order){                                                  //数据回显
@@ -102,7 +105,73 @@ public class MallController {
             responseVo.setErrno(404);
         }
         return responseVo;
-
     }
 
+
+    /*关键词*/
+    @RequestMapping("keyword/list")
+    @ResponseBody
+    public ResponseVo<Page<Keyword>> keywordList(int page, int limit, String keyword, String url, String sort, String order){
+        Page<Keyword> keywordList = keywordService.queryKeywordList(page, limit, keyword, url, sort, order);
+        ResponseVo<Page<Keyword>> responseVo = new ResponseVo<>();
+        if (keywordList != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            responseVo.setData(keywordList);
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+    @RequestMapping("keyword/update")
+    @ResponseBody
+    public ResponseVo<Keyword> updateKeyword(@RequestBody Keyword keyword){
+        ResponseVo<Keyword> responseVo = new ResponseVo<>();
+        Keyword update = keywordService.updateKeyword(keyword);
+        responseVo.setData(update);
+        if ( update != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+    @RequestMapping("keyword/delete")
+    @ResponseBody
+    public ResponseVo<Keyword> deleteKeyword(@RequestBody Keyword keyword){
+        ResponseVo<Keyword> responseVo = new ResponseVo<>();
+        int delete = keywordService.deleteKeyword(keyword);
+        if ( delete != 0){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(500);
+        }
+        return responseVo;
+    }
+    @RequestMapping("keyword/create")
+    @ResponseBody
+    public ResponseVo<Keyword> createKeyword(@RequestBody Keyword keyword){
+        ResponseVo<Keyword> responseVo = new ResponseVo<>();
+        Keyword create = keywordService.createKeyword(keyword);
+        responseVo.setData(create);
+        if ( create != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
 }
+
+
+
+
