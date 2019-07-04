@@ -231,6 +231,15 @@
     select
     <include refid="Base_Column_List"/>
     from cskaoyan_mall_footprint
+    <where>
+    <if test="userId != null">
+      user_id like concat('%',#{userId},'%')
+    </if>
+    <if test="goodsId != null">
+      and
+      goods_id like concat('%',#{goodsId},'%')
+    </if>
+  </where>
     order by #{sort} #{order}
   </select>
 </mapper>

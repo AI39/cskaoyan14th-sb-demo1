@@ -31,4 +31,7 @@ public interface CollectMapper {
     int updateByPrimaryKey(Collect record);
 
     List<Collect> selectCollectListOrder(String sort, String order);
+    List<Collect> selectCollectListOrder(@Param("userId") String userId,@Param("valueId") String valueId,
+                                         @Param("sort") String sort, @Param("order") String order);
+
 }

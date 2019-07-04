@@ -8,4 +8,5 @@ public interface UserService {
     Page<User> getPageList(int page,int limit);
 
     Page<User> getPageList(int page, int limit, String sort, String order);
+    Page<User> getPageList(int page, int limit,String username,String mobile, String sort, String order);
 }

@@ -26,5 +26,14 @@ public class FeedbackServiceImpl implements FeedbackService {
         return feedbackList;
     }
 
+    @Override
+    public Page<Feedback> getPageList(int page, int limit, String username, String id, String sort, String order) {
+        PageHelper.startPage(page,limit);
+        List<Feedback> feedbacks = feedbackMapper.selectFeedbackListOrder(username,id,sort, order);
+        PageInfo<Feedback> pageInfo = new PageInfo<>(feedbacks);
+        Page<Feedback> feedbackList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        return feedbackList;
+    }
+
 
 }
