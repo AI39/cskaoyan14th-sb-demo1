@@ -24,7 +24,7 @@ public class IssueServiceImpl implements IssueService {
         PageHelper.startPage(page,limit);
         List<Issue> issueList1 = issueMapper.queryIssueList();
         PageInfo<Issue> pageInfo = new PageInfo<>(issueList1);
-        Page<Issue> issueList = new Page<>(pageInfo.getList(), (int) pageInfo.getTotal());
+        Page<Issue> issueList = new Page<>(pageInfo.getList(), pageInfo.getTotal());
 
         return issueList;
     }
