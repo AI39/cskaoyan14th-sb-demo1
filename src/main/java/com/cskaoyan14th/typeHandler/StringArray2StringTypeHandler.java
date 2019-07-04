@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GoodsTypeHandler extends BaseTypeHandler<String[]> {
+public class StringArray2StringTypeHandler extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
         StringBuffer sb = new StringBuffer("[");

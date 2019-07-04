@@ -241,4 +241,31 @@ public class Goods {
                 ", detail='" + detail + '\'' +
                 '}';
     }
+
+    public Goods() {
+    }
+
+    public Goods(Integer id, String goodsSn, String name, Integer categoryId, Integer brandId, String[] gallery, String keywords, String brief, Boolean isOnSale, Short sortOrder, String picUrl, String shareUrl, Boolean isNew, Boolean isHot, String unit, BigDecimal counterPrice, BigDecimal retailPrice, Date addTime, Date updateTime, Boolean deleted, String detail) {
+        this.id = id;
+        this.goodsSn = goodsSn;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.brandId = brandId;
+        this.gallery = gallery;
+        this.keywords = keywords;
+        this.brief = brief;
+        this.isOnSale = isOnSale;
+        this.sortOrder = sortOrder;
+        this.picUrl = picUrl;
+        this.shareUrl = shareUrl;
+        this.isNew = isNew;
+        this.isHot = isHot;
+        this.unit = unit;
+        this.counterPrice = counterPrice;
+        this.retailPrice = retailPrice;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+        this.detail = detail;
+    }
 }

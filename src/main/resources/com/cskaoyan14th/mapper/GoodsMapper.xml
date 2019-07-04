@@ -7,7 +7,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="brand_id" jdbcType="INTEGER" property="brandId" />
-    <result column="gallery"  property="gallery" jdbcType="VARCHAR" typeHandler="com.cskaoyan14th.typeHandler.GoodsTypeHandler" />
+    <result column="gallery"  property="gallery" jdbcType="VARCHAR" typeHandler="com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="is_on_sale" jdbcType="BIT" property="isOnSale" />
@@ -150,7 +150,7 @@
       retail_price, add_time, update_time, 
       deleted, detail)
     values (#{id,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{gallery jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+      #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{gallery jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       #{keywords,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT}, 
       #{sortOrder,jdbcType=SMALLINT}, #{picUrl,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, 
       #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{unit,jdbcType=VARCHAR}, #{counterPrice,jdbcType=DECIMAL}, 
@@ -241,7 +241,7 @@
         #{brandId,jdbcType=INTEGER},
       </if>
       <if test="gallery != null">
-        #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+        #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="keywords != null">
         #{keywords,jdbcType=VARCHAR},
@@ -315,7 +315,7 @@
         brand_id = #{record.brandId,jdbcType=INTEGER},
       </if>
       <if test="record.gallery != null">
-        gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+        gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="record.keywords != null">
         keywords = #{record.keywords,jdbcType=VARCHAR},
@@ -374,7 +374,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       brand_id = #{record.brandId,jdbcType=INTEGER},
-      gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+      gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       brief = #{record.brief,jdbcType=VARCHAR},
       is_on_sale = #{record.isOnSale,jdbcType=BIT},
@@ -401,7 +401,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       brand_id = #{record.brandId,jdbcType=INTEGER},
-      gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+      gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       brief = #{record.brief,jdbcType=VARCHAR},
       is_on_sale = #{record.isOnSale,jdbcType=BIT},
@@ -436,7 +436,7 @@
         brand_id = #{brandId,jdbcType=INTEGER},
       </if>
       <if test="gallery != null">
-        gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+        gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="keywords != null">
         keywords = #{keywords,jdbcType=VARCHAR},
@@ -492,7 +492,7 @@
       name = #{name,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
-      gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+      gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       keywords = #{keywords,jdbcType=VARCHAR},
       brief = #{brief,jdbcType=VARCHAR},
       is_on_sale = #{isOnSale,jdbcType=BIT},
@@ -516,7 +516,7 @@
       name = #{name,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
-      gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
+      gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       keywords = #{keywords,jdbcType=VARCHAR},
       brief = #{brief,jdbcType=VARCHAR},
       is_on_sale = #{isOnSale,jdbcType=BIT},
@@ -533,4 +533,33 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--categoryForGoods-->
+  <resultMap id="categoryForGoodsMap" type="com.cskaoyan14th.bean.CategoryForGoods">
+    <result column="parent_value" property="value"/>
+    <result column="parent_label" property="label"/>
+    <collection property="children" ofType="com.cskaoyan14th.bean.CatAndBrandChildren">
+      <result column="children_value" property="value"/>
+      <result column="children_label" property="label"/>
+    </collection>
+  </resultMap>
+  <select id="selectCategoryForGoods" resultMap="categoryForGoodsMap">
+      SELECT
+        t1.id AS parent_value,
+        t1.NAME AS parent_label,
+        t2.id AS children_value,
+        t2.NAME AS children_label
+      FROM
+          cskaoyan_mall_category t1
+          LEFT JOIN cskaoyan_mall_category t2 ON t1.id = t2.pid
+      WHERE
+          t1.pid = 0
+  </select>
+
+  <!--brandsForGoods-->
+  <select id="selectBrandsForGoods" resultType="com.cskaoyan14th.bean.CatAndBrandChildren">
+    select id as value,name as label from cskaoyan_mall_brand
+  </select>
+
+
+
 </mapper>
