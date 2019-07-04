@@ -24,4 +24,13 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
         Page<SearchHistory> historyList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return historyList;
     }
+
+    @Override
+    public Page<SearchHistory> getPageList(int page, int limit, String userId, String keyword, String sort, String order) {
+        PageHelper.startPage(page,limit);
+        List<SearchHistory> histories = searchHistoryMapper.selectSearchHistoryOrder(userId,keyword,sort, order);
+        PageInfo<SearchHistory> pageInfo = new PageInfo<>(histories);
+        Page<SearchHistory> historyList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        return historyList;
+    }
 }

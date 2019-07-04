@@ -24,4 +24,13 @@ public class FootprintServiceImpl implements FootprintService {
         Page<Footprint> footprintList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return footprintList;
     }
+
+    @Override
+    public Page<Footprint> getPageList(int page, int limit, String userId, String goodsId, String sort, String order) {
+        PageHelper.startPage(page,limit);
+        List<Footprint> footprints = footprintMapper.selectFootprintListOrder(userId,goodsId,sort, order);
+        PageInfo<Footprint> pageInfo = new PageInfo<>(footprints);
+        Page<Footprint> footprintList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        return footprintList;
+    }
 }

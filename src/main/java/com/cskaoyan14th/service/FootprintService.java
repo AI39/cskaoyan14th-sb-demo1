@@ -5,4 +5,6 @@ import com.cskaoyan14th.vo.Page;
 
 public interface FootprintService {
     Page<Footprint> getPageList(int page, int limit, String sort, String order);
+
+    Page<Footprint> getPageList(int page, int limit, String userId, String goodsId, String sort, String order);
 }

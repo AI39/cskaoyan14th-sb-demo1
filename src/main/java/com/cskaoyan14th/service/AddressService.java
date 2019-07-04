@@ -5,4 +5,6 @@ import com.cskaoyan14th.vo.Page;
 
 public interface AddressService {
     Page<Address> getPageList(int page, int limit, String sort, String order);
+
+    Page<Address> getPageList(int page, int limit, String name, String userId, String sort, String order);
 }
