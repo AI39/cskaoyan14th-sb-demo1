@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("admin/goods")
+@RequestMapping("goods")
 public class GoodsController {
     @Autowired
     GoodsService goodsService;
@@ -23,4 +21,8 @@ public class GoodsController {
         ResponseVo<Page<Goods>> responseVo = new ResponseVo<>(0, goodsPage, "成功");
         return responseVo;
     }
+    /*@GetMapping("catAndBrand")
+    public ResponseVo catAndBrand() {
+
+    }*/
 }

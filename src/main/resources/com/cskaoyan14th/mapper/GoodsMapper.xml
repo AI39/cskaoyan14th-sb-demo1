@@ -7,7 +7,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="brand_id" jdbcType="INTEGER" property="brandId" />
-    <result column="gallery" jdbcType="VARCHAR" property="gallery" />
+    <result column="gallery"  property="gallery" jdbcType="VARCHAR" typeHandler="com.cskaoyan14th.typeHandler.GoodsTypeHandler" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="is_on_sale" jdbcType="BIT" property="isOnSale" />
@@ -150,7 +150,7 @@
       retail_price, add_time, update_time, 
       deleted, detail)
     values (#{id,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{gallery,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{gallery jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       #{keywords,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT}, 
       #{sortOrder,jdbcType=SMALLINT}, #{picUrl,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, 
       #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{unit,jdbcType=VARCHAR}, #{counterPrice,jdbcType=DECIMAL}, 
@@ -241,7 +241,7 @@
         #{brandId,jdbcType=INTEGER},
       </if>
       <if test="gallery != null">
-        #{gallery,jdbcType=VARCHAR},
+        #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       </if>
       <if test="keywords != null">
         #{keywords,jdbcType=VARCHAR},
@@ -315,7 +315,7 @@
         brand_id = #{record.brandId,jdbcType=INTEGER},
       </if>
       <if test="record.gallery != null">
-        gallery = #{record.gallery,jdbcType=VARCHAR},
+        gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       </if>
       <if test="record.keywords != null">
         keywords = #{record.keywords,jdbcType=VARCHAR},
@@ -374,7 +374,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       brand_id = #{record.brandId,jdbcType=INTEGER},
-      gallery = #{record.gallery,jdbcType=VARCHAR},
+      gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       brief = #{record.brief,jdbcType=VARCHAR},
       is_on_sale = #{record.isOnSale,jdbcType=BIT},
@@ -401,7 +401,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       brand_id = #{record.brandId,jdbcType=INTEGER},
-      gallery = #{record.gallery,jdbcType=VARCHAR},
+      gallery = #{record.gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       brief = #{record.brief,jdbcType=VARCHAR},
       is_on_sale = #{record.isOnSale,jdbcType=BIT},
@@ -436,7 +436,7 @@
         brand_id = #{brandId,jdbcType=INTEGER},
       </if>
       <if test="gallery != null">
-        gallery = #{gallery,jdbcType=VARCHAR},
+        gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       </if>
       <if test="keywords != null">
         keywords = #{keywords,jdbcType=VARCHAR},
@@ -492,7 +492,7 @@
       name = #{name,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
-      gallery = #{gallery,jdbcType=VARCHAR},
+      gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       keywords = #{keywords,jdbcType=VARCHAR},
       brief = #{brief,jdbcType=VARCHAR},
       is_on_sale = #{isOnSale,jdbcType=BIT},
@@ -516,7 +516,7 @@
       name = #{name,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
-      gallery = #{gallery,jdbcType=VARCHAR},
+      gallery = #{gallery,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.GoodsTypeHandler},
       keywords = #{keywords,jdbcType=VARCHAR},
       brief = #{brief,jdbcType=VARCHAR},
       is_on_sale = #{isOnSale,jdbcType=BIT},
