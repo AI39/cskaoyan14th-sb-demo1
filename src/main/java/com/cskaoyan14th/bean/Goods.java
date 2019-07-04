@@ -213,4 +213,32 @@ public class Goods {
     public void setDetail(String detail) {
         this.detail = detail == null ? null : detail.trim();
     }
+
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", goodsSn='" + goodsSn + '\'' +
+                ", name='" + name + '\'' +
+                ", categoryId=" + categoryId +
+                ", brandId=" + brandId +
+                ", gallery='" + gallery + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", brief='" + brief + '\'' +
+                ", isOnSale=" + isOnSale +
+                ", sortOrder=" + sortOrder +
+                ", picUrl='" + picUrl + '\'' +
+                ", shareUrl='" + shareUrl + '\'' +
+                ", isNew=" + isNew +
+                ", isHot=" + isHot +
+                ", unit='" + unit + '\'' +
+                ", counterPrice=" + counterPrice +
+                ", retailPrice=" + retailPrice +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

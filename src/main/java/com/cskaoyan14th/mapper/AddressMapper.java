@@ -3,9 +3,11 @@ package com.cskaoyan14th.mapper;
 import com.cskaoyan14th.bean.Address;
 import com.cskaoyan14th.bean.AddressExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface AddressMapper {
     long countByExample(AddressExample example);
 
@@ -28,4 +30,9 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address record);
 
     int updateByPrimaryKey(Address record);
+
+
+    List<Address> selectAddressListOrder(@Param("sort") String sort, @Param("order") String order);
+    List<Address> selectAddressListOrder(@Param("name") String name,@Param("userId") String userId,
+                                         @Param("sort") String sort, @Param("order") String order);
 }

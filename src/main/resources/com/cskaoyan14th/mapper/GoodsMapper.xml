@@ -19,6 +19,7 @@
     <result column="unit" jdbcType="VARCHAR" property="unit" />
     <result column="counter_price" jdbcType="DECIMAL" property="counterPrice" />
     <result column="retail_price" jdbcType="DECIMAL" property="retailPrice" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
@@ -86,7 +87,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale, 
-    sort_order, pic_url, share_url, is_new, is_hot, unit, counter_price, retail_price, 
+    sort_order, pic_url, share_url, is_new, is_hot, unit, counter_price, retail_price, detail,
     add_time, update_time, deleted
   </sql>
   <sql id="Blob_Column_List">

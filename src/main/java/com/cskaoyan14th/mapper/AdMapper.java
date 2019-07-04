@@ -3,6 +3,9 @@ package com.cskaoyan14th.mapper;
 import com.cskaoyan14th.bean.Ad;
 import com.cskaoyan14th.bean.AdExample;
 import java.util.List;
+
+import com.cskaoyan14th.vo.Page;
+import com.cskaoyan14th.vo.ResponseVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdMapper {
@@ -27,4 +30,5 @@ public interface AdMapper {
     int updateByPrimaryKeySelective(Ad record);
 
     int updateByPrimaryKey(Ad record);
+
 }
