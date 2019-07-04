@@ -28,4 +28,11 @@ public class IssueServiceImpl implements IssueService {
 
         return issueList;
     }
+
+    @Override
+    public Issue updateIssue(Issue issue) {
+        issueMapper.updateByPrimaryKey(issue);                                                                      //先进行修改
+        Issue issue1 = issueMapper.selectByPrimaryKey(issue.getId());                                               //再获取修改以后的issue
+        return issue1;
+    }
 }

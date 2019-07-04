@@ -8,5 +8,7 @@ import com.cskaoyan14th.vo.Page;
  * @version 2019-07-03-21:28
  */
 public interface IssueService {
-    Page<Issue> queryIssueList(int page, int limit);
+    Page<Issue> queryIssueList(int page, int limit);                                                                //回显数据
+
+    Issue updateIssue(Issue issue);                                                                                 //编辑
 }
