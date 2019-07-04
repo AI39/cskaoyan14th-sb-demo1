@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/")
 public class TestController {
 
     @Autowired

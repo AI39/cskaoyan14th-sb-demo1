@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.Feedback;
 import com.cskaoyan14th.bean.FeedbackExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FeedbackMapper {
     long countByExample(FeedbackExample example);
 
@@ -27,4 +29,9 @@ public interface FeedbackMapper {
     int updateByPrimaryKeySelective(Feedback record);
 
     int updateByPrimaryKey(Feedback record);
+
+    List<Feedback> selectFeedbackListOrder(String sort, String order);
+    List<Feedback> selectFeedbackListOrder(@Param("username") String username,@Param("id") String id,
+                                           @Param("sort") String sort, @Param("order") String order);
+
 }

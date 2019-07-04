@@ -1,0 +1,2 @@
+问题1：逆向工程生成的mapper包下的sql语句中，有关desc、from等字段没有带``符号，运行会报错
+	解决方案：把desc、from等字段修改成`desc`、`from`等。

@@ -225,4 +225,11 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--下面是自己写的sql语句-->
+  <select id="queryIssueList" resultType="com.cskaoyan14th.bean.Issue">
+    select * from cskaoyan_mall_issue
+    order by add_time desc
+  </select>
 </mapper>

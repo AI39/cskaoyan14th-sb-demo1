@@ -20,6 +20,7 @@ spring.log
 *.iml
 *.ipr
 src/main/resources/application.yml
+src/main/resources/banner.txt
 
 ### NetBeans ###
 /nbproject/private/
