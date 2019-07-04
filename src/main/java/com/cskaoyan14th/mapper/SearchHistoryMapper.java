@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.SearchHistory;
 import com.cskaoyan14th.bean.SearchHistoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SearchHistoryMapper {
     long countByExample(SearchHistoryExample example);
 
@@ -27,4 +29,6 @@ public interface SearchHistoryMapper {
     int updateByPrimaryKeySelective(SearchHistory record);
 
     int updateByPrimaryKey(SearchHistory record);
+
+    List<SearchHistory> selectSearchHistoryOrder(String sort, String order);
 }

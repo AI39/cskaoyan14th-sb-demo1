@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.User;
 import com.cskaoyan14th.bean.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
     long countByExample(UserExample example);
 
@@ -27,4 +29,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectUserListOrder(@Param("sort") String sort, @Param("order") String order);
 }
