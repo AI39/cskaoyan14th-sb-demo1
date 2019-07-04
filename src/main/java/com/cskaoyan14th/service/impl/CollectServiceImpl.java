@@ -25,4 +25,13 @@ public class CollectServiceImpl implements CollectService {
         Page<Collect> collectList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return collectList;
     }
+
+    @Override
+    public Page<Collect> getPageList(int page, int limit, String userId, String valueId, String sort, String order) {
+        PageHelper.startPage(page,limit);
+        List<Collect> collects = collectMapper.selectCollectListOrder(userId,valueId,sort, order);
+        PageInfo<Collect> pageInfo = new PageInfo<>(collects);
+        Page<Collect> collectList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        return collectList;
+    }
 }

@@ -31,4 +31,7 @@ public interface FootprintMapper {
     int updateByPrimaryKey(Footprint record);
 
     List<Footprint> selectFootprintListOrder(String sort, String order);
+    List<Footprint> selectFootprintListOrder(@Param("userId") String userId,@Param("goodsId") String goodsId,
+                                             @Param("sort") String sort, @Param("order") String order);
+
 }

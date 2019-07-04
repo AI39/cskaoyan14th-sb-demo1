@@ -31,4 +31,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> selectUserListOrder(@Param("sort") String sort, @Param("order") String order);
+    List<User> selectUserListOrder(@Param("username") String username,@Param("mobile") String mobile,
+                                   @Param("sort") String sort, @Param("order") String order);
+
 }

@@ -24,4 +24,13 @@ public class AddressServiceImpl implements AddressService {
         Page<Address> addressList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return addressList;
     }
+
+    @Override
+    public Page<Address> getPageList(int page, int limit, String name, String userId, String sort, String order) {
+        PageHelper.startPage(page,limit);
+        List<Address> addresses = addressMapper.selectAddressListOrder(name,userId,sort, order);
+        PageInfo<Address> pageInfo = new PageInfo<>(addresses);
+        Page<Address> addressList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        return addressList;
+    }
 }
