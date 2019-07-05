@@ -29,5 +29,16 @@ public interface IssueMapper {
     int updateByPrimaryKey(Issue record);
 
     /*下面是自己定义的方法*/
-    List<Issue> queryIssueList();
+    List<Issue> queryIssueList(@Param("question") String question, @Param("sort") String sort, @Param("order") String order);       //为什么要加这个
+
+    int deleteById(Integer id);
+
+
+    Issue selectById(Integer id);
+
+    int createIssue(String answer, String question, String addTime, String updateTime, boolean deleted);
+
+    Issue selectByAnswer(String answer);
+
+    int inserts(Issue issue);
 }

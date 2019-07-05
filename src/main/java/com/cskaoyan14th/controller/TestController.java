@@ -32,5 +32,15 @@ public class TestController {
     }
 
 
+    @RequestMapping("auth/testSql")
+    @ResponseBody
+    public Admin testSql() {
+        Admin admin = adminMapper.selectByPrimaryKey(1);
+        System.out.println(admin);
+        return admin;
+    }
+
+
+
 
 }
