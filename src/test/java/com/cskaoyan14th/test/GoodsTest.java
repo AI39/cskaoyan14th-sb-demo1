@@ -3,6 +3,7 @@ package com.cskaoyan14th.test;
 import com.cskaoyan14th.Cskaoyan14thSbDemo1ApplicationTests;
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.GoodsMapper;
+import com.cskaoyan14th.mapper.GoodsProductMapper;
 import com.cskaoyan14th.mapper.GoodsSpecificationMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class GoodsTest extends Cskaoyan14thSbDemo1ApplicationTests {
 
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    GoodsProductMapper goodsProductMapper;
 
     @Autowired
     GoodsSpecificationMapper goodsSpecificationMapper;
@@ -64,5 +68,13 @@ public class GoodsTest extends Cskaoyan14thSbDemo1ApplicationTests {
         goods.setName("1234567");
         int i = goodsMapper.insert(goods);
         System.out.println(goods.getId());
+    }
+
+    @Test
+    public void test7() {
+        GoodsProduct goodsProduct = new GoodsProduct();
+        goodsProduct.setNumber(1);
+        int i = goodsProductMapper.insertSelective(goodsProduct);
+        System.out.println(i);
     }
 }

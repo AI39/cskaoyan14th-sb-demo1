@@ -7,10 +7,8 @@ import com.cskaoyan14th.vo.ResponseMapVo;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.GoodsParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonFactoryBean;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ public class GoodsController {
     GoodsService goodsService;
 
     //一、商品列表
-    //（一）商品列表展示
+    //（一）商品列表展示和模糊查询
     @GetMapping("list")
     public ResponseVo<Page<Goods>> list(int page, int limit, String sort, String order) {
         Page<Goods> goodsPage = goodsService.getGoodsPage(page, limit, sort, order);
@@ -47,17 +45,13 @@ public class GoodsController {
         responseMapVo.setErrno(0);
         return responseMapVo;
     }
-    //(二)商品上架
+    //(二)insert
     @PostMapping("create")
-    public ResponseVo<Goods> create(@RequestBody GoodsParam goodsParam)  {
-        ResponseVo<Goods> responseVo = new ResponseVo<>();
+    public ResponseVo<Object> create(@RequestBody GoodsParam goodsParam)  {
+        ResponseVo<Object> responseVo = new ResponseVo<>();
 
         //1.获取参数
         Goods goods = goodsParam.getGoods();
-        GoodsSpecification[] specifications = goodsParam.getSpecifications();
-        GoodsProduct[] products = goodsParam.getProducts();
-        GoodsAttribute[] attributes = goodsParam.getAttributes();
-
 
         //2.查看商品名是否已存在
         Boolean flag = goodsService.goodsNameIsExist(goods.getName());
@@ -67,8 +61,54 @@ public class GoodsController {
             return responseVo;
         }
         //3.执行插入操作
-        flag = goodsService.insertGoods4(goods, specifications, products, attributes);
+        flag = goodsService.insertGoods4(goodsParam);
+        if(!flag) {
+            responseVo.setErrmsg("系统内部错误");
+            responseVo.setErrno(502);
+            return responseVo;
+        }
 
+        responseVo.setErrmsg("成功");
+        responseVo.setErrno(0);
+        return responseVo;
+    }
+
+    //三、商品编辑
+
+    //(一)商品编辑信息展示
+    @RequestMapping("detail")
+    public ResponseVo<GoodsParam> detail(int id) {
+        ResponseVo<GoodsParam> responseVo = new ResponseVo<>();
+        GoodsParam goodsParam = goodsService.getGoodsParam(id);
+        responseVo.setErrmsg("成功");
+        responseVo.setErrno(0);
+        responseVo.setData(goodsParam);
+        return responseVo;
+    }
+
+    //(二)update
+    @RequestMapping("update")
+    public ResponseVo<Object> update(@RequestBody GoodsParam goodsParam) {
+        ResponseVo<Object> responseVo = new ResponseVo<>();
+
+        Boolean flag = goodsService.updateGoods4(goodsParam);
+        if(!flag) {
+            responseVo.setErrmsg("系统内部错误");
+            responseVo.setErrno(502);
+            return responseVo;
+        }
+
+        responseVo.setErrmsg("成功");
+        responseVo.setErrno(0);
+        return responseVo;
+    }
+
+    //四、商品删除
+    @RequestMapping("delete")
+    public ResponseVo<Object> delete(@RequestBody Goods goods) {
+        ResponseVo<Object> responseVo = new ResponseVo<>();
+
+        Boolean flag = goodsService.deleteGoods4(goods);
 
         if(!flag) {
             responseVo.setErrmsg("系统内部错误");
