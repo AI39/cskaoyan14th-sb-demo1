@@ -19,4 +19,26 @@
   <select id="queryStorageAll" resultMap="storageMapper">
     select id,`key`,`name`,type,size,url,add_time,update_time from cskaoyan_mall_storage where name = #{ori}
   </select>
+
+  <select id="queryStorage" resultMap="storageMapper">
+   select `key`,`name`,type,size,url from cskaoyan_mall_storage
+   <where>
+     <if test="name != null ">
+       `name` like
+       CONCAT('%',#{name},'%')
+     </if>
+
+     <if test="key != null">
+       and `key` like
+       CONCAT('%',#{key},'%')
+     </if>
+   </where>
+  </select>
+
+  <update id="updateStorageByKey" >
+    update cskaoyan_mall_storage set name = #{sto.name} where `key` = #{sto.key}
+  </update>
+  <delete id="deleteStorageByKey">
+    delete from cskaoyan_mall_storage where id = #{sto.key}
+  </delete>
 </mapper>
