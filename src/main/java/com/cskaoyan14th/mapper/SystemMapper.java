@@ -3,6 +3,8 @@ package com.cskaoyan14th.mapper;
 import com.cskaoyan14th.bean.System;
 import com.cskaoyan14th.bean.SystemExample;
 import java.util.List;
+
+import com.cskaoyan14th.bean.SystemKeyValue;
 import org.apache.ibatis.annotations.Param;
 
 public interface SystemMapper {
@@ -27,4 +29,19 @@ public interface SystemMapper {
     int updateByPrimaryKeySelective(System record);
 
     int updateByPrimaryKey(System record);
+
+    String querySystemByKeyValue(@Param("keyName") String keyName);
+
+    int updateSystemKeyValue(@Param("keyValue") String keyValue,@Param("keyName") String keyName);
+
+    String querySystemByFrightMin(@Param("keyName") String keyName);
+
+    int updateSystemByFrightMin(@Param("keyValue") String keyValue,@Param("keyName") String keyName);
+
+    String querySystemByOrder(@Param("keyName") String keyName);
+
+    int updateSystemByOrder(@Param("keyValue") String keyValue,@Param("keyName") String keyName);
+
+
+
 }

@@ -1,7 +1,6 @@
 package com.cskaoyan14th.service.impl;
 
-import com.cskaoyan14th.bean.Goods;
-import com.cskaoyan14th.bean.GoodsExample;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.GoodsMapper;
 import com.cskaoyan14th.service.GoodsService;
 import com.cskaoyan14th.vo.Page;
@@ -31,4 +30,28 @@ public class GoodsServiceImpl implements GoodsService {
         Page<Goods> goodsPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return goodsPage;
     }
+
+    @Override
+    public List<CategoryForGoods> getCategoryForGoods() {
+        return goodsMapper.selectCategoryForGoods();
+    }
+
+    @Override
+    public List<CatAndBrandChildren> getBrandForGoods() {
+        return goodsMapper.selectBrandsForGoods();
+    }
+
+    @Override
+    public Boolean goodsNameIsExist(String name) {
+        GoodsExample goodsExample = new GoodsExample();
+        GoodsExample.Criteria criteria = goodsExample.createCriteria();
+        criteria.andNameEqualTo(name);
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        if(goodsList != null && goodsList.size() != 0) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
