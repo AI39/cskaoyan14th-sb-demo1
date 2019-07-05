@@ -6,7 +6,7 @@
 ### 数据库规范
 <details>
 <summary>展开查看</summary>
-<pre><code>.
+<pre><code>
 database: cskaoyanmall
 ├── table: cskaoyan_mall_ad
 ├── table: cskaoyan_mall_address
@@ -48,7 +48,6 @@ database: cskaoyanmall
 <details>
 <summary>展开查看</summary>
 <pre><code>.
-├── 33: lzl
 └── src
      ├── main
      |    ├── java
@@ -79,15 +78,16 @@ database: cskaoyanmall
 ## 项目分工
 <details>
 <summary>展开查看</summary>
-<pre><code>.
+<pre><code>
+33：lzl
 用户管理：wzg
 商场管理：yyc
 商品管理：xy
 推广管理：hs
 系统管理：sly
 配置管理：lt
-统计报表：
-外链：
+统计报表：mxf
+外链：none
 摸鱼：mxf
 </code></pre>
 </details>
