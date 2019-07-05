@@ -1,5 +1,6 @@
 package com.cskaoyan14th.bean;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Admin {
@@ -21,7 +22,7 @@ public class Admin {
 
     private Boolean deleted;
 
-    private String roleIds;
+    private int[] roleIds;
 
     public Integer getId() {
         return id;
@@ -36,7 +37,7 @@ public class Admin {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getPassword() {
@@ -44,7 +45,7 @@ public class Admin {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getLastLoginIp() {
@@ -52,7 +53,7 @@ public class Admin {
     }
 
     public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
+        this.lastLoginIp = lastLoginIp;
     }
 
     public Date getLastLoginTime() {
@@ -68,7 +69,7 @@ public class Admin {
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
+        this.avatar = avatar;
     }
 
     public Date getAddTime() {
@@ -95,11 +96,11 @@ public class Admin {
         this.deleted = deleted;
     }
 
-    public String getRoleIds() {
+    public int[] getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds == null ? null : roleIds.trim();
+    public void setRoleIds(int[] roleIds) {
+        this.roleIds = roleIds;
     }
 }

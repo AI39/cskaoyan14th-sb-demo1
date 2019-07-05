@@ -320,4 +320,22 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--自己写的方法-->
+  <select id="selectAddressListOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_address
+    <where>
+      <if test="name != null">
+        `name` like concat('%',#{name},'%')
+      </if>
+      <if test="userId != null">
+        and
+        user_id like concat('%',#{userId},'%')
+      </if>
+    </where>
+    order by #{sort} #{order}
+  </select>
 </mapper>

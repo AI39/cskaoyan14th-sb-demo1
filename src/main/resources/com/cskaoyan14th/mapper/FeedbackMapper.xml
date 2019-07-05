@@ -320,4 +320,21 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的方法-->
+  <select id="selectFeedbackListOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_feedback
+    <where>
+      <if test="username != null">
+        username like concat('%',#{username},'%')
+      </if>
+      <if test="id != null">
+        and
+        id like concat('%',#{id},'%')
+      </if>
+    </where>
+    order by #{sort} #{order}
+  </select>
 </mapper>

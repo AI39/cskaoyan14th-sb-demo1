@@ -27,4 +27,10 @@ public interface KeywordMapper {
     int updateByPrimaryKeySelective(Keyword record);
 
     int updateByPrimaryKey(Keyword record);
+
+    List<Keyword> queryKeywordList(@Param("keyword") String keyword,@Param("url") String url,@Param("sort") String sort,@Param("order") String order);
+
+    int inserts(Keyword keyword);
+
+    int deleteById(Integer id);
 }

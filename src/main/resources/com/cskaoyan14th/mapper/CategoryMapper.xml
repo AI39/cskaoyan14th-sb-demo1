@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
-    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="`desc`" jdbcType="VARCHAR" property="desc" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, keywords, desc, pid, icon_url, pic_url, level, sort_order, add_time, update_time, 
+    id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
     deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan14th.bean.CategoryExample" resultMap="BaseResultMap">
@@ -109,7 +109,7 @@
   </delete>
   <insert id="insert" parameterType="com.cskaoyan14th.bean.Category">
     insert into cskaoyan_mall_category (id, name, keywords, 
-      desc, pid, icon_url, 
+      `desc`, pid, icon_url,
       pic_url, level, sort_order, 
       add_time, update_time, deleted
       )
@@ -132,7 +132,7 @@
         keywords,
       </if>
       <if test="desc != null">
-        desc,
+        `desc`,
       </if>
       <if test="pid != null">
         pid,
@@ -217,7 +217,7 @@
         keywords = #{record.keywords,jdbcType=VARCHAR},
       </if>
       <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=VARCHAR},
+        `desc` = #{record.desc,jdbcType=VARCHAR},
       </if>
       <if test="record.pid != null">
         pid = #{record.pid,jdbcType=INTEGER},
@@ -253,7 +253,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=VARCHAR},
+      `desc` = #{record.desc,jdbcType=VARCHAR},
       pid = #{record.pid,jdbcType=INTEGER},
       icon_url = #{record.iconUrl,jdbcType=VARCHAR},
       pic_url = #{record.picUrl,jdbcType=VARCHAR},
@@ -276,7 +276,7 @@
         keywords = #{keywords,jdbcType=VARCHAR},
       </if>
       <if test="desc != null">
-        desc = #{desc,jdbcType=VARCHAR},
+        `desc` = #{desc,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
         pid = #{pid,jdbcType=INTEGER},
@@ -309,7 +309,7 @@
     update cskaoyan_mall_category
     set name = #{name,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},

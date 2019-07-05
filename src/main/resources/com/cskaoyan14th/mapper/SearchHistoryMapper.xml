@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, keyword, from, add_time, update_time, deleted
+    id, user_id, keyword, `from`, add_time, update_time, deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan14th.bean.SearchHistoryExample" resultMap="BaseResultMap">
     select
@@ -240,4 +240,21 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的方法-->
+  <select id="selectSearchHistoryOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_search_history
+    <where>
+      <if test="userId != null">
+        user_id like concat('%',#{userId},'%')
+      </if>
+      <if test="keyword != null">
+        and
+        keyword like concat('%',#{keyword},'%')
+      </if>
+    </where>
+    order by #{sort} #{order}
+  </select>
 </mapper>
