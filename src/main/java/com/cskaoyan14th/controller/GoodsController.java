@@ -5,9 +5,12 @@ import com.cskaoyan14th.service.GoodsService;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseMapVo;
 import com.cskaoyan14th.vo.ResponseVo;
+import com.cskaoyan14th.wrapper.GoodsParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonFactoryBean;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,18 +51,33 @@ public class GoodsController {
     @PostMapping("create")
     public ResponseVo<Goods> create(@RequestBody GoodsParam goodsParam)  {
         ResponseVo<Goods> responseVo = new ResponseVo<>();
+
+        //1.获取参数
         Goods goods = goodsParam.getGoods();
-        //查看商品名是否已存在
+        GoodsSpecification[] specifications = goodsParam.getSpecifications();
+        GoodsProduct[] products = goodsParam.getProducts();
+        GoodsAttribute[] attributes = goodsParam.getAttributes();
+
+
+        //2.查看商品名是否已存在
         Boolean flag = goodsService.goodsNameIsExist(goods.getName());
         if(flag) {
             responseVo.setErrmsg("商品名已经存在");
             responseVo.setErrno(611);
             return responseVo;
         }
-        //插入goods
-        //插入attributes
-        //插入products
-        //插入specifications
-        return null;
+        //3.执行插入操作
+        flag = goodsService.insertGoods4(goods, specifications, products, attributes);
+
+
+        if(!flag) {
+            responseVo.setErrmsg("系统内部错误");
+            responseVo.setErrno(502);
+            return responseVo;
+        }
+
+        responseVo.setErrmsg("成功");
+        responseVo.setErrno(0);
+        return responseVo;
     }
 }

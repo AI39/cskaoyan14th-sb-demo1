@@ -13,4 +13,6 @@ public interface GoodsService {
     List<CatAndBrandChildren> getBrandForGoods();
 
     Boolean goodsNameIsExist(String name);
+
+    Boolean insertGoods4(Goods goods, GoodsSpecification[] specifications, GoodsProduct[] products, GoodsAttribute[] attributes);
 }

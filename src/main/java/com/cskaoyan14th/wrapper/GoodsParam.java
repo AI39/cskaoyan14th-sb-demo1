@@ -1,4 +1,9 @@
-package com.cskaoyan14th.bean;
+package com.cskaoyan14th.wrapper;
+
+import com.cskaoyan14th.bean.Goods;
+import com.cskaoyan14th.bean.GoodsAttribute;
+import com.cskaoyan14th.bean.GoodsProduct;
+import com.cskaoyan14th.bean.GoodsSpecification;
 
 public class GoodsParam {
     Goods goods;
