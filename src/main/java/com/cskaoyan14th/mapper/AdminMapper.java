@@ -11,4 +11,16 @@ import java.util.List;
 public interface AdminMapper {
 
     List<Admin> queryAdminAll();
+
+    int insertAdmin(@Param("adm") Admin admin);
+
+    Admin queryAdminByUsername(@Param("user") Admin username);
+
+    int updatetAdmin(@Param("admin") Admin admin);
+
+    Admin queryAdminById(@Param("aid") Admin id);
+
+    int deleteAdmin(@Param("admin") Admin admin);
+
+    List<Admin> queryAdminAllByUsername(@Param("user") String username);
 }

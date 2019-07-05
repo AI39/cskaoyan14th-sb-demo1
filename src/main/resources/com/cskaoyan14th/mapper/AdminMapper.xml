@@ -20,4 +20,35 @@
   <select id="queryAdminAll" resultMap="adminMapper">
     select id,username,role_ids,avatar from cskaoyan_mall_admin
   </select>
+
+  <select id="queryAdminAllByUsername" resultMap="adminMapper">
+    select id,username,role_ids,avatar
+    from cskaoyan_mall_admin
+    <where>
+      username like
+      CONCAT('%',#{user},'%')
+    </where>
+  </select>
+
+  <insert id="insertAdmin">
+    insert  into cskaoyan_mall_admin (password,username,role_ids,avatar) values (##{adm.password},#{adm.username},role_ids = #{adm.roleIds,typeHandler=com.cskaoyan14th.typeHandler.AdminTypeHandler},#{adm.avatar})
+  </insert>
+
+  <select id="queryAdminByUsername" resultMap="adminMapper">
+    select id,username,role_ids,avatar from cskaoyan_mall_admin where username = #{user.username}
+  </select>
+
+  <update id="updatetAdmin" >
+    update cskaoyan_mall_admin
+    set password = #{admin.password},username = #{admin.username},role_ids = #{admin.roleIds,typeHandler=com.cskaoyan14th.typeHandler.AdminTypeHandler},avatar = #{admin.avatar}
+    where id = #{admin.id}
+  </update>
+
+  <select id="queryAdminById" resultMap="adminMapper">
+    select id,username,role_ids,avatar from cskaoyan_mall_admin where id = #{aid.id}
+  </select>
+
+  <delete id="deleteAdmin" >
+    delete from cskaoyan_mall_admin where id = #{admin.id}
+  </delete>
 </mapper>
