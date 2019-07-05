@@ -1,6 +1,7 @@
 package com.cskaoyan14th.bean;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Goods {
@@ -14,7 +15,7 @@ public class Goods {
 
     private Integer brandId;
 
-    private String gallery;
+    private String[] gallery;
 
     private String keywords;
 
@@ -59,7 +60,7 @@ public class Goods {
     }
 
     public void setGoodsSn(String goodsSn) {
-        this.goodsSn = goodsSn == null ? null : goodsSn.trim();
+        this.goodsSn = goodsSn;
     }
 
     public String getName() {
@@ -67,7 +68,7 @@ public class Goods {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public Integer getCategoryId() {
@@ -86,12 +87,12 @@ public class Goods {
         this.brandId = brandId;
     }
 
-    public String getGallery() {
+    public String[] getGallery() {
         return gallery;
     }
 
-    public void setGallery(String gallery) {
-        this.gallery = gallery == null ? null : gallery.trim();
+    public void setGallery(String[] gallery) {
+        this.gallery = gallery;
     }
 
     public String getKeywords() {
@@ -99,7 +100,7 @@ public class Goods {
     }
 
     public void setKeywords(String keywords) {
-        this.keywords = keywords == null ? null : keywords.trim();
+        this.keywords = keywords;
     }
 
     public String getBrief() {
@@ -107,15 +108,15 @@ public class Goods {
     }
 
     public void setBrief(String brief) {
-        this.brief = brief == null ? null : brief.trim();
+        this.brief = brief;
     }
 
     public Boolean getIsOnSale() {
         return isOnSale;
     }
 
-    public void setIsOnSale(Boolean isOnSale) {
-        this.isOnSale = isOnSale;
+    public void setIsOnSale(Boolean onSale) {
+        isOnSale = onSale;
     }
 
     public Short getSortOrder() {
@@ -131,7 +132,7 @@ public class Goods {
     }
 
     public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl == null ? null : picUrl.trim();
+        this.picUrl = picUrl;
     }
 
     public String getShareUrl() {
@@ -139,23 +140,23 @@ public class Goods {
     }
 
     public void setShareUrl(String shareUrl) {
-        this.shareUrl = shareUrl == null ? null : shareUrl.trim();
+        this.shareUrl = shareUrl;
     }
 
     public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setIsNew(Boolean isNew) {
-        this.isNew = isNew;
+    public void setIsNew(Boolean aNew) {
+        isNew = aNew;
     }
 
     public Boolean getIsHot() {
         return isHot;
     }
 
-    public void setIsHot(Boolean isHot) {
-        this.isHot = isHot;
+    public void setIsHot(Boolean hot) {
+        isHot = hot;
     }
 
     public String getUnit() {
@@ -163,7 +164,7 @@ public class Goods {
     }
 
     public void setUnit(String unit) {
-        this.unit = unit == null ? null : unit.trim();
+        this.unit = unit;
     }
 
     public BigDecimal getCounterPrice() {
@@ -211,9 +212,8 @@ public class Goods {
     }
 
     public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
+        this.detail = detail;
     }
-
 
     @Override
     public String toString() {
@@ -223,7 +223,7 @@ public class Goods {
                 ", name='" + name + '\'' +
                 ", categoryId=" + categoryId +
                 ", brandId=" + brandId +
-                ", gallery='" + gallery + '\'' +
+                ", gallery=" + Arrays.toString(gallery) +
                 ", keywords='" + keywords + '\'' +
                 ", brief='" + brief + '\'' +
                 ", isOnSale=" + isOnSale +

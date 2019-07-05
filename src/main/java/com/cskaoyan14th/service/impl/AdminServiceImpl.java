@@ -16,8 +16,9 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminMapper adminMapper;
+
     @Override
-    public ResponseVo queryAdminAll(int page, int limit) {
+    public ResponseVo queryAdminAll(int page, int limit, String username) {
         ResponseVo<Page<Admin>> adminResponseVo = new ResponseVo<>();
 
         PageHelper.startPage(page,limit);
@@ -35,5 +36,77 @@ public class AdminServiceImpl implements AdminService {
         }
 
         return adminResponseVo;
+    }
+
+    @Override
+    public int insertAdmin(Admin admin) {
+        int i = adminMapper.insertAdmin(admin);
+        return i;
+    }
+
+    @Override
+    public ResponseVo<Admin> queryAdminByUsername(Admin username) {
+        ResponseVo<Admin> adminResponseVo = new ResponseVo<>();
+
+        Admin admin = adminMapper.queryAdminByUsername(username);
+        if(admin != null){
+            adminResponseVo.setErrno(0);
+            adminResponseVo.setErrmsg("成功");
+            adminResponseVo.setData(admin);
+        }
+        return adminResponseVo;
+    }
+
+    @Override
+    public int updateAdmin(Admin admin) {
+        int i = adminMapper.updatetAdmin(admin);
+        return i;
+    }
+
+    @Override
+    public ResponseVo<Admin> queryAdminById(Admin id) {
+        ResponseVo<Admin> adminResponseVo = new ResponseVo<>();
+
+        Admin admin = adminMapper.queryAdminById(id);
+        if(admin != null){
+            adminResponseVo.setErrno(0);
+            adminResponseVo.setErrmsg("成功");
+            adminResponseVo.setData(admin);
+        }
+        return adminResponseVo;
+    }
+
+    @Override
+    public ResponseVo deleteAdmin(Admin admin) {
+        ResponseVo<Admin> adminResponseVo = new ResponseVo<>();
+
+        int i = adminMapper.deleteAdmin(admin);
+        if(i > 0){
+            adminResponseVo.setErrno(0);
+            adminResponseVo.setErrmsg("成功");
+        }
+        return adminResponseVo;
+    }
+
+    @Override
+    public ResponseVo queryAdminAllByUsername(int page, int limit, String username) {
+        ResponseVo<Page<Admin>> adminResponseVo = new ResponseVo<>();
+
+        PageHelper.startPage(page,limit);
+        //查询
+        List<Admin> adminList = adminMapper.queryAdminAllByUsername(username);
+
+        PageInfo pageInfo = new PageInfo(adminList);
+
+        Page<Admin> adminPage = new Page<Admin>(pageInfo.getList(), pageInfo.getTotal());
+        //判断 是否为空
+        if(adminList != null){
+            adminResponseVo.setErrno(0);
+            adminResponseVo.setErrmsg("成功");
+            adminResponseVo.setData(adminPage);
+        }
+
+        return adminResponseVo;
+
     }
 }

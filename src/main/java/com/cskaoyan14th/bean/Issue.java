@@ -62,4 +62,27 @@ public class Issue {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    public Issue() {
+    }
+
+    public Issue(String question, String answer, Date addTime, Date updateTime, Boolean deleted) {
+        this.question = question;
+        this.answer = answer;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

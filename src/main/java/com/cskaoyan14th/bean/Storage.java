@@ -11,7 +11,7 @@ public class Storage {
 
     private String type;
 
-    private Integer size;
+    private Long size;
 
     private String url;
 
@@ -34,7 +34,7 @@ public class Storage {
     }
 
     public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+        this.key = key;
     }
 
     public String getName() {
@@ -42,7 +42,7 @@ public class Storage {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getType() {
@@ -50,14 +50,14 @@ public class Storage {
     }
 
     public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+        this.type = type;
     }
 
-    public Integer getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 
@@ -66,7 +66,7 @@ public class Storage {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
     public Date getAddTime() {
