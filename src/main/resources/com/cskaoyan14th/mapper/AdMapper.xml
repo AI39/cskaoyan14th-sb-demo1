@@ -320,4 +320,25 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_ad
+    where name like #{name}
+  </select>
+
+  <select id="selectByContent" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_ad
+    where content like #{content}
+  </select>
+
+  <select id="selectByNameAndContent" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_ad
+    where name like #{name} and content like #{content}
+  </select>
 </mapper>

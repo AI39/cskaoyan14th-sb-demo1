@@ -31,4 +31,10 @@ public interface AdMapper {
 
     int updateByPrimaryKey(Ad record);
 
+    List<Ad> selectByName(@Param("name") String name);
+
+    List<Ad> selectByContent(@Param("content") String content);
+
+    List<Ad> selectByNameAndContent(@Param("name")String name,@Param("content") String content);
+
 }

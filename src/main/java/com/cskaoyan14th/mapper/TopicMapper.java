@@ -33,4 +33,10 @@ public interface TopicMapper {
     int updateByPrimaryKeyWithBLOBs(Topic record);
 
     int updateByPrimaryKey(Topic record);
+
+    List<Topic> selectByTitleAndSubtitle(@Param("title") String title,@Param("subtitle") String subtitle);
+
+    List<Topic> selectByTitle(@Param("title")String title);
+
+    List<Topic> selectBySubtitle(@Param("subtitle")String subtitle);
 }

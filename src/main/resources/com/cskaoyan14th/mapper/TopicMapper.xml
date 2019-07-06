@@ -374,4 +374,24 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectByTitleAndSubtitle" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_topic
+    where title like #{title}
+    and subtitle like #{subtitle}
+  </select>
+
+  <select id="selectByTitle" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_topic
+    where title like #{title}
+  </select>
+
+  <select id="selectBySubtitle" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_topic
+    where subtitle like #{subtitle}
+  </select>
 </mapper>

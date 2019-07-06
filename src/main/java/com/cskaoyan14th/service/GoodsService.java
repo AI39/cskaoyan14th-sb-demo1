@@ -7,7 +7,6 @@ import com.cskaoyan14th.wrapper.GoodsParam;
 import java.util.List;
 
 public interface GoodsService {
-    Page<Goods> getGoodsPage(int page, int limit, String sort, String order);
 
     List<CategoryForGoods> getCategoryForGoods();
 
@@ -22,4 +21,6 @@ public interface GoodsService {
     Boolean updateGoods4(GoodsParam goodsParam);
 
     Boolean deleteGoods4(Goods goods);
+
+    Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order);
 }
