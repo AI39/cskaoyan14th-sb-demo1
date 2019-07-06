@@ -1,7 +1,7 @@
 package com.cskaoyan14th.service;
 
-import com.cskaoyan14th.vo.Total;
+import java.util.Map;
 
 public interface DashboardService {
-    Total getTotal();
+    Map<String, Long> getTotal();
 }

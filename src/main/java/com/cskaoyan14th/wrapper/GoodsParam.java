@@ -1,6 +1,12 @@
-package com.cskaoyan14th.bean;
+package com.cskaoyan14th.wrapper;
+
+import com.cskaoyan14th.bean.Goods;
+import com.cskaoyan14th.bean.GoodsAttribute;
+import com.cskaoyan14th.bean.GoodsProduct;
+import com.cskaoyan14th.bean.GoodsSpecification;
 
 public class GoodsParam {
+    int[] categoryIds;
     Goods goods;
     GoodsSpecification[] specifications;
     GoodsProduct[] products;
@@ -36,5 +42,13 @@ public class GoodsParam {
 
     public void setAttributes(GoodsAttribute[] attributes) {
         this.attributes = attributes;
+    }
+
+    public int[] getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(int[] categoryIds) {
+        this.categoryIds = categoryIds;
     }
 }

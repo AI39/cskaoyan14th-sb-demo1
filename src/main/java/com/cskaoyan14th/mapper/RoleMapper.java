@@ -8,4 +8,14 @@ import org.apache.ibatis.annotations.Param;
 public interface RoleMapper {
 
     List<Role> queryRoleAll();
+
+    List<Role> queryRoleByName(@Param("name") String name);
+
+    int insertRole(@Param("role") Role role);
+
+    Role queryRoleByNa(@Param("role")Role role);
+
+    int updateRoleById(@Param("role")Role role);
+
+    int deleteRoleById(@Param("role")Role role);
 }

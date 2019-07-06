@@ -17,5 +17,4 @@ public interface AdminService {
 
     ResponseVo deleteAdmin(Admin admin);
 
-    ResponseVo queryAdminAllByUsername(int page, int limit, String username);
 }

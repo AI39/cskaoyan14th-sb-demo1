@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface AdminMapper {
 
-    List<Admin> queryAdminAll();
+    List<Admin> queryAdminAll(@Param("user")String username);
 
     Admin selectByPrimaryKey(int i);
-    
+
     int insertAdmin(@Param("adm") Admin admin);
 
     Admin queryAdminByUsername(@Param("user") Admin username);
@@ -24,7 +24,6 @@ public interface AdminMapper {
 
     int deleteAdmin(@Param("admin") Admin admin);
 
-    List<Admin> queryAdminAllByUsername(@Param("user") String username);
 
 
 

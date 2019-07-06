@@ -29,6 +29,9 @@ public class StringArray2StringTypeHandler extends BaseTypeHandler<String[]> {
     }
 
     private String[] toStringArray(String string) {
+        if("[]".equals(string)) {
+            return null;
+        }
         if(string != null && string.length() != 0) {
             string = string.replace("[", "").replace("]", "");
             String[] split = string.split(",");

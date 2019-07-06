@@ -4,11 +4,16 @@ import com.cskaoyan14th.bean.GoodsExample;
 import com.cskaoyan14th.bean.GoodsProductExample;
 import com.cskaoyan14th.bean.OrderExample;
 import com.cskaoyan14th.bean.UserExample;
-import com.cskaoyan14th.mapper.*;
+import com.cskaoyan14th.mapper.GoodsMapper;
+import com.cskaoyan14th.mapper.GoodsProductMapper;
+import com.cskaoyan14th.mapper.OrderMapper;
+import com.cskaoyan14th.mapper.UserMapper;
 import com.cskaoyan14th.service.DashboardService;
-import com.cskaoyan14th.vo.Total;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class DashboardServiceImpl implements DashboardService {
@@ -25,7 +30,7 @@ public class DashboardServiceImpl implements DashboardService {
     UserMapper userMapper;
 
     @Override
-    public Total getTotal() {
+    public Map<String, Long> getTotal() {
         //查询商品数量
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria goodsCriteria = goodsExample.createCriteria();
@@ -42,13 +47,13 @@ public class DashboardServiceImpl implements DashboardService {
         UserExample userExample = new UserExample();
         UserExample.Criteria userCriteria = userExample.createCriteria();
         long userTotal = userMapper.countByExample(userExample);
-        //封装成Total类型
-        Total total = new Total();
-        total.setGoodsTotal((int)goodsTotal);
-        total.setOrderTotal((int)orderTotal);
-        total.setProductTotal((int)goodsProductTotal);
-        total.setUserTotal((int)userTotal);
+        //封装成map类型
+        Map<String, Long> map = new HashMap<>();
+        map.put("goodsTotal", goodsTotal);
+        map.put("orderTotal", orderTotal);
+        map.put("productTotal", goodsProductTotal);
+        map.put("userTotal", userTotal);
 
-        return total;
+        return map;
     }
 }

@@ -5,6 +5,7 @@ import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.cskaoyan14th.bean.Storage;
 import com.cskaoyan14th.converter.DateConverter;
+import com.cskaoyan14th.vo.DateCurrentTime;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,11 +81,7 @@ public class MyOssClient {
             ossClient.putObject(putObjectRequest);
 
             //以下是将一些数据封装到Storage中
-            Date date = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String format = df.format(date);
-            DateConverter dateConverter = new DateConverter();
-            Date convert = dateConverter.convert(format);
+            Date date = DateCurrentTime.dateCurrentTime();
 
             Storage storage = new Storage();
             storage.setName(originalFilename);
@@ -93,8 +90,8 @@ public class MyOssClient {
             storage.setType(contentType);
             storage.setSize(size);
 
-            storage.setAddTime(convert);
-            storage.setUpdateTime(convert);
+            storage.setAddTime(date);
+            storage.setUpdateTime(date);
             String url = "https://cskaoyan14th.oss-cn-beijing.aliyuncs.com/" + uuid;
             storage.setUrl(url);
 
