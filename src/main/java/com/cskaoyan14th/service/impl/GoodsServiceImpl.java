@@ -29,21 +29,6 @@ public class GoodsServiceImpl implements GoodsService {
     CategoryMapper categoryMapper;
 
     @Override
-    public Page<Goods> getGoodsPage(int page, int limit, String sort, String order) {
-        PageHelper.startPage(page, limit);
-
-        GoodsExample goodsExample = new GoodsExample();
-        goodsExample.setOrderByClause(sort + " " + order);
-        GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andIdIsNotNull();
-        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
-
-        PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
-        Page<Goods> goodsPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
-        return goodsPage;
-    }
-
-    @Override
     public List<CategoryForGoods> getCategoryForGoods() {
         return goodsMapper.selectCategoryForGoods();
     }
@@ -82,7 +67,7 @@ public class GoodsServiceImpl implements GoodsService {
             goodsMapper.insertSelective(goods);
             int id = goods.getId();
 
-            //封装goodsId插入数据库
+            //封装goodsId,插入数据库
             for (GoodsSpecification goodsSpecification : specifications) {
                 goodsSpecification.setAddTime(date);
                 goodsSpecification.setUpdateTime(date);
@@ -229,6 +214,30 @@ public class GoodsServiceImpl implements GoodsService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order) {
+        PageHelper.startPage(page, limit);
+
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.setOrderByClause(sort + " " + order);
+        GoodsExample.Criteria criteria = goodsExample.createCriteria();
+
+        if((goodsSn == null || goodsSn.length() == 0) && (name == null || name.length() == 0)) {
+            criteria.andIdIsNotNull();
+        } else if((goodsSn != null && goodsSn.length() > 0) && (name == null || name.length() == 0)) {  //只查询商品编号
+            criteria.andGoodsSnLike("%" + goodsSn + "%");
+        } else if((goodsSn == null || goodsSn.length() == 0) && (name != null && name.length() != 0)) { //只查询商品名称
+            criteria.andNameLike("%" + name + "%");
+        } else {
+            criteria.andGoodsSnLike("%" + goodsSn + "%").andNameLike("%" + name + "%");
+        }
+
+        List<Goods> goodsList = goodsList = goodsMapper.selectByExample(goodsExample);
+        PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
+        Page<Goods> goodsPage = new Page<>(pageInfo.getList(),pageInfo.getTotal());
+        return goodsPage;
     }
 
     private void deleteGoodsAttributeByGoodsId(Integer id) {
