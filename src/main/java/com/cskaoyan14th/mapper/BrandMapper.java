@@ -27,4 +27,10 @@ public interface BrandMapper {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    List<Brand> selectBrandList(@Param("id") Integer id,@Param("name") String name,@Param("sort") String sort,@Param("order") String order);
+
+    int inserts(Brand brand);
+
+    Brand selectById(Integer id);
 }

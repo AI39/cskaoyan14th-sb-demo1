@@ -53,11 +53,11 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     /*文件上传组件*/
-    @Bean
+    /*@Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
         //commonsMultipartResolver.setMaxUploadSize(1024000);                    //限制图片大小为1000k
         return commonsMultipartResolver;
-    }
+    }*/
 
 }

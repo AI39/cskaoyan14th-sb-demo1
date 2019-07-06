@@ -8,7 +8,7 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="has_picture" jdbcType="BIT" property="hasPicture" />
-    <result column="pic_urls" jdbcType="VARCHAR" property="picUrls" />
+    <result column="pic_urls" jdbcType="VARCHAR" property="picUrls" typeHandler="com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler"/>
     <result column="star" jdbcType="SMALLINT" property="star" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -113,7 +113,7 @@
       update_time, deleted)
     values (#{id,jdbcType=INTEGER}, #{valueId,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
       #{content,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{hasPicture,jdbcType=BIT}, 
-      #{picUrls,jdbcType=VARCHAR}, #{star,jdbcType=SMALLINT}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{picUrls,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler}, #{star,jdbcType=SMALLINT}, #{addTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan14th.bean.Comment">
@@ -173,7 +173,7 @@
         #{hasPicture,jdbcType=BIT},
       </if>
       <if test="picUrls != null">
-        #{picUrls,jdbcType=VARCHAR},
+        #{picUrls,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="star != null">
         #{star,jdbcType=SMALLINT},
@@ -217,7 +217,7 @@
         has_picture = #{record.hasPicture,jdbcType=BIT},
       </if>
       <if test="record.picUrls != null">
-        pic_urls = #{record.picUrls,jdbcType=VARCHAR},
+        pic_urls = #{record.picUrls,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="record.star != null">
         star = #{record.star,jdbcType=SMALLINT},
@@ -244,7 +244,7 @@
       content = #{record.content,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
       has_picture = #{record.hasPicture,jdbcType=BIT},
-      pic_urls = #{record.picUrls,jdbcType=VARCHAR},
+      pic_urls = #{record.picUrls,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       star = #{record.star,jdbcType=SMALLINT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -272,7 +272,7 @@
         has_picture = #{hasPicture,jdbcType=BIT},
       </if>
       <if test="picUrls != null">
-        pic_urls = #{picUrls,jdbcType=VARCHAR},
+        pic_urls = #{picUrls,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="star != null">
         star = #{star,jdbcType=SMALLINT},
@@ -296,7 +296,7 @@
       content = #{content,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
       has_picture = #{hasPicture,jdbcType=BIT},
-      pic_urls = #{picUrls,jdbcType=VARCHAR},
+      pic_urls = #{picUrls,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       star = #{star,jdbcType=SMALLINT},
       add_time = #{addTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},

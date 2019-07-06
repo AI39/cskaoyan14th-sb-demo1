@@ -31,12 +31,20 @@ public class TestController {
         return new ResponseVo<Admin2>(0, admin2, "成功");
     }
 
+<<<<<<< HEAD
     @RequestMapping("admin/auth/testSql")
+=======
+
+    @RequestMapping("auth/testSql")
+>>>>>>> 48d5bd0012c9eeca030f2ef2f3d6d35b3e893f91
     @ResponseBody
     public Admin testSql() {
         Admin admin = adminMapper.selectByPrimaryKey(1);
         System.out.println(admin);
         return admin;
     }
+
+
+
 
 }

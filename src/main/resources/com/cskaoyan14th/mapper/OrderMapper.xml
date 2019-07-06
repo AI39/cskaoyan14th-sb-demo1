@@ -540,4 +540,93 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--下面是自己写的sql语句-->
+
+  <select id="queryOrderList" resultMap="BaseResultMap">
+    select
+    id, user_id, order_sn, order_status, consignee, mobile, address, message, goods_price, freight_price,
+    coupon_price, integral_price, groupon_price, order_price, actual_price, pay_id, pay_time, ship_sn, ship_channel,
+    ship_time, confirm_time, comments, end_time, add_time, update_time, deleted
+    from cskaoyan_mall_order
+    <where>
+      <if test="userId != null">
+        `user_id` like concat('%',#{userId},'%')
+      </if>
+      <if test="orderSn != null">
+        and
+        `order_sn` like concat('%',#{orderSn},'%')
+      </if>
+      <if test="orderStatusArray != null">
+        and
+        `order_status` like concat('%',#{orderStatusArray},'%')
+      </if>
+    </where>
+    order by #{sort} #{order}
+  </select>
+  <resultMap id="orderDetailMap" type="com.cskaoyan14th.bean.OrderDetail">
+    <association property="user" javaType="com.cskaoyan14th.bean.User">
+      <id column="id" property="id"/>
+      <result column="nickname" property="nickname"/>
+      <result column="avatar" property="avatar"/>
+    </association>
+    <association property="order" javaType="com.cskaoyan14th.bean.Order">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_id" jdbcType="INTEGER" property="userId" />
+      <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+      <result column="order_status" jdbcType="SMALLINT" property="orderStatus" />
+      <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+      <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="message" jdbcType="VARCHAR" property="message" />
+      <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+      <result column="freight_price" jdbcType="DECIMAL" property="freightPrice" />
+      <result column="coupon_price" jdbcType="DECIMAL" property="couponPrice" />
+      <result column="integral_price" jdbcType="DECIMAL" property="integralPrice" />
+      <result column="groupon_price" jdbcType="DECIMAL" property="grouponPrice" />
+      <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+      <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+      <result column="pay_id" jdbcType="VARCHAR" property="payId" />
+      <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+      <result column="ship_sn" jdbcType="VARCHAR" property="shipSn" />
+      <result column="ship_channel" jdbcType="VARCHAR" property="shipChannel" />
+      <result column="ship_time" jdbcType="TIMESTAMP" property="shipTime" />
+      <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+      <result column="comments" jdbcType="SMALLINT" property="comments" />
+      <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+    </association>
+    <collection property="orderGoods" javaType="com.cskaoyan14th.bean.OrderGoods">
+   <!--   <id column="id" property="id"/>
+      <result column="order_id" property="orderId"/>
+      <result column="goods_id" property="goodsId"/>
+      <result column="goods_name" property="goodsName"/>
+      <result column="product_id" property="productId"/>
+      <result column="specifications" property="specifications"/>
+      <result column="price" property="price"/>
+      <result column="number" property="number"/>
+      <result column="pic_url" property="picUrl"/>-->
+    </collection>
+  </resultMap>
+  <select id="showOrderDetail" resultMap="orderDetailMap">
+    select
+    o.id, o.user_id, o.order_sn, o.order_status, o.consignee, o.mobile, o.address, o.message, o.goods_price, o.freight_price,
+    o.coupon_price, o.integral_price, o.groupon_price, o.order_price, o.actual_price, o.pay_id, o.pay_time, o.ship_sn, o.ship_channel,
+    o.ship_time, o.confirm_time, o.comments, o.end_time, o.add_time, o.update_time, o.deleted,
+    u.id, u.nickname, u.avatar,
+    g.id, g.order_id, g.goods_id, g.goods_name, g.product_id, g.specifications, g.price, g.number, g.pic_url
+    from
+    cskaoyan_mall_user u,
+    cskaoyan_mall_order o,
+    cskaoyan_mall_order_goods g
+    where
+    o.id = #{id}
+    and
+    o.user_id = u.id
+    and
+    o.id = g.order_id
+
+  </select>
 </mapper>

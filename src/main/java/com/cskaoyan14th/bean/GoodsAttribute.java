@@ -1,5 +1,7 @@
 package com.cskaoyan14th.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class GoodsAttribute {
@@ -11,8 +13,10 @@ public class GoodsAttribute {
 
     private String value;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
@@ -70,6 +74,19 @@ public class GoodsAttribute {
     }
 
     public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public GoodsAttribute() {
+    }
+
+    public GoodsAttribute(Integer id, Integer goodsId, String attribute, String value, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.goodsId = goodsId;
+        this.attribute = attribute;
+        this.value = value;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
         this.deleted = deleted;
     }
 }

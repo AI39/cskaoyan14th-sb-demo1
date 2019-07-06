@@ -6,25 +6,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
-    long countByExample(RoleExample example);
 
-    int deleteByExample(RoleExample example);
+    List<Role> queryRoleAll();
 
-    int deleteByPrimaryKey(Integer id);
+    List<Role> queryRoleByName(@Param("name") String name);
 
-    int insert(Role record);
+    int insertRole(@Param("role") Role role);
 
-    int insertSelective(Role record);
+    Role queryRoleByNa(@Param("role")Role role);
 
-    List<Role> selectByExample(RoleExample example);
+    int updateRoleById(@Param("role")Role role);
 
-    Role selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Role record, @Param("example") RoleExample example);
-
-    int updateByExample(@Param("record") Role record, @Param("example") RoleExample example);
-
-    int updateByPrimaryKeySelective(Role record);
-
-    int updateByPrimaryKey(Role record);
+    int deleteRoleById(@Param("role")Role role);
 }

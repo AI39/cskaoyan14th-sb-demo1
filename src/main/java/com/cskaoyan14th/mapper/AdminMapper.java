@@ -9,27 +9,22 @@ import java.util.List;
 
 @Repository
 public interface AdminMapper {
-    long countByExample(AdminExample example);
 
-    int deleteByExample(AdminExample example);
+    List<Admin> queryAdminAll(@Param("user")String username);
 
-    int deleteByPrimaryKey(Integer id);
+    Admin selectByPrimaryKey(int i);
 
-    int insert(Admin record);
+    int insertAdmin(@Param("adm") Admin admin);
 
-    int insertSelective(Admin record);
+    Admin queryAdminByUsername(@Param("user") Admin username);
 
-    List<Admin> selectByExample(AdminExample example);
+    int updatetAdmin(@Param("admin") Admin admin);
 
-    Admin selectByPrimaryKey(Integer id);
+    Admin queryAdminById(@Param("aid") Admin id);
 
-    int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);
+    int deleteAdmin(@Param("admin") Admin admin);
 
-    int updateByExample(@Param("record") Admin record, @Param("example") AdminExample example);
 
-    int updateByPrimaryKeySelective(Admin record);
 
-    int updateByPrimaryKey(Admin record);
 
-    List<Admin> queryAdminAll();
 }

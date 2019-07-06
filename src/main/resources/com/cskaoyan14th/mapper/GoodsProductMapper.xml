@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.cskaoyan14th.bean.GoodsProduct">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
-    <result column="specifications" jdbcType="VARCHAR" property="specifications" />
+    <result column="specifications" jdbcType="VARCHAR" property="specifications" typeHandler="com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="url" jdbcType="VARCHAR" property="url" />
@@ -108,7 +108,7 @@
       price, number, url, 
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{specifications,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{specifications,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       #{price,jdbcType=DECIMAL}, #{number,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
@@ -152,7 +152,7 @@
         #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="specifications != null">
-        #{specifications,jdbcType=VARCHAR},
+        #{specifications,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
@@ -190,7 +190,7 @@
         goods_id = #{record.goodsId,jdbcType=INTEGER},
       </if>
       <if test="record.specifications != null">
-        specifications = #{record.specifications,jdbcType=VARCHAR},
+        specifications = #{record.specifications,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
@@ -219,7 +219,7 @@
     update cskaoyan_mall_goods_product
     set id = #{record.id,jdbcType=INTEGER},
       goods_id = #{record.goodsId,jdbcType=INTEGER},
-      specifications = #{record.specifications,jdbcType=VARCHAR},
+      specifications = #{record.specifications,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       price = #{record.price,jdbcType=DECIMAL},
       number = #{record.number,jdbcType=INTEGER},
       url = #{record.url,jdbcType=VARCHAR},
@@ -237,7 +237,7 @@
         goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="specifications != null">
-        specifications = #{specifications,jdbcType=VARCHAR},
+        specifications = #{specifications,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
@@ -263,7 +263,7 @@
   <update id="updateByPrimaryKey" parameterType="com.cskaoyan14th.bean.GoodsProduct">
     update cskaoyan_mall_goods_product
     set goods_id = #{goodsId,jdbcType=INTEGER},
-      specifications = #{specifications,jdbcType=VARCHAR},
+      specifications = #{specifications,jdbcType=VARCHAR,typeHandler=com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler},
       price = #{price,jdbcType=DECIMAL},
       number = #{number,jdbcType=INTEGER},
       url = #{url,jdbcType=VARCHAR},

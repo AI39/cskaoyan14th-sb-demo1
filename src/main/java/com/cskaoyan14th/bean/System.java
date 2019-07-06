@@ -5,7 +5,11 @@ import java.util.Date;
 public class System {
     private Integer id;
 
-    private String keyName;
+    private SystemKeyValue systemKeyValue;
+
+    private SystemFrightMin systemFrightMin;
+
+    private SystemOrderComment systemOrderComment;
 
     private String keyValue;
 
@@ -23,12 +27,28 @@ public class System {
         this.id = id;
     }
 
-    public String getKeyName() {
-        return keyName;
+    public SystemKeyValue getSystemKeyValue() {
+        return systemKeyValue;
     }
 
-    public void setKeyName(String keyName) {
-        this.keyName = keyName == null ? null : keyName.trim();
+    public void setSystemKeyValue(SystemKeyValue systemKeyValue) {
+        this.systemKeyValue = systemKeyValue;
+    }
+
+    public SystemFrightMin getSystemFrightMin() {
+        return systemFrightMin;
+    }
+
+    public void setSystemFrightMin(SystemFrightMin systemFrightMin) {
+        this.systemFrightMin = systemFrightMin;
+    }
+
+    public SystemOrderComment getSystemOrderComment() {
+        return systemOrderComment;
+    }
+
+    public void setSystemOrderComment(SystemOrderComment systemOrderComment) {
+        this.systemOrderComment = systemOrderComment;
     }
 
     public String getKeyValue() {
@@ -36,7 +56,7 @@ public class System {
     }
 
     public void setKeyValue(String keyValue) {
-        this.keyValue = keyValue == null ? null : keyValue.trim();
+        this.keyValue = keyValue;
     }
 
     public Date getAddTime() {
@@ -61,5 +81,33 @@ public class System {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public System(Integer id, SystemKeyValue systemKeyValue, SystemFrightMin systemFrightMin, SystemOrderComment systemOrderComment, String keyValue, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.systemKeyValue = systemKeyValue;
+        this.systemFrightMin = systemFrightMin;
+        this.systemOrderComment = systemOrderComment;
+        this.keyValue = keyValue;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
+
+    public System() {
+    }
+
+    @Override
+    public String toString() {
+        return "System{" +
+                "id=" + id +
+                ", systemKeyValue=" + systemKeyValue +
+                ", systemFrightMin=" + systemFrightMin +
+                ", systemOrderComment=" + systemOrderComment +
+                ", keyValue='" + keyValue + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
     }
 }
