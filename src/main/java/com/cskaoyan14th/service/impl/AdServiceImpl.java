@@ -141,6 +141,18 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public ResponseVo<Coupon> insertCoupon(Coupon coupon) {
+        ResponseVo<Coupon> responseVo = new ResponseVo<>();
+        int insert = couponMapper.insert(coupon);
+        if(insert==1){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            responseVo.setData(coupon);
+        }
+        return responseVo;
+    }
+
+    @Override
     public ResponseVo<Coupon> editCoupon(Coupon coupon) {
         ResponseVo<Coupon> couponResponseVo = new ResponseVo<>();
         int i = couponMapper.updateByPrimaryKey(coupon);
@@ -253,6 +265,18 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public ResponseVo<Topic> insertTopic(Topic topic) {
+        ResponseVo<Topic> responseVo = new ResponseVo<>();
+        int insert = topicMapper.insert(topic);
+        if(insert==1){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            responseVo.setData(topic);
+        }
+        return responseVo;
+    }
+
+    @Override
     public ResponseVo<String> deleteTopic(Topic topic) {
         ResponseVo<String> responseVo = new ResponseVo<>();
         int i = topicMapper.deleteByPrimaryKey(topic.getId());
@@ -301,6 +325,24 @@ public class AdServiceImpl implements AdService {
         PageInfo<GrouponRules> pageInfo=new PageInfo<>(list);
         Page<GrouponRules> grouponRulesPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         ResponseVo<Page> responseVo = new ResponseVo<>(0,grouponRulesPage,"成功");
+        return responseVo;
+    }
+
+    @Override
+    public ResponseVo<GrouponRules> insertGrouponRules(GrouponRules grouponRules) {
+        ResponseVo<GrouponRules> responseVo = new ResponseVo<>();
+        List<GrouponRules> grouponRules1 = grouponRulesMapper.selectByGoodsid(grouponRules.getGoodsId());
+        if(grouponRules1.size()<=0){
+            responseVo.setErrno(402);
+            responseVo.setErrmsg("参数值不对");
+            return responseVo;
+        }
+        int insert = grouponRulesMapper.insert(grouponRules);
+        if(insert==1){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            responseVo.setData(grouponRules);
+        }
         return responseVo;
     }
 
