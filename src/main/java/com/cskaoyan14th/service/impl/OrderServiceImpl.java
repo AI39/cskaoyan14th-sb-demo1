@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Order;
+import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.mapper.OrderMapper;
 import com.cskaoyan14th.service.OrderService;
 import com.cskaoyan14th.vo.Page;
@@ -27,5 +28,11 @@ public class OrderServiceImpl implements OrderService {
         PageInfo<Order> pageInfo = new PageInfo<>(orderList1);
         Page<Order> orderList = new Page<>(pageInfo.getList(), pageInfo.getTotal());
         return orderList;
+    }
+
+    @Override
+    public OrderDetail showOrderDetail(int id) {
+        OrderDetail orderDetail = orderMapper.showOrderDetail(id);
+        return orderDetail;
     }
 }

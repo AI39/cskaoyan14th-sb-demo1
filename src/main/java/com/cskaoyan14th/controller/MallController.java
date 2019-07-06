@@ -249,9 +249,22 @@ public class MallController {
             responseVo.setErrno(404);
         }
         return responseVo;
-
     }
-
+    @RequestMapping("order/detail")
+    @ResponseBody
+    public ResponseVo<OrderDetail> orderDetail(int id){
+        ResponseVo<OrderDetail> responseVo = new ResponseVo<>();
+        OrderDetail orderDetail = orderService.showOrderDetail(id);
+        responseVo.setData(orderDetail);
+        if (orderDetail != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
 }
 
 

@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Order;
+import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.vo.Page;
 
 /**
@@ -10,4 +11,5 @@ import com.cskaoyan14th.vo.Page;
 public interface OrderService {
     Page<Order> queryOrderList(int page, int limit, Short orderStatusArray, String sort, String order, Integer userId, String orderSn);
 
+    OrderDetail showOrderDetail(int id);
 }
