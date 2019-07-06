@@ -234,7 +234,7 @@ public class MallController {
     }
 
 
-    /*订单管理,查看还没写*/
+    /*订单管理,查看写了，但是商品显示不出来*/
     @RequestMapping("order/list")                                                                                   //这个函数中的形参orderStatusArray需要用到Short包装类，以及底层实现的参数也需要
     @ResponseBody
     public ResponseVo<Page<Order>> orderList(int page, int limit, Short orderStatusArray, String sort, String order, Integer userId, String orderSn){
@@ -265,6 +265,18 @@ public class MallController {
         }
         return responseVo;
     }
+    /*商品类目*//*
+    @RequestMapping("category/list")
+    @ResponseBody
+    public ResponseVo<CategoryList> categoryList(){
+
+    }
+
+    @RequestMapping("category/l1")
+    @ResponseBody
+    public ResponseVo<CategoryForGoods> categoryL1(){
+
+    }*/
 }
 
 
