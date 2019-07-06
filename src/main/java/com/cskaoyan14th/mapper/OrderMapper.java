@@ -1,6 +1,7 @@
 package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.Order;
+import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.bean.OrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<Order> queryOrderList(@Param("orderStatusArray") Short orderStatusArray,@Param("sort") String sort,@Param("order") String order,@Param("userId") Integer userId,@Param("orderSn") String orderSn);
+
+    OrderDetail showOrderDetail(int id);
 }
