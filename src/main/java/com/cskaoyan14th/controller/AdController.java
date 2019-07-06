@@ -152,14 +152,14 @@ public class AdController {
         return responseVo;
     }
 
-    @RequestMapping("groupon/delete")
+    @RequestMapping("admin/groupon/delete")
     @ResponseBody
     public ResponseVo<String> deleteGrouponRules(@RequestBody GrouponRules grouponRules){
         ResponseVo<String> responseVo = adService.deleteGrouponRules(grouponRules);
         return responseVo;
     }
 
-    @RequestMapping("groupon/listRecord")
+    @RequestMapping("admin/groupon/listRecord")
     @ResponseBody
     public ResponseVo<Page> getGrouponActivityList(int page,int limit,Integer goodsId,String sort,String order){
             ResponseVo<Page> responseVo=adService.getGrouponActivityList(page,limit,sort,order);
