@@ -35,6 +35,8 @@ public class AdExample {
         return oredCriteria;
     }
 
+
+
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
     }

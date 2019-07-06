@@ -424,14 +424,14 @@
   <update id="updateByPrimaryKey" parameterType="com.cskaoyan14th.bean.Coupon">
     update cskaoyan_mall_coupon
     set name = #{name,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       tag = #{tag,jdbcType=VARCHAR},
       total = #{total,jdbcType=INTEGER},
       discount = #{discount,jdbcType=DECIMAL},
       min = #{min,jdbcType=DECIMAL},
-      limit = #{limit,jdbcType=SMALLINT},
+      `limit` = #{limit,jdbcType=SMALLINT},
       type = #{type,jdbcType=SMALLINT},
-      status = #{status,jdbcType=SMALLINT},
+      `status` = #{status,jdbcType=SMALLINT},
       goods_type = #{goodsType,jdbcType=SMALLINT},
       goods_value = #{goodsValue,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
@@ -444,4 +444,65 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAllCoupon" resultMap="BaseResultMap">
+    select
+    *
+    from cskaoyan_mall_coupon
+  </select>
+
+  <select id="selectSomeCoupon" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    <where>
+      <if test="name!=null">
+        name like #{name}
+      </if>
+      <if test="type!=null">
+        and
+        type = #{type}
+      </if>
+      <if test="status!=null">
+        and
+        `status`=#{status}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectCouponByName" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    where name like #{name}
+  </select>
+
+  <select id="selectCouponByType" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    where type=#{type}
+  </select>
+
+  <select id="selectCouponByStatus" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    where `status`=#{status}
+  </select>
+
+  <select id="selectCouponByNameAndType" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    where name like #{name} and type = #{type}
+  </select>
+
+  <select id="selectCouponByNameAndStatus" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    where name like #{name} and `status`=#{status}
+  </select>
+
+  <select id="selectCouponByTypeAndStatus" resultMap="BaseResultMap">
+    select *
+    from cskaoyan_mall_coupon
+    where type like #{type} and `status`=#{status}
+  </select>
+
 </mapper>

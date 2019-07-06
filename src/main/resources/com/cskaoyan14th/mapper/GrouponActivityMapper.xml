@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan14th.mapper.GrouponActivityMapper">
+
+    <resultMap id="grouponActivityMap" type="com.cskaoyan14th.bean.GrouponActivity">
+        <association property="groupon" javaType="com.cskaoyan14th.bean.Groupon">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="order_id" jdbcType="INTEGER" property="orderId" />
+            <result column="groupon_id" jdbcType="INTEGER" property="grouponId" />
+            <result column="rules_id" jdbcType="INTEGER" property="rulesId" />
+            <result column="user_id" jdbcType="INTEGER" property="userId" />
+            <result column="creator_user_id" jdbcType="INTEGER" property="creatorUserId" />
+            <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+            <result column="share_url" jdbcType="VARCHAR" property="shareUrl" />
+            <result column="payed" jdbcType="BIT" property="payed" />
+            <result column="deleted" jdbcType="BIT" property="deleted" />
+        </association>
+        <association property="rules" javaType="com.cskaoyan14th.bean.GrouponRules">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+            <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+            <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+            <result column="discount" jdbcType="DECIMAL" property="discount" />
+            <result column="discount_member" jdbcType="INTEGER" property="discountMember" />
+            <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+            <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
+            <result column="deleted" jdbcType="BIT" property="deleted" />
+        </association>
+        <association property="goods" javaType="com.cskaoyan14th.bean.Goods">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+            <result column="name" jdbcType="VARCHAR" property="name" />
+            <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+            <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+            <result column="gallery" jdbcType="VARCHAR" property="gallery" />
+            <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+            <result column="brief" jdbcType="VARCHAR" property="brief" />
+            <result column="is_on_sale" jdbcType="BIT" property="isOnSale" />
+            <result column="sort_order" jdbcType="SMALLINT" property="sortOrder" />
+            <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+            <result column="share_url" jdbcType="VARCHAR" property="shareUrl" />
+            <result column="is_new" jdbcType="BIT" property="isNew" />
+            <result column="is_hot" jdbcType="BIT" property="isHot" />
+            <result column="unit" jdbcType="VARCHAR" property="unit" />
+            <result column="counter_price" jdbcType="DECIMAL" property="counterPrice" />
+            <result column="retail_price" jdbcType="DECIMAL" property="retailPrice" />
+            <result column="detail" jdbcType="VARCHAR" property="detail" />
+            <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+            <result column="deleted" jdbcType="BIT" property="deleted" />
+        </association>
+    </resultMap>
+    <select id="selectAll" resultMap="grouponActivityMap">
+        select *
+        from cskaoyan_mall_groupon t1
+        left join cskaoyan_mall_groupon_rules t2 on t1.rules_id=t2.id
+        left join cskaoyan_mall_goods t3 on t2.goods_id=t3.id
+    </select>
+</mapper>

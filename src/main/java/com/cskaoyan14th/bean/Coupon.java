@@ -203,4 +203,30 @@ public class Coupon {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", tag='" + tag + '\'' +
+                ", total=" + total +
+                ", discount=" + discount +
+                ", min=" + min +
+                ", limit=" + limit +
+                ", type=" + type +
+                ", status=" + status +
+                ", goodsType=" + goodsType +
+                ", goodsValue='" + goodsValue + '\'' +
+                ", code='" + code + '\'' +
+                ", timeType=" + timeType +
+                ", days=" + days +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }
