@@ -1,6 +1,8 @@
 package com.cskaoyan14th.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Category {
     private Integer id;
@@ -26,6 +28,16 @@ public class Category {
     private Date updateTime;
 
     private Boolean deleted;
+
+    private List<Category> children = new ArrayList<>();
+
+    public List<Category> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Category> children) {
+        this.children = children;
+    }
 
     public Integer getId() {
         return id;
@@ -121,5 +133,42 @@ public class Category {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public Category() {
+    }
+
+    public Category(String name, String keywords, String desc, Integer pid, String iconUrl, String picUrl, String level, Byte sortOrder, Date addTime, Date updateTime, Boolean deleted, List<Category> children) {
+        this.name = name;
+        this.keywords = keywords;
+        this.desc = desc;
+        this.pid = pid;
+        this.iconUrl = iconUrl;
+        this.picUrl = picUrl;
+        this.level = level;
+        this.sortOrder = sortOrder;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+        this.children = children;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", desc='" + desc + '\'' +
+                ", pid=" + pid +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", level='" + level + '\'' +
+                ", sortOrder=" + sortOrder +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                ", children=" + children +
+                '}';
     }
 }

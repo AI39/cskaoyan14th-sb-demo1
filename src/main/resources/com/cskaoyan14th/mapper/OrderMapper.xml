@@ -599,7 +599,7 @@
       <result column="deleted" jdbcType="BIT" property="deleted" />
     </association>
     <collection property="orderGoods" javaType="com.cskaoyan14th.bean.OrderGoods">
-   <!--   <id column="id" property="id"/>
+      <id column="id" property="id"/>
       <result column="order_id" property="orderId"/>
       <result column="goods_id" property="goodsId"/>
       <result column="goods_name" property="goodsName"/>
@@ -607,7 +607,7 @@
       <result column="specifications" property="specifications"/>
       <result column="price" property="price"/>
       <result column="number" property="number"/>
-      <result column="pic_url" property="picUrl"/>-->
+      <result column="pic_url" property="picUrl"/>
     </collection>
   </resultMap>
   <select id="showOrderDetail" resultMap="orderDetailMap">
@@ -618,15 +618,17 @@
     u.id, u.nickname, u.avatar,
     g.id, g.order_id, g.goods_id, g.goods_name, g.product_id, g.specifications, g.price, g.number, g.pic_url
     from
-    cskaoyan_mall_user u,
-    cskaoyan_mall_order o,
+    cskaoyan_mall_user u
+    left join
+    cskaoyan_mall_order o
+    on
+    o.user_id = u.id
+    left join
     cskaoyan_mall_order_goods g
+    on
+    o.id = g.order_id
     where
     o.id = #{id}
-    and
-    o.user_id = u.id
-    and
-    o.id = g.order_id
 
   </select>
 </mapper>

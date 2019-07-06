@@ -1,5 +1,6 @@
 package com.cskaoyan14th.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class OrderDetail {
     private Order order;
-    private List<OrderGoods> orderGoods;
+    private List<OrderGoods> orderGoods = new ArrayList<>();
     private User user;
 
     public OrderDetail() {
