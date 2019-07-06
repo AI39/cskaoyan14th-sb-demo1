@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.System;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Yuechao Yang
@@ -170,7 +171,7 @@ public class MallController {
     }
 
 
-    /*品牌制造商*/
+    /*品牌制造商，4个方法实现*/
     @RequestMapping("brand/list")
     @ResponseBody
     public ResponseVo<Page<Brand>> brandList(int page, int limit, Integer id, String name, String sort, String order){
@@ -234,7 +235,7 @@ public class MallController {
     }
 
 
-    /*订单管理,查看写了，但是商品显示不出来*/
+    /*订单管理,两个方法实现。商品显示有一项显示不出来，应该是前端代码的问题*/
     @RequestMapping("order/list")                                                                                   //这个函数中的形参orderStatusArray需要用到Short包装类，以及底层实现的参数也需要
     @ResponseBody
     public ResponseVo<Page<Order>> orderList(int page, int limit, Short orderStatusArray, String sort, String order, Integer userId, String orderSn){
@@ -265,18 +266,38 @@ public class MallController {
         }
         return responseVo;
     }
-    /*商品类目*//*
+    /*商品类目*/
     @RequestMapping("category/list")
     @ResponseBody
-    public ResponseVo<CategoryList> categoryList(){
-
+    public ResponseVo<List<Category>> categoryList(){
+        ResponseVo<List<Category>> responseVo = new ResponseVo<>();
+        List<Category> category = categoryService.queryCategoryList();
+        responseVo.setData(category);
+        if (category != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
     }
 
     @RequestMapping("category/l1")
     @ResponseBody
-    public ResponseVo<CategoryForGoods> categoryL1(){
-
-    }*/
+    public ResponseVo<List<CategoryForGoods>> categoryL1(){
+        ResponseVo<List<CategoryForGoods>> responseVo = new ResponseVo<>();
+        List<CategoryForGoods> category = categoryService.queryCategoryL1();
+        responseVo.setData(category);
+        if (category != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
 }
 
 
