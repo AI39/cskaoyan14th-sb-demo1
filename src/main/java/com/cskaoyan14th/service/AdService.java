@@ -26,6 +26,8 @@ public interface AdService {
 
     ResponseVo<Page> getCouponList(int page, int limit,String name,short type,short status, String sort, String order);
 
+    ResponseVo<Coupon> readCoupon(int id);
+
     ResponseVo<Coupon> insertCoupon(Coupon coupon);
 
     ResponseVo<Coupon> editCoupon(Coupon coupon);
