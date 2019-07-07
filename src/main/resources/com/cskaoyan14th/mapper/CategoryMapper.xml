@@ -381,4 +381,10 @@
         select id, `desc`, add_time, update_time, icon_url, pic_url, keywords, `level`, `name`, pid from cskaoyan_mall_category
         where id = #{id}
     </select>
+
+    <delete id="deleteCategory">
+      delete from cskaoyan_mall_category
+      where
+      id = #{id}
+    </delete>
 </mapper>
