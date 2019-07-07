@@ -1,6 +1,7 @@
 package com.cskaoyan14th.bean;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Coupon {
@@ -26,7 +27,7 @@ public class Coupon {
 
     private Short goodsType;
 
-    private String goodsValue;
+    private String[] goodsValue;
 
     private String code;
 
@@ -132,12 +133,12 @@ public class Coupon {
         this.goodsType = goodsType;
     }
 
-    public String getGoodsValue() {
+    public String[] getGoodsValue() {
         return goodsValue;
     }
 
-    public void setGoodsValue(String goodsValue) {
-        this.goodsValue = goodsValue == null ? null : goodsValue.trim();
+    public void setGoodsValue(String[] goodsValue) {
+        this.goodsValue = goodsValue;
     }
 
     public String getCode() {
@@ -218,7 +219,7 @@ public class Coupon {
                 ", type=" + type +
                 ", status=" + status +
                 ", goodsType=" + goodsType +
-                ", goodsValue='" + goodsValue + '\'' +
+                ", goodsValue=" + Arrays.toString(goodsValue) +
                 ", code='" + code + '\'' +
                 ", timeType=" + timeType +
                 ", days=" + days +

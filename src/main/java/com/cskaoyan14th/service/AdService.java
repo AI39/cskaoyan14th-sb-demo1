@@ -26,6 +26,10 @@ public interface AdService {
 
     ResponseVo<Page> getCouponList(int page, int limit,String name,short type,short status, String sort, String order);
 
+    ResponseVo<Coupon> readCoupon(int id);
+
+    ResponseVo<Coupon> insertCoupon(Coupon coupon);
+
     ResponseVo<Coupon> editCoupon(Coupon coupon);
 
     ResponseVo<String> deleteCoupon(Coupon coupon);
@@ -47,6 +51,8 @@ public interface AdService {
 
     ResponseVo<Topic> editTopic(Topic topic);
 
+    ResponseVo<Topic> insertTopic(Topic topic);
+
     ResponseVo<String> deleteTopic(Topic topic);
 
     ResponseVo<Page> getTopicListByTitle(int page, int limit,String title,String sort,String order);
@@ -54,6 +60,8 @@ public interface AdService {
     ResponseVo<Page> getTopicListBySubtitle(int page, int limit,String subtitle,String sort,String order);
 
     ResponseVo<Page> getGrouponList(int page,int limit,String sort,String order);
+
+    ResponseVo<GrouponRules> insertGrouponRules(GrouponRules grouponRules);
 
     ResponseVo<String> editGrouponRules(GrouponRules grouponRules);
 

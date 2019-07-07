@@ -46,11 +46,6 @@ public class AdController {
         return responseVo;
     }
 
-   /* @RequestMapping("admin/storage/create")
-    @ResponseBody
-    public ResponseVo<Storage> createPic(){
-        
-    }*/
 
     @RequestMapping("ad/create")
     @ResponseBody
@@ -89,6 +84,27 @@ public class AdController {
         return responseVo;
     }
 
+    @RequestMapping("coupon/read")
+    @ResponseBody
+    public ResponseVo<Coupon> readCoupon(int id){
+        ResponseVo<Coupon> responseVo = adService.readCoupon(id);
+        return responseVo;
+    }
+
+    @RequestMapping("coupon/listuser")
+    @ResponseBody
+    public  ResponseVo<Page> getListUser(int page,int limit,int couponId,String sort,String order){
+        ResponseVo<Page> responseVo = new ResponseVo<>();
+        return responseVo;
+    }
+
+    @RequestMapping("coupon/create")
+    @ResponseBody
+    public ResponseVo<Coupon> createCoupon(@RequestBody Coupon coupon){
+        ResponseVo<Coupon> responseVo = adService.insertCoupon(coupon);
+        return responseVo;
+    }
+
     @RequestMapping("coupon/update")
     @ResponseBody
     public ResponseVo<Coupon> editCoupon(@RequestBody Coupon coupon){
@@ -120,6 +136,13 @@ public class AdController {
         return responseVo;
     }
 
+    @RequestMapping("topic/create")
+    @ResponseBody
+    public ResponseVo<Topic> createTopic(@RequestBody Topic topic){
+        ResponseVo<Topic> responseVo = adService.insertTopic(topic);
+        return responseVo;
+    }
+
     @RequestMapping("topic/update")
     @ResponseBody
     public ResponseVo<Topic> editTopic(@RequestBody Topic topic){
@@ -142,6 +165,13 @@ public class AdController {
             return responseVo;
         }
         ResponseVo<Page> responseVo=adService.getGrouponListByGoodsid(page,limit,goodsId,sort,order);
+        return responseVo;
+    }
+
+    @RequestMapping("groupon/create")
+    @ResponseBody
+    public ResponseVo<GrouponRules> createGrouponRules(@RequestBody GrouponRules grouponRules){
+        ResponseVo<GrouponRules> responseVo = adService.insertGrouponRules(grouponRules);
         return responseVo;
     }
 
