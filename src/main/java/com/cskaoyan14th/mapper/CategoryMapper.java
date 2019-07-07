@@ -33,4 +33,8 @@ public interface CategoryMapper {
     List<CategoryForGoods> queryCategoryL1();
 
     List<Category> queryCategoryList();
+
+    Category selectById(@Param("id") Integer id);
+
+    int inserts(Category category);
 }

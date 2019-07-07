@@ -365,9 +365,20 @@
     <if test="c2pid != 0">
       c2.pid = c1.id
     </if>
-    where c1.level = "L1"
-    and
-    c2.level = "L2"
-
+    where
+    c1.pid = 0
   </select>
+    <insert id="inserts">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int">
+            select last_insert_id();
+        </selectKey>
+        insert into cskaoyan_mall_category
+        (`desc`, add_time, update_time, icon_url, pic_url, keywords, `level`, `name`, pid )
+        values
+        (#{desc}, #{addTime}, #{updateTime}, #{iconUrl}, #{picUrl}, #{keywords}, #{level}, #{name}, #{pid})
+    </insert>
+    <select id="selectById" resultType="com.cskaoyan14th.bean.Category">
+        select id, `desc`, add_time, update_time, icon_url, pic_url, keywords, `level`, `name`, pid from cskaoyan_mall_category
+        where id = #{id}
+    </select>
 </mapper>

@@ -14,4 +14,10 @@ public interface CategoryService {
     List<CategoryForGoods> queryCategoryL1();
 
     List<Category> queryCategoryList();
+
+    int updateCategory(Category category);
+
+    Category createCategory(Category category);
+
+    int deleteCategory(Category category);
 }
