@@ -32,7 +32,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public int deleteBrand(Brand brand) {
-        int delete = brandMapper.deleteByPrimaryKey(brand.getId());
+        int delete = brandMapper.deleteBrandById(brand.getId());
         return delete;
     }
 

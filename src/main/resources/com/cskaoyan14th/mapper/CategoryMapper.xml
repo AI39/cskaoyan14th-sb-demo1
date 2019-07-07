@@ -367,6 +367,8 @@
     </if>
     where
     c1.pid = 0
+    and
+    c1.deleted = 0
   </select>
     <insert id="inserts">
         <selectKey keyColumn="id" keyProperty="id" resultType="int">
@@ -382,9 +384,12 @@
         where id = #{id}
     </select>
 
-    <delete id="deleteCategory">
-      delete from cskaoyan_mall_category
+    <update id="deleteCategory">
+      update cskaoyan_mall_category
+      set deleted = 1
       where
       id = #{id}
-    </delete>
+      or
+      pid = #{id}
+    </update>
 </mapper>
