@@ -569,6 +569,14 @@
     select id as value,name as label from cskaoyan_mall_brand
   </select>
 
+  <!--select limit-->
+  <select id="selectLimit" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_goods
+    limit #{limit}
+  </select>
+
 
 
 </mapper>

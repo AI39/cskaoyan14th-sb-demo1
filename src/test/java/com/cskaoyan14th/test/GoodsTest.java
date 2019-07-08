@@ -87,4 +87,10 @@ public class GoodsTest extends Cskaoyan14thSbDemo1ApplicationTests {
         Comment comment = commentMapper.selectByPrimaryKey(1);
         System.out.println(comment);
     }
+
+    @Test
+    public void test9() {
+        List<Goods> goodsList = goodsMapper.selectLimit(5);
+        System.out.println(goodsList);
+    }
 }
