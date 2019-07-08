@@ -240,6 +240,15 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsPage;
     }
 
+    @Override
+    public List<Goods> getNewGoodsList() {
+        GoodsExample goodsExample = new GoodsExample();
+        GoodsExample.Criteria criteria = goodsExample.createCriteria();
+        criteria.andIsNewEqualTo(true);
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        return goodsList;
+    }
+
     private void deleteGoodsAttributeByGoodsId(Integer id) {
         GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
         GoodsAttributeExample.Criteria goodsAttributeExampleCriteria = goodsAttributeExample.createCriteria();

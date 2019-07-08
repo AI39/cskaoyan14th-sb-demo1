@@ -23,4 +23,6 @@ public interface GoodsService {
     Boolean deleteGoods4(Goods goods);
 
     Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order);
+
+    List<Goods> getNewGoodsList();
 }
