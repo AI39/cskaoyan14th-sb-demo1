@@ -113,6 +113,12 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public List<Coupon> getCouponAll() {
+        List<Coupon> coupons = couponMapper.selectAllCoupon();
+        return coupons;
+    }
+
+    @Override
     public ResponseVo<Page> getCouponList(int page, int limit, String sort, String order) {
         PageHelper.startPage(page,limit);
         List<Coupon> list = couponMapper.selectAllCoupon();

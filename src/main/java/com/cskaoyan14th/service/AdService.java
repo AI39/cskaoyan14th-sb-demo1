@@ -7,6 +7,8 @@ import com.cskaoyan14th.bean.Topic;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
 
+import java.util.List;
+
 public interface AdService {
     ResponseVo<Page> getAdList(int page, int limit, String sort, String order);
 
@@ -19,6 +21,8 @@ public interface AdService {
     ResponseVo<Page> searchAd(int page, int limit,String name,String sort,String order);
 
     ResponseVo<Page> searchAd(int page, int limit,String name,String content, String sort,String order);
+
+    List<Coupon> getCouponAll();
 
     ResponseVo<Page> getCouponList(int page, int limit, String sort, String order);
 
