@@ -34,11 +34,21 @@ public class MallController {
     @Autowired
     KeywordService keywordService;
     /*行政区域*/
-   /* @RequestMapping("region/list")
+    @RequestMapping("region/list")
     @ResponseBody
-   public ResponseVo<Page<>> regionList(int page, int limit){
-        regionService.queryRegionList(page, limit);
-    }*/
+   public ResponseVo<List<Region>> regionList(){
+        ResponseVo<List<Region>> responseVo = new ResponseVo<>();
+        List<Region> regionList= regionService.queryRegionList();
+        responseVo.setData(regionList);
+        if (regionList != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else{
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
 
 
    /*通用问题，共有四个方法实现*/
@@ -290,6 +300,51 @@ public class MallController {
         List<CategoryForGoods> category = categoryService.queryCategoryL1();
         responseVo.setData(category);
         if (category != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/update")
+    @ResponseBody
+    public ResponseVo<Category> categoryList(@RequestBody Category category){
+        ResponseVo<Category> responseVo = new ResponseVo<>();
+        int update = categoryService.updateCategory(category);
+        if (update != 0){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/create")
+    @ResponseBody
+    public ResponseVo<Category> createCategory(@RequestBody Category category){
+        ResponseVo<Category> responseVo = new ResponseVo<>();
+        Category create = categoryService.createCategory(category);
+        if (create != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/delete")
+    @ResponseBody
+    public ResponseVo<Category> deleteCategory(@RequestBody Category category){
+        ResponseVo<Category> responseVo = new ResponseVo<>();
+        int delete = categoryService.deleteCategory(category);
+        if (delete != 0){
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
         }else {

@@ -33,4 +33,6 @@ public interface BrandMapper {
     int inserts(Brand brand);
 
     Brand selectById(Integer id);
+
+    int deleteBrandById(Integer id);
 }

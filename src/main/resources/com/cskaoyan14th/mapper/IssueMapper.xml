@@ -244,6 +244,7 @@
         `question` like concat('%',#{question},'%')
       </if>
     </where>
+    where deleted = 0
     order by #{sort} #{order}
 
   </select>
@@ -253,11 +254,12 @@
     from cskaoyan_mall_issue
     where id = #{id}
   </select>
-  <delete id="deleteById">
-    delete from cskaoyan_mall_issue
+  <update id="deleteById">
+    update cskaoyan_mall_issue
+    set deleted = 1
     where
     id = #{id}
-  </delete>
+  </update>
                                                                                                                   <!--下面这三句让id自增-->
   <insert id="inserts">
     <selectKey keyColumn="id" keyProperty="id" resultType="int">

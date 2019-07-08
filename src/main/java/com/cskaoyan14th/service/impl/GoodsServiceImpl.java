@@ -4,6 +4,7 @@ import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.*;
 import com.cskaoyan14th.service.GoodsService;
 import com.cskaoyan14th.vo.Page;
+import com.cskaoyan14th.wrapper.FloorGoods;
 import com.cskaoyan14th.wrapper.GoodsParam;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -247,6 +248,21 @@ public class GoodsServiceImpl implements GoodsService {
         criteria.andIsNewEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         return goodsList;
+    }
+
+    @Override
+    public List<FloorGoods> getFloorGoodsList() {
+        CategoryExample categoryExample = new CategoryExample();
+        CategoryExample.Criteria criteria = categoryExample.createCriteria();
+        criteria.andIdIsNotNull();
+        List<Category> categories = categoryMapper.selectByExample(categoryExample);
+
+        int limit = 3;
+        List<Goods> goodsList = goodsMapper.selectLimit(limit);
+
+        for(Category category : categories) {
+        }
+        return null;
     }
 
     private void deleteGoodsAttributeByGoodsId(Integer id) {

@@ -22,7 +22,7 @@ public class GrouponRules {
 
     private Date updateTime;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
 
     private Boolean deleted;

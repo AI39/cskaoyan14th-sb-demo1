@@ -84,6 +84,20 @@ public class AdController {
         return responseVo;
     }
 
+    @RequestMapping("coupon/read")
+    @ResponseBody
+    public ResponseVo<Coupon> readCoupon(int id){
+        ResponseVo<Coupon> responseVo = adService.readCoupon(id);
+        return responseVo;
+    }
+
+    @RequestMapping("coupon/listuser")
+    @ResponseBody
+    public  ResponseVo<Page> getListUser(int page,int limit,int couponId,String sort,String order){
+        ResponseVo<Page> responseVo = new ResponseVo<>();
+        return responseVo;
+    }
+
     @RequestMapping("coupon/create")
     @ResponseBody
     public ResponseVo<Coupon> createCoupon(@RequestBody Coupon coupon){

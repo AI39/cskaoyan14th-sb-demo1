@@ -2,6 +2,7 @@ package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.vo.Page;
+import com.cskaoyan14th.wrapper.FloorGoods;
 import com.cskaoyan14th.wrapper.GoodsParam;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface GoodsService {
     Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order);
 
     List<Goods> getNewGoodsList();
+
+    List<FloorGoods> getFloorGoodsList();
 }

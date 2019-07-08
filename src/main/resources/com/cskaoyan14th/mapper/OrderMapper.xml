@@ -608,6 +608,7 @@
       <result column="price" property="price"/>
       <result column="number" property="number"/>
       <result column="pic_url" property="picUrl"/>
+      <result column="goods_sn" property="goodsSn"/>
     </collection>
   </resultMap>
   <select id="showOrderDetail" resultMap="orderDetailMap">
@@ -616,7 +617,7 @@
     o.coupon_price, o.integral_price, o.groupon_price, o.order_price, o.actual_price, o.pay_id, o.pay_time, o.ship_sn, o.ship_channel,
     o.ship_time, o.confirm_time, o.comments, o.end_time, o.add_time, o.update_time, o.deleted,
     u.id, u.nickname, u.avatar,
-    g.id, g.order_id, g.goods_id, g.goods_name, g.product_id, g.specifications, g.price, g.number, g.pic_url
+    g.id, g.order_id, g.goods_id, g.goods_name, g.product_id, g.specifications, g.price, g.number, g.pic_url, g.goods_sn
     from
     cskaoyan_mall_user u
     left join
