@@ -1,5 +1,7 @@
 package com.cskaoyan14th.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
@@ -39,8 +41,10 @@ public class Goods {
 
     private BigDecimal retailPrice;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
@@ -111,11 +115,11 @@ public class Goods {
         this.brief = brief;
     }
 
-    public Boolean getOnSale() {
+    public Boolean getIsOnSale() {
         return isOnSale;
     }
 
-    public void setOnSale(Boolean onSale) {
+    public void setIsOnSale(Boolean onSale) {
         isOnSale = onSale;
     }
 
@@ -143,19 +147,19 @@ public class Goods {
         this.shareUrl = shareUrl;
     }
 
-    public Boolean getNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(Boolean aNew) {
+    public void setIsNew(Boolean aNew) {
         isNew = aNew;
     }
 
-    public Boolean getHot() {
+    public Boolean getIsHot() {
         return isHot;
     }
 
-    public void setHot(Boolean hot) {
+    public void setIsHot(Boolean hot) {
         isHot = hot;
     }
 
@@ -240,32 +244,5 @@ public class Goods {
                 ", deleted=" + deleted +
                 ", detail='" + detail + '\'' +
                 '}';
-    }
-
-    public Goods() {
-    }
-
-    public Goods(Integer id, String goodsSn, String name, Integer categoryId, Integer brandId, String[] gallery, String keywords, String brief, Boolean isOnSale, Short sortOrder, String picUrl, String shareUrl, Boolean isNew, Boolean isHot, String unit, BigDecimal counterPrice, BigDecimal retailPrice, Date addTime, Date updateTime, Boolean deleted, String detail) {
-        this.id = id;
-        this.goodsSn = goodsSn;
-        this.name = name;
-        this.categoryId = categoryId;
-        this.brandId = brandId;
-        this.gallery = gallery;
-        this.keywords = keywords;
-        this.brief = brief;
-        this.isOnSale = isOnSale;
-        this.sortOrder = sortOrder;
-        this.picUrl = picUrl;
-        this.shareUrl = shareUrl;
-        this.isNew = isNew;
-        this.isHot = isHot;
-        this.unit = unit;
-        this.counterPrice = counterPrice;
-        this.retailPrice = retailPrice;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-        this.deleted = deleted;
-        this.detail = detail;
     }
 }

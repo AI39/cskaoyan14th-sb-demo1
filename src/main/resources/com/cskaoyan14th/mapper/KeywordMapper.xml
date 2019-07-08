@@ -297,6 +297,7 @@
         `url` like concat('%', #{url}, '%')
       </if>
     </where>
+    where deleted = 0
     order by #{sort} #{order}
   </select>
   <insert id="inserts">
@@ -308,9 +309,10 @@
     values
     (#{keyword}, #{url}, #{isHot}, #{isDefault}, #{addTime}, #{updateTime})
   </insert>
-  <delete id="deleteById">
-    delete from cskaoyan_mall_keyword
+  <update id="deleteById">
+    update cskaoyan_mall_keyword
+    set deleted = 1
     where
     id = #{id}
-  </delete>
+  </update>
 </mapper>

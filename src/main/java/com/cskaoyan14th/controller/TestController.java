@@ -31,7 +31,6 @@ public class TestController {
         return new ResponseVo<Admin2>(0, admin2, "成功");
     }
 
-
     @RequestMapping("auth/testSql")
     @ResponseBody
     public Admin testSql() {

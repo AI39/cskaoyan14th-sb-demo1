@@ -15,6 +15,34 @@
     <result column="label" jdbcType="VARCHAR" property="label" />
   </resultMap>
   <select id="queryRoleAll" resultMap="roleLabelMapper">
-    select id as value ,name as  label from cskaoyan_mall_role
+    select id as value ,name as label from cskaoyan_mall_role
   </select>
+
+  <select id="queryRoleByName" resultMap="roleMapper">
+    select id,`name`,`desc`,enabled,add_time,update_time,deleted from cskaoyan_mall_role
+    <where>
+      <if test=" name != null">
+        name like
+        CONCAT('%',#{name},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="queryRoleByNa" resultMap="roleMapper">
+    select id,`name`,`desc`,enabled,add_time,update_time,deleted from cskaoyan_mall_role where name = #{role.name}
+  </select>
+
+  <insert id="insertRole">
+    insert into cskaoyan_mall_role (`name`,`desc`,enabled,add_time,update_time) values (#{role.name},#{role.desc},
+    #{role.enabled},#{role.addTime},#{role.updateTime})
+  </insert>
+
+  <update id="updateRoleById" >
+    update cskaoyan_mall_role set `name` = #{role.name},`desc` = #{role.desc},enabled = #{role.enabled},
+    update_time = #{role.updateTime},deleted = #{role.enabled} where id = #{role.id}
+  </update>
+
+  <delete id="deleteRoleById" >
+    delete from cskaoyan_mall_role where id = #{role.id}
+  </delete>
 </mapper>

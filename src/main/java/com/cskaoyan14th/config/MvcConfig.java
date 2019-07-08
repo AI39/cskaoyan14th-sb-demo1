@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.convert.support.ConfigurableConversionService;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -53,11 +52,11 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     /*文件上传组件*/
-    @Bean
+    /*@Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
         //commonsMultipartResolver.setMaxUploadSize(1024000);                    //限制图片大小为1000k
         return commonsMultipartResolver;
-    }
+    }*/
 
 }

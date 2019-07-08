@@ -18,6 +18,8 @@ public interface GrouponRulesMapper {
 
     List<GrouponRules> selectByExample(GrouponRulesExample example);
 
+    List<GrouponRules> selectByGoodsid(@Param("goodsId") int goodsId);
+
     GrouponRules selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") GrouponRules record, @Param("example") GrouponRulesExample example);

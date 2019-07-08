@@ -1,7 +1,6 @@
 package com.cskaoyan14th.bean;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CategoryForGoods {

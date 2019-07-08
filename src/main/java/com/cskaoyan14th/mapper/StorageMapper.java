@@ -1,30 +1,20 @@
 package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.Storage;
-import com.cskaoyan14th.bean.StorageExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface StorageMapper {
-    long countByExample(StorageExample example);
 
-    int deleteByExample(StorageExample example);
+    int insertStorageAll(@Param("sto") Storage storage);
 
-    int deleteByPrimaryKey(Integer id);
+    Storage queryStorageAll(@Param("ori") String originalFilename);
 
-    int insert(Storage record);
+    List<Storage> queryStorage(@Param("name")String name, @Param("key") String key);
 
-    int insertSelective(Storage record);
+    int updateStorageByKey(@Param("sto")Storage storage);
 
-    List<Storage> selectByExample(StorageExample example);
-
-    Storage selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Storage record, @Param("example") StorageExample example);
-
-    int updateByExample(@Param("record") Storage record, @Param("example") StorageExample example);
-
-    int updateByPrimaryKeySelective(Storage record);
-
-    int updateByPrimaryKey(Storage record);
+    int deleteStorageByKey(@Param("sto")Storage storage);
 }

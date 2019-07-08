@@ -1,5 +1,7 @@
 package com.cskaoyan14th.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,27 +14,15 @@ public class GoodsSpecification {
 
     private String value;
 
-    private String pic_url;
+    private String picUrl;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
-
-    public GoodsSpecification() {
-    }
-
-    public GoodsSpecification(Integer id, Integer goodsId, String specifications, String value, String pic_url, Date addTime, Date updateTime, Boolean deleted) {
-        this.id = id;
-        this.goodsId = goodsId;
-        this.specification = specifications;
-        this.value = value;
-        this.pic_url = pic_url;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-        this.deleted = deleted;
-    }
 
     public Integer getId() {
         return id;
@@ -50,12 +40,12 @@ public class GoodsSpecification {
         this.goodsId = goodsId;
     }
 
-    public String getSpecifications() {
+    public String getSpecification() {
         return specification;
     }
 
-    public void setSpecifications(String specifications) {
-        this.specification = specifications;
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 
     public String getValue() {
@@ -66,12 +56,12 @@ public class GoodsSpecification {
         this.value = value;
     }
 
-    public String getPic_url() {
-        return pic_url;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setPic_url(String pic_url) {
-        this.pic_url = pic_url;
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public Date getAddTime() {
@@ -96,19 +86,5 @@ public class GoodsSpecification {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsSpecification{" +
-                "id=" + id +
-                ", goodsId=" + goodsId +
-                ", specifications='" + specification + '\'' +
-                ", value='" + value + '\'' +
-                ", pic_url='" + pic_url + '\'' +
-                ", addTime=" + addTime +
-                ", updateTime=" + updateTime +
-                ", deleted=" + deleted +
-                '}';
     }
 }
