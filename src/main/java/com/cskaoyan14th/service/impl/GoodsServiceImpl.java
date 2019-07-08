@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -254,15 +255,20 @@ public class GoodsServiceImpl implements GoodsService {
     public List<FloorGoods> getFloorGoodsList() {
         CategoryExample categoryExample = new CategoryExample();
         CategoryExample.Criteria criteria = categoryExample.createCriteria();
-        criteria.andIdIsNotNull();
+        criteria.andPidEqualTo(0);
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
 
+        List<FloorGoods> floorGoodsList = new ArrayList<>();
         int limit = 3;
-        List<Goods> goodsList = goodsMapper.selectLimit(limit);
-
         for(Category category : categories) {
+            List<Goods> goodsList = goodsMapper.selectLimitByParentCategoryId(category.getId(), limit);
+            FloorGoods floorGoods = new FloorGoods();
+            floorGoods.setGoodsList(goodsList);
+            floorGoods.setId(category.getId());
+            floorGoods.setName(category.getName());
+            floorGoodsList.add(floorGoods);
         }
-        return null;
+        return floorGoodsList;
     }
 
     private void deleteGoodsAttributeByGoodsId(Integer id) {
