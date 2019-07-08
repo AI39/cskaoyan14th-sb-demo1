@@ -297,6 +297,7 @@
       `name` like concat('%', #{name}, '%')
     </if>
   </where>
+    where deleted = 0
     order by #{sort} #{order}
   </select>
 
@@ -316,4 +317,12 @@
     where
     id = #{id}
   </select>
+
+  <update id="deleteBrandById">
+    update cskaoyan_mall_brand
+    set
+    deleted = 1
+    where
+    id = #{id}
+  </update>
 </mapper>

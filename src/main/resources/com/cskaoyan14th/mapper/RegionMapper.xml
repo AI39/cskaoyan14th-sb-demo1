@@ -208,4 +208,46 @@
       code = #{code,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--下面是自己写的sql语句-->
+  <resultMap id="regionList" type="com.cskaoyan14th.bean.Region">
+    <id column="r1id" property="id"/>
+    <result column="r1pid" property="pid"/>
+    <result column="r1name" property="name"/>
+    <result column="r1type" property="type"/>
+    <result column="r1code" property="code"/>
+    <collection property="children" ofType="com.cskaoyan14th.bean.Region">
+      <id column="r2id" property="id"/>
+      <result column="r2pid" property="pid"/>
+      <result column="r2name" property="name"/>
+      <result column="r2type" property="type"/>
+      <result column="r2code" property="code"/>
+      <collection property="children" ofType="com.cskaoyan14th.bean.Region">
+        <id column="r3id" property="id"/>
+        <result column="r3pid" property="pid"/>
+        <result column="r3name" property="name"/>
+        <result column="r3type" property="type"/>
+        <result column="r3code" property="code"/>
+      </collection>
+    </collection>
+
+  </resultMap>
+  <select id="queryRegionList" resultMap="regionList">
+    select
+    r1.id as r1id, r1.`name` as r1name, r1.type as r1type, r1.code as r1code,
+    r2.id as r2id, r2.`name` as r2name, r2.type as r2type, r2.code as r2code,
+    r3.id as r3id, r3.`name` as r3name, r3.type as r3type, r3.code as r3code
+
+    from
+    cskaoyan_mall_region r1
+    join
+    cskaoyan_mall_region r2
+    join
+    cskaoyan_mall_region r3
+    on
+    r1.id = r2.pid and
+    r2.id = r3.pid
+
+    where r1.pid = 0
+  </select>
 </mapper>
