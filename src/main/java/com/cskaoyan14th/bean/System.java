@@ -11,6 +11,8 @@ public class System {
 
     private SystemOrderComment systemOrderComment;
 
+    private SystemWx systemWx;
+
     private String keyValue;
 
     private Date addTime;
@@ -51,6 +53,14 @@ public class System {
         this.systemOrderComment = systemOrderComment;
     }
 
+    public SystemWx getSystemWx() {
+        return systemWx;
+    }
+
+    public void setSystemWx(SystemWx systemWx) {
+        this.systemWx = systemWx;
+    }
+
     public String getKeyValue() {
         return keyValue;
     }
@@ -83,11 +93,12 @@ public class System {
         this.deleted = deleted;
     }
 
-    public System(Integer id, SystemKeyValue systemKeyValue, SystemFrightMin systemFrightMin, SystemOrderComment systemOrderComment, String keyValue, Date addTime, Date updateTime, Boolean deleted) {
+    public System(Integer id, SystemKeyValue systemKeyValue, SystemFrightMin systemFrightMin, SystemOrderComment systemOrderComment, SystemWx systemWx, String keyValue, Date addTime, Date updateTime, Boolean deleted) {
         this.id = id;
         this.systemKeyValue = systemKeyValue;
         this.systemFrightMin = systemFrightMin;
         this.systemOrderComment = systemOrderComment;
+        this.systemWx = systemWx;
         this.keyValue = keyValue;
         this.addTime = addTime;
         this.updateTime = updateTime;
@@ -104,6 +115,7 @@ public class System {
                 ", systemKeyValue=" + systemKeyValue +
                 ", systemFrightMin=" + systemFrightMin +
                 ", systemOrderComment=" + systemOrderComment +
+                ", systemWx=" + systemWx +
                 ", keyValue='" + keyValue + '\'' +
                 ", addTime=" + addTime +
                 ", updateTime=" + updateTime +

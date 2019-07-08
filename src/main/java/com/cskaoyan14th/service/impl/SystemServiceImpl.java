@@ -46,5 +46,15 @@ public class SystemServiceImpl implements SystemService {
         return systemMapper.updateSystemByOrder(keyValue,keyName);
     }
 
+    @Override
+    public String querySystemByWx(String keyName) {
+        return systemMapper.querySystemByWx(keyName);
+    }
+
+    @Override
+    public int updateSystemByWx(String keyValue, String keyName) {
+        return systemMapper.updateSystemByWx(keyValue, keyName);
+    }
+
 }
 
