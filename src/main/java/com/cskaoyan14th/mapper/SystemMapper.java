@@ -42,6 +42,10 @@ public interface SystemMapper {
 
     int updateSystemByOrder(@Param("keyValue") String keyValue,@Param("keyName") String keyName);
 
+    String querySystemByWx(@Param("keyName") String keyName);
+
+    int updateSystemByWx(@Param("keyValue") String keyValue,@Param("keyName") String keyName);
+
 
 
 }

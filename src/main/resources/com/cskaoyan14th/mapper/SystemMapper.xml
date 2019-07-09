@@ -250,4 +250,12 @@
   <update id="updateSystemByOrder">
     update cskaoyan_mall_system set key_value = #{keyValue} where key_name = #{keyName}
   </update>
+  <!--小程序配置查询-->
+  <select id="querySystemByWx" resultType="string">
+     select key_value from cskaoyan_mall_system where key_name = #{keyName}
+  </select>
+  <!--小程序配置修改-->
+  <update id="updateSystemByWx">
+    update cskaoyan_mall_system set key_value = #{keyValue} where key_name = #{keyName}
+  </update>
 </mapper>
