@@ -21,8 +21,6 @@ public class TopicController {
     @Autowired
     TopicService topicService;
 
-    @Autowired
-    AdService adService;
 
     @RequestMapping("topic/list")
     @ResponseBody
@@ -46,20 +44,6 @@ public class TopicController {
     }
 
 
-    /*
-    valueId:264
-    type:1
-    showType:0
-    page:1
-    size:5
-     */
-    @RequestMapping("comment/list")
-    @ResponseBody
-    public ResponseVo<CommentList> getCommentList(int valueId,int type,int showType,int page,int size){
-        ResponseVo<CommentList> responseVo=topicService.getCommentList(valueId,type,showType,page,size);
-        return responseVo;
-    }
-
     @RequestMapping("coupon/receive")
     @ResponseBody
     public ResponseVo<String> receiveCoupon(int couponId){
@@ -74,11 +58,12 @@ public class TopicController {
         return responseVo;
     }
 
-    /*@RequestMapping("groupon/list")
+    @RequestMapping("groupon/list")
     @ResponseBody
-    public ResponseVo<PageData> getGrouponxListAll(){
-        adService.
-    }*/
+    public ResponseVo<PageData> getGrouponxListAll(int page,int size){
+        ResponseVo<PageData> responseVo=topicService.getGrouponxListAll(page,size);
+        return responseVo;
+    }
 
 
 

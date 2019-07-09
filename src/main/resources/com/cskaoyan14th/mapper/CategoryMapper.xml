@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
-    <result column="`desc`" jdbcType="VARCHAR" property="desc" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />

@@ -5,6 +5,7 @@ import com.cskaoyan14th.service.AdService;
 import com.cskaoyan14th.service.BrandService;
 import com.cskaoyan14th.service.CategoryService;
 import com.cskaoyan14th.service.GoodsService;
+import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.FloorGoods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,9 @@ public class WxIndexController {
         map.put("couponList", couponList);
 
         //获取channel
-        map.put("channel", null);
+        WxCatalog wxCatalogIndex = categoryService.queryCatalogIndex();
+        List<Category> channel = wxCatalogIndex.getCategoryList();
+        map.put("channel", channel);
         //获取grouponList
         List<Grouponx> grouponList = adService.selectGrouponxLimit();
         map.put("grouponList", grouponList);
@@ -50,7 +53,8 @@ public class WxIndexController {
         List<Ad> banner = adService.getAdAll();
         map.put("banner", banner);
         //获取brandList
-        map.put("brandList", null);
+        List<Brand> brandList = brandService.queryWxBrandList(1, 4);
+        map.put("brandList", brandList);
         //获取hotGoodsList
         List<Goods> hotGoodsList = goodsService.getHotGoodsList();
         map.put("hotGoodsList", hotGoodsList);

@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("storage")
+@RequestMapping("admin/storage")
 public class StorageController {
     @Autowired
     MyOssClient myOssClient;
