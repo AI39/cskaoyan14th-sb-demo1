@@ -18,6 +18,11 @@ public interface SystemService {
 
     int updateSystemByOrder( String keyValue, String keyName);
 
+    String querySystemByWx( String keyName);
+
+    int updateSystemByWx( String keyValue, String keyName);
+
+
 
 
 }

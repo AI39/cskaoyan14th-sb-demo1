@@ -303,4 +303,34 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--以上逆向工程-->
+  <resultMap id="CommentForGoodsDetailResultMap" type="com.cskaoyan14th.bean.CommentForGoodsDetail">
+    <result column="add_time" property="addTime"/>
+    <result column="pic_urls" property="picList" typeHandler="com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler"/>
+    <result column="nickname" property="nickname"/>
+    <result column="id" property="id"/>
+    <result column="avatar" property="avatar"/>
+    <result column="content" property="content"/>
+  </resultMap>
+  <select id="selectLimitCommentForGoodsDetailByGoodId" resultMap="CommentForGoodsDetailResultMap">
+        SELECT
+        t1.add_time,
+        t1.pic_urls,
+        t2.nickname,
+        t1.id,
+        t2.avatar,
+        t1.content
+    FROM
+        cskaoyan_mall_comment t1
+        INNER JOIN cskaoyan_mall_user t2 ON t1.user_id = t2.id
+    WHERE
+        t1.value_id = #{id}
+        LIMIT #{limit};
+  </select>
+
+  <select id="selectCountByGoodsId" resultType="_int">
+    select count(id) from cskaoyan_mall_comment where value_id = #{id}
+  </select>
+
 </mapper>

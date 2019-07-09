@@ -1,13 +1,15 @@
 package com.cskaoyan14th.service;
 
-import com.cskaoyan14th.bean.Ad;
-import com.cskaoyan14th.bean.Coupon;
-import com.cskaoyan14th.bean.GrouponRules;
-import com.cskaoyan14th.bean.Topic;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
 
+import java.util.List;
+
 public interface AdService {
+
+    List<Ad> getAdAll();
+
     ResponseVo<Page> getAdList(int page, int limit, String sort, String order);
 
     ResponseVo<Ad> editAd(Ad ad);
@@ -19,6 +21,8 @@ public interface AdService {
     ResponseVo<Page> searchAd(int page, int limit,String name,String sort,String order);
 
     ResponseVo<Page> searchAd(int page, int limit,String name,String content, String sort,String order);
+
+    List<Coupon> getCouponAll();
 
     ResponseVo<Page> getCouponList(int page, int limit, String sort, String order);
 
@@ -45,6 +49,8 @@ public interface AdService {
 
     ResponseVo<Page> getCouponListByTypeAndStatus(int page, int limit,short type,short status,String sort, String order);
 
+    List<Topic> getTopicAll();
+
     ResponseVo<Page> getTopicList(int page, int limit,String sort,String order);
 
     ResponseVo<Page> getTopicList(int page, int limit,String title,String subtitle,String sort,String order);
@@ -70,4 +76,6 @@ public interface AdService {
     ResponseVo<Page> getGrouponListByGoodsid(int page,int limit,int goodsId,String sort,String order);
 
     ResponseVo<Page> getGrouponActivityList(int page,int limit,String sort,String order);
+
+    List<Grouponx> selectGrouponxLimit();
 }

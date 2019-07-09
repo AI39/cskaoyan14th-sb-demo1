@@ -6,6 +6,7 @@ import com.cskaoyan14th.mapper.CommentMapper;
 import com.cskaoyan14th.mapper.GoodsMapper;
 import com.cskaoyan14th.mapper.GoodsProductMapper;
 import com.cskaoyan14th.mapper.GoodsSpecificationMapper;
+import com.cskaoyan14th.wrapper.FloorGoods;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -86,5 +87,12 @@ public class GoodsTest extends Cskaoyan14thSbDemo1ApplicationTests {
     public void test8() {
         Comment comment = commentMapper.selectByPrimaryKey(1);
         System.out.println(comment);
+    }
+
+
+    @Test
+    public void test9() {
+        List<Goods> goodsList = goodsMapper.selectLimitByParentCategoryId(1005000, 3);
+        System.out.println(goodsList);
     }
 }

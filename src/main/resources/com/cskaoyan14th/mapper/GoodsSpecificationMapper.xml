@@ -256,4 +256,9 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--上面是逆向工程-->
+  <select id="selectDistinctSpecificationByGoodsId" resultType="string">
+    select distinct specification from cskaoyan_mall_goods_specification where goods_id = #{id}
+  </select>
 </mapper>

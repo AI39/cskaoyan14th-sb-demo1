@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -36,6 +37,18 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    GrouponxMapper grouponxMapper;
+
+    @Override
+    public List<Ad> getAdAll() {
+        AdExample adExample = new AdExample();
+        AdExample.Criteria criteria = adExample.createCriteria();
+        criteria.andIdIsNotNull();
+        List<Ad> ads = adMapper.selectByExample(adExample);
+        return ads;
+    }
 
     @Override
     public ResponseVo<Page> getAdList(int page, int limit, String sort, String order) {
@@ -110,6 +123,12 @@ public class AdServiceImpl implements AdService {
         Page<Ad> adPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         ResponseVo<Page> responseVo = new ResponseVo<>(0,adPage,"成功");
         return responseVo;
+    }
+
+    @Override
+    public List<Coupon> getCouponAll() {
+        List<Coupon> coupons = couponMapper.selectAllCoupon();
+        return coupons;
     }
 
     @Override
@@ -237,6 +256,15 @@ public class AdServiceImpl implements AdService {
         Page<Coupon> couponPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         ResponseVo<Page> responseVo = new ResponseVo<>(0,couponPage,"成功");
         return responseVo;
+    }
+
+    @Override
+    public List<Topic> getTopicAll() {
+        TopicExample topicExample = new TopicExample();
+        TopicExample.Criteria criteria = topicExample.createCriteria();
+        criteria.andIdIsNotNull();
+        List<Topic> list = topicMapper.selectByExample(topicExample);
+        return list;
     }
 
     @Override
@@ -405,6 +433,15 @@ public class AdServiceImpl implements AdService {
         return responseVo;
     }
 
+    @Override
+    public List<Grouponx> selectGrouponxLimit() {
+        List<Grouponx> grouponxes = grouponxMapper.selectGrouponxAll();
+        for (Grouponx items:grouponxes) {
+            items.setGroupon_price(new Random().nextDouble()*1000);
+            items.setGroupon_member(new Random().nextInt(20));
+        }
+        return grouponxes;
+    }
 
 
 }

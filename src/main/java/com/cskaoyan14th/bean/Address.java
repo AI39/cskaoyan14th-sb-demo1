@@ -16,6 +16,7 @@ public class Address {
     private Integer areaId;
 
     private String address;
+    private String detailedAddress;
 
     private String mobile;
 
@@ -26,6 +27,14 @@ public class Address {
     private Date updateTime;
 
     private Boolean deleted;
+
+    public String getDetailedAddress() {
+        return detailedAddress;
+    }
+
+    public void setDetailedAddress(String detailedAddress) {
+        this.detailedAddress = detailedAddress;
+    }
 
     public Integer getId() {
         return id;
