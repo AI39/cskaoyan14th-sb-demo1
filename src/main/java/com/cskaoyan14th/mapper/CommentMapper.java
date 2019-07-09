@@ -3,6 +3,8 @@ package com.cskaoyan14th.mapper;
 import com.cskaoyan14th.bean.Comment;
 import com.cskaoyan14th.bean.CommentExample;
 import java.util.List;
+
+import com.cskaoyan14th.bean.CommentForGoodsDetail;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommentMapper {
@@ -27,4 +29,8 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+    List<CommentForGoodsDetail> selectLimitCommentForGoodsDetailByGoodId(@Param("id") int id, @Param("limit") int limit);
+
+    int selectCountByGoodsId(@Param("id") int id);
 }

@@ -1,9 +1,7 @@
 package com.cskaoyan14th.controller;
 
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.bean.System;
-import com.cskaoyan14th.bean.SystemFrightMin;
-import com.cskaoyan14th.bean.SystemKeyValue;
-import com.cskaoyan14th.bean.SystemOrderComment;
 import com.cskaoyan14th.mapper.SystemMapper;
 import com.cskaoyan14th.vo.Admin2;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -100,6 +98,43 @@ public class SystemController {
         systemOrderComment1.setCskaoyan_mall_order_unconfirm(systemMapper.querySystemByOrder("cskaoyan_mall_order_unconfirm"));
 
         return new ResponseVo<SystemOrderComment>(0, systemOrderComment1 , "成功");
+    }
+    @GetMapping("config/wx")
+    @ResponseBody
+    public ResponseVo<SystemWx> mall3() {
+        SystemWx systemWx1 = new SystemWx();
+
+        systemWx1.setCskaoyan_mall_wx_share(systemMapper.querySystemByWx("cskaoyan_mall_wx_share"));
+        systemWx1.setCskaoyan_mall_wx_catlog_goods(systemMapper.querySystemByWx("cskaoyan_mall_wx_catlog_goods"));
+        systemWx1.setCskaoyan_mall_wx_catlog_list(systemMapper.querySystemByWx("cskaoyan_mall_wx_catlog_list"));
+        systemWx1.setCskaoyan_mall_wx_index_brand(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_brand"));
+        systemWx1.setCskaoyan_mall_wx_index_hot(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_hot"));
+        systemWx1.setCskaoyan_mall_wx_index_topic(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_topic"));
+        systemWx1.setCskaoyan_mall_wx_index_new(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_new"));
+       return new ResponseVo<SystemWx>(0, systemWx1, "成功");
+    }
+    @PostMapping("config/wx")
+    @ResponseBody
+    public ResponseVo<SystemWx> mall(@RequestBody SystemWx systemWx) {
+        SystemWx systemWx1 = new SystemWx();
+
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_share(),"cskaoyan_mall_wx_share");
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_catlog_goods(),"cskaoyan_mall_wx_catlog_goods");
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_catlog_list(),"cskaoyan_mall_wx_catlog_list");
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_index_brand(),"cskaoyan_mall_wx_index_brand");
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_index_hot(),"cskaoyan_mall_wx_index_hot");
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_index_topic(),"cskaoyan_mall_wx_index_topic");
+        systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_index_new(),"cskaoyan_mall_wx_index_new");
+
+        systemWx1.setCskaoyan_mall_wx_share(systemMapper.querySystemByWx("cskaoyan_mall_wx_share"));
+        systemWx1.setCskaoyan_mall_wx_catlog_goods(systemMapper.querySystemByWx("cskaoyan_mall_wx_catlog_goods"));
+        systemWx1.setCskaoyan_mall_wx_catlog_list(systemMapper.querySystemByWx("cskaoyan_mall_wx_catlog_list"));
+        systemWx1.setCskaoyan_mall_wx_index_brand(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_brand"));
+        systemWx1.setCskaoyan_mall_wx_index_hot(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_hot"));
+        systemWx1.setCskaoyan_mall_wx_index_topic(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_topic"));
+        systemWx1.setCskaoyan_mall_wx_index_new(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_new"));
+
+        return new ResponseVo<SystemWx>(0, systemWx1 , "成功");
     }
 
 }
