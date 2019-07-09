@@ -2,9 +2,9 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.mapper.StatMapper;
 import com.cskaoyan14th.service.StatService;
-import com.cskaoyan14th.vo.GoodsStat;
-import com.cskaoyan14th.vo.OrderStat;
-import com.cskaoyan14th.vo.UserStat;
+import com.cskaoyan14th.wrapper.GoodsStat;
+import com.cskaoyan14th.wrapper.OrderStat;
+import com.cskaoyan14th.wrapper.UserStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

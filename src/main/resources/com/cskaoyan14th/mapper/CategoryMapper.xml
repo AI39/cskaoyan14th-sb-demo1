@@ -414,6 +414,7 @@
     from cskaoyan_mall_category
     where
     pid = 0
+    and deleted = 0
   </select>
 
   <select id="queryCurrentCatalog" resultMap="catalogList">
@@ -421,11 +422,13 @@
     from cskaoyan_mall_category
     where
     id = #{id}
+    and deleted = 0
   </select>
   <select id="queryCurrentSubCategory" resultMap="catalogList">
     select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
     from cskaoyan_mall_category
     where
     pid = #{id}
+    and deleted = 0
   </select>
 </mapper>

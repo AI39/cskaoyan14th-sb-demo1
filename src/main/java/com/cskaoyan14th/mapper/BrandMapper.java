@@ -35,4 +35,11 @@ public interface BrandMapper {
     Brand selectById(Integer id);
 
     int deleteBrandById(Integer id);
+
+    /*微信*/
+
+    List<Brand> queryWxBrandList();
+
+    long countBrand();
+
 }

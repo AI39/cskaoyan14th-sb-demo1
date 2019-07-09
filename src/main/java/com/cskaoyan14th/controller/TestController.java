@@ -13,7 +13,7 @@ import java.util.UUID;
 
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("admin")
 public class TestController {
 
     @Autowired

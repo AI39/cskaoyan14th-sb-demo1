@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan14th.mapper.StatMapper">
 
-    <resultMap id="UserStatMapper" type="com.cskaoyan14th.vo.UserStat">
+    <resultMap id="UserStatMapper" type="com.cskaoyan14th.wrapper.UserStat">
         <result column="u_count" property="users"/>
         <result column="date" property="day"/>
     </resultMap>
@@ -12,7 +12,7 @@
         group by date(add_time);
     </select>
 
-    <resultMap id="OrderStatMapper" type="com.cskaoyan14th.vo.OrderStat">
+    <resultMap id="OrderStatMapper" type="com.cskaoyan14th.wrapper.OrderStat">
         <result column="o_count" property="orders"/>
         <result column="u_count" property="customers"/>
         <result column="p_sum" property="amount"/>
@@ -25,7 +25,7 @@
         group by date(add_time)
     </select>
 
-    <resultMap id="GoodsStatMapper" type="com.cskaoyan14th.vo.GoodsStat">
+    <resultMap id="GoodsStatMapper" type="com.cskaoyan14th.wrapper.GoodsStat">
         <result column="o_count" property="orders"/>
         <result column="n_count" property="products"/>
         <result column="np" property="amount"/>
