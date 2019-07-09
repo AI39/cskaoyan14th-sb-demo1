@@ -1,14 +1,8 @@
 package com.cskaoyan14th.controller.wx;
 
-import com.cskaoyan14th.bean.Address;
-import com.cskaoyan14th.bean.Cart;
-import com.cskaoyan14th.bean.Coupon;
-import com.cskaoyan14th.bean.GrouponRules;
-import com.cskaoyan14th.service.AddressService;
-import com.cskaoyan14th.service.CouponService;
-import com.cskaoyan14th.service.GrouponRulesService;
+import com.cskaoyan14th.bean.*;
+import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.wrapper.CartTotal;
-import com.cskaoyan14th.service.CartService;
 import com.cskaoyan14th.util.UserTokenManager;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.CheckOutOrder;
@@ -19,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,4 +161,69 @@ public class CartController {
 
     }
 
+    @RequestMapping("goodscount")
+    @ResponseBody
+    public ResponseVo goodsCount(HttpServletRequest request){
+        ResponseVo responseVo = new ResponseVo();
+        responseVo.setErrno(0);
+        responseVo.setErrmsg("成功");
+        responseVo.setData(0);
+        return responseVo;
+    }
+
+    @Autowired
+    GoodsService goodsService;
+
+    @RequestMapping("add")
+    @ResponseBody
+    public ResponseVo add(@RequestBody Map<String,Object> map,HttpServletRequest request){
+        Integer goodsId = (Integer) map.get("goodsId");
+        Integer number = (Integer) map.get("number");
+        Integer productId = (Integer) map.get("productId");
+        //获取token
+        String token = request.getHeader("X-Litemall-Token");
+        Integer uid = UserTokenManager.getUserId(token);
+
+        Cart cart = new Cart();
+        cart.setUserId(uid);
+
+        //通过goods_id获取商品，需要goods_sn和goods_name
+        cart.setGoodsId(goodsId);
+        Goods goods = goodsService.getGoodByGoodsId(goodsId);
+        cart.setGoodsName(goods.getName());
+        cart.setGoodsSn(goods.getGoodsSn());
+
+        //通过product_id获取商品货物表goods_product的信息
+        cart.setProductId(productId);
+        GoodsProduct product = goodsService.getProductByProductId(productId);
+        cart.setPrice(product.getPrice());
+        cart.setNumber(number.shortValue());
+
+        String[] specifications = product.getSpecifications();
+        StringBuilder sb = new StringBuilder();
+        for (String specification : specifications) {
+            sb.append(specification);
+        }
+        cart.setSpecifications(sb.toString());
+
+        //数据库里是tinyint ,bean里是boolean
+        cart.setChecked(true);
+        cart.setPicUrl(goods.getPicUrl());
+        cart.setAddTime(new Date());
+        cart.setUpdateTime(new Date());
+        cart.setDeleted(false);
+
+        ResponseVo responseVo = new ResponseVo();
+        //插入cart
+        int id= cartService.insertCart(cart);
+        if (id > 0 ){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        }else {
+            responseVo.setErrmsg("添加购物车失败");
+            responseVo.setErrno(-1);
+        }
+        responseVo.setData(id);
+        return responseVo;
+    }
 }

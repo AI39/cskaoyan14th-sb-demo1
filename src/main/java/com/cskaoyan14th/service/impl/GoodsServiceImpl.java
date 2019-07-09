@@ -490,4 +490,14 @@ public class GoodsServiceImpl implements GoodsService {
 
         return map;
     }
+
+    @Override
+    public Goods getGoodByGoodsId(Integer goodsId) {
+        return goodsMapper.selectByPrimaryKey(goodsId);
+    }
+
+    @Override
+    public GoodsProduct getProductByProductId(Integer productId) {
+        return goodsProductMapper.selectByPrimaryKey(productId);
+    }
 }

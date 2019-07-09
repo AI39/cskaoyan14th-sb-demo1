@@ -45,4 +45,7 @@ public interface GoodsService {
 
     Map<String, Object> getCurrentBrotherParentGatogory(int id);
 
+    //在cart/add中使用
+    Goods getGoodByGoodsId(Integer goodsId);
+    GoodsProduct getProductByProductId(Integer productId);
 }
