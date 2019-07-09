@@ -83,6 +83,16 @@ public class TopicController {
         return responseVo;
     }
 
+    /*
+    cartId=193&grouponRulesId=0
+     */
+    @RequestMapping("coupon/selectlist")
+    @ResponseBody
+    public ResponseVo<List> selectCouponList(int cartId,int grouponRules){
+        ResponseVo<List> responseVo=topicService.selectCouponList(cartId,grouponRules);
+        return responseVo;
+    }
+
 
 
 

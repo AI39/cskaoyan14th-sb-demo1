@@ -26,4 +26,6 @@ public interface TopicService {
     ResponseVo<PageData> getCouponList(int status,int page,int size);
 
     ResponseVo<String> exchange(String code);
+
+    ResponseVo<List> selectCouponList(int cartId,int grouponRules);
 }
