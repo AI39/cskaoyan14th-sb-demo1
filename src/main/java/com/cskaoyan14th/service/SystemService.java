@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public interface SystemService {
+
     String querySystemByKeyValue(String keyName);
+
     int updateSystemKeyValue( String keyValue, String keyName);
 
     String querySystemByFrightMin( String keyName);

@@ -3,6 +3,7 @@ package com.cskaoyan14th.service.impl;
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.CommentMapper;
 import com.cskaoyan14th.mapper.CouponMapper;
+import com.cskaoyan14th.mapper.GrouponxMapper;
 import com.cskaoyan14th.mapper.TopicMapper;
 import com.cskaoyan14th.service.TopicService;
 import com.cskaoyan14th.vo.Page;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class TopicServiceImpl implements TopicService {
@@ -26,6 +28,12 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     CouponMapper couponMapper;
+
+    @Autowired
+    GrouponxMapper grouponxMapper;
+
+    @Autowired
+    AdServiceImpl adService;
 
     @Override
     public ResponseVo<PageData> getTopicListWx(int page, int size) {
@@ -98,8 +106,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public ResponseVo<PageData> getGrouponxListAll(int page, int size) {
         PageHelper.startPage(page,size);
-
-        return null;
+        List<Grouponx> grouponxes = adService.selectGrouponxLimit();
+        PageInfo<Grouponx> pageInfo=new PageInfo<>(grouponxes);
+        PageData<Grouponx> pageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        ResponseVo<PageData> responseVo = new ResponseVo<>(0,pageData,"成功");
+        return responseVo;
     }
 
 
