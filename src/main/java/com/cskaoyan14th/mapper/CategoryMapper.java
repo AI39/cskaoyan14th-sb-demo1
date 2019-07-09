@@ -5,7 +5,6 @@ import com.cskaoyan14th.bean.CategoryExample;
 import java.util.List;
 
 import com.cskaoyan14th.bean.CategoryForGoods;
-import com.cskaoyan14th.bean.wx.Catalog;
 import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {

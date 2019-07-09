@@ -1,4 +1,4 @@
-package com.cskaoyan14th.bean.wx;
+package com.cskaoyan14th.bean;
 
 import com.cskaoyan14th.bean.Category;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author Yuechao Yang
  * @version 2019-07-08-20:17
  */
-public class Catalog {
+public class WxCatalog {
     private List<Category> categoryList = new ArrayList<>();
     private Category currentCategory;
     private List<Category> currentSubCategory = new ArrayList<>();
@@ -38,18 +38,18 @@ public class Catalog {
         this.currentSubCategory = currentSubCategory;
     }
 
-    public Catalog(List<Category> categoryList, Category currentCategory, List<Category> currentSubCategory) {
+    public WxCatalog(List<Category> categoryList, Category currentCategory, List<Category> currentSubCategory) {
         this.categoryList = categoryList;
         this.currentCategory = currentCategory;
         this.currentSubCategory = currentSubCategory;
     }
 
-    public Catalog() {
+    public WxCatalog() {
     }
 
     @Override
     public String toString() {
-        return "Catalog{" +
+        return "WxCatalog{" +
                 "categoryList=" + categoryList +
                 ", currentCategory=" + currentCategory +
                 ", currentSubCategory=" + currentSubCategory +

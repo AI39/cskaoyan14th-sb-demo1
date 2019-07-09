@@ -2,7 +2,7 @@ package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Category;
 import com.cskaoyan14th.bean.CategoryForGoods;
-import com.cskaoyan14th.bean.wx.Catalog;
+import com.cskaoyan14th.bean.WxCatalog;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface CategoryService {
 
     /*微信后台中需要的逻辑*/
 
-    Catalog queryCatalogIndex();
+    WxCatalog queryCatalogIndex();
 
-    Catalog queryCurrentCatalog(int id);
+    WxCatalog queryCurrentCatalog(int id);
 }

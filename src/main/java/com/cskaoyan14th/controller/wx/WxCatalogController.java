@@ -1,7 +1,6 @@
 package com.cskaoyan14th.controller.wx;
 
-import com.cskaoyan14th.bean.Category;
-import com.cskaoyan14th.bean.wx.Catalog;
+import com.cskaoyan14th.bean.WxCatalog;
 import com.cskaoyan14th.service.CategoryService;
 import com.cskaoyan14th.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,11 @@ public class WxCatalogController {
     CategoryService categoryService;
     @RequestMapping("index")
     @ResponseBody
-    public ResponseVo<Catalog> catalogIndex(){
-        ResponseVo<Catalog> responseVo = new ResponseVo<>();
-        Catalog catalogIndex = categoryService.queryCatalogIndex();
-        if (catalogIndex != null){
-            responseVo.setData(catalogIndex);
+    public ResponseVo<WxCatalog> catalogIndex(){
+        ResponseVo<WxCatalog> responseVo = new ResponseVo<>();
+        WxCatalog wxCatalogIndex = categoryService.queryCatalogIndex();
+        if (wxCatalogIndex != null){
+            responseVo.setData(wxCatalogIndex);
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
         }else {
@@ -35,11 +34,11 @@ public class WxCatalogController {
     }
     @RequestMapping("current")
     @ResponseBody
-    public ResponseVo<Catalog> currentCatalog(int id){
-        ResponseVo<Catalog> responseVo = new ResponseVo<>();
-        Catalog currentCatalog = categoryService.queryCurrentCatalog(id);
-        if (currentCatalog != null){
-            responseVo.setData(currentCatalog);
+    public ResponseVo<WxCatalog> currentCatalog(int id){
+        ResponseVo<WxCatalog> responseVo = new ResponseVo<>();
+        WxCatalog currentWxCatalog = categoryService.queryCurrentCatalog(id);
+        if (currentWxCatalog != null){
+            responseVo.setData(currentWxCatalog);
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
         }else {
