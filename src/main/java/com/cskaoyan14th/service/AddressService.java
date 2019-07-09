@@ -16,4 +16,8 @@ public interface AddressService {
 
     int deleteAddressById(int id);
     int deleteAddressById(String id);
+
+    Address getDefaultAddress(Integer uid);
+
+    Address getCheckedAddress(int addressId);
 }
