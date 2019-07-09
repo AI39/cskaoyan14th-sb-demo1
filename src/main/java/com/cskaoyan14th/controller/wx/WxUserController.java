@@ -19,6 +19,7 @@ public class WxUserController {
     @Autowired
     UserService userService;
 
+    /*账号登录*/
     @RequestMapping("/auth/login")
     @ResponseBody
     public ResponseVo<Map<String, Object>> login(@RequestBody User user) {
@@ -36,7 +37,6 @@ public class WxUserController {
         userInfo.setNickName(activeUser.getNickname());
         userInfo.setAvatarUrl(activeUser.getAvatar());
 
-
         //********************************
         //根据获得userid
         int userId = activeUser.getId();
@@ -52,7 +52,34 @@ public class WxUserController {
         return new ResponseVo(0, result, "成功");
     }
 
-    @GetMapping("user/index")
+    /*账号退出*/
+    @RequestMapping("auth/logout")
+    @ResponseBody
+    public ResponseVo<Object> logout(HttpServletRequest request) {
+        //前端写了一个token放在请求头中
+        //*************************
+        //获得请求头
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        //通过请求头获得userId，进而可以获得一切关于user的信息
+        //**************************
+        if (userId == null) {
+            return new ResponseVo(-1, null, "错误");
+        }
+        //删除与本地维护用户token相关的数据
+        UserTokenManager.removeToken(userId);
+        return new ResponseVo(0, null, "成功");
+    }
+
+    /*微信登录，这里好像直接屏蔽了*/
+    @RequestMapping("auth/login_by_weixin")
+    @ResponseBody
+    public ResponseVo<Object> logout() {
+        return new ResponseVo(-1, null, "错误");
+    }
+
+    /*显示个人页面相关信息*/
+    @RequestMapping("user/index")
     public ResponseVo<Map<String, Map<String, Object>>> index(HttpServletRequest request) {
         //前端写了一个token放在请求头中
         //*************************
