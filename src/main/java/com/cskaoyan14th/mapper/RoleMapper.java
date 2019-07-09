@@ -1,5 +1,6 @@
 package com.cskaoyan14th.mapper;
 
+import com.cskaoyan14th.bean.Admin;
 import com.cskaoyan14th.bean.Role;
 import com.cskaoyan14th.bean.RoleExample;
 import java.util.List;
@@ -18,4 +19,6 @@ public interface RoleMapper {
     int updateRoleById(@Param("role")Role role);
 
     int deleteRoleById(@Param("role")Role role);
+
+    String[] queryNameByRoleids(@Param("adm") int[] admin);
 }

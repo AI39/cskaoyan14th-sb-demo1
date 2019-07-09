@@ -45,4 +45,11 @@
   <delete id="deleteRoleById" >
     delete from cskaoyan_mall_role where id = #{role.id}
   </delete>
+
+  <select id="queryNameByRoleids" resultType="string">
+    select `name` from  cskaoyan_mall_role where id in
+    <foreach collection="adm" item="ids" separator="," open="(" close=")">
+      #{ids}
+    </foreach>
+  </select>
 </mapper>

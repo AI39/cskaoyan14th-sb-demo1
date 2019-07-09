@@ -17,6 +17,8 @@
     <result column="deleted"  property="deleted"/>
     <result column="role_ids" property="roleIds" typeHandler="com.cskaoyan14th.typeHandler.AdminTypeHandler"/>
   </resultMap>
+
+
   <select id="queryAdminAll" resultMap="adminMapper">
     select id,username,role_ids,avatar from cskaoyan_mall_admin
     <where>
@@ -32,7 +34,11 @@
   </insert>
 
   <select id="queryAdminByUsername" resultMap="adminMapper">
-    select id,password,username,role_ids,add_time,update_time from cskaoyan_mall_admin where username = #{user.username}
+    select id,password,username,avatar,role_ids,add_time,update_time from cskaoyan_mall_admin where username = #{user.username}
+  </select>
+
+  <select id="queryPasswordByUsername" resultMap="adminMapper">
+    select password,username,role_ids from cskaoyan_mall_admin where username = #{name}
   </select>
 
   <update id="updatetAdmin" >
@@ -48,4 +54,6 @@
   <delete id="deleteAdmin" >
     delete from cskaoyan_mall_admin where id = #{admin.id}
   </delete>
+
+
 </mapper>

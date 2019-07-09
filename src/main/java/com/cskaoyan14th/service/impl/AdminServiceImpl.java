@@ -1,19 +1,18 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Admin;
-import com.cskaoyan14th.converter.DateConverter;
+import com.cskaoyan14th.bean.Permission;
 import com.cskaoyan14th.mapper.AdminMapper;
 import com.cskaoyan14th.service.AdminService;
 import com.cskaoyan14th.vo.DateCurrentTime;
+import com.cskaoyan14th.vo.MD5;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +48,8 @@ public class AdminServiceImpl implements AdminService {
         System.out.println(date);
         admin.setAddTime(date);
         admin.setUpdateTime(date);
+        String md5 = MD5.getMd5(admin.getUsername(), admin.getPassword());
+        admin.setPassword(md5);
         int i = adminMapper.insertAdmin(admin);
         return i;
     }
@@ -96,6 +97,13 @@ public class AdminServiceImpl implements AdminService {
         }
         return adminResponseVo;
     }
+
+    @Override
+    public Admin queryPasswordByUsername(String username) {
+        Admin admin = adminMapper.queryPasswordByUsername(username);
+        return  admin;
+    }
+
 
 
 }

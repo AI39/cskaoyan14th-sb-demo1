@@ -1,7 +1,10 @@
 package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Admin;
+import com.cskaoyan14th.bean.Permission;
 import com.cskaoyan14th.vo.ResponseVo;
+
+import java.util.List;
 
 public interface AdminService {
 
@@ -16,5 +19,7 @@ public interface AdminService {
     ResponseVo<Admin> queryAdminById(Admin id);
 
     ResponseVo deleteAdmin(Admin admin);
+
+    Admin queryPasswordByUsername(String username);
 
 }

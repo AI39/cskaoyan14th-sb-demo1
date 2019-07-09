@@ -3,6 +3,11 @@ package com.cskaoyan14th.controller;
 import com.cskaoyan14th.bean.Admin;
 import com.cskaoyan14th.service.AdminService;
 import com.cskaoyan14th.vo.ResponseVo;
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("admin/admin")
 public class AdminController {
     @Autowired
     AdminService adminService;
+
     @RequestMapping("list")
     @ResponseBody
+    @RequiresPermissions(value = "*")
     public ResponseVo list(int page, int limit, String username){
         ResponseVo responseVo = adminService.queryAdminAll(page,limit,username);
+
         return responseVo;
     }
 
@@ -28,7 +36,7 @@ public class AdminController {
     public ResponseVo<Admin> create(@RequestBody Admin admin){
         int i = adminService.insertAdmin(admin);
         ResponseVo<Admin> adminResponseVo = adminService.queryAdminByUsername(admin);
-
+        System.out.println(adminResponseVo);
         return  adminResponseVo;
     }
 
