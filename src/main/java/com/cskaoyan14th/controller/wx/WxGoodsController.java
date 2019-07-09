@@ -1,5 +1,6 @@
 package com.cskaoyan14th.controller.wx;
 
+import com.cskaoyan14th.bean.Category;
 import com.cskaoyan14th.bean.Goods;
 import com.cskaoyan14th.service.GoodsService;
 import com.cskaoyan14th.vo.Page;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class WxGoodsController {
 
     //商品搜索和更多商品展示
     @RequestMapping("list")
-    public ResponseMapVo list(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId) {
+    public ResponseMapVo list(HttpServletRequest request, String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId) {
         ResponseMapVo responseMapVo = new ResponseMapVo();
         Map<String, Object> data = new HashMap<>();
         List<Goods> goodsList = goodsService.getGoodsListByPage(keyword, page, size, sort, order, categoryId, brandId);
@@ -44,6 +46,9 @@ public class WxGoodsController {
         responseMapVo.setData(data);
         responseMapVo.setErrmsg("成功");
         responseMapVo.setErrno(0);
+
+        //记录搜索历史
+
         return responseMapVo;
     }
 
@@ -73,9 +78,17 @@ public class WxGoodsController {
     }
 
     //按照categoryId展示商品list
-    @RequestMapping("goods/category")
+    @RequestMapping("category")
     public ResponseMapVo category(int id) {
-        return null;
+        ResponseMapVo responseMapVo = new ResponseMapVo();
+        Map<String, Object> data = goodsService.getCurrentBrotherParentGatogory(id);
+
+        responseMapVo.setData(data);
+        responseMapVo.setErrno(0);
+        responseMapVo.setErrmsg("成功");
+
+
+        return responseMapVo;
     }
 
 }

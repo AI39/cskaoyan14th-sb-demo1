@@ -456,4 +456,38 @@ public class GoodsServiceImpl implements GoodsService {
         }
         return goodsListLimit;
     }
+
+    @Override
+    public Map<String, Object> getCurrentBrotherParentGatogory(int id) {
+        Map<String, Object> map = new HashMap<>();
+        CategoryExample categoryExample = new CategoryExample();
+        CategoryExample.Criteria criteria = categoryExample.createCriteria();
+
+        Category category = categoryMapper.selectByPrimaryKey(id);
+        if(category.getPid() == 0) {
+
+            Category parentCategory = categoryMapper.selectByPrimaryKey(id);
+            map.put("parentCategory", parentCategory);
+
+
+            criteria.andPidEqualTo(id);
+            List<Category> brotherCategory = categoryMapper.selectByExample(categoryExample);
+            map.put("brotherCategory", brotherCategory);
+
+            if (brotherCategory != null && brotherCategory.size() != 0) {
+                map.put("currentCategory", brotherCategory.get(0));
+            }
+        } else {
+            Category parentCategory = categoryMapper.selectByPrimaryKey(category.getPid());
+            map.put("parentCategory", parentCategory);
+
+            criteria.andPidEqualTo(category.getPid());
+            List<Category> brotherCategory = categoryMapper.selectByExample(categoryExample);
+            map.put("brotherCategory", brotherCategory);
+
+            map.put("currentCategory", category);
+        }
+
+        return map;
+    }
 }

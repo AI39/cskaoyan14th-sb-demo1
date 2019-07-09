@@ -6,7 +6,9 @@ import com.cskaoyan14th.wrapper.FloorGoods;
 import com.cskaoyan14th.wrapper.GoodsDetail;
 import com.cskaoyan14th.wrapper.GoodsParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsService {
 
@@ -39,4 +41,8 @@ public interface GoodsService {
     GoodsDetail getGoodsDetailByGoodsId(int id);
 
     List<Goods> getRelatedGoods(int id);
+
+
+    Map<String, Object> getCurrentBrotherParentGatogory(int id);
+
 }
