@@ -95,5 +95,12 @@ public class TopicServiceImpl implements TopicService {
         return responseVo;
     }
 
+    @Override
+    public ResponseVo<PageData> getGrouponxListAll(int page, int size) {
+        PageHelper.startPage(page,size);
+
+        return null;
+    }
+
 
 }

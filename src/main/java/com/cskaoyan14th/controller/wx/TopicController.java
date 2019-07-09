@@ -21,8 +21,6 @@ public class TopicController {
     @Autowired
     TopicService topicService;
 
-    @Autowired
-    AdService adService;
 
     @RequestMapping("topic/list")
     @ResponseBody
@@ -74,11 +72,12 @@ public class TopicController {
         return responseVo;
     }
 
-    /*@RequestMapping("groupon/list")
+    @RequestMapping("groupon/list")
     @ResponseBody
-    public ResponseVo<PageData> getGrouponxListAll(){
-        adService.
-    }*/
+    public ResponseVo<PageData> getGrouponxListAll(int page,int size){
+        ResponseVo<PageData> responseVo=topicService.getGrouponxListAll(page,size);
+        return responseVo;
+    }
 
 
 
