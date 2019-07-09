@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.UUID;
 
+
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class TestController {
 
     @Autowired

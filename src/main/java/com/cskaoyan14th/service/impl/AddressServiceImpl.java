@@ -33,4 +33,19 @@ public class AddressServiceImpl implements AddressService {
         Page<Address> addressList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return addressList;
     }
+
+    @Override
+    public List<Address> getAddressList(int uid) {
+        //return addressMapper.getListById(uid);
+        return addressMapper.getListById();
+    }
+
+    @Override
+    public int deleteAddressById(int id) {
+        return addressMapper.deleteByPrimaryKey(id);
+    }
+    @Override
+    public int deleteAddressById(String id) {
+        return addressMapper.deleteByPrimaryKey(Integer.valueOf(id));
+    }
 }
