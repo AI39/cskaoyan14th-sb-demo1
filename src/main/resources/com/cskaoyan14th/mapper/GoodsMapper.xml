@@ -569,6 +569,20 @@
     select id as value,name as label from cskaoyan_mall_brand
   </select>
 
+  <!--根据父级目录id查找所有商品-->
+  <select id="selectLimitByParentCategoryId" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_goods
+    where category_id in (select id from cskaoyan_mall_category where pid = #{id})
+    limit #{limit}
+  </select>
+
+  <!--获取goods条数-->
+  <select id="selectCount" resultType="_int">
+    select count(id) from cskaoyan_mall_goods where id is not null;
+  </select>
+
 
 
 </mapper>

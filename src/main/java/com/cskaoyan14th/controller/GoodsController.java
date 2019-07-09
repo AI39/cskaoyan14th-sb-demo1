@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("goods")
+@RequestMapping("admin/goods")
 public class GoodsController {
     @Autowired
     GoodsService goodsService;
@@ -22,8 +22,8 @@ public class GoodsController {
     //一、商品列表
     //（一）商品列表展示和模糊查询
     @GetMapping("list")
-    public ResponseVo<Page<Goods>> list(int page, int limit, String sort, String order) {
-        Page<Goods> goodsPage = goodsService.getGoodsPage(page, limit, sort, order);
+    public ResponseVo<Page<Goods>> list(int page, int limit, String goodsSn, String name,String sort, String order) {
+        Page<Goods> goodsPage = goodsService.getGoodsPage(page, limit, goodsSn, name, sort, order);
         ResponseVo<Page<Goods>> responseVo = new ResponseVo<>(0, goodsPage, "成功");
         return responseVo;
     }

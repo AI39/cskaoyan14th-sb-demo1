@@ -1,6 +1,7 @@
 package com.cskaoyan14th.bean;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Topic {
@@ -18,7 +19,7 @@ public class Topic {
 
     private Integer sortOrder;
 
-    private String goods;
+    private String[] goods;
 
     private Date addTime;
 
@@ -84,12 +85,12 @@ public class Topic {
         this.sortOrder = sortOrder;
     }
 
-    public String getGoods() {
+    public String[] getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
-        this.goods = goods == null ? null : goods.trim();
+    public void setGoods(String[] goods) {
+        this.goods = goods;
     }
 
     public Date getAddTime() {
@@ -122,5 +123,23 @@ public class Topic {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", price=" + price +
+                ", readCount='" + readCount + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", sortOrder=" + sortOrder +
+                ", goods=" + Arrays.toString(goods) +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

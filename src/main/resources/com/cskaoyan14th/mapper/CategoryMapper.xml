@@ -320,4 +320,115 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--下面是自己写的sql语句-->
+  <resultMap id="categoryL1" type="com.cskaoyan14th.bean.CategoryForGoods">
+    <id column="id" property="value"/>
+    <result column="name" property="label"/>
+  </resultMap>
+  <select id="queryCategoryL1" resultMap="categoryL1">
+    select id, `name`
+    from cskaoyan_mall_category
+    where
+    level = "L1"
+  </select>
+  
+  <resultMap id="categoryList" type="com.cskaoyan14th.bean.Category">
+      <id column="c1id" property="id"/>
+      <result column="c1pid" property="pid"/>
+      <result column="c1name" property="name"/>
+      <result column="c1keywords" property="keywords"/>
+      <result column="c1desc" property="desc"/>
+      <result column="c1level" property="level"/>
+      <result column="c1icon_url" property="iconUrl"/>
+      <result column="c1pic_url" property="picUrl"/>
+    <collection property="children" javaType="com.cskaoyan14th.bean.Category">
+      <id column="c2id" property="id"/>
+      <result column="c2pid" property="pid"/>
+      <result column="c2name" property="name"/>
+      <result column="c2keywords" property="keywords"/>
+      <result column="c2desc" property="desc"/>
+      <result column="c2level" property="level"/>
+      <result column="c2icon_url" property="iconUrl"/>
+      <result column="c2pic_url" property="picUrl"/>
+    </collection>
+  </resultMap>
+  <select id="queryCategoryList" resultMap="categoryList">                                                          /*这里是用连接查询来进行查询的*/
+    select
+    c1.id as c1id , c1.`name` as c1name, c1.keywords as c1keywords, c1.`desc` as c1desc, c1.`level` as c1level , c1.icon_url as c1icon_url, c1.pic_url as c1pic_url,
+    c2.id as c2id , c2.`name` as c2name, c2.keywords as c2keywords, c2.`desc` as c2desc, c2.`level` as c2level , c2.icon_url as c2icon_url, c2.pic_url as c2pic_url
+    from
+    cskaoyan_mall_category c1
+    left join
+    cskaoyan_mall_category c2
+    on
+    <if test="c2pid != 0">
+      c2.pid = c1.id
+    </if>
+    where
+    c1.pid = 0
+    and
+    c1.deleted = 0
+  </select>
+    <insert id="inserts">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int">
+            select last_insert_id();
+        </selectKey>
+        insert into cskaoyan_mall_category
+        (`desc`, add_time, update_time, icon_url, pic_url, keywords, `level`, `name`, pid )
+        values
+        (#{desc}, #{addTime}, #{updateTime}, #{iconUrl}, #{picUrl}, #{keywords}, #{level}, #{name}, #{pid})
+    </insert>
+    <select id="selectById" resultType="com.cskaoyan14th.bean.Category">
+        select id, `desc`, add_time, update_time, icon_url, pic_url, keywords, `level`, `name`, pid from cskaoyan_mall_category
+        where id = #{id}
+    </select>
+
+    <update id="deleteCategory">
+      update cskaoyan_mall_category
+      set deleted = 1
+      where
+      id = #{id}
+      or
+      pid = #{id}
+    </update>
+  
+  
+  <!--微信的后台需要的sql语句-->
+  <resultMap id="catalogList" type="com.cskaoyan14th.bean.Category">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+      <result column="desc" jdbcType="VARCHAR" property="desc" />
+      <result column="pid" jdbcType="INTEGER" property="pid" />
+      <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+      <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+      <result column="level" jdbcType="VARCHAR" property="level" />
+      <result column="sort_order" jdbcType="TINYINT" property="sortOrder" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <select id="queryCatalogIndex" resultMap="catalogList">
+    select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_category
+    where
+    pid = 0
+    and deleted = 0
+  </select>
+
+  <select id="queryCurrentCatalog" resultMap="catalogList">
+    select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_category
+    where
+    id = #{id}
+    and deleted = 0
+  </select>
+  <select id="queryCurrentSubCategory" resultMap="catalogList">
+    select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_category
+    where
+    pid = #{id}
+    and deleted = 0
+  </select>
 </mapper>

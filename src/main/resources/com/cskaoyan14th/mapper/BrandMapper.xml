@@ -272,4 +272,70 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--下面是自己写的sql语句-->
+  <resultMap id="myResultMap" type="com.cskaoyan14th.bean.Brand">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="desc" property="desc"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="sort_order" property="sortOrder"/>
+    <result column="floor_price" property="floorPrice"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
+  </resultMap>
+  <select id="selectBrandList" resultMap="myResultMap">
+    select id, `name`, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
+    from cskaoyan_mall_brand
+    <where>
+    <if test="id != null">
+      id like concat('%',#{id},'%')
+    </if>
+    <if test="name != null">
+      and
+      `name` like concat('%', #{name}, '%')
+    </if>
+  </where>
+    where deleted = 0
+    order by #{sort} #{order}
+  </select>
+
+  <insert id="inserts">
+    <selectKey keyColumn="id" keyProperty="id" resultType="int">
+      select last_insert_id();
+    </selectKey>
+    insert into cskaoyan_mall_brand
+    (`name`, `desc`, pic_url, floor_price, add_time, update_time)
+    values
+    (#{name},#{desc}, #{picUrl}, #{floorPrice},  #{addTime}, #{updateTime})
+  </insert>
+
+  <select id="selectById" resultMap="myResultMap">
+    select id, `name`, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
+    from cskaoyan_mall_brand
+    where
+    id = #{id}
+  </select>
+
+  <update id="deleteBrandById">
+    update cskaoyan_mall_brand
+    set
+    deleted = 1
+    where
+    id = #{id}
+  </update>
+
+
+  <!--微信-->
+  <select id="queryWxBrandList" resultMap="myResultMap">
+    select id, `name`, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
+    from cskaoyan_mall_brand
+    where deleted = 0
+  </select>
+
+  <select id="countBrand" resultType="java.lang.Long">
+    select count(*) from cskaoyan_mall_brand
+    where deleted = 0
+  </select>
 </mapper>

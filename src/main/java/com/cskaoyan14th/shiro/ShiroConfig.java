@@ -26,12 +26,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
 
-        shiroFilterFactoryBean.setLoginUrl("/");
+        shiroFilterFactoryBean.setLoginUrl("/admin/auth/login");
         HashMap<String, String> filterMap = new HashMap<>();
-        filterMap.put("/auth/login","anon");
-        filterMap.put("/auth/info","anon");
-        filterMap.put("logout","logout");
-        filterMap.put("/**","authc");
+        filterMap.put("/admin/auth/login","anon");
+        filterMap.put("/admin/auth/info","anon");
+        filterMap.put("/admin/**","authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return  shiroFilterFactoryBean;

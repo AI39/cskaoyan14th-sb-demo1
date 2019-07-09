@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.UUID;
 
+
 @Controller
+@RequestMapping("admin")
 public class TestController {
 
     @Autowired
@@ -30,7 +32,6 @@ public class TestController {
         Admin2 admin2 = new Admin2("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "admin123", new String[]{"*"}, new String[]{"超级管理员"});
         return new ResponseVo<Admin2>(0, admin2, "成功");
     }*/
-
 
     @RequestMapping("auth/testSql")
     @ResponseBody

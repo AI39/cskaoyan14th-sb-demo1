@@ -1,6 +1,7 @@
 package com.cskaoyan14th.bean;
 
-import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class GoodsSpecification {
@@ -14,8 +15,10 @@ public class GoodsSpecification {
 
     private String picUrl;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;

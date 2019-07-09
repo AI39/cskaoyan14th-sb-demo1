@@ -1,7 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Admin;
-import com.cskaoyan14th.bean.Permission;
+
 import com.cskaoyan14th.mapper.AdminMapper;
 import com.cskaoyan14th.service.AdminService;
 import com.cskaoyan14th.vo.DateCurrentTime;
@@ -69,6 +69,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int updateAdmin(Admin admin) {
+        String md5 = MD5.getMd5(admin.getUsername(), admin.getPassword());
+        admin.setPassword(md5);
         int i = adminMapper.updatetAdmin(admin);
         return i;
     }

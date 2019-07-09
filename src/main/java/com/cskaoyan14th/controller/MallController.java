@@ -1,9 +1,6 @@
 package com.cskaoyan14th.controller;
 
-import com.cskaoyan14th.bean.Category;
-import com.cskaoyan14th.bean.Issue;
-import com.cskaoyan14th.bean.Keyword;
-import com.cskaoyan14th.bean.Region;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -14,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.System;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Yuechao Yang
  * @version 2019-07-03-21:08
  */
 @RestController
+@RequestMapping("/admin")
 public class MallController {
     @Autowired
     RegionService regionService;
@@ -35,11 +35,21 @@ public class MallController {
     @Autowired
     KeywordService keywordService;
     /*行政区域*/
-   /* @RequestMapping("region/list")
+    @RequestMapping("region/list")
     @ResponseBody
-   public ResponseVo<Page<>> regionList(int page, int limit){
-        regionService.queryRegionList(page, limit);
-    }*/
+   public ResponseVo<List<Region>> regionList(){
+        ResponseVo<List<Region>> responseVo = new ResponseVo<>();
+        List<Region> regionList= regionService.queryRegionList();
+        responseVo.setData(regionList);
+        if (regionList != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else{
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
 
 
    /*通用问题，共有四个方法实现*/
@@ -108,7 +118,7 @@ public class MallController {
     }
 
 
-    /*关键词*/
+    /*关键词,共有四个方法实现*/
     @RequestMapping("keyword/list")
     @ResponseBody
     public ResponseVo<Page<Keyword>> keywordList(int page, int limit, String keyword, String url, String sort, String order){
@@ -164,6 +174,180 @@ public class MallController {
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
 
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+
+    /*品牌制造商，4个方法实现*/
+    @RequestMapping("brand/list")
+    @ResponseBody
+    public ResponseVo<Page<Brand>> brandList(int page, int limit, Integer id, String name, String sort, String order){
+        Page<Brand> brandList = brandService.queryBrandList(page, limit, id, name, sort, order);
+        ResponseVo<Page<Brand>> responseVo = new ResponseVo<>();
+        if (brandList != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            responseVo.setData(brandList);
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+    @RequestMapping("brand/delete")
+    @ResponseBody
+    public ResponseVo<Brand> brandDelete(@RequestBody Brand brand){
+        ResponseVo<Brand> responseVo = new ResponseVo<>();
+        int delete = brandService.deleteBrand(brand);
+        if ( delete != 0){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(500);
+        }
+        return responseVo;
+    }
+    @RequestMapping("brand/create")
+    @ResponseBody
+    public ResponseVo<Brand> createBrand(@RequestBody Brand brand){
+        ResponseVo<Brand> responseVo = new ResponseVo<>();
+        Brand create = brandService.createBrand(brand);
+        responseVo.setData(create);
+        if (create != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("brand/update")
+    @ResponseBody
+    public ResponseVo<Brand> updateBrand(@RequestBody Brand brand){
+        ResponseVo<Brand> responseVo = new ResponseVo<>();
+        Brand update = brandService.updateBrand(brand);
+        responseVo.setData(update);
+        if ( update != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+
+    /*订单管理,两个方法实现。商品显示有一项显示不出来，应该是前端代码的问题*/
+    @RequestMapping("order/list")                                                                                   //这个函数中的形参orderStatusArray需要用到Short包装类，以及底层实现的参数也需要
+    @ResponseBody
+    public ResponseVo<Page<Order>> orderList(int page, int limit, Short orderStatusArray, String sort, String order, Integer userId, String orderSn){
+        Page<Order> orderList = orderService.queryOrderList(page, limit, orderStatusArray, sort, order, userId, orderSn);
+        ResponseVo<Page<Order>> responseVo = new ResponseVo<>();
+        if (orderList != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            responseVo.setData(orderList);
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+    @RequestMapping("order/detail")
+    @ResponseBody
+    public ResponseVo<OrderDetail> orderDetail(int id){
+        ResponseVo<OrderDetail> responseVo = new ResponseVo<>();
+        OrderDetail orderDetail = orderService.showOrderDetail(id);
+        responseVo.setData(orderDetail);
+        if (orderDetail != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+    /*商品类目*/
+    @RequestMapping("category/list")
+    @ResponseBody
+    public ResponseVo<List<Category>> categoryList(){
+        ResponseVo<List<Category>> responseVo = new ResponseVo<>();
+        List<Category> category = categoryService.queryCategoryList();
+        responseVo.setData(category);
+        if (category != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/l1")
+    @ResponseBody
+    public ResponseVo<List<CategoryForGoods>> categoryL1(){
+        ResponseVo<List<CategoryForGoods>> responseVo = new ResponseVo<>();
+        List<CategoryForGoods> category = categoryService.queryCategoryL1();
+        responseVo.setData(category);
+        if (category != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/update")
+    @ResponseBody
+    public ResponseVo<Category> categoryList(@RequestBody Category category){
+        ResponseVo<Category> responseVo = new ResponseVo<>();
+        int update = categoryService.updateCategory(category);
+        if (update != 0){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/create")
+    @ResponseBody
+    public ResponseVo<Category> createCategory(@RequestBody Category category){
+        ResponseVo<Category> responseVo = new ResponseVo<>();
+        Category create = categoryService.createCategory(category);
+        if (create != null){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }else {
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("category/delete")
+    @ResponseBody
+    public ResponseVo<Category> deleteCategory(@RequestBody Category category){
+        ResponseVo<Category> responseVo = new ResponseVo<>();
+        int delete = categoryService.deleteCategory(category);
+        if (delete != 0){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
         }else {
             responseVo.setErrmsg("失败");
             responseVo.setErrno(404);

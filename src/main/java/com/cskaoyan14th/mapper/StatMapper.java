@@ -1,8 +1,8 @@
 package com.cskaoyan14th.mapper;
 
-import com.cskaoyan14th.vo.GoodsStat;
-import com.cskaoyan14th.vo.OrderStat;
-import com.cskaoyan14th.vo.UserStat;
+import com.cskaoyan14th.wrapper.GoodsStat;
+import com.cskaoyan14th.wrapper.OrderStat;
+import com.cskaoyan14th.wrapper.UserStat;
 
 import java.util.List;
 

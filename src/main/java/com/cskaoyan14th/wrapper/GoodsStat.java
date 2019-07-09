@@ -1,4 +1,4 @@
-package com.cskaoyan14th.vo;
+package com.cskaoyan14th.wrapper;
 
 import java.math.BigDecimal;
 import java.sql.Date;

@@ -12,7 +12,7 @@ public class OrderGoods {
 
     private String goodsName;
 
-    private String goodsSn;
+    private String goodsSn;                                                                                         /*商品编号*/
 
     private Integer productId;
 

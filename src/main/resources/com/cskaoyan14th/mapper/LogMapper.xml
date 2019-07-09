@@ -24,4 +24,10 @@
       </if>
     </where>
   </select>
+  <insert id="insertLogin">
+    insert into cskaoyan_mall_log (admin,ip,`type`,`action`,status,add_time,update_time,deleted)
+    values (#{log.admin},#{log.ip},#{log.type},#{log.action},#{log.status},#{log.addTime},#{log.updateTime},#{log.deleted})
+  </insert>
+
+
 </mapper>

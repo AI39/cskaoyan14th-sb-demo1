@@ -9,4 +9,6 @@ public interface LogMapper {
 
 
     List<Log> queryAdminAll(@Param("name") String name);
+
+    int insertLogin(@Param("log")Log log);
 }

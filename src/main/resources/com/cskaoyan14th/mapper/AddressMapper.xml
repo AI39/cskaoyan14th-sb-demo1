@@ -8,6 +8,10 @@
     <result column="province_id" jdbcType="INTEGER" property="provinceId" />
     <result column="city_id" jdbcType="INTEGER" property="cityId" />
     <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="detailedAddress" jdbcType="VARCHAR" property="detailedAddress" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="is_default" jdbcType="BIT" property="isDefault" />
@@ -323,19 +327,41 @@
 
 
   <!--自己写的方法-->
+  <sql id="LEFT_JOIN_REGION_Column_List">
+    a.id, a.name, a.user_id, a.province_id, a.city_id, a.area_id, a.address, a.mobile, a.is_default, a.add_time,
+    a.update_time, a.deleted, r1.name as province, r2.name as city, r3.name as area,concat(r1.name,r2.name,r3.name,a.address) as detailedAddress
+  </sql>
   <select id="selectAddressListOrder" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
-    from cskaoyan_mall_address
+    <include refid="LEFT_JOIN_REGION_Column_List"/>
+    from cskaoyan_mall_address a
+    left join cskaoyan_mall_region r1 on a.province_id = r1.code
+    left join cskaoyan_mall_region r2 on a.city_id = r2.code
+    left join cskaoyan_mall_region r3 on a.area_id = r3.code
     <where>
       <if test="name != null">
-        `name` like concat('%',#{name},'%')
+        a.name like concat('%',#{name},'%')
       </if>
       <if test="userId != null">
         and
-        user_id like concat('%',#{userId},'%')
+        a.user_id like concat('%',#{userId},'%')
       </if>
     </where>
     order by #{sort} #{order}
   </select>
+
+  <select id="getListById" resultMap="BaseResultMap">
+    select
+    a.id, a.is_default, a.mobile, a.name, concat(r1.name,r2.name,r3.name,a.address) as detailedAddress
+    from cskaoyan_mall_address a
+    left join cskaoyan_mall_region r1 on a.province_id = r1.code
+    left join cskaoyan_mall_region r2 on a.city_id = r2.code
+    left join cskaoyan_mall_region r3 on a.area_id = r3.code
+    <where>
+      <if test="uid != null">
+        a.id=#{uid}
+      </if>
+    </where>
+  </select>
+
 </mapper>

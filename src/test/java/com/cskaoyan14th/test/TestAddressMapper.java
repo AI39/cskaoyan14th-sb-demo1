@@ -48,7 +48,7 @@ public class TestAddressMapper extends Cskaoyan14thSbDemo1ApplicationTests {
 
     @Test
     public void Md5(){
-        String md5 = MD5.getMd5("mall123", "mall123");
+        String md5 = MD5.getMd5("admin123", "admin123");
         System.out.println(md5);
     }
 
