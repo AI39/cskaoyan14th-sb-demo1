@@ -20,6 +20,7 @@ import java.util.List;
  * @version 2019-07-03-21:08
  */
 @RestController
+@RequestMapping("/admin")
 public class MallController {
     @Autowired
     RegionService regionService;
