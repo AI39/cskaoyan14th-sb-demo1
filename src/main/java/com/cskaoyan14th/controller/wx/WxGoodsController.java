@@ -2,7 +2,6 @@ package com.cskaoyan14th.controller.wx;
 
 import com.cskaoyan14th.bean.Goods;
 import com.cskaoyan14th.service.GoodsService;
-import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseMapVo;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.GoodsDetail;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

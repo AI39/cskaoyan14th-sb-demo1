@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.Cart;
 import com.cskaoyan14th.bean.CartExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CartMapper {
     long countByExample(CartExample example);
 
