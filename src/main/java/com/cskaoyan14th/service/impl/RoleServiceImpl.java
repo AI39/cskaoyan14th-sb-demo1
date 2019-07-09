@@ -101,4 +101,12 @@ public class RoleServiceImpl implements RoleService {
         }
         return roleResponseVo;
     }
+
+    @Override
+    public String[] queryNameByRoleids(int[] admin) {
+
+        String[] strings = roleMapper.queryNameByRoleids(admin);
+
+        return strings;
+    }
 }

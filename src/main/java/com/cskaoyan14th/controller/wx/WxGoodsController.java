@@ -3,6 +3,8 @@ package com.cskaoyan14th.controller.wx;
 import com.cskaoyan14th.bean.Category;
 import com.cskaoyan14th.bean.Goods;
 import com.cskaoyan14th.service.GoodsService;
+import com.cskaoyan14th.util.UserTokenManager;
+import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseMapVo;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.GoodsDetail;
@@ -47,6 +49,15 @@ public class WxGoodsController {
         responseMapVo.setErrno(0);
 
         //记录搜索历史
+        //获取用户的id
+        if(keyword != null && keyword.length() != 0) {
+            String token = request.getHeader("X-Litemall-Token");
+            Integer userId = UserTokenManager.getUserId(token);
+            if(userId != null) {
+                goodsService.insertSearchHistory(userId, keyword);
+            }
+        }
+
 
         return responseMapVo;
     }
@@ -89,5 +100,6 @@ public class WxGoodsController {
 
         return responseMapVo;
     }
+
 
 }

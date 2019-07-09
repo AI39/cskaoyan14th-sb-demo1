@@ -2,6 +2,7 @@ package com.cskaoyan14th.bean;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Admin {
     private Integer id;
