@@ -333,4 +333,54 @@
     select count(id) from cskaoyan_mall_comment where value_id = #{id}
   </select>
 
+  <select id="getPicCount" resultType="_int">
+    SELECT
+        count(1)
+    FROM
+        `cskaoyan_mall_comment`
+    WHERE
+        pic_urls NOT IN ( '[]', '[', ']' )
+        AND pic_urls IS NOT NULL
+        and value_id = #{valueId}
+        and type = #{type}
+  </select>
+
+  <select id="getAllCount" resultType="_int">
+    SELECT
+        count(1)
+    FROM
+        `cskaoyan_mall_comment`
+    where value_id = #{valueId}
+    and type = #{type}
+  </select>
+
+  <resultMap id="CommentDataResultMap" type="com.cskaoyan14th.bean.CommentData">
+    <result property="addTime" column="add_time"/>
+    <result property="picList" column="pic_urls" typeHandler="com.cskaoyan14th.typeHandler.StringArray2StringTypeHandler"/>
+    <result property="content" column="content"/>
+    <association property="userInfo" javaType="com.cskaoyan14th.bean.UserInfo">
+      <result property="nickName" column="nickname"/>
+      <result property="avatarUrl" column="avatar"/>
+    </association>
+  </resultMap>
+
+  <select id="getCommentData" resultMap="CommentDataResultMap">
+    SELECT
+      t2.nickname,
+      t2.avatar,
+      t1.add_time,
+      t1.pic_urls,
+      t1.content
+    FROM
+      cskaoyan_mall_comment t1
+	INNER JOIN cskaoyan_mall_user t2 ON t1.user_id = t2.id
+    WHERE
+	  t1.value_id = #{valueId}
+	AND t1.type = #{type}
+	<if test="showType == 1">
+      AND t1.pic_urls NOT IN ( '[]', '[', ']' )
+      AND t1.pic_urls IS NOT NULL
+    </if>
+  </select>
+
 </mapper>

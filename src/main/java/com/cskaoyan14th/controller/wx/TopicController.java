@@ -53,12 +53,7 @@ public class TopicController {
     page:1
     size:5
      */
-    @RequestMapping("comment/list")
-    @ResponseBody
-    public ResponseVo<CommentList> getCommentList(int valueId,int type,int showType,int page,int size){
-        ResponseVo<CommentList> responseVo=topicService.getCommentList(valueId,type,showType,page,size);
-        return responseVo;
-    }
+
 
     @RequestMapping("coupon/receive")
     @ResponseBody
