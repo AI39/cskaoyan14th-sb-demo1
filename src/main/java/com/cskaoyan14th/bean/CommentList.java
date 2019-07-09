@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CommentList {
-
     List<CommentData> data;
     int count;
     int currentPage;

@@ -1,7 +1,9 @@
 package com.cskaoyan14th.service.impl;
 
+import com.cskaoyan14th.bean.OrderExample;
 import com.cskaoyan14th.bean.User;
 import com.cskaoyan14th.bean.UserExample;
+import com.cskaoyan14th.mapper.OrderMapper;
 import com.cskaoyan14th.mapper.UserMapper;
 import com.cskaoyan14th.service.UserService;
 import com.cskaoyan14th.vo.Page;
@@ -16,6 +18,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired(required = false)
+    OrderMapper orderMapper;
 
     @Override
     public Page<User> getPageList(int page, int limit) {
@@ -49,5 +53,18 @@ public class UserServiceImpl implements UserService {
         PageInfo<User> pageInfo = new PageInfo<>(users);
         Page<User> userList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return userList;
+    }
+
+    @Override
+    public User getUser(String username, String password) {
+        return userMapper.selectUserByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public long countByOrderStatus(short orderStat) {
+        OrderExample orderExample = new OrderExample();
+        OrderExample.Criteria criteria = orderExample.createCriteria();
+        criteria.andOrderStatusEqualTo(orderStat);
+        return orderMapper.countByExample(orderExample);
     }
 }

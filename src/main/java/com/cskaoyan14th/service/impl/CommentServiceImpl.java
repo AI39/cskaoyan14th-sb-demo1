@@ -1,7 +1,9 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Comment;
+import com.cskaoyan14th.bean.CommentData;
 import com.cskaoyan14th.bean.CommentExample;
+import com.cskaoyan14th.bean.CommentList;
 import com.cskaoyan14th.mapper.CommentMapper;
 import com.cskaoyan14th.service.CommentService;
 import com.cskaoyan14th.vo.Page;
@@ -44,5 +46,40 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int deleteCommentById(Integer id) {
         return commentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int getPicCount(int valueId, int type) {
+        int picCount = commentMapper.getPicCount(valueId, type);
+        return picCount;
+    }
+
+    @Override
+    public int getAllCount(int valueId, int type) {
+        int allCount = commentMapper.getAllCount(valueId, type);
+        return allCount;
+    }
+
+    @Override
+    public CommentList getWxCommentList(int valueId, int type, int page, int size, int showType) {  //showType为1只展示图片
+        PageHelper.startPage(page, size);
+
+        List<CommentData> commentDataList = commentMapper.getCommentData(valueId, type, showType);
+
+        CommentList commentList = new CommentList();
+        if(showType == 0) {
+            commentList.setCount(commentMapper.getAllCount(valueId, type));
+        } else if(showType == 1) {
+            commentList.setCount(commentMapper.getPicCount(valueId, type));
+        }
+
+        commentList.setCurrentPage(page);
+
+
+        PageInfo<CommentData> pageInfo = new PageInfo<>(commentDataList);
+        List<CommentData> data = pageInfo.getList();
+        commentList.setData(data);
+
+        return commentList;
     }
 }

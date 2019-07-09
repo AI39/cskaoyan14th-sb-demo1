@@ -399,4 +399,18 @@
     </where>
     order by #{sort} #{order}
   </select>
+
+  <select id="selectUserByUsernameAndPassword" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_user
+    <where>
+      <if test="username != null">
+        username = #{username}
+      </if>
+      <if test="password != null">
+        and password = #{password}
+      </if>
+    </where>
+  </select>
 </mapper>
