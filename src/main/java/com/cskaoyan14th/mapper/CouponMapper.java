@@ -46,4 +46,5 @@ public interface CouponMapper {
 
     List<Coupon> selectCouponByTypeAndStatus(@Param("type") short type,@Param("status")short status);
 
+    Coupon selectCouponByCode(@Param("code") String code);
 }

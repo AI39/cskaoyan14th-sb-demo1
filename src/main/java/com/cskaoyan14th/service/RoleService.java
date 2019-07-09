@@ -17,4 +17,6 @@ public interface RoleService {
     ResponseVo updateRoleById(Role role);
 
     ResponseVo deleteById(Role role);
+
+    String[] queryNameByRoleids(int[] admin);
 }

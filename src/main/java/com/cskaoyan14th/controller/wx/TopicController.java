@@ -49,7 +49,7 @@ public class TopicController {
     @RequestMapping("coupon/receive")
     @ResponseBody
     public ResponseVo<String> receiveCoupon(@RequestBody Map<String,Integer> map){
-        Integer couponId = map.get("couponId");
+        Integer couponId=map.get("couponId");
         ResponseVo<String> responseVo=topicService.receiveCoupon(couponId);
         return responseVo;
     }
@@ -67,6 +67,23 @@ public class TopicController {
         ResponseVo<PageData> responseVo=topicService.getGrouponxListAll(page,size);
         return responseVo;
     }
+
+    @RequestMapping("coupon/mylist")
+    @ResponseBody
+    public ResponseVo<PageData> getCouponList(int status,int page,int size){
+        ResponseVo<PageData> responseVo=topicService.getCouponList(status,page,size);
+        return responseVo;
+    }
+
+    @RequestMapping("coupon/exchange")
+    @ResponseBody
+    public ResponseVo<String> exchange(@RequestBody Map<String,String> map){
+        String code = map.get("code");
+        ResponseVo<String> responseVo=topicService.exchange(code);
+        return responseVo;
+    }
+
+
 
 
 
