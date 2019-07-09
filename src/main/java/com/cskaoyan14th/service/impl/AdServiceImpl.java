@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -178,6 +179,19 @@ public class AdServiceImpl implements AdService {
     @Override
     public ResponseVo<Coupon> insertCoupon(Coupon coupon) {
         ResponseVo<Coupon> responseVo = new ResponseVo<>();
+        if(coupon.getType()==2){
+            String s = UUID.randomUUID().toString();
+            String uuid = s.replace("-", "");
+            String code=uuid.substring(0,8);
+            char[] chars = code.toCharArray();
+            for(int j=0;j<chars.length;j++){
+                if(chars[j]>='a'&&chars[j]<='z'){
+                    chars[j]=(char)(chars[j]-32);
+                }
+            }
+            String code1=String.valueOf(chars);
+            coupon.setCode(code1);
+        }
         int insert = couponMapper.insert(coupon);
         if(insert==1){
             responseVo.setErrno(0);
@@ -453,3 +467,6 @@ public class AdServiceImpl implements AdService {
 
 
 }
+
+
+

@@ -22,4 +22,8 @@ public interface TopicService {
     ResponseVo<PageData> getCouponListAll(int page,int size);
 
     ResponseVo<PageData> getGrouponxListAll(int page,int size);
+
+    ResponseVo<PageData> getCouponList(int status,int page,int size);
+
+    ResponseVo<String> exchange(String code);
 }
