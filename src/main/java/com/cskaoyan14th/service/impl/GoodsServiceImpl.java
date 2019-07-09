@@ -254,28 +254,26 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getNewGoodsList() {
+    public List<Goods> getNewGoodsList(int newGoodsCount) {
+        PageHelper.startPage(1, newGoodsCount);
+
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andIsNewEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
-        int limit = 5;
-        List<Goods> goodsListLimit = new ArrayList<>();
-        for (int i = 0; i < limit && i < goodsList.size(); i++) {
-            goodsListLimit.add(goodsList.get(i));
-        }
-        return goodsListLimit;
+        return goodsList;
     }
 
     @Override
-    public List<FloorGoods> getFloorGoodsList() {
+    public List<FloorGoods> getFloorGoodsList(int catlogCount, int catlogGoodsCount) {
+        PageHelper.startPage(1, catlogCount);
         CategoryExample categoryExample = new CategoryExample();
         CategoryExample.Criteria criteria = categoryExample.createCriteria();
         criteria.andPidEqualTo(0);
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
 
         List<FloorGoods> floorGoodsList = new ArrayList<>();
-        int limit = 4;
+        int limit = catlogGoodsCount;
         for(Category category : categories) {
             List<Goods> goodsList = goodsMapper.selectLimitByParentCategoryId(category.getId(), limit);
             FloorGoods floorGoods = new FloorGoods();
@@ -288,19 +286,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getHotGoodsList() {
+    public List<Goods> getHotGoodsList(int hotGoodsCount) {
+        PageHelper.startPage(1, hotGoodsCount);
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andIsHotEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
 
-        int limit = 5;
-        List<Goods> goodsListLimit = new ArrayList<>();
-        for (int i = 0; i < limit && i < goodsList.size(); i++) {
-            goodsListLimit.add(goodsList.get(i));
-        }
-
-        return goodsListLimit;
+        return goodsList;
     }
 
     @Override
