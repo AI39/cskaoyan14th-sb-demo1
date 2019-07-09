@@ -29,7 +29,6 @@ public class UserTokenManager {
         return userToken.getUserId();
     }
 
-
     public static UserToken generateToken(Integer id) {
         UserToken userToken = null;
 

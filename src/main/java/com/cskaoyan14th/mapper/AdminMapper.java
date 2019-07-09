@@ -1,7 +1,7 @@
 package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.Admin;
-import com.cskaoyan14th.bean.AdminExample;
+import com.cskaoyan14th.bean.Permission;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +24,6 @@ public interface AdminMapper {
 
     int deleteAdmin(@Param("admin") Admin admin);
 
-
-
+    Admin queryPasswordByUsername(@Param("name") String username);
 
 }

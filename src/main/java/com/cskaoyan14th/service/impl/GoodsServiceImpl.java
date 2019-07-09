@@ -38,6 +38,8 @@ public class GoodsServiceImpl implements GoodsService {
     BrandMapper brandMapper;
     @Autowired
     CollectMapper collectMapper;
+    @Autowired
+    SearchHistoryMapper searchHistoryMapper;
 
     @Override
     public List<CategoryForGoods> getCategoryForGoods() {
@@ -309,7 +311,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, int categoryId) {
+    public List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId) {
         PageHelper.startPage(page, size);
 
         GoodsExample goodsExample = new GoodsExample();
@@ -318,12 +320,14 @@ public class GoodsServiceImpl implements GoodsService {
         }
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
 
-        if(categoryId == 0 && (keyword != null && keyword.length() != 0)) {
+        if(keyword != null && keyword.length() != 0) {
             criteria.andNameLike("%" + keyword + "%");
-        } else if (categoryId != 0 && (keyword != null && keyword.length() != 0)){
-            criteria.andNameLike("%" + keyword + "%").andCategoryIdEqualTo(categoryId);
-        } else if (categoryId != 0 && (keyword == null || keyword.length() == 0)) {
+        }
+        if (categoryId != null && categoryId != 0){
             criteria.andCategoryIdEqualTo(categoryId);
+        }
+        if (brandId != null && brandId != 0) {
+            criteria.andBrandIdEqualTo(brandId);
         }
 
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
@@ -453,5 +457,51 @@ public class GoodsServiceImpl implements GoodsService {
             goodsListLimit.add(goodsList.get(i));
         }
         return goodsListLimit;
+    }
+
+    @Override
+    public Map<String, Object> getCurrentBrotherParentGatogory(int id) {
+        Map<String, Object> map = new HashMap<>();
+        CategoryExample categoryExample = new CategoryExample();
+        CategoryExample.Criteria criteria = categoryExample.createCriteria();
+
+        Category category = categoryMapper.selectByPrimaryKey(id);
+        if(category.getPid() == 0) {
+
+            Category parentCategory = categoryMapper.selectByPrimaryKey(id);
+            map.put("parentCategory", parentCategory);
+
+
+            criteria.andPidEqualTo(id);
+            List<Category> brotherCategory = categoryMapper.selectByExample(categoryExample);
+            map.put("brotherCategory", brotherCategory);
+
+            if (brotherCategory != null && brotherCategory.size() != 0) {
+                map.put("currentCategory", brotherCategory.get(0));
+            }
+        } else {
+            Category parentCategory = categoryMapper.selectByPrimaryKey(category.getPid());
+            map.put("parentCategory", parentCategory);
+
+            criteria.andPidEqualTo(category.getPid());
+            List<Category> brotherCategory = categoryMapper.selectByExample(categoryExample);
+            map.put("brotherCategory", brotherCategory);
+
+            map.put("currentCategory", category);
+        }
+
+        return map;
+    }
+
+    @Override
+    public int insertSearchHistory(Integer userId, String keyword) {
+        SearchHistory searchHistory = new SearchHistory();
+        searchHistory.setAddTime(new Date());
+        searchHistory.setDeleted(false);
+        searchHistory.setKeyword(keyword);
+        searchHistory.setUpdateTime(new Date());
+        searchHistory.setUserId(userId);
+        int i = searchHistoryMapper.insertSelective(searchHistory);
+        return i;
     }
 }

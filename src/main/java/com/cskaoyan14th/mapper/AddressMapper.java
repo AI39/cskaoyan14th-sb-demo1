@@ -38,5 +38,6 @@ public interface AddressMapper {
 
     List<Address> getListById(@Param("uid") int uid);
     List<Address> getListById();
+    Address getDefaultAddress(@Param("uid") int uid);
 
 }

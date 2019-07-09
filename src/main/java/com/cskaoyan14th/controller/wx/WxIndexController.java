@@ -53,8 +53,7 @@ public class WxIndexController {
         List<Ad> banner = adService.getAdAll();
         map.put("banner", banner);
         //获取brandList
-        Page<Brand> brandPage = brandService.queryBrandList(1, 4, null,null,"id","asc");
-        List<Brand> brandList = brandPage.getItems();
+        List<Brand> brandList = brandService.queryWxBrandList(1, 4);
         map.put("brandList", brandList);
         //获取hotGoodsList
         List<Goods> hotGoodsList = goodsService.getHotGoodsList();
