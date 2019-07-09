@@ -4,15 +4,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class CommentForGoodsDetail {
+public class CommentData {
+    private UserInfo userInfo;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
-
     private String[] picList;
-    private String nickname;
-    private int id;
-    private String avatar; //用户相关
     private String content;
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public Date getAddTime() {
         return addTime;
@@ -28,30 +33,6 @@ public class CommentForGoodsDetail {
 
     public void setPicList(String[] picList) {
         this.picList = picList;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getContent() {
