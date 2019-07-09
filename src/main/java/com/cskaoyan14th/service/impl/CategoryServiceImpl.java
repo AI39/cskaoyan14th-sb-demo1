@@ -2,6 +2,7 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Category;
 import com.cskaoyan14th.bean.CategoryForGoods;
+import com.cskaoyan14th.bean.WxCatalog;
 import com.cskaoyan14th.mapper.CategoryMapper;
 import com.cskaoyan14th.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,30 @@ public class CategoryServiceImpl implements CategoryService {
         return delete;
 
     }
+
+    @Override
+    public WxCatalog queryCatalogIndex() {
+        List<Category> categoryList = categoryMapper.queryCatalogIndex();                                           //取到一级目录
+        Category categoryFirst = categoryList.get(0);                                                               //取到一级目录中的第一个category
+        Integer id = categoryFirst.getId();                                                                         //取到第一个category的id
+        Category currentCatalog = categoryMapper.queryCurrentCatalog(id);                                           //取到第一个category
+        List<Category> currentSubCategory = categoryMapper.queryCurrentSubCategory(id);                             //取到第一个category的二级category
+        WxCatalog wxCatalogIndex = new WxCatalog();
+        wxCatalogIndex.setCategoryList(categoryList);
+        wxCatalogIndex.setCurrentCategory(currentCatalog);
+        wxCatalogIndex.setCurrentSubCategory(currentSubCategory);
+        return wxCatalogIndex;
+    }
+
+    @Override
+    public WxCatalog queryCurrentCatalog(int id) {
+        WxCatalog wxCatalogCurrent = new WxCatalog();
+        Category currentCatalog = categoryMapper.queryCurrentCatalog(id);
+        List<Category> currentSubCategory = categoryMapper.queryCurrentSubCategory(id);
+        wxCatalogCurrent.setCurrentCategory(currentCatalog);
+        wxCatalogCurrent.setCurrentSubCategory(currentSubCategory);
+        return wxCatalogCurrent;
+    }
+
+
 }
