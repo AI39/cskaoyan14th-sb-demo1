@@ -1,6 +1,7 @@
-package com.cskaoyan14th.bean;
+package com.cskaoyan14th.wrapper;
 
-import java.math.BigDecimal;
+import com.cskaoyan14th.bean.Cart;
+
 import java.util.List;
 
 /**
@@ -19,12 +20,13 @@ public class CartTotal {
         double checkedGoodsAmount = 0;
         for (Cart cart : cartList) {
             double price = cart.getPrice().doubleValue();
+            int num = cart.getNumber().intValue();
             goodsCount++;
             if (cart.getChecked()){
                 checkedGoodsCount++;
-                checkedGoodsAmount += price;
+                checkedGoodsAmount += price*num;
             }
-            goodsAmount += price;
+            goodsAmount += price*num;
         }
         return new CartTotal(goodsCount,goodsAmount,checkedGoodsCount,checkedGoodsAmount);
     }
