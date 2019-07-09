@@ -2,6 +2,7 @@ package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Category;
 import com.cskaoyan14th.bean.CategoryForGoods;
+import com.cskaoyan14th.bean.WxCatalog;
 
 import java.util.List;
 
@@ -20,4 +21,10 @@ public interface CategoryService {
     Category createCategory(Category category);
 
     int deleteCategory(Category category);
+
+    /*微信后台中需要的逻辑*/
+
+    WxCatalog queryCatalogIndex();
+
+    WxCatalog queryCurrentCatalog(int id);
 }

@@ -54,4 +54,27 @@ public class BrandServiceImpl implements BrandService {
         return brand1;
 
     }
+
+    /*微信中的方法实现*/
+    @Override
+    public List<Brand> queryWxBrandList(int page, int size) {
+        PageHelper.startPage(page, size);
+        List<Brand> WxBrandList1 = brandMapper.queryWxBrandList();
+        PageInfo<Brand> pageInfo = new PageInfo<>(WxBrandList1);
+
+
+        return pageInfo.getList();
+    }
+
+    @Override
+    public Brand queryBrandDetail(int id) {
+        Brand brand1 = brandMapper.selectByPrimaryKey(id);
+        return brand1;
+    }
+
+    @Override
+    public long queryCountBrand() {
+        long count = brandMapper.countBrand();
+        return count;
+    }
 }

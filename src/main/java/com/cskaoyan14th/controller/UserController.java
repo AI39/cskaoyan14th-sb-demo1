@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 用户模块的控制器
  */
 @Controller
+@RequestMapping("admin")
 public class UserController {
 
     @Autowired

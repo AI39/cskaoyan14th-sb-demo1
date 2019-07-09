@@ -394,4 +394,12 @@
     from cskaoyan_mall_topic
     where subtitle like #{subtitle}
   </select>
+
+  <select id="selectRelatedTopic" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+     from cskaoyan_mall_topic where id!=#{id} limit 4
+  </select>
 </mapper>
