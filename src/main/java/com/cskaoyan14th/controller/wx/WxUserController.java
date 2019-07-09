@@ -29,7 +29,7 @@ public class WxUserController {
         //*******************************
 
         if (activeUser == null) {
-            return new ResponseVo(-1, null, "用户名不存在");
+            return new ResponseVo(-1, null, "用户名或密码错误");
         }
 
         // userInfo
