@@ -578,6 +578,11 @@
     limit #{limit}
   </select>
 
+  <!--获取goods条数-->
+  <select id="selectCount" resultType="_int">
+    select count(id) from cskaoyan_mall_goods where id is not null;
+  </select>
+
 
 
 </mapper>

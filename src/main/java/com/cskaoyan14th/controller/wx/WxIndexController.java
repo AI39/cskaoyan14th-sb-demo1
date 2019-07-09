@@ -1,8 +1,9 @@
 package com.cskaoyan14th.controller.wx;
 
-import com.cskaoyan14th.bean.Coupon;
-import com.cskaoyan14th.bean.Goods;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.AdService;
+import com.cskaoyan14th.service.BrandService;
+import com.cskaoyan14th.service.CategoryService;
 import com.cskaoyan14th.service.GoodsService;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.FloorGoods;
@@ -16,11 +17,15 @@ import java.util.Map;
 
 @RequestMapping("wx/home")
 @RestController
-public class IndexController {
+public class WxIndexController {
     @Autowired
     GoodsService goodsService;
     @Autowired
     AdService adService;
+    @Autowired
+    BrandService brandService;
+    @Autowired
+    CategoryService categoryService;
 
 
     @RequestMapping("index")
@@ -31,21 +36,32 @@ public class IndexController {
         //获取newGoodsList
         List<Goods> newGoodsList = goodsService.getNewGoodsList();
         map.put("newGoodsList", newGoodsList);
+
         //获取couponList
         List<Coupon> couponList = adService.getCouponAll();
         map.put("couponList", couponList);
+
+        //获取channel
+        map.put("channel", null);
         //获取grouponList
-        map.put("grouponList", null);
+        List<Grouponx> grouponList = adService.selectGrouponxLimit();
+        map.put("grouponList", grouponList);
+        //获取banner
+        List<Ad> banner = adService.getAdAll();
+        map.put("banner", banner);
         //获取brandList
         map.put("brandList", null);
+        //获取hotGoodsList
+        List<Goods> hotGoodsList = goodsService.getHotGoodsList();
+        map.put("hotGoodsList", hotGoodsList);
         //获取topicList
-        map.put("topicList", null);
+        List<Topic> topicList = adService.getTopicAll();
+        map.put("topicList", topicList);
         //获取floorGoodsList
         List<FloorGoods> floorGoodsList = goodsService.getFloorGoodsList();
         map.put("floorGoodsList", floorGoodsList);
 
-        //获取hotGoodsList
-        map.put("hotGoodsList", null);
+
 
         responseVo.setErrno(0);
         responseVo.setErrmsg("成功");

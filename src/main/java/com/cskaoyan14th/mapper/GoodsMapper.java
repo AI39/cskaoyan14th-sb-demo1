@@ -45,4 +45,6 @@ public interface GoodsMapper {
     List<CatAndBrandChildren> selectBrandsForGoods();
 
     List<Goods> selectLimitByParentCategoryId(@Param("id")Integer id, @Param("limit") int limit);
+
+    int selectCount();
 }
