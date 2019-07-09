@@ -2,6 +2,7 @@ package com.cskaoyan14th.controller.wx;
 
 import com.cskaoyan14th.bean.CommentList;
 import com.cskaoyan14th.bean.Topic;
+import com.cskaoyan14th.service.AdService;
 import com.cskaoyan14th.service.TopicService;
 import com.cskaoyan14th.vo.PageData;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -19,6 +20,9 @@ public class TopicController {
 
     @Autowired
     TopicService topicService;
+
+    @Autowired
+    AdService adService;
 
     @RequestMapping("topic/list")
     @ResponseBody
@@ -69,6 +73,13 @@ public class TopicController {
         ResponseVo<PageData> responseVo=topicService.getCouponListAll(page,size);
         return responseVo;
     }
+
+    /*@RequestMapping("groupon/list")
+    @ResponseBody
+    public ResponseVo<PageData> getGrouponxListAll(){
+        adService.
+    }*/
+
 
 
 }
