@@ -1,11 +1,7 @@
 package com.cskaoyan14th.controller.wx;
 
 import com.cskaoyan14th.bean.*;
-import com.cskaoyan14th.service.AdService;
-import com.cskaoyan14th.service.BrandService;
-import com.cskaoyan14th.service.CategoryService;
-import com.cskaoyan14th.service.GoodsService;
-import com.cskaoyan14th.vo.Page;
+import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.wrapper.FloorGoods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +23,8 @@ public class WxIndexController {
     BrandService brandService;
     @Autowired
     CategoryService categoryService;
-
+    @Autowired
+    SystemService systemService;
 
     @RequestMapping("index")
     public ResponseVo<Map<String, Object>> index() {
@@ -35,7 +32,9 @@ public class WxIndexController {
         HashMap<String, Object> map = new HashMap<>();
 
         //获取newGoodsList
-        List<Goods> newGoodsList = goodsService.getNewGoodsList();
+        String cskaoyan_mall_wx_index_new = systemService.querySystemByWx("cskaoyan_mall_wx_index_new");
+        int newGoodsCount = Integer.parseInt(cskaoyan_mall_wx_index_new);
+        List<Goods> newGoodsList = goodsService.getNewGoodsList(newGoodsCount);
         map.put("newGoodsList", newGoodsList);
 
         //获取couponList
@@ -53,16 +52,24 @@ public class WxIndexController {
         List<Ad> banner = adService.getAdAll();
         map.put("banner", banner);
         //获取brandList
-        List<Brand> brandList = brandService.queryWxBrandList(1, 4);
+        String cskaoyan_mall_wx_index_brand = systemService.querySystemByWx("cskaoyan_mall_wx_index_brand");
+        int brandCount = Integer.parseInt(cskaoyan_mall_wx_index_brand);
+        List<Brand> brandList = brandService.queryWxBrandList(1, brandCount);
         map.put("brandList", brandList);
         //获取hotGoodsList
-        List<Goods> hotGoodsList = goodsService.getHotGoodsList();
+        String cskaoyan_mall_wx_index_hot = systemService.querySystemByWx("cskaoyan_mall_wx_index_hot");
+        int hotGoodsCount = Integer.parseInt(cskaoyan_mall_wx_index_hot);
+        List<Goods> hotGoodsList = goodsService.getHotGoodsList(hotGoodsCount);
         map.put("hotGoodsList", hotGoodsList);
         //获取topicList
         List<Topic> topicList = adService.getTopicAll();
         map.put("topicList", topicList);
         //获取floorGoodsList
-        List<FloorGoods> floorGoodsList = goodsService.getFloorGoodsList();
+        String cskaoyan_mall_wx_catlog_list = systemService.querySystemByWx("cskaoyan_mall_wx_catlog_list");
+        String cskaoyan_mall_wx_catlog_goods = systemService.querySystemByWx("cskaoyan_mall_wx_catlog_goods");
+        int catlogCount = Integer.parseInt(cskaoyan_mall_wx_catlog_list);
+        int catlogGoodsCount = Integer.parseInt(cskaoyan_mall_wx_catlog_goods);
+        List<FloorGoods> floorGoodsList = goodsService.getFloorGoodsList(catlogCount, catlogGoodsCount);
         map.put("floorGoodsList", floorGoodsList);
 
 
