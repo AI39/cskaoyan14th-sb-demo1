@@ -5,6 +5,8 @@ import com.cskaoyan14th.bean.CategoryForGoods;
 import com.cskaoyan14th.bean.Goods;
 import com.cskaoyan14th.bean.GoodsExample;
 import java.util.List;
+
+import com.cskaoyan14th.wrapper.FloorGoods;
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsMapper {
@@ -42,5 +44,7 @@ public interface GoodsMapper {
 
     List<CatAndBrandChildren> selectBrandsForGoods();
 
-    List<Goods> selectLimit(@Param("limit") int limit);
+    List<Goods> selectLimitByParentCategoryId(@Param("id")Integer id, @Param("limit") int limit);
+
+    int selectCount();
 }
