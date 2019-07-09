@@ -38,6 +38,8 @@ public class GoodsServiceImpl implements GoodsService {
     BrandMapper brandMapper;
     @Autowired
     CollectMapper collectMapper;
+    @Autowired
+    SearchHistoryMapper searchHistoryMapper;
 
     @Override
     public List<CategoryForGoods> getCategoryForGoods() {
@@ -489,5 +491,17 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
         return map;
+    }
+
+    @Override
+    public int insertSearchHistory(Integer userId, String keyword) {
+        SearchHistory searchHistory = new SearchHistory();
+        searchHistory.setAddTime(new Date());
+        searchHistory.setDeleted(false);
+        searchHistory.setKeyword(keyword);
+        searchHistory.setUpdateTime(new Date());
+        searchHistory.setUserId(userId);
+        int i = searchHistoryMapper.insertSelective(searchHistory);
+        return i;
     }
 }

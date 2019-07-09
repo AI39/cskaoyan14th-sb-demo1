@@ -45,4 +45,5 @@ public interface GoodsService {
 
     Map<String, Object> getCurrentBrotherParentGatogory(int id);
 
+    int insertSearchHistory(Integer userId, String keyword);
 }
