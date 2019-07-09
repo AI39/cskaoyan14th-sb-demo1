@@ -352,7 +352,7 @@
 
   <select id="getListById" resultMap="BaseResultMap">
     select
-    a.id, a.is_default, a.mobile, a.name, concat(r1.name,r2.name,r3.name,a.address) as detailedAddress
+    <include refid="LEFT_JOIN_REGION_Column_List"/>
     from cskaoyan_mall_address a
     left join cskaoyan_mall_region r1 on a.province_id = r1.code
     left join cskaoyan_mall_region r2 on a.city_id = r2.code
@@ -363,5 +363,17 @@
       </if>
     </where>
   </select>
-
+  <select id="getDefaultAddress" resultMap="BaseResultMap">
+    select
+    <include refid="LEFT_JOIN_REGION_Column_List"/>
+    from cskaoyan_mall_address a
+    left join cskaoyan_mall_region r1 on a.province_id = r1.code
+    left join cskaoyan_mall_region r2 on a.city_id = r2.code
+    left join cskaoyan_mall_region r3 on a.area_id = r3.code
+    <where>
+      a.id=#{uid}
+      and
+      a.is_default = 1
+    </where>
+  </select>
 </mapper>

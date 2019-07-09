@@ -15,8 +15,15 @@ public class Address {
 
     private Integer areaId;
 
+    private String province;
+
+    private String city;
+
+    private String area;
+
     private String address;
     private String detailedAddress;
+
 
     private String mobile;
 
@@ -130,5 +137,29 @@ public class Address {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

@@ -9,10 +9,12 @@ import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.TopicDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/wx")
@@ -46,7 +48,8 @@ public class TopicController {
 
     @RequestMapping("coupon/receive")
     @ResponseBody
-    public ResponseVo<String> receiveCoupon(int couponId){
+    public ResponseVo<String> receiveCoupon(@RequestBody Map<String,Integer> map){
+        Integer couponId = map.get("couponId");
         ResponseVo<String> responseVo=topicService.receiveCoupon(couponId);
         return responseVo;
     }
