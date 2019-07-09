@@ -60,4 +60,11 @@ public class WxCommentController {
         }
         return responseVo;
     }
+
+/*    @RequestMapping("comment/list")
+    @ResponseBody
+    public ResponseVo<CommentList> getCommentList(int valueId, int type, int showType, int page, int size){
+        ResponseVo<CommentList> responseVo=topicService.getCommentList(valueId,type,showType,page,size);
+        return responseVo;
+    }*/
 }
