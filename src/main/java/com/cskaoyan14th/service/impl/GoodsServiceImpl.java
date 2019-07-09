@@ -257,7 +257,12 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andIsNewEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
-        return goodsList;
+        int limit = 5;
+        List<Goods> goodsListLimit = new ArrayList<>();
+        for (int i = 0; i < limit && i < goodsList.size(); i++) {
+            goodsListLimit.add(goodsList.get(i));
+        }
+        return goodsListLimit;
     }
 
     @Override
@@ -286,7 +291,14 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andIsHotEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
-        return goodsList;
+
+        int limit = 5;
+        List<Goods> goodsListLimit = new ArrayList<>();
+        for (int i = 0; i < limit && i < goodsList.size(); i++) {
+            goodsListLimit.add(goodsList.get(i));
+        }
+
+        return goodsListLimit;
     }
 
     @Override
@@ -301,13 +313,17 @@ public class GoodsServiceImpl implements GoodsService {
         PageHelper.startPage(page, size);
 
         GoodsExample goodsExample = new GoodsExample();
-        goodsExample.setOrderByClause(sort + " " + order);
+        if((sort != null && sort.length() != 0) && (order != null && order.length() != 0)) {
+            goodsExample.setOrderByClause(sort + " " + order);
+        }
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
 
-        if(categoryId == 0) {
+        if(categoryId == 0 && (keyword != null && keyword.length() != 0)) {
             criteria.andNameLike("%" + keyword + "%");
-        } else {
+        } else if (categoryId != 0 && (keyword != null && keyword.length() != 0)){
             criteria.andNameLike("%" + keyword + "%").andCategoryIdEqualTo(categoryId);
+        } else if (categoryId != 0 && (keyword == null || keyword.length() == 0)) {
+            criteria.andCategoryIdEqualTo(categoryId);
         }
 
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
@@ -378,7 +394,7 @@ public class GoodsServiceImpl implements GoodsService {
         CollectExample.Criteria collectExampleCriteria = collectExample.createCriteria();
         collectExampleCriteria.andValueIdEqualTo(id);
         List<Collect> userHasCollect = collectMapper.selectByExample(collectExample);
-        if(userHasCollect == null) {
+        if(userHasCollect == null || userHasCollect.size() == 0) {
             goodsDetail.setUserHasCollect(0);
         } else {
             goodsDetail.setUserHasCollect(1);

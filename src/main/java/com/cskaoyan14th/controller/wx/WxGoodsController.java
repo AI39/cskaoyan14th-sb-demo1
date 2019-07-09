@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class WxGoodsController {
         return responseMapVo;
     }
 
-    //商品搜索
+    //商品搜索和更多商品展示
     @RequestMapping("list")
     public ResponseMapVo list(String keyword, int page, int size, String sort, String order, int categoryId) {
         ResponseMapVo responseMapVo = new ResponseMapVo();
@@ -72,4 +71,11 @@ public class WxGoodsController {
         responseMapVo.setData(map);
         return responseMapVo;
     }
+
+    //按照categoryId展示商品list
+    @RequestMapping("goods/category")
+    public ResponseMapVo category(int id) {
+        return null;
+    }
+
 }
