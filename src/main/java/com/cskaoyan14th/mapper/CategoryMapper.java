@@ -43,4 +43,12 @@ public interface CategoryMapper {
     int deleteCategoryById(Category category);
 
     int deleteCategoryByPid(Category category);
+
+    /*微信中需要的逻辑*/
+
+    List<Category> queryCatalogIndex();
+
+    Category queryCurrentCatalog(@Param("id") int id);
+
+    List<Category> queryCurrentSubCategory(int id);
 }

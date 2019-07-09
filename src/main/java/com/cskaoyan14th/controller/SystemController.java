@@ -14,8 +14,9 @@ public class SystemController {
 
     @Autowired
     SystemMapper systemMapper;
+    /*商场配置*/
 
-    @GetMapping("config/mall")
+    @GetMapping("admin/config/mall")
     @ResponseBody
     public ResponseVo<SystemKeyValue> mall() {
         SystemKeyValue systemKeyValue1 = new SystemKeyValue();
@@ -28,8 +29,9 @@ public class SystemController {
         return new ResponseVo<SystemKeyValue>(0, systemKeyValue1, "成功");
 
     }
+    /*商场配置*/
 
-    @PostMapping("config/mall")
+    @PostMapping("admin/config/mall")
     @ResponseBody
     public ResponseVo<SystemKeyValue> mall(@RequestBody SystemKeyValue systemKeyValue) {
         SystemKeyValue systemKeyValue1 = new SystemKeyValue();
@@ -48,7 +50,8 @@ public class SystemController {
 
     }
 
-    @GetMapping("config/express")
+    /*运费配置*/
+    @GetMapping("admin/config/express")
     @ResponseBody
     public ResponseVo<SystemFrightMin> mall1() {
         SystemFrightMin systemFrightMin1 = new SystemFrightMin();
@@ -59,8 +62,9 @@ public class SystemController {
         return new ResponseVo<SystemFrightMin>(0, systemFrightMin1, "成功");
 
     }
+    /*运费配置*/
 
-    @PostMapping("config/express")
+    @PostMapping("admin/config/express")
     @ResponseBody
     public ResponseVo<SystemFrightMin> mall(@RequestBody SystemFrightMin systemFrightMin) {
         SystemFrightMin systemFrightMin1 = new SystemFrightMin();
@@ -74,7 +78,10 @@ public class SystemController {
         return new ResponseVo<SystemFrightMin>(0, systemFrightMin1, "成功");
 
     }
-    @GetMapping("config/order")
+
+    /*订单配置*/
+
+    @GetMapping("admin/config/order")
     @ResponseBody
     public ResponseVo<SystemOrderComment> mall2() {
         SystemOrderComment systemOrderComment1 = new SystemOrderComment();
@@ -84,7 +91,9 @@ public class SystemController {
         systemOrderComment1.setCskaoyan_mall_order_unconfirm(systemMapper.querySystemByOrder("cskaoyan_mall_order_unconfirm"));
         return new ResponseVo<SystemOrderComment>(0, systemOrderComment1, "成功");
     }
-    @PostMapping("config/order")
+
+    /*订单配置*/
+    @PostMapping("admin/config/order")
     @ResponseBody
     public ResponseVo<SystemOrderComment> mall(@RequestBody SystemOrderComment systemOrderComment) {
         SystemOrderComment systemOrderComment1 = new SystemOrderComment();
@@ -99,7 +108,9 @@ public class SystemController {
 
         return new ResponseVo<SystemOrderComment>(0, systemOrderComment1 , "成功");
     }
-    @GetMapping("config/wx")
+
+    /*小程序配置*/
+    @GetMapping("admin/config/wx")
     @ResponseBody
     public ResponseVo<SystemWx> mall3() {
         SystemWx systemWx1 = new SystemWx();
@@ -113,7 +124,9 @@ public class SystemController {
         systemWx1.setCskaoyan_mall_wx_index_new(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_new"));
        return new ResponseVo<SystemWx>(0, systemWx1, "成功");
     }
-    @PostMapping("config/wx")
+
+    /*小程序配置*/
+    @PostMapping("admin/config/wx")
     @ResponseBody
     public ResponseVo<SystemWx> mall(@RequestBody SystemWx systemWx) {
         SystemWx systemWx1 = new SystemWx();

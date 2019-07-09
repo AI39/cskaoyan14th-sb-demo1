@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("goods")
+@RequestMapping("admin/goods")
 public class GoodsController {
     @Autowired
     GoodsService goodsService;

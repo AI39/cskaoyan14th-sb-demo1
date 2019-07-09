@@ -392,4 +392,43 @@
       or
       pid = #{id}
     </update>
+  
+  
+  <!--微信的后台需要的sql语句-->
+  <resultMap id="catalogList" type="com.cskaoyan14th.bean.Category">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+      <result column="desc" jdbcType="VARCHAR" property="desc" />
+      <result column="pid" jdbcType="INTEGER" property="pid" />
+      <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+      <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+      <result column="level" jdbcType="VARCHAR" property="level" />
+      <result column="sort_order" jdbcType="TINYINT" property="sortOrder" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <select id="queryCatalogIndex" resultMap="catalogList">
+    select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_category
+    where
+    pid = 0
+    and deleted = 0
+  </select>
+
+  <select id="queryCurrentCatalog" resultMap="catalogList">
+    select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_category
+    where
+    id = #{id}
+    and deleted = 0
+  </select>
+  <select id="queryCurrentSubCategory" resultMap="catalogList">
+    select id, `name`, keywords, `desc`, `level`, pid, icon_url, pic_url, sort_order, add_time, update_time, deleted
+    from cskaoyan_mall_category
+    where
+    pid = #{id}
+    and deleted = 0
+  </select>
 </mapper>
