@@ -39,4 +39,6 @@ public interface TopicMapper {
     List<Topic> selectByTitle(@Param("title")String title);
 
     List<Topic> selectBySubtitle(@Param("subtitle")String subtitle);
+
+    List<Topic> selectRelatedTopic(@Param("id") int id);
 }
