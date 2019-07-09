@@ -34,7 +34,7 @@ public interface GoodsService {
 
     int getGoodsCount();
 
-    List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, int categoryId);
+    List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId);
 
     GoodsDetail getGoodsDetailByGoodsId(int id);
 

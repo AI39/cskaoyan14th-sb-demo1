@@ -309,7 +309,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, int categoryId) {
+    public List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId) {
         PageHelper.startPage(page, size);
 
         GoodsExample goodsExample = new GoodsExample();
@@ -318,12 +318,14 @@ public class GoodsServiceImpl implements GoodsService {
         }
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
 
-        if(categoryId == 0 && (keyword != null && keyword.length() != 0)) {
+        if(keyword != null && keyword.length() != 0) {
             criteria.andNameLike("%" + keyword + "%");
-        } else if (categoryId != 0 && (keyword != null && keyword.length() != 0)){
-            criteria.andNameLike("%" + keyword + "%").andCategoryIdEqualTo(categoryId);
-        } else if (categoryId != 0 && (keyword == null || keyword.length() == 0)) {
+        }
+        if (categoryId != null && categoryId != 0){
             criteria.andCategoryIdEqualTo(categoryId);
+        }
+        if (brandId != null && brandId != 0) {
+            criteria.andBrandIdEqualTo(brandId);
         }
 
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);

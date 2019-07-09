@@ -36,10 +36,10 @@ public class WxGoodsController {
 
     //商品搜索和更多商品展示
     @RequestMapping("list")
-    public ResponseMapVo list(String keyword, int page, int size, String sort, String order, int categoryId) {
+    public ResponseMapVo list(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId) {
         ResponseMapVo responseMapVo = new ResponseMapVo();
         Map<String, Object> data = new HashMap<>();
-        List<Goods> goodsList = goodsService.getGoodsListByPage(keyword, page, size, sort, order, categoryId);
+        List<Goods> goodsList = goodsService.getGoodsListByPage(keyword, page, size, sort, order, categoryId, brandId);
         data.put("goodsList", goodsList);
         responseMapVo.setData(data);
         responseMapVo.setErrmsg("成功");
