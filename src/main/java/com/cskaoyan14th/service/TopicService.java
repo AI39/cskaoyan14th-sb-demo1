@@ -20,4 +20,6 @@ public interface TopicService {
     ResponseVo<String> receiveCoupon(int couponId);
 
     ResponseVo<PageData> getCouponListAll(int page,int size);
+
+    ResponseVo<PageData> getGrouponxListAll(int page,int size);
 }

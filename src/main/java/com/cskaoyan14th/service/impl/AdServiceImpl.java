@@ -10,6 +10,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -435,9 +437,15 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public List<Grouponx> selectGrouponxLimit() {
-        List<Grouponx> grouponxes = grouponxMapper.selectGrouponxAll();
+        List<Grouponx> grouponxes = grouponxMapper.selectGrouponxAllNotLimit();
+        DecimalFormat dcmFmt = new DecimalFormat("0.00");
+        /*double v = new Random().nextDouble() * 1000;
+        double format =Double.valueOf(dcmFmt.format(v));*/
+
         for (Grouponx items:grouponxes) {
-            items.setGroupon_price(new Random().nextDouble()*1000);
+            BigDecimal retailPrice = items.getGoods().getRetailPrice();
+            double price=retailPrice.doubleValue();
+            items.setGroupon_price(Double.valueOf(dcmFmt.format(price)));
             items.setGroupon_member(new Random().nextInt(20));
         }
         return grouponxes;
