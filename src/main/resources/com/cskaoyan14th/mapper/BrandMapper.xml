@@ -331,9 +331,11 @@
   <select id="queryWxBrandList" resultMap="myResultMap">
     select id, `name`, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
     from cskaoyan_mall_brand
+    where deleted = 0
   </select>
 
   <select id="countBrand" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_brand
+    where deleted = 0
   </select>
 </mapper>
