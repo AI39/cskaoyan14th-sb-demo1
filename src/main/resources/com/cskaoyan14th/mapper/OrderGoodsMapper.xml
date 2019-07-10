@@ -350,4 +350,10 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="deleteOrdergoodsList">
+    update cskaoyan_mall_order_goods
+    set deleted = 1
+    where order_id = #{orderId}
+  </update>
 </mapper>

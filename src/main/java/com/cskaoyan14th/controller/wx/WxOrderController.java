@@ -94,6 +94,55 @@ public class WxOrderController {
         return map;
     }
 
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public ResponseVo<Order> delete(@RequestBody Map<String,Object> map, HttpServletRequest request){
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        //通过请求头获得userId，进而可以获得一切关于user的信息
+        //**************************
+        if (userId == null) {
+            return new ResponseVo(-1, null, "错误");
+        }
+        ResponseVo<Order> responseVo = new ResponseVo<>();
+        //获取请求json对象的信息
+        Integer orderId =(Integer) map.get("orderId");
+        int delete = orderService.deleteList(orderId);
+        if (delete != 0){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        }else{
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("cancel")
+    @ResponseBody
+    public ResponseVo<Order> cancel(@RequestBody Map<String,Object> map, HttpServletRequest request) {
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        //通过请求头获得userId，进而可以获得一切关于user的信息
+        //**************************
+        if (userId == null) {
+            return new ResponseVo(-1, null, "错误");
+        }
+        ResponseVo<Order> responseVo = new ResponseVo<>();
+        //获取请求json对象的信息
+        Integer orderId =(Integer) map.get("orderId");
+        int delete = orderService.deleteList(orderId);
+        if (delete != 0){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        }else{
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
     @Autowired
     AddressService addressService;
 
@@ -118,6 +167,7 @@ public class WxOrderController {
         Integer grouponLinkId = (Integer) map.get("grouponLinkId");
         Integer grouponRulesId = (Integer) map.get("grouponRulesId");
         String message = (String) map.get("message");
+
 
 
         /*

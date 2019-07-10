@@ -122,6 +122,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+
+    public int deleteList(Integer orderId) {
+        int delete = orderMapper.deleteList(orderId);
+        int delete2 = orderGoodsMapper.deleteOrdergoodsList(orderId);
+        if (delete == 1 && delete2 == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    @Override
     public int insertOrderReturnId(Order order) {
 
         int insert = orderMapper.insertOrderReturnId(order);
@@ -130,6 +141,7 @@ public class OrderServiceImpl implements OrderService {
 
         }else {
             return -1;
+
         }
     }
 
@@ -138,3 +150,4 @@ public class OrderServiceImpl implements OrderService {
         return orderGoodsMapper.insert(orderGoods);
     }
 }
+
