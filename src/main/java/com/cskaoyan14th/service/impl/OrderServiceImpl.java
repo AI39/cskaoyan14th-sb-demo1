@@ -100,4 +100,15 @@ public class OrderServiceImpl implements OrderService {
 
         return orderGoodsList;
     }
+
+    @Override
+    public int deleteList(int orderId) {
+        int delete = orderMapper.deleteList(orderId);
+        int delete2 = orderGoodsMapper.deleteOrdergoodsList(orderId);
+        if (delete == 1 && delete2 == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

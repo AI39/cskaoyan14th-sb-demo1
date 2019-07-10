@@ -682,6 +682,8 @@
       <if test="showType == 4">
         and order_status = 401
       </if>
+      and
+      deleted = 0
     </where>
   </select>
 
@@ -718,7 +720,16 @@
     select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_order
-    where id = #{id,jdbcType=INTEGER}
+    where
+    id = #{id,jdbcType=INTEGER}
+    and
+    deleted = 0
   </select>
+
+  <update id="deleteList">
+    update cskaoyan_mall_order
+    set deleted = 1
+    where id = #{orderId}
+  </update>
 
 </mapper>

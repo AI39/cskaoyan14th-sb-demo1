@@ -14,6 +14,8 @@ import java.util.Map;
  * @version 2019-07-03-21:27
  */
 public interface OrderService {
+
+
     Page<Order> queryOrderList(int page, int limit, Short orderStatusArray, String sort, String order, Integer userId, String orderSn);
 
     OrderDetail showOrderDetail(int id);
@@ -27,4 +29,6 @@ public interface OrderService {
     WxOrder queryWxOrderById(int userId);
 
     List<OrderGoods> queryOrderGoodsById(int orderId);
+
+    int deleteList(int orderId);
 }

@@ -42,4 +42,8 @@ public interface OrderMapper {
     List<WxOrder> wxQueryOrderListByUserId(@Param("userId") int userId, @Param("showType") int showType);
 
     WxOrder selectWxOrderById(@Param("id") int orderId);
+
+    int deleteList(int orderId);
+
+
 }
