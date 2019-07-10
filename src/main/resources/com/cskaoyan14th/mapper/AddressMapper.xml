@@ -359,7 +359,7 @@
     left join cskaoyan_mall_region r3 on a.area_id = r3.code
     <where>
       <if test="uid != null">
-        a.id=#{uid}
+        a.user_id=#{uid}
       </if>
     </where>
   </select>

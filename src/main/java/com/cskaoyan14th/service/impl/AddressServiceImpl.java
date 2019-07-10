@@ -36,8 +36,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<Address> getAddressList(int uid) {
-        //return addressMapper.getListById(uid);
-        return addressMapper.getListById();
+        return addressMapper.getListById(uid);
+        //return addressMapper.getListById();
     }
 
     @Override
@@ -62,5 +62,10 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address getAddressById(Integer addressId) {
         return addressMapper.getAddressById(addressId);
+    }
+
+    @Override
+    public int updateAddress(Address address) {
+        return addressMapper.updateByPrimaryKeySelective(address);
     }
 }

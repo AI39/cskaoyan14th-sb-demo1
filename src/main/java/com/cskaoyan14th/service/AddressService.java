@@ -22,4 +22,6 @@ public interface AddressService {
     Address getCheckedAddress(int addressId);
 
     Address getAddressById(Integer addressId);
+
+    int updateAddress(Address address);
 }
