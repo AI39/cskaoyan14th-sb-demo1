@@ -1,6 +1,8 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Role;
+import com.cskaoyan14th.bean.shiro.AuthorDataOne;
+import com.cskaoyan14th.bean.shiro.AuthorDataTwo;
 import com.cskaoyan14th.mapper.RoleMapper;
 import com.cskaoyan14th.service.RoleService;
 import com.cskaoyan14th.vo.DateCurrentTime;
@@ -9,8 +11,10 @@ import com.cskaoyan14th.vo.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -116,5 +120,28 @@ public class RoleServiceImpl implements RoleService {
         String[] strings = roleMapper.queryNameByRoleids(admin);
 
         return strings;
+    }
+
+    @Override
+    public ResponseVo<AuthorDataOne> permissions(String roleId) {
+        List<String> stringList =roleMapper.queryCategoryRoles();
+        List<String> s1 = new ArrayList<>();
+        for (String s : stringList) {
+            if (s != null ){
+                s1.add(s);
+            }
+        }
+        AuthorDataOne authorDataOne1 = new AuthorDataOne();
+        authorDataOne1.setAssignedPermissions(s1);
+        ResponseVo<AuthorDataOne> authorDataOneResponseVo = new ResponseVo<>();
+        List<AuthorDataTwo> authorDataOne = roleMapper.selectPermission(1);
+        System.out.println( authorDataOne);
+        authorDataOne1.setSystemPermissions(authorDataOne);
+        if( authorDataOne1 != null){
+            authorDataOneResponseVo.setErrno(0);
+            authorDataOneResponseVo.setErrmsg("成功");
+            authorDataOneResponseVo.setData(authorDataOne1);
+        }
+        return authorDataOneResponseVo;
     }
 }

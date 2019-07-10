@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Role;
+import com.cskaoyan14th.bean.shiro.AuthorDataOne;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.ResponseVo;
 
@@ -19,4 +20,6 @@ public interface RoleService {
     ResponseVo deleteById(Role role);
 
     String[] queryNameByRoleids(int[] admin);
+
+    ResponseVo<AuthorDataOne> permissions(String roleId);
 }
