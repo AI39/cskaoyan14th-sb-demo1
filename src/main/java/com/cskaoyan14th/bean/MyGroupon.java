@@ -4,17 +4,29 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class MyGroupon {
+
     String orderStatusText;
+
     String creator;
+
     Groupon groupon;
+
     int orderId;
+
     String orderSn;
+
     BigDecimal actualPrice;
+
     int joinerCount;
+
     List<Goods> goodsList;
+
     GrouponRules rules;
+
     int id;
+
     boolean isCreator;
+
     HandleOption handleOption;
 
     public MyGroupon() {

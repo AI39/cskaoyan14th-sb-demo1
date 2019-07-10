@@ -10,14 +10,19 @@ import java.util.Date;
  * @version 2019-07-10-15:03
  */
 public class WxFootprint {
+
     private Integer id;
 
     private Integer userId;
 
     private Integer goodsId;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+
     private Date addTime;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+
     private Date updateTime;
 
     private Boolean deleted;

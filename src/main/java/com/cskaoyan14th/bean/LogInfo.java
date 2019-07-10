@@ -3,9 +3,13 @@ package com.cskaoyan14th.bean;
 import java.util.Arrays;
 
 public class LogInfo {
+
     String avatar;
+
     String name;
+
     String[] perms;
+
     String[] roles;
 
     public String getAvatar() {
