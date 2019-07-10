@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.CommentList;
+import com.cskaoyan14th.bean.GrouponRules;
 import com.cskaoyan14th.bean.Topic;
 import com.cskaoyan14th.vo.PageData;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -26,4 +27,8 @@ public interface TopicService {
     ResponseVo<PageData> getCouponList(int status,int page,int size);
 
     ResponseVo<String> exchange(String code);
+
+    ResponseVo<List> selectCouponList(int cartId, int grouponRulesId);
+
+    ResponseVo<PageData> getMyGroupon(int showType);
 }

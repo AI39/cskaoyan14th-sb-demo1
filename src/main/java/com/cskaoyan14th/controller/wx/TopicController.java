@@ -1,6 +1,7 @@
 package com.cskaoyan14th.controller.wx;
 
 import com.cskaoyan14th.bean.CommentList;
+import com.cskaoyan14th.bean.GrouponRules;
 import com.cskaoyan14th.bean.Topic;
 import com.cskaoyan14th.service.AdService;
 import com.cskaoyan14th.service.TopicService;
@@ -80,6 +81,23 @@ public class TopicController {
     public ResponseVo<String> exchange(@RequestBody Map<String,String> map){
         String code = map.get("code");
         ResponseVo<String> responseVo=topicService.exchange(code);
+        return responseVo;
+    }
+
+    /*
+    cartId=193&grouponRulesId=0
+     */
+    @RequestMapping("coupon/selectlist")
+    @ResponseBody
+    public ResponseVo<List> selectCouponList(int cartId, int grouponRulesId){
+        ResponseVo<List> responseVo=topicService.selectCouponList(cartId,grouponRulesId);
+        return responseVo;
+    }
+
+    @RequestMapping("groupon/my")
+    @ResponseBody
+    public ResponseVo<PageData> getMyGroupon(int showType){
+        ResponseVo<PageData> responseVo=topicService.getMyGroupon(showType);
         return responseVo;
     }
 

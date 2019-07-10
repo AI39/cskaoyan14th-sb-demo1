@@ -40,4 +40,6 @@ public interface CartMapper {
     int deleteCartItemByPids(@Param("uid") Integer uid,@Param("productIds") List<Integer> productIds);
 
     List<Cart> getCheckedCartList(@Param("uid") Integer uid);
+
+    int insertCartReturnId(Cart cart);
 }

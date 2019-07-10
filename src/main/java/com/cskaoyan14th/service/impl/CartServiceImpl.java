@@ -2,7 +2,6 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Cart;
 import com.cskaoyan14th.bean.CartExample;
-import com.cskaoyan14th.bean.OrderGoods;
 import com.cskaoyan14th.mapper.CartMapper;
 import com.cskaoyan14th.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +47,20 @@ public class CartServiceImpl implements CartService {
     public List<Cart> getCheckedGoodsList(Integer uid) {
 
         return cartMapper.getCheckedCartList(uid);
+    }
+
+    /**
+     * 插入并返回id
+     * @param cart
+     * @return
+     */
+    @Override
+    public int insertCart(Cart cart) {
+        int insert = cartMapper.insertCartReturnId(cart);
+        if (insert > 0){
+            return cart.getId();
+        }else {
+            return insert;
+        }
     }
 }

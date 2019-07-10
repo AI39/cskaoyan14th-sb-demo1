@@ -16,4 +16,6 @@ public interface CartService {
     int deleteCartItemByPids(Integer uid, List<Integer> productIds);
 
     List<Cart> getCheckedGoodsList(Integer uid);
+
+    int insertCart(Cart cart);
 }
