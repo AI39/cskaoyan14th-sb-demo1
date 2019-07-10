@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CouponMapper {
+
     long countByExample(CouponExample example);
 
     int deleteByExample(CouponExample example);

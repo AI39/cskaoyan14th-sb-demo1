@@ -29,6 +29,7 @@ public class WxCommentController {
 
     @RequestMapping("count")
     public ResponseMapVo count(int valueId, int type) {
+
         ResponseMapVo responseMapVo = new ResponseMapVo();
         Map<String, Object> map = new HashMap<>();
 
@@ -41,6 +42,7 @@ public class WxCommentController {
         responseMapVo.setErrno(0);
         responseMapVo.setErrmsg("成功");
         responseMapVo.setData(map);
+
         return responseMapVo;
     }
 
@@ -49,9 +51,11 @@ public class WxCommentController {
 
         ResponseVo<CommentList> responseVo = new ResponseVo<>();
         CommentList data = commentService.getWxCommentList(valueId, type, page, size, showType);
+
         responseVo.setData(data);
         responseVo.setErrmsg("成功");
         responseVo.setErrno(0);
+
         return responseVo;
     }
 
@@ -64,6 +68,7 @@ public class WxCommentController {
 
     @RequestMapping("post")
     public ResponseVo<Comment> post(HttpServletRequest request, @RequestBody Comment comment) {
+
         ResponseVo<Comment> responseVo = new ResponseVo<>();
 
         //获取userId
@@ -80,6 +85,7 @@ public class WxCommentController {
         comment.setUpdateTime(date);
 
         Integer id = commentService.insertComment(comment);
+
         if(id != null) {
             comment.setId(id);
             responseVo.setData(comment);
@@ -89,6 +95,7 @@ public class WxCommentController {
         }
         responseVo.setErrmsg("服务器内部错误");
         responseVo.setErrno(502);
+
         return responseVo;
     }
 

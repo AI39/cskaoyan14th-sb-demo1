@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GrouponRulesMapper {
+
     long countByExample(GrouponRulesExample example);
 
     int deleteByExample(GrouponRulesExample example);

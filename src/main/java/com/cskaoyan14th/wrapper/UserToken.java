@@ -3,10 +3,15 @@ package com.cskaoyan14th.wrapper;
 import java.time.LocalDateTime;
 
 public class UserToken {
+
     private Integer userId;
+
     private String token;
+
     private String sessionKey;
+
     private LocalDateTime expireTime;
+
     private LocalDateTime updateTime;
 
     public String getSessionKey() {

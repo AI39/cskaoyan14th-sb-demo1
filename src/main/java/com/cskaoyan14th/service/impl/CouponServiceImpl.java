@@ -12,10 +12,13 @@ import java.util.Map;
 
 @Service
 public class CouponServiceImpl implements CouponService {
+
     @Autowired
     CouponMapper couponMapper;
+
     @Override
     public double getCouponPrice(int couponId) {
+
         Coupon coupon = couponMapper.selectByPrimaryKey(couponId);
         return coupon.getDiscount().doubleValue();
     }

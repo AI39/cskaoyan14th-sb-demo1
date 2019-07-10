@@ -8,19 +8,31 @@ import java.util.List;
  * 统计订单中商品数目和金额的类
  */
 public class CartTotal {
+
     private int goodsCount;
+
     private double goodsAmount;
+
     private int checkedGoodsCount;
+
     private double checkedGoodsAmount;
 
     public static CartTotal calculate(List<Cart> cartList) {
+
         int goodsCount = 0;
+
         double goodsAmount = 0;
+
         int checkedGoodsCount = 0;
+
         double checkedGoodsAmount = 0;
+
         for (Cart cart : cartList) {
+
             double price = cart.getPrice().doubleValue();
+
             int num = cart.getNumber().intValue();
+
             if (cart.getChecked()){
                 checkedGoodsCount += num;
                 checkedGoodsAmount += price*num;

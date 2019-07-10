@@ -10,6 +10,7 @@ import com.cskaoyan14th.wrapper.FloorGoods;
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsMapper {
+
     long countByExample(GoodsExample example);
 
     int deleteByExample(GoodsExample example);

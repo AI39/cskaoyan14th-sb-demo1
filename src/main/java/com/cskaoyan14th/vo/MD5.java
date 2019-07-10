@@ -6,9 +6,11 @@ import java.security.NoSuchAlgorithmException;
 public class MD5 {
     public static String getMd5(String username,String password ){
         //1.获取Java语言中提供的Md5算法
+
         String result = null;
         //将密码个用户名拼接
         String s = username + password ;
+
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             //2.传入密码，返回一个表示MD5的字节数组（16字节）
@@ -27,6 +29,7 @@ public class MD5 {
                 stringBuffer.append(st);
             }
             result = stringBuffer.toString();
+
             return result;
 
         } catch (NoSuchAlgorithmException e) {

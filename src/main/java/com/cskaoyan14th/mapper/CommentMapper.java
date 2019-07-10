@@ -9,6 +9,7 @@ import com.cskaoyan14th.bean.CommentForGoodsDetail;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommentMapper {
+
     long countByExample(CommentExample example);
 
     int deleteByExample(CommentExample example);

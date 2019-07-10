@@ -5,8 +5,11 @@ import com.cskaoyan14th.bean.Goods;
 import java.util.List;
 
 public class FloorGoods {
+
     String name;
+
     List<Goods> goodsList;
+
     int id;
 
     public String getName() {

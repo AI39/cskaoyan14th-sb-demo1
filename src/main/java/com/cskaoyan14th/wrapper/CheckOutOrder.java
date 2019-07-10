@@ -17,10 +17,13 @@ public class CheckOutOrder {
     private int addressId;
     //优惠券数量
     private int availeCouponLength;
+
     private Address checkedAddress;
+
     private List<Cart> checkedGoodsList;
     //优惠券id和价格
     private int couponId;
+
     private double couponPrice;
     //运费
     private double freightPrice;

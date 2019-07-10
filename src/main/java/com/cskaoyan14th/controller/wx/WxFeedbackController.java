@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("wx/feedback")
 public class WxFeedbackController {
+
     @Autowired
     FeedbackService feedbackService;
 
@@ -18,6 +19,7 @@ public class WxFeedbackController {
     @RequestMapping("/submit")
 
     public ResponseVo add(@RequestBody Feedback feedback){
+
         ResponseVo<Object> objectResponseVo = new ResponseVo<>();
 
         int i = feedbackService.insertSelective(feedback);

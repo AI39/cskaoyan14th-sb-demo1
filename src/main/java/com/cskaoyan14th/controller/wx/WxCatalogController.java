@@ -15,28 +15,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/wx/catalog")
 public class WxCatalogController {
+
     @Autowired
     CategoryService categoryService;
+
     @RequestMapping("index")
     @ResponseBody
     public ResponseVo<WxCatalog> catalogIndex(){
+
         ResponseVo<WxCatalog> responseVo = new ResponseVo<>();
         WxCatalog wxCatalogIndex = categoryService.queryCatalogIndex();
+
         if (wxCatalogIndex != null){
+
             responseVo.setData(wxCatalogIndex);
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
+
         }else {
             responseVo.setErrno(404);
             responseVo.setErrmsg("失败");
+
         }
         return responseVo;
     }
     @RequestMapping("current")
     @ResponseBody
     public ResponseVo<WxCatalog> currentCatalog(int id){
+
         ResponseVo<WxCatalog> responseVo = new ResponseVo<>();
         WxCatalog currentWxCatalog = categoryService.queryCurrentCatalog(id);
+
         if (currentWxCatalog != null){
             responseVo.setData(currentWxCatalog);
             responseVo.setErrno(0);

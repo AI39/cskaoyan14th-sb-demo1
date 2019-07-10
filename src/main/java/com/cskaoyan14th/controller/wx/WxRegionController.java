@@ -16,10 +16,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/wx/region")
 public class WxRegionController {
+
     @Autowired
     RegionService regionService;
+
     @RequestMapping("list")
     public ResponseVo<List<Region>> regionList(){
+
         ResponseVo<List<Region>> responseVo = new ResponseVo<>();
         List<Region> regionList= regionService.queryRegionList();
         responseVo.setData(regionList);

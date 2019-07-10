@@ -7,9 +7,13 @@ import java.net.UnknownHostException;
 public class IPAddress {
 
         public static String getIpAddr(HttpServletRequest request) {
+
             String ipAddress = null;
+
             try {
+
                 ipAddress = request.getHeader("x-forwarded-for");
+
                 if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
                     ipAddress = request.getHeader("Proxy-Client-IP");
                 }
@@ -18,6 +22,7 @@ public class IPAddress {
                 }
                 if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
                     ipAddress = request.getRemoteAddr();
+
                     if (ipAddress.equals("127.0.0.1")) {
                         // 根据网卡取本机配置的IP
                         InetAddress inet = null;
@@ -36,6 +41,7 @@ public class IPAddress {
                         ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
                     }
                 }
+
             } catch (Exception e) {
                 ipAddress="";
             }
