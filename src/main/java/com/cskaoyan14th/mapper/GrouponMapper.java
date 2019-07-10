@@ -27,4 +27,6 @@ public interface GrouponMapper {
     int updateByPrimaryKeySelective(Groupon record);
 
     int updateByPrimaryKey(Groupon record);
+
+    List<Groupon> selectByUserId(@Param("userId") int userId);
 }
