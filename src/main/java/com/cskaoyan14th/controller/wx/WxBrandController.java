@@ -24,42 +24,55 @@ public class WxBrandController {
 
     @Autowired
     BrandService brandService;
+
     @RequestMapping("list")
     @ResponseBody
     public ResponseMapVo queryBrandList(int page, int size){
+
         ResponseMapVo responseMapVo = new ResponseMapVo();
+
         Map<String, Object> data = new HashMap<>();
         List<Brand> WxBrandList = brandService.queryWxBrandList(page, size);
         data.put("brandList", WxBrandList);                                                                         //把List数组塞进map
+
         long count = brandService.queryCountBrand();
         int totalPages = (int)(count / size);                                                                       //用来计算页码
+
         if (count / size != 0){                                                                                     //如果不能整除，页码加一
             totalPages += 1;
         }
+
         data.put("totalPages", totalPages);                                                                         //把页码塞进map
+
         if (data != null){
             responseMapVo.setData(data);
             responseMapVo.setErrno(0);
             responseMapVo.setErrmsg("成功");
+
         }else {
             responseMapVo.setErrno(404);
             responseMapVo.setErrmsg("失败");
+
         }
         return responseMapVo;
     }
     @RequestMapping("detail")
     @ResponseBody
     public ResponseVo<Brand> queryBrandDetail(int id){
+
         ResponseVo<Brand> responseVo = new ResponseVo<>();
         Brand brandDetail = brandService.queryBrandDetail(id);
+
         if (brandDetail != null){
             responseVo.setData(brandDetail);
             responseVo.setErrmsg("成功");
             responseVo.setErrno(0);
+
         }else{
             responseVo.setErrmsg("失败");
             responseVo.setErrno(404);
         }
+
         return responseVo;
     }
 }

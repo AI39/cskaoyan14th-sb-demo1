@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FeedbackMapper {
+
     long countByExample(FeedbackExample example);
 
     int deleteByExample(FeedbackExample example);

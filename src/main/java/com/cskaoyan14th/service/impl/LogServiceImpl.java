@@ -15,8 +15,10 @@ import java.util.Date;
 import java.util.List;
 @Service
 public class LogServiceImpl implements LogService {
+
     @Autowired
     LogMapper logMapper;
+
     @Override
     public ResponseVo<Page<Log>> queryLogAll(int page, int limit, String name) {
         ResponseVo<Page<Log>> adminResponseVo = new ResponseVo<>();
@@ -29,6 +31,7 @@ public class LogServiceImpl implements LogService {
 
         Page<Log> adminPage = new Page<Log>(pageInfo.getList(), pageInfo.getTotal());
         //判断 是否为空
+
         if(logList != null){
             adminResponseVo.setErrno(0);
             adminResponseVo.setErrmsg("成功");
@@ -40,6 +43,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public int insertLogin(String ipAddr, String username) {
+
         Log log = new Log();
         Date date = DateCurrentTime.dateCurrentTime();
         log.setAction("登录");
@@ -50,14 +54,18 @@ public class LogServiceImpl implements LogService {
         log.setUpdateTime(date);
         log.setDeleted(false);
         log.setType(1);
+
         int i = logMapper.insertLogin(log);
+
         return i;
     }
 
     @Override
     public int insertUpdate(String username, String ipAddr) {
+
         Log log = new Log();
         Date date = DateCurrentTime.dateCurrentTime();
+
         log.setAction("修改");
         log.setAddTime(date);
         log.setAdmin(username);
@@ -66,7 +74,9 @@ public class LogServiceImpl implements LogService {
         log.setUpdateTime(date);
         log.setDeleted(false);
         log.setType(1);
+
         int i = logMapper.insertLogin(log);
+
         return i;
 
     }

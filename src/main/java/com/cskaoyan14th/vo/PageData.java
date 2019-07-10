@@ -3,6 +3,7 @@ package com.cskaoyan14th.vo;
 import java.util.List;
 
 public class PageData<T> {
+
     List<T> data;
     long count;
 

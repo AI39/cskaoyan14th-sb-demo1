@@ -9,6 +9,7 @@ import com.cskaoyan14th.vo.ResponseVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdMapper {
+
     long countByExample(AdExample example);
 
     int deleteByExample(AdExample example);

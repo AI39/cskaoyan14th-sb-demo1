@@ -46,30 +46,41 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public List<Ad> getAdAll() {
+
         AdExample adExample = new AdExample();
         AdExample.Criteria criteria = adExample.createCriteria();
         criteria.andIdIsNotNull();
         List<Ad> ads = adMapper.selectByExample(adExample);
+
         return ads;
     }
 
     @Override
     public ResponseVo<Page> getAdList(int page, int limit, String sort, String order) {
+
         PageHelper.startPage(page,limit);
+
         AdExample adExample = new AdExample();
         AdExample.Criteria criteria = adExample.createCriteria();
+
         criteria.andIdIsNotNull();
         List<Ad> ads = adMapper.selectByExample(adExample);
+
         PageInfo<Ad> pageInfo=new PageInfo<>(ads);
         Page<Ad> adPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         ResponseVo<Page> responseVo = new ResponseVo<>(0,adPage,"成功");
+
         return responseVo;
     }
 
     @Override
     public ResponseVo<Ad> editAd(Ad ad) {
+
         ResponseVo<Ad> adResponseVo = new ResponseVo<>();
+
         int i = adMapper.updateByPrimaryKey(ad);
+
         if(i==1){
             adResponseVo.setErrno(0);
             adResponseVo.setErrmsg("成功");
@@ -80,8 +91,12 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public ResponseVo<String> deleteAd(Ad ad) {
+
         ResponseVo<String> responseVo = new ResponseVo<>();
+
+
         int i = adMapper.deleteByPrimaryKey(ad.getId());
+
         if(i==1){
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
@@ -91,8 +106,11 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public ResponseVo<Ad> insertAd(Ad ad) {
+
         ResponseVo<Ad> responseVo = new ResponseVo<>();
+
         int insert = adMapper.insert(ad);
+
         if(insert==1){
             responseVo.setErrno(0);
             responseVo.setErrmsg("成功");
@@ -103,28 +121,40 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public ResponseVo<Page> searchAd(int page, int limit, String name, String sort, String order) {
+
         PageHelper.startPage(page,limit);
         List<Ad> ads = adMapper.selectByName("%"+name+"%");
+
         PageInfo<Ad> pageInfo = new PageInfo<>(ads);
         Page<Ad> adPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         ResponseVo<Page> responseVo = new ResponseVo<>(0,adPage,"成功");
+
         return responseVo;
     }
 
     @Override
     public ResponseVo<Page> searchAd(int page, int limit, String name, String content, String sort, String order) {
+
         PageHelper.startPage(page,limit);
+
         if(name==null){
+
             List<Ad> ads = adMapper.selectByContent("%"+content+"%");
             PageInfo<Ad> pageInfo = new PageInfo<>(ads);
             Page<Ad> adPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
             ResponseVo<Page> responseVo = new ResponseVo<>(0,adPage,"成功");
             return responseVo;
         }
+
         List<Ad> ads = adMapper.selectByNameAndContent("%"+name+"%","%"+content+"%");
+
         PageInfo<Ad> pageInfo = new PageInfo<>(ads);
         Page<Ad> adPage = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         ResponseVo<Page> responseVo = new ResponseVo<>(0,adPage,"成功");
+
         return responseVo;
     }
 

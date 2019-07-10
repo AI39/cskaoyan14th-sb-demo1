@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface UserMapper {
+
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);

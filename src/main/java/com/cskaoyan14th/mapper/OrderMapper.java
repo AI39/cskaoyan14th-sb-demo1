@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 public interface OrderMapper {
+
     long countByExample(OrderExample example);
 
     int deleteByExample(OrderExample example);
@@ -49,5 +50,10 @@ public interface OrderMapper {
     int insertOrderReturnId(Order order);
 
     WxOrder selectWxOrderById(@Param("id") int orderId);
+
+
+    int deleteList(Integer orderId);
+
+
 
 }

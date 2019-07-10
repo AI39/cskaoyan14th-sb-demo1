@@ -21,36 +21,47 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     BrandMapper brandMapper;
+
     @Override
     public Page<Brand> queryBrandList(int page, int limit, Integer id, String name, String sort, String order) {
+
         PageHelper.startPage(page, limit);
         List<Brand> brandList1 = brandMapper.selectBrandList(id, name, sort, order);
+
         PageInfo<Brand> pageInfo = new PageInfo<>(brandList1);
         Page<Brand> brandList = new Page<>(pageInfo.getList(), pageInfo.getTotal());
+
         return brandList;
     }
 
     @Override
     public int deleteBrand(Brand brand) {
+
         int delete = brandMapper.deleteBrandById(brand.getId());
+
         return delete;
     }
 
     @Override
     public Brand createBrand(Brand brand) {
+
         long l = System.currentTimeMillis();
         Date date = new Date(l);
         brand.setAddTime(date);
         brand.setUpdateTime(date);
+
         brandMapper.inserts(brand);
         Brand brand1 = brandMapper.selectById(brand.getId());
+
         return brand1;
     }
 
     @Override
     public Brand updateBrand(Brand brand) {
+
         brandMapper.updateByPrimaryKey(brand);
         Brand brand1 = brandMapper.selectByPrimaryKey(brand.getId());
+
         return brand1;
 
     }
@@ -58,6 +69,7 @@ public class BrandServiceImpl implements BrandService {
     /*微信中的方法实现*/
     @Override
     public List<Brand> queryWxBrandList(int page, int size) {
+
         PageHelper.startPage(page, size);
         List<Brand> WxBrandList1 = brandMapper.queryWxBrandList();
         PageInfo<Brand> pageInfo = new PageInfo<>(WxBrandList1);
@@ -68,13 +80,17 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand queryBrandDetail(int id) {
+
         Brand brand1 = brandMapper.selectByPrimaryKey(id);
+
         return brand1;
     }
 
     @Override
     public long queryCountBrand() {
+
         long count = brandMapper.countBrand();
+
         return count;
     }
 }

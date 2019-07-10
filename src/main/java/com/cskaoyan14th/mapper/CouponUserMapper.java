@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CouponUserMapper {
+
     long countByExample(CouponUserExample example);
 
     int deleteByExample(CouponUserExample example);

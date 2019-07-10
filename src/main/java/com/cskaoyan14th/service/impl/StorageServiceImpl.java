@@ -17,13 +17,18 @@ import java.util.List;
 
 @Service
 public class StorageServiceImpl implements StorageService {
+
     @Autowired
     StorageMapper storageMapper;
+
     @Autowired
     MyOssClient myOssClient;
+
     @Override
     public int insertStorageAll(MultipartFile myfile) {
+
         int i = 0;
+
         try {
             Storage storage = myOssClient.ossFileUpload(myfile);
             i = storageMapper.insertStorageAll(storage);
@@ -37,9 +42,12 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public ResponseVo queryStorageAll(MultipartFile myfile) {
+
         ResponseVo<Storage> storageResponseVo = new ResponseVo<>();
+
         String originalFilename = myfile.getOriginalFilename();
         Storage storage = storageMapper.queryStorageAll(originalFilename);
+
         if (storage != null){
             storageResponseVo.setData(storage);
             storageResponseVo.setErrmsg("ok");
@@ -51,6 +59,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public ResponseVo<Page<Storage>> queryStorage(int page, int limit, String name, String key) {
+
         ResponseVo<Page<Storage>> storageResponseVo = new ResponseVo<>();
 
         PageHelper.startPage(page,limit);
@@ -61,7 +70,9 @@ public class StorageServiceImpl implements StorageService {
 
         Page<Storage> storagePage = new Page<Storage>(pageInfo.getList(), pageInfo.getTotal());
         //判断 是否为空
+
         if(storageList != null){
+
             storageResponseVo.setErrno(0);
             storageResponseVo.setErrmsg("成功");
             storageResponseVo.setData(storagePage);
@@ -71,8 +82,11 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public ResponseVo<Storage> updateStorage(Storage storage) {
+
         ResponseVo<Storage> storageResponseVo = new ResponseVo<>();
+
         int i = storageMapper.updateStorageByKey(storage);
+
         if (storage != null){
             storageResponseVo.setErrmsg("ok");
             storageResponseVo.setErrno(0);
@@ -83,13 +97,18 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public ResponseVo<Storage> deleteStorage(Storage storage) {
+
         ResponseVo<Storage> storageResponseVo = new ResponseVo<>();
+
         int i = storageMapper.deleteStorageByKey(storage);
+
         if (storage != null){
+
             storageResponseVo.setErrmsg("ok");
             storageResponseVo.setErrno(0);
             return storageResponseVo;
         }
+
         return storageResponseVo;
 
     }

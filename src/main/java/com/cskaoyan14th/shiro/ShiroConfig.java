@@ -15,14 +15,17 @@ public class ShiroConfig {
 
     @Bean
     public DefaultWebSecurityManager securityManager (CustomRealm customRealm,MallShiroSessionManager mallShiroSessionManager){
+
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setSessionManager(mallShiroSessionManager);
         defaultWebSecurityManager.setRealm(customRealm);
+
         return defaultWebSecurityManager;
     }
 
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager defaultWebSecurityManager){
+
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
 
@@ -33,11 +36,13 @@ public class ShiroConfig {
         filterMap.put("/admin/**","authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+
         return  shiroFilterFactoryBean;
     }
 
     @Bean
     public AuthorizationAttributeSourceAdvisor  authorizationAttributeSourceAdvisor (DefaultWebSecurityManager defaultWebSecurityManager){
+
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(defaultWebSecurityManager);
 
@@ -46,7 +51,9 @@ public class ShiroConfig {
 
     @Bean
     public MallShiroSessionManager mallShiroSessionManager(){
+
         MallShiroSessionManager mallShiroSessionManager = new MallShiroSessionManager();
+
         return mallShiroSessionManager;
     }
 }
