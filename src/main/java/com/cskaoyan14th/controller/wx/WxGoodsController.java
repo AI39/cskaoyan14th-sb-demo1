@@ -1,6 +1,7 @@
 package com.cskaoyan14th.controller.wx;
 
 import com.cskaoyan14th.bean.Category;
+import com.cskaoyan14th.bean.Footprint;
 import com.cskaoyan14th.bean.Goods;
 import com.cskaoyan14th.service.GoodsService;
 import com.cskaoyan14th.util.UserTokenManager;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,9 +66,14 @@ public class WxGoodsController {
 
     //商品详情
     @RequestMapping("detail")
-    public ResponseVo<GoodsDetail> detail(int id) {
+    public ResponseVo<GoodsDetail> detail(HttpServletRequest request, int id) {
         ResponseVo<GoodsDetail> responseVo = new ResponseVo();
         GoodsDetail goodsDetail = goodsService.getGoodsDetailByGoodsId(id);
+        //插入footprint
+        String token = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(token);
+        goodsService.insertFootprintByUserIdAndGoodsId(userId, id);
+
         responseVo.setErrno(0);
         responseVo.setErrmsg("成功");
         responseVo.setData(goodsDetail);
