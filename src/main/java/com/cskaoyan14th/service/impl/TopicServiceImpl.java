@@ -99,10 +99,12 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public ResponseVo<String> receiveCoupon(int userId,int couponId) {
         ResponseVo<String> responseVo = new ResponseVo<>();
+        Coupon coupon = couponMapper.selectByPrimaryKey(couponId);
+        Short status = coupon.getStatus();
         CouponUser couponUser = new CouponUser();
         couponUser.setCouponId(couponId);
         couponUser.setUserId(userId);
-        couponUser.setStatus(Short.valueOf("0"));
+        couponUser.setStatus(status);
         int insert = couponUserMapper.insert(couponUser);
         if(insert==1){
             responseVo.setErrmsg("成功");
