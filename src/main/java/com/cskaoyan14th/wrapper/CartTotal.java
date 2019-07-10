@@ -21,11 +21,11 @@ public class CartTotal {
         for (Cart cart : cartList) {
             double price = cart.getPrice().doubleValue();
             int num = cart.getNumber().intValue();
-            goodsCount++;
             if (cart.getChecked()){
-                checkedGoodsCount++;
+                checkedGoodsCount += num;
                 checkedGoodsAmount += price*num;
             }
+            goodsCount += num;
             goodsAmount += price*num;
         }
         return new CartTotal(goodsCount,goodsAmount,checkedGoodsCount,checkedGoodsAmount);
