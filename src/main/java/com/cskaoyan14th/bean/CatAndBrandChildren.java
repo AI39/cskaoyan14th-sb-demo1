@@ -1,7 +1,9 @@
 package com.cskaoyan14th.bean;
 
 public class CatAndBrandChildren {
+
     Integer value;
+
     String label;
 
     public CatAndBrandChildren() {

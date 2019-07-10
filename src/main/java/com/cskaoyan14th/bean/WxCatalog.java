@@ -10,8 +10,11 @@ import java.util.List;
  * @version 2019-07-08-20:17
  */
 public class WxCatalog {
+
     private List<Category> categoryList = new ArrayList<>();
+
     private Category currentCategory;
+
     private List<Category> currentSubCategory = new ArrayList<>();
 
     public List<Category> getCategoryList() {

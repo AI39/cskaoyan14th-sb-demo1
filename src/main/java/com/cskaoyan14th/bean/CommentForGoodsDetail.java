@@ -5,13 +5,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class CommentForGoodsDetail {
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+
     private String[] picList;
+
     private String nickname;
+
     private int id;
+
     private String avatar; //用户相关
+
     private String content;
 
     public Date getAddTime() {

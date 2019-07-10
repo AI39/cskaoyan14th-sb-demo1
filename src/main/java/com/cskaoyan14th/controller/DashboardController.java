@@ -12,12 +12,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("admin")
 public class DashboardController {
+
     @Autowired
     DashboardServiceImpl dashboardService;
 
     @RequestMapping("dashboard")
     @ResponseBody
     public ResponseVo<Map<String, Long>> dashboard() {
+
         Map<String, Long> map = dashboardService.getTotal();
 
         return new ResponseVo<>(0, map, "成功");

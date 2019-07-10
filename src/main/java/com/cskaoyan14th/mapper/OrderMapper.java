@@ -5,9 +5,13 @@ import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.bean.OrderExample;
 import com.cskaoyan14th.bean.WxOrder;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+
 
 import java.util.List;
 
+@Repository
 public interface OrderMapper {
     long countByExample(OrderExample example);
 
@@ -41,5 +45,9 @@ public interface OrderMapper {
 
     List<WxOrder> wxQueryOrderListByUserId(@Param("userId") int userId, @Param("showType") int showType);
 
+
+    int insertOrderReturnId(Order order);
+
     WxOrder selectWxOrderById(@Param("id") int orderId);
+
 }

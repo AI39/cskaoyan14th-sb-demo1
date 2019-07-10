@@ -9,4 +9,6 @@ public interface CouponService {
     double getCouponPrice(int couponId);
 
     List<Coupon> getavailableCouponList(Integer uid);
+
+    Coupon getCouponById(Integer couponId);
 }

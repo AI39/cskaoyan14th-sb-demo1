@@ -1,7 +1,9 @@
 package com.cskaoyan14th.bean;
 
 public class UserInfo {
+
     String nickName;
+
     String avatarUrl;
 
     public String getNickName() {

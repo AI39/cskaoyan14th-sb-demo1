@@ -6,12 +6,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderInfo {
+
     String consignee;
 
     String address;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     Date addTime;
+
 
     String orderSn;
 

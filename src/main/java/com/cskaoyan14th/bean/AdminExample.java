@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AdminExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -40,12 +41,14 @@ public class AdminExample {
     }
 
     public Criteria or() {
+
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
@@ -54,6 +57,7 @@ public class AdminExample {
     }
 
     protected Criteria createCriteriaInternal() {
+
         Criteria criteria = new Criteria();
         return criteria;
     }
@@ -65,6 +69,7 @@ public class AdminExample {
     }
 
     protected abstract static class GeneratedCriteria {
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -106,16 +111,19 @@ public class AdminExample {
         }
 
         public Criteria andIdIsNull() {
+
             addCriterion("id is null");
             return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
+
             addCriterion("id is not null");
             return (Criteria) this;
         }
 
         public Criteria andIdEqualTo(Integer value) {
+
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
@@ -136,6 +144,7 @@ public class AdminExample {
         }
 
         public Criteria andIdLessThan(Integer value) {
+
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
@@ -266,6 +275,7 @@ public class AdminExample {
         }
 
         public Criteria andPasswordLessThan(String value) {
+
             addCriterion("password <", value, "password");
             return (Criteria) this;
         }
@@ -276,6 +286,7 @@ public class AdminExample {
         }
 
         public Criteria andPasswordLike(String value) {
+
             addCriterion("password like", value, "password");
             return (Criteria) this;
         }

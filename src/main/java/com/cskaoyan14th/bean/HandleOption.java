@@ -1,12 +1,19 @@
 package com.cskaoyan14th.bean;
 
 public class HandleOption {
+
     boolean cancel;
+
     boolean delete;
+
     boolean pay;
+
     boolean comment;
+
     boolean confirm;
+
     boolean refund;
+
     boolean rebuy;
 
     public HandleOption() {

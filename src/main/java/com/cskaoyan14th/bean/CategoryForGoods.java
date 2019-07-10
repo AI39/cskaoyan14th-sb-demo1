@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryForGoods {
+
     Integer value;
+
     String label;
+
     List<CatAndBrandChildren> children = new ArrayList<>();
 
     public CategoryForGoods() {

@@ -1,8 +1,11 @@
 package com.cskaoyan14th.bean;
 
 public class SystemOrderComment {
+
     String cskaoyan_mall_order_comment;
+
     String cskaoyan_mall_order_unpaid;
+
     String cskaoyan_mall_order_unconfirm;
 
     public String getCskaoyan_mall_order_comment() {

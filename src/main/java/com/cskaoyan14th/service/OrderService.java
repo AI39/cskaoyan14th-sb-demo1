@@ -27,4 +27,9 @@ public interface OrderService {
     WxOrder queryWxOrderById(int userId);
 
     List<OrderGoods> queryOrderGoodsById(int orderId);
+
+    //order/submit
+    int insertOrderReturnId(Order order);
+
+    int insertGoodIntoOrderGoods(OrderGoods orderGoods);
 }

@@ -58,4 +58,6 @@ public interface CartMapper {
     List<Cart> getCartListByUidNotDeleted(@Param("uid") int uid);
 
     void clearDeletedCart(@Param("uid") Integer userId);
+
+    int setDeletedTrueById(@Param("id") Integer id);
 }

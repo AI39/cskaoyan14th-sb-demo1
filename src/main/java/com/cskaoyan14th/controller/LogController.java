@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("admin/log")
 public class LogController {
+
     @Autowired
     LogService logService;
+
     @RequestMapping("list")
     @ResponseBody
     public ResponseVo<Page<Log>> list(int page , int limit , String name){
+
         ResponseVo<Page<Log>> logResponseVo = logService.queryLogAll(page,limit,name);
         return logResponseVo;
     }

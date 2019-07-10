@@ -1,7 +1,9 @@
 package com.cskaoyan14th.bean;
 
 public class SystemFrightMin {
+
     String cskaoyan_mall_express_freight_min;
+
     String cskaoyan_mall_express_freight_value;
 
     public String getCskaoyan_mall_express_freight_min() {

@@ -1,8 +1,11 @@
 package com.cskaoyan14th.bean;
 
 public class Grouponx {
+
     double groupon_price;
+
     Goods goods;
+
     int groupon_member;
 
     public double getGroupon_price() {
