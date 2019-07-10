@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 public class MallShiroSessionManager extends DefaultWebSessionManager {
+
     public static final String LOGIN_TOKEN_KEY = "X-Litemall-Admin-Token";
+
     private static final String REFERENCED_SESSION_ID_SOURCE = "Stateless request";
+
     @Override
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+
         HttpServletRequest servletRequest = (HttpServletRequest) request;
         String id = servletRequest.getHeader(LOGIN_TOKEN_KEY);
 

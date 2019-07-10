@@ -5,7 +5,9 @@ import com.cskaoyan14th.bean.Topic;
 import java.util.Arrays;
 
 public class TopicDetail {
+
     Topic topic;
+
     String[] goods;
 
     public TopicDetail() {

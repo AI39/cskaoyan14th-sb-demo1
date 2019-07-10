@@ -3,15 +3,20 @@ package com.cskaoyan14th.vo;
 import java.util.Arrays;
 
 public class Admin2 {
+
     String avatar;
+
     String name;
+
     String[] perms;
+
     String[] roles;
 
     public Admin2() {
     }
 
     public Admin2(String avatar, String name, String[] perms, String[] roles) {
+
         this.avatar = avatar;
         this.name = name;
         this.perms = perms;
@@ -52,6 +57,7 @@ public class Admin2 {
 
     @Override
     public String toString() {
+
         return "Admin2{" +
                 "avatar='" + avatar + '\'' +
                 ", name='" + name + '\'' +

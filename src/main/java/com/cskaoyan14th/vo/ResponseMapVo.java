@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResponseMapVo {
+
     int errno;
+
     Map<String, Object> data = new HashMap<>();
+
     String errmsg;
 
     public ResponseMapVo() {
@@ -43,6 +46,7 @@ public class ResponseMapVo {
 
     @Override
     public String toString() {
+
         return "ResponseMapVo{" +
                 "errno=" + errno +
                 ", data=" + data +
