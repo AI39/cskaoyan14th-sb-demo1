@@ -71,4 +71,17 @@ public class SearchServiceImpl implements SearchService {
         int i = searchHistoryMapper.deleteByExample(searchHistoryExample);
         return i;
     }
+
+    @Override
+    public List<String> getFussyKeyword(String keyword) {
+        KeywordExample keywordExample = new KeywordExample();
+        KeywordExample.Criteria criteria = keywordExample.createCriteria();
+        criteria.andKeywordLike("%" + keyword + "%");
+        List<Keyword> keywords = keywordMapper.selectByExample(keywordExample);
+        List<String> list = new ArrayList<>();
+        for(Keyword k : keywords) {
+            list.add(k.getKeyword());
+        }
+        return list;
+    }
 }

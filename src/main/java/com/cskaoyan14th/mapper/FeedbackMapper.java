@@ -31,6 +31,7 @@ public interface FeedbackMapper {
     int updateByPrimaryKey(Feedback record);
 
     List<Feedback> selectFeedbackListOrder(String sort, String order);
+
     List<Feedback> selectFeedbackListOrder(@Param("username") String username,@Param("id") String id,
                                            @Param("sort") String sort, @Param("order") String order);
 
