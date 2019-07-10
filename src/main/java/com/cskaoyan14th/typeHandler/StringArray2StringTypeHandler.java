@@ -9,11 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StringArray2StringTypeHandler extends BaseTypeHandler<String[]> {
+
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
+
         StringBuffer sb = new StringBuffer("[");
+
         for (int j = 0; j < strings.length; j++) {
+
             sb.append("\"").append(strings[j]).append("\"");
+
             if(j != strings.length - 1) {
                 sb.append(",");
             }
@@ -23,37 +28,48 @@ public class StringArray2StringTypeHandler extends BaseTypeHandler<String[]> {
 
     @Override
     public String[] getNullableResult(ResultSet resultSet, String s) throws SQLException {
+
         String string = resultSet.getString(s);
         String[] strings = toStringArray(string);
+
         return strings;
     }
 
     private String[] toStringArray(String string) {
+
         if("[]".equals(string)) {
             return null;
         }
+
         if(string != null && string.length() != 0) {
             string = string.replace("[", "").replace("]", "");
             String[] split = string.split(",");
+
             for (int i = 0; i < split.length; i++) {
                 split[i] = split[i].replace("\"", "");
             }
+
             return split;
         }
+
         return null;
     }
 
     @Override
     public String[] getNullableResult(ResultSet resultSet, int i) throws SQLException {
+
         String string = resultSet.getString(i);
         String[] strings = toStringArray(string);
+
         return strings;
     }
 
     @Override
     public String[] getNullableResult(CallableStatement callableStatement, int i) throws SQLException {
+
         String string = callableStatement.getString(i);
         String[] strings = toStringArray(string);
+
         return strings;
     }
 }

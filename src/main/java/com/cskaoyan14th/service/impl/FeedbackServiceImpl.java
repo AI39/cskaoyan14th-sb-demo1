@@ -16,29 +16,40 @@ import java.util.Map;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
+
     @Autowired
     FeedbackMapper feedbackMapper;
+
     @Override
     public Page<Feedback> getPageList(int page, int limit, String sort, String order) {
+
         PageHelper.startPage(page,limit);
+
         List<Feedback> feedbacks = feedbackMapper.selectFeedbackListOrder(sort, order);
+
         PageInfo<Feedback> pageInfo = new PageInfo<>(feedbacks);
         Page<Feedback> feedbackList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         return feedbackList;
     }
 
     @Override
     public Page<Feedback> getPageList(int page, int limit, String username, String id, String sort, String order) {
+
         PageHelper.startPage(page,limit);
         List<Feedback> feedbacks = feedbackMapper.selectFeedbackListOrder(username,id,sort, order);
+
         PageInfo<Feedback> pageInfo = new PageInfo<>(feedbacks);
         Page<Feedback> feedbackList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         return feedbackList;
     }
 
     @Override
     public int insertSelective(Feedback record) {
+
         int i = feedbackMapper.insertSelective(record);
+
         return i;
     }
 

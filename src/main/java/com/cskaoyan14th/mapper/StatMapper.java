@@ -7,6 +7,7 @@ import com.cskaoyan14th.wrapper.UserStat;
 import java.util.List;
 
 public interface StatMapper {
+
     List<UserStat> getUserStatList();
 
     List<OrderStat> getOrderStatList();

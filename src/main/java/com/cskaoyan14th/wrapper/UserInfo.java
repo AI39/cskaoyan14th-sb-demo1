@@ -1,12 +1,19 @@
 package com.cskaoyan14th.wrapper;
 
 public class UserInfo {
+
     private String nickName;
+
     private String avatarUrl;
+
     private String country;
+
     private String province;
+
     private String city;
+
     private String language;
+
     private Byte gender;
 
     public String getCountry() {

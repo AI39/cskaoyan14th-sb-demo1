@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface AddressMapper {
+
     long countByExample(AddressExample example);
 
     int deleteByExample(AddressExample example);
@@ -33,11 +34,13 @@ public interface AddressMapper {
 
 
     List<Address> selectAddressListOrder(@Param("sort") String sort, @Param("order") String order);
+
     List<Address> selectAddressListOrder(@Param("name") String name,@Param("userId") String userId,
                                          @Param("sort") String sort, @Param("order") String order);
 
     List<Address> getListById(@Param("uid") int uid);
     List<Address> getListById();
+
     Address getDefaultAddress(@Param("uid") int uid);
 
     Address getAddressById(@Param("addressId") Integer addressId);

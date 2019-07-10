@@ -34,6 +34,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/wx/order")
 public class WxOrderController {
+
     @Autowired
     OrderService orderService;
 //    @RequestMapping("list")
@@ -54,6 +55,7 @@ public class WxOrderController {
     @RequestMapping("list")
     @ResponseBody
     public ResponseVo<Map<String, Object>> list(Integer showType, Integer page, Integer size, HttpServletRequest request) {
+
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
         //通过请求头获得userId，进而可以获得一切关于user的信息
@@ -74,6 +76,7 @@ public class WxOrderController {
     @RequestMapping("detail")
     @ResponseBody
     public ResponseVo<Map<String, Object>> detail(Integer orderId) {
+
         Map<String, Object> map = new HashMap<>();
 
         map.put("orderInfo", orderService.queryWxOrderById(orderId));
@@ -93,12 +96,16 @@ public class WxOrderController {
 
     @Autowired
     AddressService addressService;
+
     @Autowired
     GoodsService goodsService;
+
     @Autowired
     CartService cartService;
+
     @Autowired
     CouponService couponService;
+
     @RequestMapping("submit")
     @ResponseBody
     public ResponseVo submit(@RequestBody Map<String,Object> map,HttpServletRequest request){
@@ -129,7 +136,9 @@ public class WxOrderController {
         order.setMessage(message);
 
         //设置商品信息
+
         List<Cart> checkedGoodsList = new ArrayList<>();
+
         if (cartId == 0){
             //cartId=0，表示购买购物车选中的商品
             checkedGoodsList = cartService.getCheckedGoodsList(uid);
@@ -138,6 +147,7 @@ public class WxOrderController {
             checkedGoodsList = cartService.getFastAddCartByCartId(cartId,uid);
         }
         double goodsPrice = CartTotal.calculate(checkedGoodsList).getCheckedGoodsAmount();
+
         order.setGoodsPrice(BigDecimal.valueOf(goodsPrice));
 
         //所以这个邮费在哪里找？

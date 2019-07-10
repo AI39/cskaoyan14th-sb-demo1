@@ -22,8 +22,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/wx/footprint")
 public class WxFootPrintController {
+
     @Autowired
     FootprintService footprintService;
+
     @RequestMapping("list")
     @ResponseBody
     public ResponseMapVo footPrintList(Integer page, Integer size, HttpServletRequest request){
@@ -32,12 +34,15 @@ public class WxFootPrintController {
         //通过请求头获得userId，进而可以获得一切关于user的信息
         //**************************
         if (userId == null) {
+
             return new ResponseMapVo(404,null, "错误");
         }
         ResponseMapVo responseMapVo = new ResponseMapVo();
         Map<String, Object> data = new HashMap<>();
         List<Footprint> footprintList = footprintService.queryFootprintList(page, size);
+
         data.put("footprintList", footprintList);
+
         int totalPages = footprintService.queryFootprintTotalPages(page, size);
         data.put("totalPages", totalPages);
         if (data != null){

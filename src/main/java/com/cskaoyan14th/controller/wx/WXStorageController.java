@@ -15,15 +15,20 @@ import java.io.IOException;
 @Controller
 @RequestMapping("wx/storage")
 public class WXStorageController {
+
     @Autowired
     MyOssClient myOssClient;
+
     @Autowired
     StorageService storageService;
+
     @RequestMapping("upload")
     @ResponseBody
     public ResponseVo<Storage> create(MultipartFile file) throws IOException {
+
         storageService.insertStorageAll(file);
         ResponseVo<Storage> responseVo = storageService.queryStorageAll(file);
+
         return responseVo;
     }
 }

@@ -4,10 +4,15 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 public class OrderStat {
+
     private BigDecimal amount;
+
     private int customers;
+
     private Date day;
+
     private int orders;
+
     private BigDecimal pcr;
 
     public OrderStat() {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CartMapper {
+
     long countByExample(CartExample example);
 
     int deleteByExample(CartExample example);

@@ -22,8 +22,10 @@ import java.util.List;
 
 @Component("myrealm")
 public class CustomRealm extends AuthorizingRealm {
+
     @Autowired
     AdminService  adminService;
+
     @Autowired
     PermissionService permissionService;
 
@@ -34,6 +36,7 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+
         //principalCollection是SimpleAuthenticationInfo的第一个参数可以使Javabean也可以是String
 
         String primaryPrincipal = (String) principalCollection.getPrimaryPrincipal();
@@ -46,17 +49,22 @@ public class CustomRealm extends AuthorizingRealm {
         Admin admin = adminService.queryPasswordByUsername(primaryPrincipal);
         List<Permission> permissionList = permissionService.queryAdminByPrincipal(admin.getRoleIds());
         //判空 若不为空则将pojo中的permission取出
+
         if (permissionList != null){
+
             HashSet<String> strings = new HashSet<>();
+
             for (Permission permission : permissionList) {
                 strings.add(permission.getPermission());
             }
             System.out.println(strings);
             simpleAuthorizationInfo.addStringPermissions(strings);
+
             return simpleAuthorizationInfo;
         }
 
         //simpleAuthorizationInfo.addRoles();
+
         return simpleAuthorizationInfo;
     }
 
@@ -69,6 +77,7 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         //先进行一波判断 看看token是否为零
+
         if(authenticationToken == null || StringUtils.isBlank((String) authenticationToken.getPrincipal())){
             return null;
         }
@@ -78,6 +87,7 @@ public class CustomRealm extends AuthorizingRealm {
         String  username = (String) authenticationToken.getPrincipal();
         //根据用户名去查询信息看看数据库中有这号人物不
         Admin admin = adminService.queryPasswordByUsername(username);
+
         if ( admin == null ){
             return null;
         }
@@ -88,6 +98,7 @@ public class CustomRealm extends AuthorizingRealm {
         * 第三个参数当前域名 通常没有用
         * */
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(admin.getUsername(), admin.getPassword(),this.getName());
+
         return simpleAuthenticationInfo;
     }
 }

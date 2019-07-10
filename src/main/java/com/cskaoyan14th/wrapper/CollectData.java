@@ -3,6 +3,7 @@ package com.cskaoyan14th.wrapper;
 import java.math.BigDecimal;
 
 public class CollectData {
+
     private Integer id;
 
     private Integer valueId;

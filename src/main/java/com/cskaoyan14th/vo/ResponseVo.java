@@ -1,8 +1,11 @@
 package com.cskaoyan14th.vo;
 
 public class ResponseVo<T> {
+
     int errno;
+
     T data;
+
     String errmsg;
 
     public ResponseVo() {

@@ -17,8 +17,11 @@ import java.util.UUID;
 @ConfigurationProperties(prefix = "myoss")
 @Component
 public class MyOssClient {
+
     String bucket;
+
     String endpoint;
+
     String accessKey;
 
     String secret;
@@ -56,7 +59,9 @@ public class MyOssClient {
     }
 
     public Storage ossFileUpload(MultipartFile myfile) throws IOException {
+
         if(myfile != null){
+
             InputStream inputStream = myfile.getInputStream();
 
             long size = myfile.getSize();//文件大小
