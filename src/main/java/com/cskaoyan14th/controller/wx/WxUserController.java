@@ -117,10 +117,10 @@ public class WxUserController {
         Map<String, Object> orderData = new HashMap<>();
         //***********************************
         //根据userId查询订单信息
-        orderData.put("unpaid", userService.countByOrderStatus((short)101));
-        orderData.put("unship", userService.countByOrderStatus((short)201));
-        orderData.put("unrecv", userService.countByOrderStatus((short)301));
-        orderData.put("uncomment", userService.countByOrderStatus((short)401));
+        orderData.put("unpaid", userService.countByOrderStatus(userId, (short)101));
+        orderData.put("unship", userService.countByOrderStatus(userId, (short)201));
+        orderData.put("unrecv", userService.countByOrderStatus(userId, (short)301));
+        orderData.put("uncomment", userService.countByOrderStatus(userId, (short)401));
 
         data.put("order", orderData);
         //***********************************

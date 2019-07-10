@@ -61,10 +61,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public long countByOrderStatus(short orderStat) {
+    public long countByOrderStatus(int userId, short orderStat) {
         OrderExample orderExample = new OrderExample();
         OrderExample.Criteria criteria = orderExample.createCriteria();
-        criteria.andOrderStatusEqualTo(orderStat);
+        criteria.andUserIdEqualTo(userId).andOrderStatusEqualTo(orderStat);
         return orderMapper.countByExample(orderExample);
     }
 }

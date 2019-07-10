@@ -12,5 +12,5 @@ public interface UserService {
 
     User getUser(String username, String password);
 
-    long countByOrderStatus(short orderStat);
+    long countByOrderStatus(int userId, short orderStat);
 }
