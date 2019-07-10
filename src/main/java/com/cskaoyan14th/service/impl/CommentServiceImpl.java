@@ -82,4 +82,10 @@ public class CommentServiceImpl implements CommentService {
 
         return commentList;
     }
+
+    @Override
+    public Integer insertComment(Comment comment) {
+        commentMapper.insertSelective(comment);
+        return comment.getId();
+    }
 }
