@@ -1,5 +1,6 @@
 package com.cskaoyan14th.controller.wx;
 
+
 import com.cskaoyan14th.bean.Address;
 import com.cskaoyan14th.bean.Cart;
 import com.cskaoyan14th.bean.Coupon;
@@ -10,12 +11,23 @@ import com.cskaoyan14th.util.UserTokenManager;
 import com.cskaoyan14th.vo.ResponseVo;
 
 import com.cskaoyan14th.wrapper.CartTotal;
+
+import com.cskaoyan14th.service.OrderService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.math.BigDecimal;
 import java.util.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author Yuechao Yang
@@ -66,7 +78,7 @@ public class WxOrderController {
     public ResponseVo<Map<String, Object>> detail(Integer orderId) {
         Map<String, Object> map = new HashMap<>();
 
-        map.put("orderInfo", orderService.queryOrderById(orderId));
+        map.put("orderInfo", orderService.queryWxOrderById(orderId));
         map.put("orderGoods", orderService.queryOrderGoodsById(orderId));
         System.out.println(map);
         return new ResponseVo<>(0,  map, "成功");
@@ -74,11 +86,8 @@ public class WxOrderController {
 
     @RequestMapping("prepay")
     @ResponseBody
-    public ResponseVo<Order> prepay(int OrderId){
-        ResponseVo<Order> responseVo = new ResponseVo<>();
-        responseVo.setErrno(724);
-        responseVo.setErrmsg("订单不能支付");
-        return responseVo;
+    public ResponseVo<Object> prepay(@RequestBody Map<String, Object> requestMap){
+        return new ResponseVo<>(0,  null, "成功");
     }
 
     @Autowired

@@ -1,10 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.*;
-import com.cskaoyan14th.mapper.CommentMapper;
-import com.cskaoyan14th.mapper.CouponMapper;
-import com.cskaoyan14th.mapper.GrouponxMapper;
-import com.cskaoyan14th.mapper.TopicMapper;
+import com.cskaoyan14th.mapper.*;
 import com.cskaoyan14th.service.TopicService;
 import com.cskaoyan14th.vo.Page;
 import com.cskaoyan14th.vo.PageData;
@@ -36,6 +33,21 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     AdServiceImpl adService;
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Autowired
+    GrouponMapper grouponMapper;
+
+    @Autowired
+    OrderMapper orderMapper;
+
+    @Autowired
+    GrouponRulesMapper grouponRulesMapper;
+
+    @Autowired
+    CouponUserMapper couponUserMapper;
 
     @Override
     public ResponseVo<PageData> getTopicListWx(int page, int size) {
@@ -85,10 +97,17 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResponseVo<String> receiveCoupon(int couponId) {
+    public ResponseVo<String> receiveCoupon(int userId,int couponId) {
         ResponseVo<String> responseVo = new ResponseVo<>();
-        responseVo.setErrmsg("成功");
-        responseVo.setErrno(0);
+        CouponUser couponUser = new CouponUser();
+        couponUser.setCouponId(couponId);
+        couponUser.setUserId(userId);
+        couponUser.setStatus(Short.valueOf("0"));
+        int insert = couponUserMapper.insert(couponUser);
+        if(insert==1){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        }
         return responseVo;
     }
 
@@ -116,49 +135,22 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResponseVo<PageData> getCouponList(int status, int page, int size) {
-        if(status==0){
-            PageHelper.startPage(page,size);
-            List<Coupon> list=new ArrayList<>();
-            Coupon coupon1 = couponMapper.selectByPrimaryKey(2);
-            Coupon coupon2 = couponMapper.selectByPrimaryKey(3);
-            list.add(coupon1);
-            list.add(coupon2);
-            PageInfo<Coupon> pageInfo=new PageInfo<>(list);
-            PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
-            ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
-            return responseVo;
-
-        }else if(status==1){
-            PageHelper.startPage(page,size);
-            List<Coupon> list=new ArrayList<>();
-            Coupon coupon1 = couponMapper.selectByPrimaryKey(8);
-            Coupon coupon2 = couponMapper.selectByPrimaryKey(9);
-            list.add(coupon1);
-            list.add(coupon2);
-            PageInfo<Coupon> pageInfo=new PageInfo<>(list);
-            PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
-            ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
-            return responseVo;
-        } else if(status==2){
-            PageHelper.startPage(page,size);
-            List<Coupon> list=new ArrayList<>();
-            Coupon coupon2 = couponMapper.selectByPrimaryKey(9);
-            list.add(coupon2);
-            PageInfo<Coupon> pageInfo=new PageInfo<>(list);
-            PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
-            ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
-            return responseVo;
-        }
+    public ResponseVo<PageData> getCouponList(int userId,short status, int page, int size) {
         PageHelper.startPage(page,size);
-        List<Coupon> list=new ArrayList<>();
-        Coupon coupon2 = couponMapper.selectByPrimaryKey(9);
-        list.add(coupon2);
+        CouponUserExample couponUserExample = new CouponUserExample();
+        CouponUserExample.Criteria criteria = couponUserExample.createCriteria();
+        criteria.andStatusEqualTo(status).andUserIdEqualTo(userId);
+        List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
+        ArrayList<Coupon> list = new ArrayList<>();
+        for (CouponUser items:couponUsers) {
+            Integer couponId = items.getCouponId();
+            Coupon coupon = couponMapper.selectByPrimaryKey(couponId);
+            list.add(coupon);
+        }
         PageInfo<Coupon> pageInfo=new PageInfo<>(list);
         PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
         ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
         return responseVo;
-
     }
 
     @Override
@@ -179,7 +171,7 @@ public class TopicServiceImpl implements TopicService {
     public ResponseVo<List> selectCouponList(int cartId, int grouponRulesId) {
         CouponExample couponExample = new CouponExample();
         CouponExample.Criteria criteria = couponExample.createCriteria();
-        criteria.andIdIsNotNull();
+        criteria.andStatusEqualTo(Short.valueOf("0"));
         List<Coupon> coupons = couponMapper.selectByExample(couponExample);
         ResponseVo<List> responseVo = new ResponseVo<>();
         responseVo.setErrmsg("成功");
@@ -189,8 +181,73 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResponseVo<PageData> getMyGroupon(int showType) {
-        return null;
+    public ResponseVo<PageData> getMyGroupon(int userId,int showType) {
+        ResponseVo<PageData> responseVo = new ResponseVo<>();
+        if(showType==0){
+            ArrayList<MyGroupon> myGroupons = new ArrayList<>();
+            List<Groupon> groupons=grouponMapper.selectByUserId(userId);
+            for (Groupon groupon:groupons) {
+                MyGroupon myGroupon = new MyGroupon();
+                myGroupon.setOrderStatusText("已收货");
+                User user = userMapper.selectByPrimaryKey(userId);
+                myGroupon.setCreator(user.getNickname());
+                myGroupon.setGroupon(groupon);
+                Integer orderId = groupon.getOrderId();
+                myGroupon.setOrderId(orderId);
+                Order order = orderMapper.selectByPrimaryKey(orderId);
+                String orderSn = order.getOrderSn();
+                myGroupon.setOrderSn(orderSn);
+                myGroupon.setActualPrice(order.getActualPrice());
+                myGroupon.setJoinerCount(new Random().nextInt(10));
+                ArrayList<Goods> goodsList = new ArrayList<>();
+                myGroupon.setGoodsList(goodsList);
+                Integer rulesId = groupon.getRulesId();
+                GrouponRules grouponRules = grouponRulesMapper.selectByPrimaryKey(rulesId);
+                myGroupon.setRules(grouponRules);
+                myGroupon.setId(groupon.getId());
+                myGroupon.setCreator(true);
+                HandleOption handleOption = new HandleOption(false,true,false,true,false,false,true);
+                myGroupon.setHandleOption(handleOption);
+                myGroupons.add(myGroupon);
+            }
+            PageData<MyGroupon> pageData = new PageData<>(myGroupons,myGroupons.size());
+            responseVo.setData(pageData);
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        } else if(showType==1){
+            ArrayList<MyGroupon> myGroupons = new ArrayList<>();
+            PageData<MyGroupon> pageData = new PageData<>(myGroupons,myGroupons.size());
+            responseVo.setData(pageData);
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        }
+        return responseVo;
+    }
+
+    @Override
+    public ResponseVo<GrouponDetail> getGrouponDetail(int grouponId) {
+        GrouponDetail detail = new GrouponDetail();
+        Groupon groupon = grouponMapper.selectByPrimaryKey(grouponId);
+        Integer creatorUserId = groupon.getCreatorUserId();
+        User user = userMapper.selectByPrimaryKey(creatorUserId);
+        Creator creator = new Creator(user.getNickname(),"");
+        detail.setCreator(creator);
+        detail.setGroupon(groupon);
+        Creator[] creators={creator};
+        detail.setJoiners(creators);
+        Integer orderId = groupon.getOrderId();
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        OrderInfo orderInfo = new OrderInfo(order.getConsignee(),order.getAddress(),order.getAddTime(),order.getOrderSn(),order.getActualPrice(),order.getMobile(),order.getShipChannel(),
+                "已收货",order.getGoodsPrice(),order.getShipSn(),orderId,order.getFreightPrice(),new HandleOption(false,true,false,true,false,false,true));
+
+        detail.setOrderInfo(orderInfo);
+
+        Integer rulesId = groupon.getRulesId();
+        GrouponRules grouponRules = grouponRulesMapper.selectByPrimaryKey(rulesId);
+        detail.setRules(grouponRules);
+        detail.setLinkGrouponId(grouponId);
+        ResponseVo<GrouponDetail> responseVo = new ResponseVo<>(0,detail,"成功");
+        return responseVo;
     }
 
 
