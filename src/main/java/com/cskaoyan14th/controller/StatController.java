@@ -17,12 +17,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("admin/stat")
 public class StatController {
+
     @Autowired
     StatServiceImpl statService;
 
     @RequestMapping("user")
     @ResponseBody
     public ResponseVo<Map<String, Object>> user() {
+
         Map<String, Object> map = new HashMap<>();
         map.put("columns", new String[]{"day", "users"});
         List<UserStat> rows = statService.getUserStatList();
@@ -34,6 +36,7 @@ public class StatController {
     @RequestMapping("order")
     @ResponseBody
     public ResponseVo<Map<String, Object>> order() {
+
         Map<String, Object> map = new HashMap<>();
         map.put("columns", new String[]{"day", "orders", "customers", "amount", "pcr"});
 
@@ -46,6 +49,7 @@ public class StatController {
     @RequestMapping("goods")
     @ResponseBody
     public ResponseVo<Map<String, Object>> goods() {
+
         Map<String, Object> map = new HashMap<>();
         map.put("columns", new String[]{"day", "orders", "products", "amount"});
 
