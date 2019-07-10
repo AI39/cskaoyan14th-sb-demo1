@@ -1,9 +1,11 @@
 package com.cskaoyan14th.mapper;
 
-import com.cskaoyan14th.bean.Admin;
 import com.cskaoyan14th.bean.Role;
-import com.cskaoyan14th.bean.RoleExample;
+
 import java.util.List;
+
+import com.cskaoyan14th.bean.shiro.AuthorDataOne;
+import com.cskaoyan14th.bean.shiro.AuthorDataTwo;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
@@ -21,4 +23,13 @@ public interface RoleMapper {
     int deleteRoleById(@Param("role")Role role);
 
     String[] queryNameByRoleids(@Param("adm") int[] admin);
+
+    List<String> queryNameByRoleid(@Param("role") int roleId);
+
+
+    List<String> queryCategoryRoles();
+
+    AuthorDataOne queryCategoryAll(@Param("i")int i);
+
+    List<AuthorDataTwo> selectPermission(@Param("i")int i);
 }

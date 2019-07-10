@@ -52,4 +52,36 @@
       #{ids}
     </foreach>
   </select>
+
+
+
+
+  <select id="queryCategoryRoles" resultType="String">
+    select roles from cskaoyan_mall_permission_category
+  </select>
+
+  <resultMap id="dataTwoMap" type="com.cskaoyan14th.bean.shiro.AuthorDataTwo">
+    <result property="id" column="name"/>
+    <result property="label" column="name"/>
+    <collection property="children" column="pid" select="com.cskaoyan14th.mapper.RoleMapper.selectDataThree"/>
+  </resultMap>
+
+
+  <select id="selectPermission" resultMap="dataTwoMap">
+    select `name`,pid from cskaoyan_mall_permission_category where role_id = #{i}
+</select>
+
+  <resultMap id="dataThreeMap" type="com.cskaoyan14th.bean.shiro.AuthorDataThree">
+    <result property="id" column="name"/>
+    <result property="label" column="name"/>
+    <collection property="children" column="pid" select="com.cskaoyan14th.mapper.RoleMapper.selectDataFour"/>
+  </resultMap>
+
+  <select id="selectDataThree" resultMap="dataThreeMap">
+    select pid,`name` from cskaoyan_mall_permission_category where role_id = #{pid}
+</select>
+
+  <select id="selectDataFour" resultType="com.cskaoyan14th.bean.shiro.AuthorFour">
+    select api,roles as id , `name` as label from cskaoyan_mall_permission_category where role_id = #{pid}
+</select>
 </mapper>
