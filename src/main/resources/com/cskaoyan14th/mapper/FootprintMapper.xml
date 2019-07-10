@@ -264,5 +264,6 @@
     f.goods_id = g.id
     where
     f.deleted = 0
+    order by f.add_time desc
   </select>
 </mapper>
