@@ -1,19 +1,21 @@
 package com.cskaoyan14th.controller.wx;
 
+import com.cskaoyan14th.bean.Address;
+import com.cskaoyan14th.bean.Cart;
+import com.cskaoyan14th.bean.Coupon;
 import com.cskaoyan14th.bean.Order;
-import com.cskaoyan14th.service.OrderService;
+import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.util.UserTokenManager;
-import com.cskaoyan14th.vo.ResponseMapVo;
+
 import com.cskaoyan14th.vo.ResponseVo;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+
+import com.cskaoyan14th.wrapper.CartTotal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @author Yuechao Yang
@@ -79,6 +81,102 @@ public class WxOrderController {
         return responseVo;
     }
 
+    @Autowired
+    AddressService addressService;
+    @Autowired
+    GoodsService goodsService;
+    @Autowired
+    CartService cartService;
+    @Autowired
+    CouponService couponService;
+    @RequestMapping("submit")
+    @ResponseBody
+    public ResponseVo submit(@RequestBody Map<String,Object> map,HttpServletRequest request){
+        //获取参数
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer uid = UserTokenManager.getUserId(tokenKey);
+        Integer addressId = (Integer) map.get("addressId");
+        Integer cartId = (Integer) map.get("cartId");
+        Integer couponId = (Integer) map.get("couponId");
+        Integer grouponLinkId = (Integer) map.get("grouponLinkId");
+        Integer grouponRulesId = (Integer) map.get("grouponRulesId");
+        String message = (String) map.get("message");
 
+
+        /*
+        插入order表的操作
+         */
+        Order order = new Order();
+        //设置订单信息
+        order.setUserId(uid);
+        order.setOrderSn(UUID.randomUUID().toString());
+        order.setOrderStatus((short)101);
+        //设置收货人信息
+        Address address = addressService.getAddressById(addressId);
+        order.setConsignee(address.getName());
+        order.setMobile(address.getMobile());
+        order.setAddress(address.getDetailedAddress());
+        order.setMessage(message);
+
+        //设置商品信息
+        List<Cart> checkedGoodsList = new ArrayList<>();
+        if (cartId == 0){
+            checkedGoodsList = cartService.getCheckedGoodsList(uid);
+        }else {
+            checkedGoodsList = cartService.getFastAddCartByCartId(cartId,uid);
+        }
+        double goodsPrice = CartTotal.calculate(checkedGoodsList).getCheckedGoodsAmount();
+        order.setGoodsPrice(BigDecimal.valueOf(goodsPrice));
+
+        //所以这个邮费在哪里找？
+        BigDecimal freightPrice = BigDecimal.valueOf(0);
+        order.setFreightPrice(freightPrice);
+        
+        //优惠券
+        Coupon coupon = couponService.getCouponById(couponId);
+        BigDecimal couponPrice = null;
+        if (coupon != null) {
+            couponPrice = coupon.getDiscount();
+        }else {
+            couponPrice = BigDecimal.valueOf(0);
+        }
+        order.setCouponPrice(couponPrice);
+
+
+        //用户积分？wtf?
+        BigDecimal integralPrice = BigDecimal.valueOf(0);
+        order.setIntegralPrice(integralPrice);
+
+        //团购减免？
+        order.setGrouponPrice(BigDecimal.valueOf(0));
+        //订单费用， = goods_price + freight_price - coupon_price
+        BigDecimal orderPrice = BigDecimal.valueOf(goodsPrice).add(freightPrice).subtract(couponPrice);
+        order.setOrderPrice(orderPrice);
+        //实付费用， = order_price - integral_price
+        BigDecimal actualPrice = orderPrice.subtract(integralPrice);
+        order.setActualPrice(actualPrice);
+
+        //....
+        order.setEndTime(new Date());
+        order.setAddTime(new Date());
+        order.setUpdateTime(new Date());
+        order.setDeleted(false);
+
+        int orderId = orderService.insertOrderReturnId(order);
+
+        ResponseVo responseVo = new ResponseVo();
+        responseVo.setErrno(0);
+        responseVo.setErrmsg("成功");
+        Map<String,Integer> voMap = new HashMap<>();
+        voMap.put("orderId",orderId);
+        responseVo.setData(voMap);
+
+        /*
+        插入order_goods表的操作
+         */
+
+
+        return responseVo;
+    }
 
 }

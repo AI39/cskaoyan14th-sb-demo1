@@ -89,4 +89,14 @@ public class OrderServiceImpl implements OrderService {
 
         return orderGoodsList;
     }
+
+    @Override
+    public int insertOrderReturnId(Order order) {
+        int insert = orderMapper.insertOrderReturnId(order);
+        if (insert == 1){
+            return order.getId();
+        }else {
+            return -1;
+        }
+    }
 }

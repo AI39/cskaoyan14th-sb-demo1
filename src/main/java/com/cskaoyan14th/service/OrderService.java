@@ -26,4 +26,7 @@ public interface OrderService {
     Order queryOrderById(int userId);
 
     List<OrderGoods> queryOrderGoodsById(int orderId);
+
+    //order/submit
+    int insertOrderReturnId(Order order);
 }

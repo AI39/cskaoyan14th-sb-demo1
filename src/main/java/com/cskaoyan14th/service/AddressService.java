@@ -20,4 +20,6 @@ public interface AddressService {
     Address getDefaultAddress(Integer uid);
 
     Address getCheckedAddress(int addressId);
+
+    Address getAddressById(Integer addressId);
 }
