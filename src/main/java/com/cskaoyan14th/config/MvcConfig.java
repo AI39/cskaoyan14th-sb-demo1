@@ -20,18 +20,24 @@ public class MvcConfig implements WebMvcConfigurer {
     /*视图解析器*/
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
+
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+
         //internalResourceViewResolver.setPrefix("/");
         //internalResourceViewResolver.setSuffix(".jsp");
+
         return internalResourceViewResolver;
     }
 
     /*处理器（即数据转换器）*/
     @Autowired
     ConfigurableConversionService conversionService;
+
     @PostConstruct
     public void addConverter(){
+
         //模板如下，自己添加的处理器放在后面即可
+
         conversionService.addConverter(new DateConverter());
         //添加的位置
 
@@ -45,7 +51,9 @@ public class MvcConfig implements WebMvcConfigurer {
     /*拦截器*/
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         //模板如下，自己添加的拦截器放在后面即可
+
         registry.addInterceptor(new TestInterceptor()).addPathPatterns("/test/auth/**");
         //添加的位置
 

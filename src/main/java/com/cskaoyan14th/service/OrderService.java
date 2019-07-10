@@ -3,6 +3,7 @@ package com.cskaoyan14th.service;
 import com.cskaoyan14th.bean.Order;
 import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.bean.OrderGoods;
+import com.cskaoyan14th.bean.WxOrder;
 import com.cskaoyan14th.vo.Page;
 
 import java.util.List;
@@ -23,7 +24,12 @@ public interface OrderService {
 
     Map<String, Object> wxQueryOrderListByUserId(int userId, int showType, int page, int size);
 
-    Order queryOrderById(int userId);
+    WxOrder queryWxOrderById(int userId);
 
     List<OrderGoods> queryOrderGoodsById(int orderId);
+
+    //order/submit
+    int insertOrderReturnId(Order order);
+
+    int insertGoodIntoOrderGoods(OrderGoods orderGoods);
 }

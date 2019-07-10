@@ -147,8 +147,8 @@ public class CartController {
         CartTotal cartTotal = CartTotal.calculate(checkedGoodsList);
         double goodsTotalPrice = cartTotal.getCheckedGoodsAmount();
 
-        //double couponPrice = couponService.getCouponPrice(couponId);
-        double couponPrice = 2;
+        double couponPrice = couponService.getCouponPrice(couponId);
+        /*double couponPrice = 2;*/
         //int availableCouponLength = couponService.getavailableCouponList(uid).size();
         int availableCouponLength = 5;
 

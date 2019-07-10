@@ -3,6 +3,7 @@ package com.cskaoyan14th.bean;
 import java.util.Date;
 
 public class User {
+
     private Integer id;
 
     private String username;

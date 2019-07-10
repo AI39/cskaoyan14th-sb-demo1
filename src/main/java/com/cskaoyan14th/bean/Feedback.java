@@ -1,9 +1,11 @@
 package com.cskaoyan14th.bean;
 
 import java.util.Arrays;
+
 import java.util.Date;
 
 public class Feedback {
+
     private Integer id;
 
     private Integer userId;
@@ -29,6 +31,7 @@ public class Feedback {
     private Boolean deleted;
 
     public Integer getId() {
+
         return id;
     }
 
@@ -126,8 +129,11 @@ public class Feedback {
 
     public Feedback(Integer id, Integer userId, String username, String mobile, String feedType, String content, Integer status, Boolean hasPicture, String[] picUrls, Date addTime, Date updateTime, Boolean deleted) {
         this.id = id;
+
         this.userId = userId;
+
         this.username = username;
+
         this.mobile = mobile;
         this.feedType = feedType;
         this.content = content;
@@ -144,6 +150,7 @@ public class Feedback {
 
     @Override
     public String toString() {
+
         return "Feedback{" +
                 "id=" + id +
                 ", userId=" + userId +

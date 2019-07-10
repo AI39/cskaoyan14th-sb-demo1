@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Comment {
+
     private Integer id;
 
     private Integer valueId;

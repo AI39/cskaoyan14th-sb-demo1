@@ -34,4 +34,5 @@ public interface CartService {
     List<Cart> getCartListByUidNotDeleted(int uid);
 
 
+    int setDeletedTrueById(Integer id);
 }

@@ -29,4 +29,9 @@ public class CouponServiceImpl implements CouponService {
 
         return couponMapper.selectAllCoupon();
     }
+
+    @Override
+    public Coupon getCouponById(Integer couponId) {
+        return couponMapper.selectByPrimaryKey(couponId);
+    }
 }

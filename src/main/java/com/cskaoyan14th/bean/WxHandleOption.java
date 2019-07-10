@@ -5,12 +5,19 @@ package com.cskaoyan14th.bean;
  * @version 2019-07-09-16:16
  */
 public class WxHandleOption {
+
     private boolean cancel;
+
     private boolean comment;
+
     private boolean confirm;
+
     private boolean delete;
+
     private boolean pay;
+
     private boolean rebuy;
+
     private boolean refund;
 
     public boolean isCancel() {

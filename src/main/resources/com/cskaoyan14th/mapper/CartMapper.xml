@@ -490,4 +490,11 @@
       deleted = 1
     </where>
   </delete>
+  <update id="setDeletedTrueById">
+    update cskaoyan_mall_cart
+    set deleted = 1
+    <where>
+      id = #{id}
+    </where>
+  </update>
 </mapper>

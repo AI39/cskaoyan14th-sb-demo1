@@ -83,8 +83,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order queryOrderById(int userId) {
-        return orderMapper.selectByPrimaryKey(userId);
+    public WxOrder queryWxOrderById(int orderId) {
+        WxOrder wxOrder = orderMapper.selectWxOrderById(orderId);
+        wxOrder.setOrderStatusText(OrderUtil.orderStatusText(wxOrder));
+        wxOrder.setHandleOption(OrderUtil.build(wxOrder));
+
+        return wxOrder;
     }
 
     @Override
@@ -95,5 +99,20 @@ public class OrderServiceImpl implements OrderService {
         List<OrderGoods> orderGoodsList = orderGoodsMapper.selectByExample(orderGoodsExample);
 
         return orderGoodsList;
+    }
+
+    @Override
+    public int insertOrderReturnId(Order order) {
+        int insert = orderMapper.insertOrderReturnId(order);
+        if (insert == 1){
+            return order.getId();
+        }else {
+            return -1;
+        }
+    }
+
+    @Override
+    public int insertGoodIntoOrderGoods(OrderGoods orderGoods) {
+        return orderGoodsMapper.insert(orderGoods);
     }
 }

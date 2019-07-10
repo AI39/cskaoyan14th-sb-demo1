@@ -3,6 +3,7 @@ package com.cskaoyan14th.bean;
 import java.util.Date;
 
 public class Ad {
+
     private Integer id;
 
     private String name;
@@ -125,6 +126,7 @@ public class Ad {
 
     @Override
     public String toString() {
+
         return "Ad{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

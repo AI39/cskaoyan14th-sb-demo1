@@ -20,13 +20,17 @@ import java.util.List;
 @Controller
 @RequestMapping("admin/storage")
 public class StorageController {
+
     @Autowired
     MyOssClient myOssClient;
+
     @Autowired
     StorageService storageService;
+
     @RequestMapping("create")
     @ResponseBody
     public ResponseVo<Storage> create(MultipartFile file) throws IOException {
+
         storageService.insertStorageAll(file);
         ResponseVo<Storage> responseVo = storageService.queryStorageAll(file);
         return responseVo;
@@ -35,6 +39,7 @@ public class StorageController {
     @RequestMapping("list")
     @ResponseBody
     public ResponseVo<Page<Storage>> list(int page, int limit, String name, String key){
+
         ResponseVo<Page<Storage>> listResponseVo = storageService.queryStorage(page,limit,name,key);
 
         return listResponseVo;
@@ -43,6 +48,7 @@ public class StorageController {
     @RequestMapping("update")
     @ResponseBody
     public ResponseVo<Storage> update(@RequestBody Storage storage){
+
         ResponseVo<Storage> storageResponseVo = storageService.updateStorage(storage);
         return storageResponseVo;
     }
@@ -50,6 +56,7 @@ public class StorageController {
     @RequestMapping("delete")
     @ResponseBody
     public ResponseVo<Storage> delete(@RequestBody Storage storage){
+
         ResponseVo<Storage> storageResponseVo = storageService.deleteStorage(storage);
         return storageResponseVo;
     }

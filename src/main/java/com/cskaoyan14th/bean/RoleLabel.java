@@ -1,6 +1,7 @@
 package com.cskaoyan14th.bean;
 
 public class RoleLabel {
+
     private Integer value;
 
     private String label;

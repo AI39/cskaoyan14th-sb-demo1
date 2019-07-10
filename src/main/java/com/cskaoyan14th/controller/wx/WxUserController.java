@@ -78,6 +78,27 @@ public class WxUserController {
         return new ResponseVo(-1, null, "错误");
     }
 
+    /*用户注册时获取验证码，这里好像直接屏蔽了*/
+    @RequestMapping("auth/regCaptcha")
+    @ResponseBody
+    public ResponseVo<Object> regCaptcha(@RequestBody Map<String, Object> requestMap) {
+        return new ResponseVo(701, null, "小程序后台验证码服务不支持");
+    }
+
+    /*用户注册，这里好像直接屏蔽了*/
+    @RequestMapping("auth/register")
+    @ResponseBody
+    public ResponseVo<Object> register(@RequestBody Map<String, Object> requestMap) {
+        return new ResponseVo(703, null, "验证码错误");
+    }
+
+    /*密码重置，这里好像直接屏蔽了*/
+    @RequestMapping("auth/reset")
+    @ResponseBody
+    public ResponseVo<Object> reset(@RequestBody Map<String, Object> requestMap) {
+        return new ResponseVo(703, null, "验证码错误");
+    }
+
     /*显示个人页面相关信息*/
     @RequestMapping("user/index")
     public ResponseVo<Map<String, Map<String, Object>>> index(HttpServletRequest request) {

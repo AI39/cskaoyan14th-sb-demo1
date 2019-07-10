@@ -3,6 +3,7 @@ package com.cskaoyan14th.bean;
 import java.util.Date;
 
 public class Formid {
+
     private Integer id;
 
     private String formid;
