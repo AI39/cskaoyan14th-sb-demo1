@@ -632,4 +632,57 @@
     o.id = #{id}
 
   </select>
+
+
+    <!--微信中的sql语句实现-->
+    <select id="queryWxOrderListCount" resultType="java.lang.Long">
+        select count(*) from cskaoyan_mall_order
+        where
+        deleted = 0
+    </select>
+
+  <resultMap id="WxOrderMap" type="com.cskaoyan14th.bean.WxOrder">
+
+  </resultMap>
+  <select id="queryDataByPage" resultMap="WxOrderMap">
+
+  </select>
+
+
+  <resultMap id="WxOrderMapper" type="com.cskaoyan14th.bean.WxOrder">
+    <result column="o_id" property="id"/>
+    <result column="o_actual_price" property="actualPrice"/>
+    <result column="o_order_sn" property="orderSn"/>
+    <result column="o_order_status" property="orderStatus"/>
+    <result column="gr_groupon_id" property="isGroupin"/>
+    <collection property="goodsList" ofType="com.cskaoyan14th.bean.OrderGoods">
+      <result column="og_goods_id" property="id"/>
+      <result column="og_goods_name" property="goodsName"/>
+      <result column="og_number" property="number"/>
+      <result column="og_pic_url" property="picUrl"/>
+    </collection>
+
+  </resultMap>
+  <select id="wxQueryOrderListByUserId" resultMap="WxOrderMapper">
+    select o.id as o_id, o.actual_price as o_actual_price, o.order_sn as o_order_sn, o.order_status as o_order_status, gr.groupon_id as gr_groupon_id, og.goods_name as og_goods_name, og.pic_url as og_pic_url, og.goods_id as og_goods_id, og.number as og_number
+    from cskaoyan_mall_order as o
+    left join cskaoyan_mall_groupon as gr on o.id = gr.order_id
+    left join cskaoyan_mall_order_goods as og on o.id = og.order_id
+    <where>
+      o.user_id = #{userId}
+      <if test="showType == 1">
+        and order_status = 101
+      </if>
+      <if test="showType == 2">
+        and order_status = 201
+      </if>
+      <if test="showType == 3">
+        and order_status = 301
+      </if>
+      <if test="showType == 4">
+        and order_status = 401
+      </if>
+    </where>
+  </select>
+
 </mapper>

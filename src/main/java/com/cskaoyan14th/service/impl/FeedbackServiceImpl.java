@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -35,5 +36,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         return feedbackList;
     }
 
+    @Override
+    public int insertSelective(Feedback record) {
+        int i = feedbackMapper.insertSelective(record);
+        return i;
+    }
 
 }

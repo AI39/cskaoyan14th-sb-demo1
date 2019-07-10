@@ -1,5 +1,6 @@
 package com.cskaoyan14th.service.impl;
 
+import com.cskaoyan14th.bean.Brand;
 import com.cskaoyan14th.bean.Footprint;
 import com.cskaoyan14th.bean.User;
 import com.cskaoyan14th.mapper.FootprintMapper;
@@ -32,5 +33,21 @@ public class FootprintServiceImpl implements FootprintService {
         PageInfo<Footprint> pageInfo = new PageInfo<>(footprints);
         Page<Footprint> footprintList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
         return footprintList;
+    }
+
+    @Override
+    public List<Footprint> queryFootprintList(Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<Footprint> footprintList =  footprintMapper.selectFootprintList();
+        PageInfo<Footprint> pageInfo = new PageInfo<>(footprintList);
+        return pageInfo.getList();
+    }
+
+    @Override
+    public int queryFootprintTotalPages(Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<Footprint> footprintList =  footprintMapper.selectFootprintList();
+        PageInfo<Footprint> pageInfo = new PageInfo<>(footprintList);
+        return pageInfo.getPages();
     }
 }

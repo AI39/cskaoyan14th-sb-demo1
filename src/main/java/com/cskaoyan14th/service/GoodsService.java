@@ -51,4 +51,6 @@ public interface GoodsService {
 
     int insertSearchHistory(Integer userId, String keyword);
 
+    int insertFootprintByUserIdAndGoodsId(Integer userId, int goodId);
+
 }
