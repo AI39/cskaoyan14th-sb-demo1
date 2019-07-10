@@ -17,8 +17,10 @@ public class RegionServiceImpl implements RegionService {
 
     @Autowired
     RegionMapper regionMapper;
+
     @Override
     public List<Region> queryRegionList() {
+
         List<Region> regionList = regionMapper.queryRegionList();
         return regionList;
     }
