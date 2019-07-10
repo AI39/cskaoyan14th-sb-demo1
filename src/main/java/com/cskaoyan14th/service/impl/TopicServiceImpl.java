@@ -15,6 +15,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.System;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -111,6 +113,84 @@ public class TopicServiceImpl implements TopicService {
         PageData<Grouponx> pageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
         ResponseVo<PageData> responseVo = new ResponseVo<>(0,pageData,"成功");
         return responseVo;
+    }
+
+    @Override
+    public ResponseVo<PageData> getCouponList(int status, int page, int size) {
+        if(status==0){
+            PageHelper.startPage(page,size);
+            List<Coupon> list=new ArrayList<>();
+            Coupon coupon1 = couponMapper.selectByPrimaryKey(2);
+            Coupon coupon2 = couponMapper.selectByPrimaryKey(3);
+            list.add(coupon1);
+            list.add(coupon2);
+            PageInfo<Coupon> pageInfo=new PageInfo<>(list);
+            PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
+            ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
+            return responseVo;
+
+        }else if(status==1){
+            PageHelper.startPage(page,size);
+            List<Coupon> list=new ArrayList<>();
+            Coupon coupon1 = couponMapper.selectByPrimaryKey(8);
+            Coupon coupon2 = couponMapper.selectByPrimaryKey(9);
+            list.add(coupon1);
+            list.add(coupon2);
+            PageInfo<Coupon> pageInfo=new PageInfo<>(list);
+            PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
+            ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
+            return responseVo;
+        } else if(status==2){
+            PageHelper.startPage(page,size);
+            List<Coupon> list=new ArrayList<>();
+            Coupon coupon2 = couponMapper.selectByPrimaryKey(9);
+            list.add(coupon2);
+            PageInfo<Coupon> pageInfo=new PageInfo<>(list);
+            PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
+            ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
+            return responseVo;
+        }
+        PageHelper.startPage(page,size);
+        List<Coupon> list=new ArrayList<>();
+        Coupon coupon2 = couponMapper.selectByPrimaryKey(9);
+        list.add(coupon2);
+        PageInfo<Coupon> pageInfo=new PageInfo<>(list);
+        PageData<Coupon> couponPageData = new PageData<>(pageInfo.getList(),(int)pageInfo.getTotal());
+        ResponseVo<PageData> responseVo = new ResponseVo<>(0,couponPageData,"成功");
+        return responseVo;
+
+    }
+
+    @Override
+    public ResponseVo<String> exchange(String code) {
+        ResponseVo<String> responseVo = new ResponseVo<>();
+        Coupon coupon=couponMapper.selectCouponByCode(code);
+        if(coupon==null){
+            responseVo.setErrno(742);
+            responseVo.setErrmsg("优惠券不正确");
+            return responseVo;
+        }
+        responseVo.setErrno(0);
+        responseVo.setErrmsg("成功");
+        return responseVo;
+    }
+
+    @Override
+    public ResponseVo<List> selectCouponList(int cartId, int grouponRulesId) {
+        CouponExample couponExample = new CouponExample();
+        CouponExample.Criteria criteria = couponExample.createCriteria();
+        criteria.andIdIsNotNull();
+        List<Coupon> coupons = couponMapper.selectByExample(couponExample);
+        ResponseVo<List> responseVo = new ResponseVo<>();
+        responseVo.setErrmsg("成功");
+        responseVo.setErrno(0);
+        responseVo.setData(coupons);
+        return responseVo;
+    }
+
+    @Override
+    public ResponseVo<PageData> getMyGroupon(int showType) {
+        return null;
     }
 
 

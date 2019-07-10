@@ -7,7 +7,9 @@ import com.cskaoyan14th.mapper.AddressMapper;
 import com.cskaoyan14th.mapper.UserMapper;
 import com.cskaoyan14th.service.AddressService;
 import com.cskaoyan14th.service.UserService;
+import com.cskaoyan14th.vo.MD5;
 import com.cskaoyan14th.vo.Page;
+import org.aspectj.weaver.ast.Var;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,6 +44,12 @@ public class TestAddressMapper extends Cskaoyan14thSbDemo1ApplicationTests {
     public void test4(){
         Page<Address> pageList = addressService.getPageList(1, 10, "先生", "", "add_time", "desc");
         System.out.println(pageList);
+    }
+
+    @Test
+    public void Md5(){
+        String md5 = MD5.getMd5("admin123", "admin123");
+        System.out.println(md5);
     }
 
 }

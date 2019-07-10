@@ -48,4 +48,14 @@ public class AddressServiceImpl implements AddressService {
     public int deleteAddressById(String id) {
         return addressMapper.deleteByPrimaryKey(Integer.valueOf(id));
     }
+
+    @Override
+    public Address getDefaultAddress(Integer uid) {
+        return addressMapper.getDefaultAddress(uid);
+    }
+
+    @Override
+    public Address getCheckedAddress(int addressId) {
+        return addressMapper.selectByPrimaryKey(addressId);
+    }
 }

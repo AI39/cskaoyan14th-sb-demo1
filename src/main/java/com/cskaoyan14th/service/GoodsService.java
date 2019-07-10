@@ -6,7 +6,9 @@ import com.cskaoyan14th.wrapper.FloorGoods;
 import com.cskaoyan14th.wrapper.GoodsDetail;
 import com.cskaoyan14th.wrapper.GoodsParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsService {
 
@@ -26,17 +28,27 @@ public interface GoodsService {
 
     Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order);
 
-    List<Goods> getNewGoodsList();
+    List<Goods> getNewGoodsList(int newGoodsCount);
 
-    List<FloorGoods> getFloorGoodsList();
+    List<FloorGoods> getFloorGoodsList(int catlogCount, int catlogGoodsCount);
 
-    List<Goods> getHotGoodsList();
+    List<Goods> getHotGoodsList(int hotGoodsCount);
 
     int getGoodsCount();
 
-    List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, int categoryId);
+    List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId);
 
     GoodsDetail getGoodsDetailByGoodsId(int id);
 
     List<Goods> getRelatedGoods(int id);
+
+
+    Map<String, Object> getCurrentBrotherParentGatogory(int id);
+
+    //在cart/add中使用
+    Goods getGoodByGoodsId(Integer goodsId);
+    GoodsProduct getProductByProductId(Integer productId);
+
+    int insertSearchHistory(Integer userId, String keyword);
+
 }

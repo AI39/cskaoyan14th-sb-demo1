@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.GrouponRules;
 import com.cskaoyan14th.bean.GrouponRulesExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GrouponRulesMapper {
     long countByExample(GrouponRulesExample example);
 

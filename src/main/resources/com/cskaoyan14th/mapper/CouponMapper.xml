@@ -505,4 +505,8 @@
     where type like #{type} and `status`=#{status}
   </select>
 
+  <select id="selectCouponByCode" resultMap="BaseResultMap">
+    select * from cskaoyan_mall_coupon where code=#{code}
+  </select>
+
 </mapper>

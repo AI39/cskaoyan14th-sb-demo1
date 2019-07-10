@@ -4,7 +4,9 @@ import com.cskaoyan14th.bean.Coupon;
 import com.cskaoyan14th.bean.CouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CouponMapper {
     long countByExample(CouponExample example);
 
@@ -44,4 +46,5 @@ public interface CouponMapper {
 
     List<Coupon> selectCouponByTypeAndStatus(@Param("type") short type,@Param("status")short status);
 
+    Coupon selectCouponByCode(@Param("code") String code);
 }
