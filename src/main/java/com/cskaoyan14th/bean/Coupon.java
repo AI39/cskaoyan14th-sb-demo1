@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Coupon {
+
     private Integer id;
 
     private String name;

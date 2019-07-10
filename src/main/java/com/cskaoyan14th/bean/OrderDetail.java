@@ -8,8 +8,11 @@ import java.util.List;
  * @version 2019-07-05-20:48
  */
 public class OrderDetail {
+
     private Order order;
+
     private List<OrderGoods> orderGoods = new ArrayList<>();
+
     private User user;
 
     public OrderDetail() {

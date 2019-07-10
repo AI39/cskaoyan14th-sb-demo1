@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class GrouponRules {
+
     private Integer id;
 
     private Integer goodsId;
@@ -23,6 +24,7 @@ public class GrouponRules {
     private Date updateTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     private Date expireTime;
 
     private Boolean deleted;

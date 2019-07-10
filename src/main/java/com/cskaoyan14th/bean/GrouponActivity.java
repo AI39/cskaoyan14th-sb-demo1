@@ -3,9 +3,13 @@ package com.cskaoyan14th.bean;
 import java.util.Arrays;
 
 public class GrouponActivity {
+
     Groupon groupon;
+
     Goods goods;
+
     GrouponRules rules;
+
     String[] subGroupons;
 
     public Groupon getGroupon() {

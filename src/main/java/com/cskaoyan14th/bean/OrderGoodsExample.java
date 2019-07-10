@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderGoodsExample {
+
     protected String orderByClause;
 
     protected boolean distinct;

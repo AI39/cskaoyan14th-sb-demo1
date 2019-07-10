@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AddressExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -40,12 +41,14 @@ public class AddressExample {
     }
 
     public Criteria or() {
+
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
@@ -65,6 +68,7 @@ public class AddressExample {
     }
 
     protected abstract static class GeneratedCriteria {
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -92,6 +96,7 @@ public class AddressExample {
         }
 
         protected void addCriterion(String condition, Object value, String property) {
+
             if (value == null) {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
@@ -99,6 +104,7 @@ public class AddressExample {
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
+
             if (value1 == null || value2 == null) {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
@@ -111,6 +117,7 @@ public class AddressExample {
         }
 
         public Criteria andIdIsNotNull() {
+
             addCriterion("id is not null");
             return (Criteria) this;
         }
@@ -191,6 +198,7 @@ public class AddressExample {
         }
 
         public Criteria andNameGreaterThanOrEqualTo(String value) {
+
             addCriterion("name >=", value, "name");
             return (Criteria) this;
         }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class GoodsSpecification {
+
     private Integer id;
 
     private Integer goodsId;
@@ -16,9 +17,11 @@ public class GoodsSpecification {
     private String picUrl;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+
     private Date addTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+
     private Date updateTime;
 
     private Boolean deleted;
