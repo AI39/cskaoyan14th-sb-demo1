@@ -14,4 +14,7 @@ public interface CommentService {
     int getAllCount(int valueId, int type);
 
     CommentList getWxCommentList(int valueId, int type, int page, int size, int showType);
+
+    Integer insertComment(Comment comment);
+
 }

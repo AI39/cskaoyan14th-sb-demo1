@@ -13,4 +13,6 @@ public interface SearchService {
     List<Map<String, String>> getHistoryKeywordList(Integer userId);
 
     int clearHistoryByUserId(Integer userId);
+
+    List<String> getFussyKeyword(String keyword);
 }
