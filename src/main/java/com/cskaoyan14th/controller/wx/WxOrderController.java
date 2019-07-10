@@ -1,10 +1,10 @@
 package com.cskaoyan14th.controller.wx;
 
-import com.cskaoyan14th.bean.Order;
 import com.cskaoyan14th.service.OrderService;
 import com.cskaoyan14th.util.UserTokenManager;
 import com.cskaoyan14th.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,11 +70,8 @@ public class WxOrderController {
 
     @RequestMapping("prepay")
     @ResponseBody
-    public ResponseVo<Order> prepay(int OrderId){
-        ResponseVo<Order> responseVo = new ResponseVo<>();
-        responseVo.setErrno(724);
-        responseVo.setErrmsg("订单不能支付");
-        return responseVo;
+    public ResponseVo<Object> prepay(@RequestBody Map<String, Object> requestMap){
+        return new ResponseVo<>(0,  null, "成功");
     }
 
 
