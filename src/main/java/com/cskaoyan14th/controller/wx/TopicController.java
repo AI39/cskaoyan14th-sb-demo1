@@ -38,6 +38,7 @@ public class TopicController {
     @RequestMapping("topic/detail")
     @ResponseBody
     public ResponseVo<TopicDetail> getTopicDetail(int id){
+
         ResponseVo<TopicDetail> responseVo= topicService.getTopicDetail(id);
         return responseVo;
     }
@@ -45,6 +46,7 @@ public class TopicController {
     @RequestMapping("topic/related")
     @ResponseBody
     public ResponseVo<List> getRelatedTopic(int id){
+
         ResponseVo<List> responseVo=topicService.getRelatedTopic(id);
         return responseVo;
     }
@@ -53,18 +55,21 @@ public class TopicController {
     @RequestMapping("coupon/receive")
     @ResponseBody
     public ResponseVo<String> receiveCoupon(HttpServletRequest request,@RequestBody Map<String,Integer> map){
+
         //获取userId
         String token = request.getHeader("X-Litemall-Token");
         Integer userId= UserTokenManager.getUserId(token);
 
         Integer couponId=map.get("couponId");
         ResponseVo<String> responseVo=topicService.receiveCoupon(userId,couponId);
+
         return responseVo;
     }
 
     @RequestMapping("coupon/list")
     @ResponseBody
     public ResponseVo<PageData> getCouponListAll(int page,int size){
+
         ResponseVo<PageData> responseVo=topicService.getCouponListAll(page,size);
         return responseVo;
     }
@@ -72,6 +77,7 @@ public class TopicController {
     @RequestMapping("groupon/list")
     @ResponseBody
     public ResponseVo<PageData> getGrouponxListAll(int page,int size){
+
         ResponseVo<PageData> responseVo=topicService.getGrouponxListAll(page,size);
         return responseVo;
     }
@@ -79,6 +85,7 @@ public class TopicController {
     @RequestMapping("coupon/mylist")
     @ResponseBody
     public ResponseVo<PageData> getCouponList(HttpServletRequest request,short status,int page,int size){
+
         //获取userId
         String token = request.getHeader("X-Litemall-Token");
         Integer userId= UserTokenManager.getUserId(token);
@@ -89,6 +96,7 @@ public class TopicController {
     @RequestMapping("coupon/exchange")
     @ResponseBody
     public ResponseVo<String> exchange(@RequestBody Map<String,String> map){
+
         String code = map.get("code");
         ResponseVo<String> responseVo=topicService.exchange(code);
         return responseVo;
@@ -100,6 +108,7 @@ public class TopicController {
     @RequestMapping("coupon/selectlist")
     @ResponseBody
     public ResponseVo<List> selectCouponList(int cartId, int grouponRulesId){
+
         ResponseVo<List> responseVo=topicService.selectCouponList(cartId,grouponRulesId);
         return responseVo;
     }
@@ -107,17 +116,20 @@ public class TopicController {
     @RequestMapping("groupon/my")
     @ResponseBody
     public ResponseVo<PageData> getMyGroupon(HttpServletRequest request,int showType){
+
         //获取userId
         String token = request.getHeader("X-Litemall-Token");
         Integer userId= UserTokenManager.getUserId(token);
 
         ResponseVo<PageData> responseVo=topicService.getMyGroupon(userId,showType);
+
         return responseVo;
     }
 
     @RequestMapping("groupon/detail")
     @ResponseBody
     public ResponseVo<GrouponDetail> getGrouponDetail(int grouponId){
+
         ResponseVo<GrouponDetail> responseVo=topicService.getGrouponDetail(grouponId);
         return responseVo;
     }

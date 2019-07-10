@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FootprintMapper {
+
     long countByExample(FootprintExample example);
 
     int deleteByExample(FootprintExample example);

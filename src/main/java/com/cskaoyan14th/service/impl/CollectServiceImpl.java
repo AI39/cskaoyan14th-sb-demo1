@@ -18,29 +18,39 @@ import java.util.Map;
 
 @Service
 public class CollectServiceImpl implements CollectService {
+
     @Autowired
     CollectMapper collectMapper;
 
     @Override
     public Page<Collect> getPageList(int page, int limit, String sort, String order) {
+
         PageHelper.startPage(page,limit);
+
         List<Collect> collects = collectMapper.selectCollectListOrder(sort, order);
+
         PageInfo<Collect> pageInfo = new PageInfo<>(collects);
         Page<Collect> collectList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         return collectList;
     }
 
     @Override
     public Page<Collect> getPageList(int page, int limit, String userId, String valueId, String sort, String order) {
+
         PageHelper.startPage(page,limit);
+
         List<Collect> collects = collectMapper.selectCollectListOrder(userId,valueId,sort, order);
+
         PageInfo<Collect> pageInfo = new PageInfo<>(collects);
         Page<Collect> collectList = new Page<>(pageInfo.getList(),(int)pageInfo.getTotal());
+
         return collectList;
     }
 
     @Override
     public Map<String, Object> getCollectDataList(int page, int size, int userId, int type) {
+
         PageHelper.startPage(page, size);
         List<CollectData> collects = collectMapper.selectCollectDataListByUserId(userId, type);
         PageInfo<CollectData> pageInfo = new PageInfo<>(collects);
@@ -54,6 +64,7 @@ public class CollectServiceImpl implements CollectService {
 
     @Override
     public String addordeleteCollect(int userId, int valueId) {
+
         String result = "";
 
         CollectExample collectExample = new CollectExample();
@@ -62,28 +73,37 @@ public class CollectServiceImpl implements CollectService {
 
         List<Collect> collectList = collectMapper.selectByExample(collectExample);
         Collect newCollect = new Collect();
+
         if (collectList == null || collectList.size() == 0) {
+
             newCollect.setUserId(userId);
             newCollect.setValueId(valueId);
             newCollect.setType((byte)0);
             newCollect.setAddTime(new Date());
             newCollect.setUpdateTime(new Date());
             newCollect.setDeleted(false);
+
             collectMapper.insertSelective(newCollect);
 
             result = "add";
         }
         else {
+
             Collect collect = collectList.get(0);
+
             if (collect.getType() == 0) {
+
                 collect.setType((byte) 1);
                 collect.setDeleted(true);
                 result = "delete";
+
             } else {
+
                 collect.setType((byte) 0);
                 collect.setDeleted(false);
                 result = "add";
             }
+
             collect.setUpdateTime(new Date());
             collectMapper.updateByPrimaryKeySelective(collect);
         }

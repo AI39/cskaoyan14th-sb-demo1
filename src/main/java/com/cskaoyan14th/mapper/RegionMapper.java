@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RegionMapper {
+
     long countByExample(RegionExample example);
 
     int deleteByExample(RegionExample example);

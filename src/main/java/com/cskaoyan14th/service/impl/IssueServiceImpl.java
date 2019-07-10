@@ -19,6 +19,7 @@ import java.util.List;
  */
 @Service
 public class IssueServiceImpl implements IssueService {
+
     @Autowired
     IssueMapper issueMapper;
 
@@ -30,8 +31,10 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public Page<Issue> queryIssueList(int page, int limit, String question, String sort, String order) {
+
         PageHelper.startPage(page,limit);
         List<Issue> issueList1 = issueMapper.queryIssueList(question, sort, order);
+
         PageInfo<Issue> pageInfo = new PageInfo<>(issueList1);
         Page<Issue> issueList = new Page<>(pageInfo.getList(), pageInfo.getTotal());
 
@@ -40,8 +43,10 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public Issue updateIssue(Issue issue) {
+
         issueMapper.updateByPrimaryKey(issue);                                                                      //先进行修改
         Issue issue1 = issueMapper.selectById(issue.getId());                                                       //再获取修改以后的issue
+
         return issue1;
     }
 
@@ -54,12 +59,14 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public Issue createIssue(Issue issue) {
         long l = System.currentTimeMillis();
+
         Date date = new Date(l);
 
         issue.setAddTime(date);
         issue.setUpdateTime(date);
         issueMapper.inserts(issue);
         Issue issue1 = issueMapper.selectByPrimaryKey(issue.getId());
+
         return issue1;
     }
 }

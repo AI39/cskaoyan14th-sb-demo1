@@ -6,10 +6,15 @@ import com.cskaoyan14th.bean.GoodsProduct;
 import com.cskaoyan14th.bean.GoodsSpecification;
 
 public class GoodsParam {
+
     int[] categoryIds;
+
     Goods goods;
+
     GoodsSpecification[] specifications;
+
     GoodsProduct[] products;
+
     GoodsAttribute[] attributes;
 
     public Goods getGoods() {

@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class StatServiceImpl implements StatService {
+
     @Autowired(required = false)
     StatMapper statMapper;
 

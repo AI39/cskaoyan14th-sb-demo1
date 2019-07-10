@@ -16,12 +16,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("wx/collect")
 public class WxCollectController {
+
     @Autowired
     CollectService collectService;
 
     @RequestMapping("list")
     @ResponseBody
     public ResponseVo<Map<String, Object>> list(Integer type, Integer page, Integer size, HttpServletRequest request) {
+
         //前端写了一个token放在请求头中
         //*************************
         //获得请求头
@@ -41,6 +43,7 @@ public class WxCollectController {
     @RequestMapping("addordelete")
     @ResponseBody
     public ResponseVo<Map<String, Object>> list(@RequestBody Map<String, Object> requestMap, HttpServletRequest request) {
+
         Integer type = (Integer)requestMap.get("type");
         Integer valueId = (Integer)requestMap.get("valueId");
 

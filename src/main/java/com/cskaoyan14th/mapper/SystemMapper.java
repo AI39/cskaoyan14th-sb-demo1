@@ -8,6 +8,7 @@ import com.cskaoyan14th.bean.SystemKeyValue;
 import org.apache.ibatis.annotations.Param;
 
 public interface SystemMapper {
+
     long countByExample(SystemExample example);
 
     int deleteByExample(SystemExample example);

@@ -24,31 +24,39 @@ public class CartController {
 
     //根据uid返回含有购物车列表cartList和信息cartTotal的Vo
     private ResponseVo<Map<String,Object>> getSuccessListVo(int uid){
+
         ResponseVo<Map<String,Object>> responseVo = new ResponseVo<>();
 
         //查找用户购物车，deleted=false，方便让fastadd已经存在购物车的商品不继续加入购物车
         List<Cart> cartList = cartService.getCartListByUidNotDeleted(uid);
 
         CartTotal cartTotal = CartTotal.calculate(cartList);
+
         Map<String,Object> objectMap = new HashMap<>();
+
         objectMap.put("cartList",cartList);
         objectMap.put("cartTotal",cartTotal);
+
         responseVo.setData(objectMap);
         responseVo.setErrno(0);
         responseVo.setErrmsg("成功");
+
         return responseVo;
     }
     @RequestMapping("index")
     @ResponseBody
     public ResponseVo<Map<String,Object>> index(HttpServletRequest request){
+
         String token = request.getHeader("X-Litemall-Token");
         Integer uid = UserTokenManager.getUserId(token);
+
         return getSuccessListVo(uid);
     }
 
     @RequestMapping("checked")
     @ResponseBody
     public ResponseVo<Map<String,Object>> checked(@RequestBody Map<String,Object> map,HttpServletRequest request){
+
         //获取请求json对象的信息
         Integer isChecked = (Integer) map.get("isChecked");
         List<Integer> productIds = (List<Integer>) map.get("productIds");
@@ -60,6 +68,7 @@ public class CartController {
 
         if (update > 0){
             return getSuccessListVo(uid);
+
         }else {
             return new ResponseVo(-1,null,"服务器异常");
         }
@@ -68,6 +77,7 @@ public class CartController {
     @RequestMapping("update")
     @ResponseBody
     public ResponseVo update(@RequestBody Map<String,Object> map,HttpServletRequest request){
+
         Integer goodsId = (Integer) map.get("goodsId");
         Integer id = (Integer) map.get("id");
         Integer number = (Integer) map.get("number");
@@ -78,9 +88,13 @@ public class CartController {
         Integer uid = UserTokenManager.getUserId(token);
 
         int update = cartService.updateCartNumber(id,number);
+
         if (update > 0){
+
             return new ResponseVo(0,null,"成功");
+
         }else {
+
             return new ResponseVo(-1,null,"服务器异常");
         }
     }
@@ -88,6 +102,7 @@ public class CartController {
     @RequestMapping("delete")
     @ResponseBody
     public ResponseVo delete(@RequestBody Map<String,Object> map,HttpServletRequest request){
+
         List<Integer> productIds = (List<Integer>) map.get("productIds");
 
         //获取token
@@ -95,8 +110,11 @@ public class CartController {
         Integer uid = UserTokenManager.getUserId(token);
 
         int delete = cartService.deleteCartItemByPids(uid,productIds);
+
         if (delete > 0){
+
             return getSuccessListVo(uid);
+
         }else {
             return new ResponseVo(-1,null,"服务器异常");
         }
@@ -105,8 +123,10 @@ public class CartController {
 
     @Autowired
     CouponService couponService;
+
     @Autowired
     GrouponRulesService grouponRulesService;
+
     @Autowired
     AddressService addressService;
 
@@ -147,8 +167,8 @@ public class CartController {
         CartTotal cartTotal = CartTotal.calculate(checkedGoodsList);
         double goodsTotalPrice = cartTotal.getCheckedGoodsAmount();
 
-        //double couponPrice = couponService.getCouponPrice(couponId);
-        double couponPrice = 2;
+        double couponPrice = couponService.getCouponPrice(couponId);
+        /*double couponPrice = 2;*/
         //int availableCouponLength = couponService.getavailableCouponList(uid).size();
         int availableCouponLength = 5;
 
@@ -176,6 +196,7 @@ public class CartController {
         responseVo.setData(checkOutOrder);
         responseVo.setErrmsg("成功");
         responseVo.setErrno(0);
+
         return responseVo;
 
     }
@@ -183,14 +204,18 @@ public class CartController {
     @RequestMapping("goodscount")
     @ResponseBody
     public ResponseVo goodsCount(HttpServletRequest request){
+
         String token = request.getHeader("X-Litemall-Token");
         Integer uid = UserTokenManager.getUserId(token);
 
         ResponseVo responseVo = new ResponseVo();
         responseVo.setErrno(0);
         responseVo.setErrmsg("成功");
+
         int count = cartService.getGoodsCount(uid);
+
         responseVo.setData(count);
+
         return responseVo;
     }
 
@@ -201,6 +226,7 @@ public class CartController {
     @RequestMapping("add")
     @ResponseBody
     public ResponseVo add(@RequestBody Map<String,Object> map,HttpServletRequest request){
+
         Integer goodsId = (Integer) map.get("goodsId");
         Integer number = (Integer) map.get("number");
         Integer productId = (Integer) map.get("productId");
@@ -316,6 +342,7 @@ public class CartController {
             responseVo.setErrno(-1);
         }
         responseVo.setData(id);
+
         return responseVo;
     }
 }

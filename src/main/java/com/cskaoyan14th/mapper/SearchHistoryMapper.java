@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SearchHistoryMapper {
+
     long countByExample(SearchHistoryExample example);
 
     int deleteByExample(SearchHistoryExample example);

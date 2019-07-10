@@ -3,6 +3,7 @@ package com.cskaoyan14th.vo;
 import java.util.List;
 
 public class Page<T> {
+
     List<T> items;
     long total;
 
@@ -10,6 +11,7 @@ public class Page<T> {
     }
 
     public Page(List<T> items, long total) {
+
         this.items = items;
         this.total = total;
     }

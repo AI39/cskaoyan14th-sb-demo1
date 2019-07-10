@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface KeywordMapper {
+
     long countByExample(KeywordExample example);
 
     int deleteByExample(KeywordExample example);

@@ -43,6 +43,7 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public int updateSystemByOrder(String keyValue, String keyName) {
+
         return systemMapper.updateSystemByOrder(keyValue,keyName);
     }
 
@@ -53,6 +54,7 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public int updateSystemByWx(String keyValue, String keyName) {
+
         return systemMapper.updateSystemByWx(keyValue, keyName);
     }
 

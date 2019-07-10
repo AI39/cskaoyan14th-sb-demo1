@@ -19,11 +19,15 @@ public class SystemController {
     @GetMapping("admin/config/mall")
     @ResponseBody
     public ResponseVo<SystemKeyValue> mall() {
+
         SystemKeyValue systemKeyValue1 = new SystemKeyValue();
 
         systemKeyValue1.setCskaoyan_mall_mall_address(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_address"));
+
         systemKeyValue1.setCskaoyan_mall_mall_name(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_name"));
+
         systemKeyValue1.setCskaoyan_mall_mall_phone(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_phone"));
+
         systemKeyValue1.setCskaoyan_mall_mall_qq(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_qq"));
 
         return new ResponseVo<SystemKeyValue>(0, systemKeyValue1, "成功");
@@ -34,16 +38,23 @@ public class SystemController {
     @PostMapping("admin/config/mall")
     @ResponseBody
     public ResponseVo<SystemKeyValue> mall(@RequestBody SystemKeyValue systemKeyValue) {
+
         SystemKeyValue systemKeyValue1 = new SystemKeyValue();
 
         systemMapper.updateSystemKeyValue(systemKeyValue.getCskaoyan_mall_mall_address(), "cskaoyan_mall_mall_address");
+
         systemMapper.updateSystemKeyValue(systemKeyValue.getCskaoyan_mall_mall_name(), "cskaoyan_mall_mall_name");
+
         systemMapper.updateSystemKeyValue(systemKeyValue.getCskaoyan_mall_mall_phone(), "cskaoyan_mall_mall_phone");
+
         systemMapper.updateSystemKeyValue(systemKeyValue.getCskaoyan_mall_mall_qq(), "cskaoyan_mall_mall_qq");
 
         systemKeyValue1.setCskaoyan_mall_mall_address(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_address"));
+
         systemKeyValue1.setCskaoyan_mall_mall_name(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_name"));
+
         systemKeyValue1.setCskaoyan_mall_mall_phone(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_phone"));
+
         systemKeyValue1.setCskaoyan_mall_mall_qq(systemMapper.querySystemByKeyValue("cskaoyan_mall_mall_qq"));
 
         return new ResponseVo<SystemKeyValue>(0, systemKeyValue1, "成功");
@@ -54,6 +65,7 @@ public class SystemController {
     @GetMapping("admin/config/express")
     @ResponseBody
     public ResponseVo<SystemFrightMin> mall1() {
+
         SystemFrightMin systemFrightMin1 = new SystemFrightMin();
 
         systemFrightMin1.setCskaoyan_mall_express_freight_min(systemMapper.querySystemByFrightMin("cskaoyan_mall_express_freight_min"));
@@ -67,6 +79,7 @@ public class SystemController {
     @PostMapping("admin/config/express")
     @ResponseBody
     public ResponseVo<SystemFrightMin> mall(@RequestBody SystemFrightMin systemFrightMin) {
+
         SystemFrightMin systemFrightMin1 = new SystemFrightMin();
 
         systemMapper.updateSystemByFrightMin(systemFrightMin.getCskaoyan_mall_express_freight_min(), "cskaoyan_mall_express_freight_min");
@@ -84,11 +97,14 @@ public class SystemController {
     @GetMapping("admin/config/order")
     @ResponseBody
     public ResponseVo<SystemOrderComment> mall2() {
+
         SystemOrderComment systemOrderComment1 = new SystemOrderComment();
 
         systemOrderComment1.setCskaoyan_mall_order_comment(systemMapper.querySystemByOrder("cskaoyan_mall_order_comment"));
         systemOrderComment1.setCskaoyan_mall_order_unpaid(systemMapper.querySystemByOrder("cskaoyan_mall_order_unpaid"));
+
         systemOrderComment1.setCskaoyan_mall_order_unconfirm(systemMapper.querySystemByOrder("cskaoyan_mall_order_unconfirm"));
+
         return new ResponseVo<SystemOrderComment>(0, systemOrderComment1, "成功");
     }
 
@@ -96,6 +112,7 @@ public class SystemController {
     @PostMapping("admin/config/order")
     @ResponseBody
     public ResponseVo<SystemOrderComment> mall(@RequestBody SystemOrderComment systemOrderComment) {
+
         SystemOrderComment systemOrderComment1 = new SystemOrderComment();
 
         systemMapper.updateSystemByOrder(systemOrderComment.getCskaoyan_mall_order_comment(), "cskaoyan_mall_order_comment");
@@ -113,6 +130,7 @@ public class SystemController {
     @GetMapping("admin/config/wx")
     @ResponseBody
     public ResponseVo<SystemWx> mall3() {
+
         SystemWx systemWx1 = new SystemWx();
 
         systemWx1.setCskaoyan_mall_wx_share(systemMapper.querySystemByWx("cskaoyan_mall_wx_share"));
@@ -122,6 +140,7 @@ public class SystemController {
         systemWx1.setCskaoyan_mall_wx_index_hot(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_hot"));
         systemWx1.setCskaoyan_mall_wx_index_topic(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_topic"));
         systemWx1.setCskaoyan_mall_wx_index_new(systemMapper.querySystemByWx("cskaoyan_mall_wx_index_new"));
+
        return new ResponseVo<SystemWx>(0, systemWx1, "成功");
     }
 
@@ -129,6 +148,7 @@ public class SystemController {
     @PostMapping("admin/config/wx")
     @ResponseBody
     public ResponseVo<SystemWx> mall(@RequestBody SystemWx systemWx) {
+
         SystemWx systemWx1 = new SystemWx();
 
         systemMapper.updateSystemByWx(systemWx.getCskaoyan_mall_wx_share(),"cskaoyan_mall_wx_share");

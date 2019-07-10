@@ -4,7 +4,9 @@ package com.cskaoyan14th.wrapper;
 import java.sql.Date;
 
 public class UserStat {
+
     private Date day;
+
     private int users;
 
     public UserStat() {

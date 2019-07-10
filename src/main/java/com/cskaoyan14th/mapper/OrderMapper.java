@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 public interface OrderMapper {
+
     long countByExample(OrderExample example);
 
     int deleteByExample(OrderExample example);

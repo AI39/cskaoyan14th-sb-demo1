@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface CollectMapper {
+
     long countByExample(CollectExample example);
 
     int deleteByExample(CollectExample example);

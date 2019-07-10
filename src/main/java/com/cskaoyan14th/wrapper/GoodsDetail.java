@@ -7,15 +7,25 @@ import java.util.List;
 import java.util.Map;
 
 public class GoodsDetail {
+
     private List<Map<String, Object>> specificationList = new ArrayList<>();
+
     private List<GrouponRules> groupon;
+
     private List<Issue> issue;
+
     private int userHasCollect;
+
     private String shareImage;
+
     private Map<String, Object> comment;
+
     private List<GoodsAttribute> attribute;
+
     private Brand brand;
+
     private List<GoodsProduct> productList;
+
     private Goods info;
 
     public List<Map<String, Object>> getSpecificationList() {

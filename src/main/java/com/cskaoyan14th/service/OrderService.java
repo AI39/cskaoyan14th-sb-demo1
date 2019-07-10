@@ -36,4 +36,7 @@ public interface OrderService {
     //order/submit
     int insertOrderReturnId(Order order);
 
+
+    int insertGoodIntoOrderGoods(OrderGoods orderGoods);
+
 }
