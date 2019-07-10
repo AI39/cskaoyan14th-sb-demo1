@@ -83,8 +83,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order queryOrderById(int userId) {
-        return orderMapper.selectByPrimaryKey(userId);
+    public WxOrder queryWxOrderById(int orderId) {
+        WxOrder wxOrder = orderMapper.selectWxOrderById(orderId);
+        wxOrder.setOrderStatusText(OrderUtil.orderStatusText(wxOrder));
+        wxOrder.setHandleOption(OrderUtil.build(wxOrder));
+
+        return wxOrder;
     }
 
     @Override

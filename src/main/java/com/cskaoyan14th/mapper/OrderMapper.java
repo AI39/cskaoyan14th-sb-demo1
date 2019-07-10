@@ -3,10 +3,10 @@ package com.cskaoyan14th.mapper;
 import com.cskaoyan14th.bean.Order;
 import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.bean.OrderExample;
-import java.util.List;
-
 import com.cskaoyan14th.bean.WxOrder;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrderMapper {
     long countByExample(OrderExample example);
@@ -40,4 +40,6 @@ public interface OrderMapper {
     List<WxOrder> queryDataByPage();
 
     List<WxOrder> wxQueryOrderListByUserId(@Param("userId") int userId, @Param("showType") int showType);
+
+    WxOrder selectWxOrderById(@Param("id") int orderId);
 }

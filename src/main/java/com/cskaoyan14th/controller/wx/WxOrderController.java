@@ -3,15 +3,13 @@ package com.cskaoyan14th.controller.wx;
 import com.cskaoyan14th.bean.Order;
 import com.cskaoyan14th.service.OrderService;
 import com.cskaoyan14th.util.UserTokenManager;
-import com.cskaoyan14th.vo.ResponseMapVo;
 import com.cskaoyan14th.vo.ResponseVo;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,7 +62,7 @@ public class WxOrderController {
     public ResponseVo<Map<String, Object>> detail(Integer orderId) {
         Map<String, Object> map = new HashMap<>();
 
-        map.put("orderInfo", orderService.queryOrderById(orderId));
+        map.put("orderInfo", orderService.queryWxOrderById(orderId));
         map.put("orderGoods", orderService.queryOrderGoodsById(orderId));
         System.out.println(map);
         return new ResponseVo<>(0,  map, "成功");
