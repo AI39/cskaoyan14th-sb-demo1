@@ -18,11 +18,13 @@ import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+
     @Autowired
     AdminMapper adminMapper;
 
     @Override
     public ResponseVo queryAdminAll(int page, int limit, String username) {
+
         ResponseVo<Page<Admin>> adminResponseVo = new ResponseVo<>();
 
         PageHelper.startPage(page,limit);
@@ -44,22 +46,29 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int insertAdmin(Admin admin) {
+
         Date date = DateCurrentTime.dateCurrentTime();
         System.out.println(date);
         admin.setAddTime(date);
         admin.setUpdateTime(date);
+
         String md5 = MD5.getMd5(admin.getUsername(), admin.getPassword());
         admin.setPassword(md5);
+
         int i = adminMapper.insertAdmin(admin);
+
         return i;
     }
 
     @Override
     public ResponseVo<Admin> queryAdminByUsername(Admin username) {
+
         ResponseVo<Admin> adminResponseVo = new ResponseVo<>();
 
         Admin admin = adminMapper.queryAdminByUsername(username);
+
         if(admin != null){
+
             adminResponseVo.setErrno(0);
             adminResponseVo.setErrmsg("成功");
             adminResponseVo.setData(admin);
@@ -69,18 +78,24 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int updateAdmin(Admin admin) {
+
         String md5 = MD5.getMd5(admin.getUsername(), admin.getPassword());
         admin.setPassword(md5);
+
         int i = adminMapper.updatetAdmin(admin);
+
         return i;
     }
 
     @Override
     public ResponseVo<Admin> queryAdminById(Admin id) {
+
         ResponseVo<Admin> adminResponseVo = new ResponseVo<>();
 
         Admin admin = adminMapper.queryAdminById(id);
+
         if(admin != null){
+
             adminResponseVo.setErrno(0);
             adminResponseVo.setErrmsg("成功");
             adminResponseVo.setData(admin);
@@ -90,10 +105,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public ResponseVo deleteAdmin(Admin admin) {
+
         ResponseVo<Admin> adminResponseVo = new ResponseVo<>();
 
         int i = adminMapper.deleteAdmin(admin);
+
         if(i > 0){
+
             adminResponseVo.setErrno(0);
             adminResponseVo.setErrmsg("成功");
         }
@@ -102,7 +120,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin queryPasswordByUsername(String username) {
+
         Admin admin = adminMapper.queryPasswordByUsername(username);
+
         return  admin;
     }
 

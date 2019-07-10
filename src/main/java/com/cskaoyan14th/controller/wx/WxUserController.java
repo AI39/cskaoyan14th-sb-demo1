@@ -16,6 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/wx")
 public class WxUserController {
+
     @Autowired
     UserService userService;
 
@@ -23,6 +24,7 @@ public class WxUserController {
     @RequestMapping("/auth/login")
     @ResponseBody
     public ResponseVo<Map<String, Object>> login(@RequestBody User user) {
+
         //*******************************
         //根据username和password查询user信息
         User activeUser = userService.getUser(user.getUsername(), user.getPassword());
@@ -56,6 +58,7 @@ public class WxUserController {
     @RequestMapping("auth/logout")
     @ResponseBody
     public ResponseVo<Object> logout(HttpServletRequest request) {
+
         //前端写了一个token放在请求头中
         //*************************
         //获得请求头
@@ -63,11 +66,13 @@ public class WxUserController {
         Integer userId = UserTokenManager.getUserId(tokenKey);
         //通过请求头获得userId，进而可以获得一切关于user的信息
         //**************************
+
         if (userId == null) {
             return new ResponseVo(-1, null, "错误");
         }
         //删除与本地维护用户token相关的数据
         UserTokenManager.removeToken(userId);
+
         return new ResponseVo(0, null, "成功");
     }
 
