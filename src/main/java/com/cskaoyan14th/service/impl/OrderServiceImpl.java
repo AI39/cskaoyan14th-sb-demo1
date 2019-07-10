@@ -4,12 +4,14 @@ import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.OrderGoodsMapper;
 import com.cskaoyan14th.mapper.OrderMapper;
 import com.cskaoyan14th.service.OrderService;
+import com.cskaoyan14th.util.OrderUtil;
 import com.cskaoyan14th.vo.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.System;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +24,9 @@ import java.util.Map;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
+    @Autowired(required = false)
     OrderMapper orderMapper;
-    @Autowired
+    @Autowired(required = false)
     OrderGoodsMapper orderGoodsMapper;
 
     @Override
@@ -66,6 +68,11 @@ public class OrderServiceImpl implements OrderService {
     public Map<String, Object> wxQueryOrderListByUserId(int userId, int showType, int page, int size) {
         PageHelper.startPage(page, size);
         List<WxOrder> orderList1 = orderMapper.wxQueryOrderListByUserId(userId, showType);
+        System.out.println(orderList1);
+        for (WxOrder wxO : orderList1) {
+            wxO.setOrderStatusText(OrderUtil.orderStatusText(wxO));
+            wxO.setHandleOption(OrderUtil.build(wxO));
+        }
         PageInfo<WxOrder> pageInfo = new PageInfo<>(orderList1);
 
         Map<String, Object> map = new HashMap<>();
@@ -76,8 +83,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order queryOrderById(int userId) {
-        return orderMapper.selectByPrimaryKey(userId);
+    public WxOrder queryWxOrderById(int orderId) {
+        WxOrder wxOrder = orderMapper.selectWxOrderById(orderId);
+        wxOrder.setOrderStatusText(OrderUtil.orderStatusText(wxOrder));
+        wxOrder.setHandleOption(OrderUtil.build(wxOrder));
+
+        return wxOrder;
     }
 
     @Override
@@ -88,5 +99,15 @@ public class OrderServiceImpl implements OrderService {
         List<OrderGoods> orderGoodsList = orderGoodsMapper.selectByExample(orderGoodsExample);
 
         return orderGoodsList;
+    }
+
+    @Override
+    public int insertOrderReturnId(Order order) {
+        int insert = orderMapper.insertOrderReturnId(order);
+        if (insert == 1){
+            return order.getId();
+        }else {
+            return -1;
+        }
     }
 }

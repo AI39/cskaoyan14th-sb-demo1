@@ -1,5 +1,6 @@
 package com.cskaoyan14th.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class MyGroupon {
@@ -8,7 +9,7 @@ public class MyGroupon {
     Groupon groupon;
     int orderId;
     String orderSn;
-    double actualPrice;
+    BigDecimal actualPrice;
     int joinerCount;
     List<Goods> goodsList;
     GrouponRules rules;
@@ -19,7 +20,7 @@ public class MyGroupon {
     public MyGroupon() {
     }
 
-    public MyGroupon(String orderStatusText, String creator, Groupon groupon, int orderId, String orderSn, double actualPrice, int joinerCount, List<Goods> goodsList, GrouponRules rules, int id, boolean isCreator, HandleOption handleOption) {
+    public MyGroupon(String orderStatusText, String creator, Groupon groupon, int orderId, String orderSn, BigDecimal actualPrice, int joinerCount, List<Goods> goodsList, GrouponRules rules, int id, boolean isCreator, HandleOption handleOption) {
         this.orderStatusText = orderStatusText;
         this.creator = creator;
         this.groupon = groupon;
@@ -74,11 +75,11 @@ public class MyGroupon {
         this.orderSn = orderSn;
     }
 
-    public double getActualPrice() {
+    public BigDecimal getActualPrice() {
         return actualPrice;
     }
 
-    public void setActualPrice(double actualPrice) {
+    public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
     }
 

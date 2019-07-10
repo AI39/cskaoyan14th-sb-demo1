@@ -303,4 +303,8 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select * from cskaoyan_mall_groupon where user_id=#{userId}
+  </select>
 </mapper>
