@@ -445,7 +445,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsExampleCriteria.andCategoryIdEqualTo(categoryId);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         List<Goods> goodsListLimit = new ArrayList<>();
-        int limit = 5;
+        int limit = 6;
         for (int i = 0; i < limit && i < goodsList.size(); i++) {
             goodsListLimit.add(goodsList.get(i));
         }
