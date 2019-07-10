@@ -242,4 +242,27 @@
   </where>
     order by #{sort} #{order}
   </select>
+  
+  <resultMap id="footprint" type="com.cskaoyan14th.bean.WxFootprint">
+    <id column="id" property="id"/>
+    <result column="goods_id" property="goodsId"/>
+    <result column="add_time" property="addTime"/>
+    <result column="deleted" property="deleted"/>
+    <result column="name" property="name"/>
+    <result column="brief" property="brief"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="retail_price" property="retailPrice"/>
+  </resultMap>
+  <select id="selectFootprintList" resultMap="footprint">
+    select
+    f.id , f.goods_id, f.add_time, g.name, g.brief, g.pic_url, g.retail_price
+    from
+    cskaoyan_mall_footprint f
+    left join
+    cskaoyan_mall_goods g
+    on
+    f.goods_id = g.id
+    where
+    f.deleted = 0
+  </select>
 </mapper>

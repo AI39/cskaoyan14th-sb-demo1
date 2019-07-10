@@ -34,4 +34,5 @@ public interface FootprintMapper {
     List<Footprint> selectFootprintListOrder(@Param("userId") String userId,@Param("goodsId") String goodsId,
                                              @Param("sort") String sort, @Param("order") String order);
 
+    List<Footprint> selectFootprintList();
 }
