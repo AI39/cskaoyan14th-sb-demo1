@@ -3,6 +3,7 @@ package com.cskaoyan14th.bean;
 import java.util.Date;
 
 public class Permission {
+
     private Integer id;
 
     private Integer roleId;

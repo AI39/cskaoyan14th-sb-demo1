@@ -1,13 +1,22 @@
 package com.cskaoyan14th.bean;
 
+
 public class SystemWx {
+
     String cskaoyan_mall_wx_index_new;
+
     String cskaoyan_mall_wx_share;
+
     String cskaoyan_mall_wx_index_hot;
+
     String cskaoyan_mall_wx_catlog_goods;
+
     String cskaoyan_mall_wx_catlog_list;
+
     String cskaoyan_mall_wx_index_brand;
+
     String cskaoyan_mall_wx_index_topic;
+
 
     public String getCskaoyan_mall_wx_index_new() {
         return cskaoyan_mall_wx_index_new;

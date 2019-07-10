@@ -3,8 +3,11 @@ package com.cskaoyan14th.bean;
 public class SystemKeyValue {
 
     String  cskaoyan_mall_mall_name;
+
     String  cskaoyan_mall_mall_phone;
+
     String  cskaoyan_mall_mall_address;
+
     String  cskaoyan_mall_mall_qq;
 
     public String getCskaoyan_mall_mall_name() {
