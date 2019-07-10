@@ -1,6 +1,7 @@
 package com.cskaoyan14th.controller.wx;
 
 import com.cskaoyan14th.bean.CommentList;
+import com.cskaoyan14th.bean.GrouponRules;
 import com.cskaoyan14th.bean.Topic;
 import com.cskaoyan14th.service.AdService;
 import com.cskaoyan14th.service.TopicService;
@@ -88,8 +89,8 @@ public class TopicController {
      */
     @RequestMapping("coupon/selectlist")
     @ResponseBody
-    public ResponseVo<List> selectCouponList(int cartId,int grouponRules){
-        ResponseVo<List> responseVo=topicService.selectCouponList(cartId,grouponRules);
+    public ResponseVo<List> selectCouponList(int cartId, int grouponRulesId){
+        ResponseVo<List> responseVo=topicService.selectCouponList(cartId,grouponRulesId);
         return responseVo;
     }
 

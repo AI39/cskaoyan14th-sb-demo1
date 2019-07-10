@@ -487,6 +487,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public Goods getGoodByGoodsId(Integer goodsId) {
+        return goodsMapper.selectByPrimaryKey(goodsId);
+    }
+
+    @Override
+    public GoodsProduct getProductByProductId(Integer productId) {
+        return goodsProductMapper.selectByPrimaryKey(productId);
+    }
     public int insertSearchHistory(Integer userId, String keyword) {
         SearchHistory searchHistory = new SearchHistory();
         searchHistory.setAddTime(new Date());
