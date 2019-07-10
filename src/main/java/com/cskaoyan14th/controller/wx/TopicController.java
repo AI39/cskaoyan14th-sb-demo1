@@ -93,6 +93,13 @@ public class TopicController {
         return responseVo;
     }
 
+    @RequestMapping("groupon/my")
+    @ResponseBody
+    public ResponseVo<PageData> getMyGroupon(int showType){
+        ResponseVo<PageData> responseVo=topicService.getMyGroupon(showType);
+        return responseVo;
+    }
+
 
 
 

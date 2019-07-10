@@ -28,4 +28,6 @@ public interface TopicService {
     ResponseVo<String> exchange(String code);
 
     ResponseVo<List> selectCouponList(int cartId,int grouponRules);
+
+    ResponseVo<PageData> getMyGroupon(int showType);
 }
