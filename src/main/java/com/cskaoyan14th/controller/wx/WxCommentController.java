@@ -69,7 +69,11 @@ public class WxCommentController {
         //获取userId
         String token = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(token);
-
+        if(userId == null || userId == 0) {
+            responseVo.setErrmsg("请重新登陆");
+            responseVo.setErrno(502);
+            return responseVo;
+        }
         Date date = new Date();
         comment.setUserId(userId);
         comment.setAddTime(date);
