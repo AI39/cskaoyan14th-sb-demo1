@@ -1,10 +1,7 @@
 package com.cskaoyan14th.controller.wx;
 
 
-import com.cskaoyan14th.bean.Address;
-import com.cskaoyan14th.bean.Cart;
-import com.cskaoyan14th.bean.Coupon;
-import com.cskaoyan14th.bean.Order;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.util.UserTokenManager;
 
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.lang.System;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -86,8 +84,11 @@ public class WxOrderController {
 
     @RequestMapping("prepay")
     @ResponseBody
-    public ResponseVo<Object> prepay(@RequestBody Map<String, Object> requestMap){
-        return new ResponseVo<>(0,  null, "成功");
+    public Map<String,Object> prepay(@RequestBody Map<String, Object> requestMap){
+        Map<String,Object> map = new HashMap<>();
+        map.put("errmsg","订单不能支付");
+        map.put("errno",720);
+        return map;
     }
 
     @Autowired
@@ -130,8 +131,10 @@ public class WxOrderController {
         //设置商品信息
         List<Cart> checkedGoodsList = new ArrayList<>();
         if (cartId == 0){
+            //cartId=0，表示购买购物车选中的商品
             checkedGoodsList = cartService.getCheckedGoodsList(uid);
         }else {
+            //否则是立即购买的商品
             checkedGoodsList = cartService.getFastAddCartByCartId(cartId,uid);
         }
         double goodsPrice = CartTotal.calculate(checkedGoodsList).getCheckedGoodsAmount();
@@ -183,7 +186,27 @@ public class WxOrderController {
         /*
         插入order_goods表的操作
          */
+        for (Cart cart : checkedGoodsList) {
+            OrderGoods orderGoods = new OrderGoods();
+            orderGoods.setOrderId(orderId);
+            orderGoods.setGoodsId(cart.getGoodsId());
+            orderGoods.setGoodsName(cart.getGoodsName());
+            orderGoods.setGoodsSn(cart.getGoodsSn());
+            orderGoods.setProductId(cart.getProductId());
+            orderGoods.setNumber(cart.getNumber());
+            orderGoods.setPrice(cart.getPrice());
+            orderGoods.setSpecifications(cart.getSpecifications());
+            orderGoods.setPicUrl(cart.getPicUrl());
+            orderGoods.setComment(-1);//可能要连表
+            orderGoods.setAddTime(cart.getAddTime());
+            orderGoods.setUpdateTime(new Date());
+            orderGoods.setDeleted(cart.getDeleted());
 
+            //插入orderGoods表
+            int insert = orderService.insertGoodIntoOrderGoods(orderGoods);
+            //设置cart表的deleted为1/true,表示已经删除，不会在购物车(cart/list)显示
+            int a = cartService.setDeletedTrueById(cart.getId());
+        }
 
         return responseVo;
     }
