@@ -394,7 +394,7 @@ public class GoodsServiceImpl implements GoodsService {
         CollectExample.Criteria collectExampleCriteria = collectExample.createCriteria();
         collectExampleCriteria.andValueIdEqualTo(id);
         List<Collect> userHasCollect = collectMapper.selectByExample(collectExample);
-        if(userHasCollect == null || userHasCollect.size() == 0) {
+        if(userHasCollect == null || userHasCollect.size() == 0 || userHasCollect.get(0).getType() == 1 ||  userHasCollect.get(0).getDeleted() == true) {
             goodsDetail.setUserHasCollect(0);
         } else {
             goodsDetail.setUserHasCollect(1);
