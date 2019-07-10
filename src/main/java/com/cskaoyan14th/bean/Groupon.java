@@ -1,8 +1,11 @@
 package com.cskaoyan14th.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Groupon {
+
     private Integer id;
 
     private Integer orderId;
@@ -15,6 +18,7 @@ public class Groupon {
 
     private Integer creatorUserId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date addTime;
 
     private Date updateTime;

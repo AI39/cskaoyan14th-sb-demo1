@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CartMapper {
+
     long countByExample(CartExample example);
 
     int deleteByExample(CartExample example);
@@ -39,5 +40,25 @@ public interface CartMapper {
 
     int deleteCartItemByPids(@Param("uid") Integer uid,@Param("productIds") List<Integer> productIds);
 
+    //获取选中的购物车项，deleted=0
     List<Cart> getCheckedCartList(@Param("uid") Integer uid);
+
+    int insertCartReturnId(Cart cart);
+
+    List<Cart> getCartItemByCartId(@Param("cartId") int cartId,@Param("uid") Integer uid);
+
+    int getCartCountByUid(Integer uid);
+
+    //根据cartid查询商品数量
+    int queryNumberById(@Param("id") Integer id);
+
+    //查询数据库中是否有该uid和productId的数据
+    Cart queryCartWithUidAndPid(@Param("uid") Integer userId,@Param("pid") Integer productId);
+
+    //只查deleted=0的购物车项
+    List<Cart> getCartListByUidNotDeleted(@Param("uid") int uid);
+
+    void clearDeletedCart(@Param("uid") Integer userId);
+
+    int setDeletedTrueById(@Param("id") Integer id);
 }

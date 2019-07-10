@@ -18,28 +18,43 @@ import java.util.*;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
+
     @Autowired
     GoodsMapper goodsMapper;
+
     @Autowired
     GoodsAttributeMapper goodsAttributeMapper;
+
     @Autowired
     GoodsProductMapper goodsProductMapper;
+
     @Autowired
     GoodsSpecificationMapper goodsSpecificationMapper;
+
     @Autowired
     CategoryMapper categoryMapper;
+
     @Autowired
     GrouponRulesMapper grouponRulesMapper;
+
     @Autowired
     IssueMapper issueMapper;
+
     @Autowired
     CommentMapper commentMapper;
+
     @Autowired
     BrandMapper brandMapper;
+
     @Autowired
     CollectMapper collectMapper;
+
     @Autowired
     SearchHistoryMapper searchHistoryMapper;
+
+    @Autowired
+    FootprintMapper footprintMapper;
+
 
     @Override
     public List<CategoryForGoods> getCategoryForGoods() {
@@ -53,10 +68,13 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public Boolean goodsNameIsExist(String name) {
+
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andNameEqualTo(name);
+
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+
         if(goodsList != null && goodsList.size() != 0) {
             return true;
         }
@@ -66,6 +84,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public Boolean insertGoods4(GoodsParam goodsParam) {
+
         Date date = new Date();
         //获取参数
         Goods goods = goodsParam.getGoods();
@@ -82,29 +101,37 @@ public class GoodsServiceImpl implements GoodsService {
 
             //封装goodsId,插入数据库
             for (GoodsSpecification goodsSpecification : specifications) {
+
                 goodsSpecification.setAddTime(date);
                 goodsSpecification.setUpdateTime(date);
                 goodsSpecification.setGoodsId(id);
+
                 goodsSpecificationMapper.insertSelective(goodsSpecification);
             }
 
             for (GoodsProduct goodsProduct : products) {
+
                 goodsProduct.setAddTime(date);
                 goodsProduct.setUpdateTime(date);
                 goodsProduct.setId(null);
                 goodsProduct.setGoodsId(id);
+
                 goodsProductMapper.insertSelective(goodsProduct);
             }
 
             for (GoodsAttribute goodsAttribute : attributes) {
+
                 goodsAttribute.setAddTime(date);
                 goodsAttribute.setUpdateTime(date);
                 goodsAttribute.setGoodsId(id);
+
                 goodsAttributeMapper.insertSelective(goodsAttribute);
             }
         } catch (Exception e) {
+
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
             return false;
         }
         return true;
@@ -112,6 +139,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public GoodsParam getGoodsParam(int id) {
+
         GoodsParam goodsParam = new GoodsParam();
         //获取categoryIds
         int[] categoryIds = new int[2];
@@ -122,6 +150,7 @@ public class GoodsServiceImpl implements GoodsService {
 
         Category category = categoryMapper.selectByPrimaryKey(childCategoryId);
         int parentCategoryId = 0;
+
         if(category != null) {
             parentCategoryId = category.getPid();
         }
@@ -136,7 +165,9 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
         GoodsAttributeExample.Criteria goodsAttributeExampleCriteria = goodsAttributeExample.createCriteria();
         goodsAttributeExampleCriteria.andGoodsIdEqualTo(id);
+
         List<GoodsAttribute> goodsAttributesList = goodsAttributeMapper.selectByExample(goodsAttributeExample);
+
         GoodsAttribute[] attributes = new GoodsAttribute[goodsAttributesList.size()];
         goodsAttributesList.toArray(attributes);
         goodsParam.setAttributes(attributes);
@@ -144,18 +175,24 @@ public class GoodsServiceImpl implements GoodsService {
         //获取specifications
         GoodsSpecificationExample goodsSpecificationExample = new GoodsSpecificationExample();
         GoodsSpecificationExample.Criteria goodsSpecificationExampleCriteria = goodsSpecificationExample.createCriteria();
+
         goodsSpecificationExampleCriteria.andGoodsIdEqualTo(id);
+
         List<GoodsSpecification> goodsSpecificationList = goodsSpecificationMapper.selectByExample(goodsSpecificationExample);
         GoodsSpecification[] specifications = new GoodsSpecification[goodsSpecificationList.size()];
+
         goodsSpecificationList.toArray(specifications);
         goodsParam.setSpecifications(specifications);
 
         //获取products
         GoodsProductExample goodsProductExample = new GoodsProductExample();
         GoodsProductExample.Criteria goodsProductExampleCriteria = goodsProductExample.createCriteria();
+
         goodsProductExampleCriteria.andGoodsIdEqualTo(id);
         List<GoodsProduct> goodsProductList = goodsProductMapper.selectByExample(goodsProductExample);
+
         GoodsProduct[] products = new GoodsProduct[goodsProductList.size()];
+
         goodsProductList.toArray(products);
         goodsParam.setProducts(products);
 
@@ -165,6 +202,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public Boolean updateGoods4(GoodsParam goodsParam) {
+
         Date date = new Date();
         //获取参数
         Goods goods = goodsParam.getGoods();
@@ -183,29 +221,37 @@ public class GoodsServiceImpl implements GoodsService {
 
             //insert子表
             for (GoodsSpecification goodsSpecification : specifications) {
+
                 goodsSpecification.setAddTime(date);
                 goodsSpecification.setUpdateTime(date);
                 goodsSpecification.setGoodsId(goods.getId());
+
                 goodsSpecificationMapper.insertSelective(goodsSpecification);
             }
 
             for (GoodsProduct goodsProduct : products) {
+
                 goodsProduct.setAddTime(date);
                 goodsProduct.setUpdateTime(date);
                 goodsProduct.setId(null);
                 goodsProduct.setGoodsId(goods.getId());
+
                 goodsProductMapper.insertSelective(goodsProduct);
             }
 
             for (GoodsAttribute goodsAttribute : attributes) {
+
                 goodsAttribute.setAddTime(date);
                 goodsAttribute.setUpdateTime(date);
                 goodsAttribute.setGoodsId(goods.getId());
+
                 goodsAttributeMapper.insertSelective(goodsAttribute);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
             return false;
         }
 
@@ -215,15 +261,22 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public Boolean deleteGoods4(Goods goods) {
+
         Integer id = goods.getId();
+
         try {
+
             goodsMapper.deleteByPrimaryKey(id);
+
             deleteGoodsSpecificationByGoodsId(id);
             deleteGoodsProductByGoodsId(id);
             deleteGoodsAttributeByGoodsId(id);
+
         } catch (Exception e) {
+
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
             return false;
         }
         return true;
@@ -231,6 +284,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order) {
+
         PageHelper.startPage(page, limit);
 
         GoodsExample goodsExample = new GoodsExample();
@@ -239,44 +293,55 @@ public class GoodsServiceImpl implements GoodsService {
 
         if((goodsSn == null || goodsSn.length() == 0) && (name == null || name.length() == 0)) {
             criteria.andIdIsNotNull();
+
         } else if((goodsSn != null && goodsSn.length() > 0) && (name == null || name.length() == 0)) {  //只查询商品编号
             criteria.andGoodsSnLike("%" + goodsSn + "%");
+
         } else if((goodsSn == null || goodsSn.length() == 0) && (name != null && name.length() != 0)) { //只查询商品名称
             criteria.andNameLike("%" + name + "%");
+
         } else {
             criteria.andGoodsSnLike("%" + goodsSn + "%").andNameLike("%" + name + "%");
         }
 
         List<Goods> goodsList = goodsList = goodsMapper.selectByExample(goodsExample);
+
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         Page<Goods> goodsPage = new Page<>(pageInfo.getList(),pageInfo.getTotal());
+
         return goodsPage;
     }
 
     @Override
-    public List<Goods> getNewGoodsList() {
+    public List<Goods> getNewGoodsList(int newGoodsCount) {
+
+        PageHelper.startPage(1, newGoodsCount);
+
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
+
         criteria.andIsNewEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
-        int limit = 5;
-        List<Goods> goodsListLimit = new ArrayList<>();
-        for (int i = 0; i < limit && i < goodsList.size(); i++) {
-            goodsListLimit.add(goodsList.get(i));
-        }
-        return goodsListLimit;
+
+        return goodsList;
     }
 
     @Override
-    public List<FloorGoods> getFloorGoodsList() {
+    public List<FloorGoods> getFloorGoodsList(int catlogCount, int catlogGoodsCount) {
+
+        PageHelper.startPage(1, catlogCount);
+
         CategoryExample categoryExample = new CategoryExample();
         CategoryExample.Criteria criteria = categoryExample.createCriteria();
+
         criteria.andPidEqualTo(0);
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
 
         List<FloorGoods> floorGoodsList = new ArrayList<>();
-        int limit = 4;
+        int limit = catlogGoodsCount;
+
         for(Category category : categories) {
+
             List<Goods> goodsList = goodsMapper.selectLimitByParentCategoryId(category.getId(), limit);
             FloorGoods floorGoods = new FloorGoods();
             floorGoods.setGoodsList(goodsList);
@@ -288,19 +353,17 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getHotGoodsList() {
+    public List<Goods> getHotGoodsList(int hotGoodsCount) {
+
+        PageHelper.startPage(1, hotGoodsCount);
+
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
+
         criteria.andIsHotEqualTo(true);
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
 
-        int limit = 5;
-        List<Goods> goodsListLimit = new ArrayList<>();
-        for (int i = 0; i < limit && i < goodsList.size(); i++) {
-            goodsListLimit.add(goodsList.get(i));
-        }
-
-        return goodsListLimit;
+        return goodsList;
     }
 
     @Override
@@ -312,6 +375,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<Goods> getGoodsListByPage(String keyword, int page, int size, String sort, String order, Integer categoryId, Integer brandId) {
+
         PageHelper.startPage(page, size);
 
         GoodsExample goodsExample = new GoodsExample();
@@ -336,28 +400,35 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     private void deleteGoodsAttributeByGoodsId(Integer id) {
+
         GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
         GoodsAttributeExample.Criteria goodsAttributeExampleCriteria = goodsAttributeExample.createCriteria();
         goodsAttributeExampleCriteria.andGoodsIdEqualTo(id);
+
         goodsAttributeMapper.deleteByExample(goodsAttributeExample);
     }
 
     private void deleteGoodsProductByGoodsId(Integer id) {
+
         GoodsProductExample goodsProductExample = new GoodsProductExample();
         GoodsProductExample.Criteria goodsProductExampleCriteria = goodsProductExample.createCriteria();
         goodsProductExampleCriteria.andGoodsIdEqualTo(id);
+
         goodsProductMapper.deleteByExample(goodsProductExample);
     }
 
     private void deleteGoodsSpecificationByGoodsId(Integer id) {
+
         GoodsSpecificationExample goodsSpecificationExample = new GoodsSpecificationExample();
         GoodsSpecificationExample.Criteria goodsSpecificationExampleCriteria = goodsSpecificationExample.createCriteria();
         goodsSpecificationExampleCriteria.andGoodsIdEqualTo(id);
+
         goodsSpecificationMapper.deleteByExample(goodsSpecificationExample);
     }
 
     @Override
     public GoodsDetail getGoodsDetailByGoodsId(int id) {
+
         GoodsDetail goodsDetail = new GoodsDetail();
 
         //获取specificationList
@@ -374,6 +445,7 @@ public class GoodsServiceImpl implements GoodsService {
             GoodsSpecificationExample.Criteria criteria = goodsSpecificationExample.createCriteria();
             criteria.andSpecificationEqualTo(specification).andGoodsIdEqualTo(id);
             List<GoodsSpecification> valueList = goodsSpecificationMapper.selectByExample(goodsSpecificationExample);
+
             map.put("valueList", valueList);
             specificationList.add(map);
         }
@@ -383,6 +455,7 @@ public class GoodsServiceImpl implements GoodsService {
         GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
         GrouponRulesExample.Criteria grouponRulesExampleCriteria = grouponRulesExample.createCriteria();
         grouponRulesExampleCriteria.andGoodsIdEqualTo(id);
+
         List<GrouponRules> groupon = grouponRulesMapper.selectByExample(grouponRulesExample);
         goodsDetail.setGroupon(groupon);
 
@@ -390,6 +463,7 @@ public class GoodsServiceImpl implements GoodsService {
         IssueExample issueExample = new IssueExample();
         IssueExample.Criteria issueExampleCriteria = issueExample.createCriteria();
         issueExampleCriteria.andIdIsNotNull();
+
         List<Issue> issue = issueMapper.selectByExample(issueExample);
         goodsDetail.setIssue(issue);
 
@@ -398,8 +472,10 @@ public class GoodsServiceImpl implements GoodsService {
         CollectExample.Criteria collectExampleCriteria = collectExample.createCriteria();
         collectExampleCriteria.andValueIdEqualTo(id);
         List<Collect> userHasCollect = collectMapper.selectByExample(collectExample);
-        if(userHasCollect == null || userHasCollect.size() == 0) {
+
+        if(userHasCollect == null || userHasCollect.size() == 0 || userHasCollect.get(0).getType() == 1 ||  userHasCollect.get(0).getDeleted() == true) {
             goodsDetail.setUserHasCollect(0);
+
         } else {
             goodsDetail.setUserHasCollect(1);
         }
@@ -412,6 +488,7 @@ public class GoodsServiceImpl implements GoodsService {
         //获取comment
         int limit = 2;
         List<CommentForGoodsDetail> data = commentMapper.selectLimitCommentForGoodsDetailByGoodId(id, limit);
+
         int count = commentMapper.selectCountByGoodsId(id);
         HashMap<String, Object> comment = new HashMap<>();
         comment.put("data", data);
@@ -445,14 +522,17 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<Goods> getRelatedGoods(int id) {
+
         Goods goods = goodsMapper.selectByPrimaryKey(id);
         Integer categoryId = goods.getCategoryId();
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria goodsExampleCriteria = goodsExample.createCriteria();
         goodsExampleCriteria.andCategoryIdEqualTo(categoryId);
+
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         List<Goods> goodsListLimit = new ArrayList<>();
-        int limit = 5;
+
+        int limit = 6;
         for (int i = 0; i < limit && i < goodsList.size(); i++) {
             goodsListLimit.add(goodsList.get(i));
         }
@@ -461,11 +541,14 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public Map<String, Object> getCurrentBrotherParentGatogory(int id) {
+
         Map<String, Object> map = new HashMap<>();
+
         CategoryExample categoryExample = new CategoryExample();
         CategoryExample.Criteria criteria = categoryExample.createCriteria();
 
         Category category = categoryMapper.selectByPrimaryKey(id);
+
         if(category.getPid() == 0) {
 
             Category parentCategory = categoryMapper.selectByPrimaryKey(id);
@@ -494,14 +577,41 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public Goods getGoodByGoodsId(Integer goodsId) {
+        return goodsMapper.selectByPrimaryKey(goodsId);
+    }
+
+    @Override
+    public GoodsProduct getProductByProductId(Integer productId) {
+        return goodsProductMapper.selectByPrimaryKey(productId);
+    }
+    @Override
     public int insertSearchHistory(Integer userId, String keyword) {
+
         SearchHistory searchHistory = new SearchHistory();
         searchHistory.setAddTime(new Date());
         searchHistory.setDeleted(false);
         searchHistory.setKeyword(keyword);
         searchHistory.setUpdateTime(new Date());
         searchHistory.setUserId(userId);
+
         int i = searchHistoryMapper.insertSelective(searchHistory);
+        return i;
+    }
+
+    @Override
+    public int insertFootprintByUserIdAndGoodsId(Integer userId, int goodId) {
+
+        Footprint footprint = new Footprint();
+        Date date = new Date();
+        footprint.setAddTime(date);
+        footprint.setDeleted(false);
+        footprint.setGoodsId(goodId);
+        footprint.setUpdateTime(date);
+        footprint.setUserId(userId);
+
+        int i = footprintMapper.insertSelective(footprint);
+
         return i;
     }
 }

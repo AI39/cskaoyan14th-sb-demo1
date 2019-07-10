@@ -18,18 +18,22 @@ import java.util.Map;
 
 @Service
 public class SearchServiceImpl implements SearchService {
+
     @Autowired
     KeywordMapper keywordMapper;
+
     @Autowired
     SearchHistoryMapper searchHistoryMapper;
 
     @Override
     public Keyword getDefaultKeyWord() {
+
         PageHelper.startPage(1,1);
         KeywordExample keywordExample = new KeywordExample();
         KeywordExample.Criteria criteria = keywordExample.createCriteria();
         criteria.andIsHotEqualTo(true);
         List<Keyword> keywords = keywordMapper.selectByExample(keywordExample);
+
         if(keywords != null && keywords.size() != 0) {
             return keywords.get(0);
         }
@@ -38,9 +42,11 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Keyword> getHotKeywordList() {
+
         KeywordExample keywordExample = new KeywordExample();
         KeywordExample.Criteria criteria = keywordExample.createCriteria();
         criteria.andIsHotEqualTo(true);
+
         List<Keyword> keywords = keywordMapper.selectByExample(keywordExample);
         return keywords;
     }
@@ -65,10 +71,27 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public int clearHistoryByUserId(Integer userId) {
+
         SearchHistoryExample searchHistoryExample = new SearchHistoryExample();
         SearchHistoryExample.Criteria criteria = searchHistoryExample.createCriteria();
         criteria.andUserIdEqualTo(userId);
+
         int i = searchHistoryMapper.deleteByExample(searchHistoryExample);
         return i;
+    }
+
+    @Override
+    public List<String> getFussyKeyword(String keyword) {
+
+        KeywordExample keywordExample = new KeywordExample();
+        KeywordExample.Criteria criteria = keywordExample.createCriteria();
+        criteria.andKeywordLike("%" + keyword + "%");
+        List<Keyword> keywords = keywordMapper.selectByExample(keywordExample);
+        List<String> list = new ArrayList<>();
+
+        for(Keyword k : keywords) {
+            list.add(k.getKeyword());
+        }
+        return list;
     }
 }

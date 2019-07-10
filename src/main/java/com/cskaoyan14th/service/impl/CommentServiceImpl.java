@@ -22,11 +22,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Page<Comment> getCommentPage(int page, int limit, Integer userId, Integer valueId, String sort, String order) {
+
         PageHelper.startPage(page, limit);
 
         CommentExample commentExample = new CommentExample();
         commentExample.setOrderByClause(sort + " " + order);
         CommentExample.Criteria criteria = commentExample.createCriteria();
+
         if(userId == null && valueId == null) {
             criteria.andIdIsNotNull();
         } else if(userId != null && valueId == null) {
@@ -40,6 +42,7 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentList = commentMapper.selectByExample(commentExample);
         PageInfo<Comment> pageInfo = new PageInfo<>(commentList);
         Page<Comment> commentPage = new Page<>(pageInfo.getList(), pageInfo.getTotal());
+
         return commentPage;
     }
 
@@ -62,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentList getWxCommentList(int valueId, int type, int page, int size, int showType) {  //showType为1只展示图片
+
         PageHelper.startPage(page, size);
 
         List<CommentData> commentDataList = commentMapper.getCommentData(valueId, type, showType);
@@ -81,5 +85,11 @@ public class CommentServiceImpl implements CommentService {
         commentList.setData(data);
 
         return commentList;
+    }
+
+    @Override
+    public Integer insertComment(Comment comment) {
+        commentMapper.insertSelective(comment);
+        return comment.getId();
     }
 }

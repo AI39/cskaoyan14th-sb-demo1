@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("admin/role")
 public class RoleController {
+
     @Autowired
     RoleService roleService;
+
     @RequestMapping("options")
     @ResponseBody
     public ResponseVo roleOptions(){
@@ -26,6 +28,7 @@ public class RoleController {
     @RequestMapping("list")
     @ResponseBody
     public ResponseVo<Page<Role>> list(int page, int limit,String name){
+
         ResponseVo<Page<Role>> listResponseVo = roleService.queryRoleByName(page,limit,name);
         return listResponseVo;
     }
@@ -33,6 +36,7 @@ public class RoleController {
     @RequestMapping("create")
     @ResponseBody
     public ResponseVo<Role> create(@RequestBody Role role){
+
         roleService.insertRole(role);
         ResponseVo<Role> roleResponseVo = roleService.queryRoleByNa(role);
         return roleResponseVo;
@@ -41,6 +45,7 @@ public class RoleController {
     @RequestMapping("update")
     @ResponseBody
     public ResponseVo update(@RequestBody Role role){
+
         ResponseVo responseVo = roleService.updateRoleById(role);
         return responseVo;
     }
@@ -48,6 +53,7 @@ public class RoleController {
     @RequestMapping("delete")
     @ResponseBody
     public ResponseVo delete(@RequestBody Role role){
+
         ResponseVo responseVo = roleService.deleteById(role);
         return responseVo;
     }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FootprintMapper {
+
     long countByExample(FootprintExample example);
 
     int deleteByExample(FootprintExample example);
@@ -34,4 +35,5 @@ public interface FootprintMapper {
     List<Footprint> selectFootprintListOrder(@Param("userId") String userId,@Param("goodsId") String goodsId,
                                              @Param("sort") String sort, @Param("order") String order);
 
+    List<Footprint> selectFootprintList();
 }

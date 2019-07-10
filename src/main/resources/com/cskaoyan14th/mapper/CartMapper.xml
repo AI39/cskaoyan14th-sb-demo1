@@ -407,6 +407,94 @@
       user_id = #{uid}
       and
       checked = 1
+      and
+      deleted = 0
     </where>
   </select>
+
+  <insert id="insertCartReturnId" parameterType="com.cskaoyan14th.bean.Cart">
+    insert into cskaoyan_mall_cart
+    (id, user_id, goods_id,
+    goods_sn, goods_name, product_id,
+    price, number, specifications,
+    checked, pic_url, add_time,
+    update_time, deleted)
+    values (null, #{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
+    #{goodsSn,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
+    #{price,jdbcType=DECIMAL}, #{number,jdbcType=SMALLINT}, #{specifications,jdbcType=VARCHAR},
+    #{checked,jdbcType=BIT}, #{picUrl,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+    <selectKey order="AFTER" resultType="_int" keyProperty="id">
+      select last_insert_id()
+    </selectKey>
+  </insert>
+
+  <select id="getCartItemByCartId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_cart
+    <where>
+      user_id = #{uid}
+      and
+      id = #{cartId}
+      and
+      deleted = 1
+    </where>
+  </select>
+
+  <select id="getCartCountByUid" resultType="_int">
+    select count(id)
+    from cskaoyan_mall_cart
+    <where>
+      user_id = #{uid}
+    </where>
+  </select>
+
+  <select id="queryNumberById" resultType="_int">
+    select number
+    from cskaoyan_mall_cart
+    where
+    id = #{id}
+  </select>
+
+  <select id="queryCartWithUidAndPid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_cart
+    <where>
+      user_id = #{uid}
+      and
+      product_id = #{pid}
+      and
+      deleted = 0
+    </where>
+  </select>
+
+  <select id="getCartListByUidNotDeleted" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_cart
+    <where>
+      user_id = #{uid}
+      and
+      deleted = 0
+    </where>
+  </select>
+
+  <delete id="clearDeletedCart">
+    delete
+    from cskaoyan_mall_cart
+    <where>
+      user_id = #{uid}
+      and
+      deleted = 1
+    </where>
+  </delete>
+  <update id="setDeletedTrueById">
+    update cskaoyan_mall_cart
+    set deleted = 1
+    <where>
+      id = #{id}
+    </where>
+  </update>
 </mapper>

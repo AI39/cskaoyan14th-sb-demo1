@@ -3,10 +3,17 @@ package com.cskaoyan14th.mapper;
 import com.cskaoyan14th.bean.Order;
 import com.cskaoyan14th.bean.OrderDetail;
 import com.cskaoyan14th.bean.OrderExample;
-import java.util.List;
+import com.cskaoyan14th.bean.WxOrder;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+
+
+import java.util.List;
+
+@Repository
 public interface OrderMapper {
+
     long countByExample(OrderExample example);
 
     int deleteByExample(OrderExample example);
@@ -32,4 +39,16 @@ public interface OrderMapper {
     List<Order> queryOrderList(@Param("orderStatusArray") Short orderStatusArray,@Param("sort") String sort,@Param("order") String order,@Param("userId") Integer userId,@Param("orderSn") String orderSn);
 
     OrderDetail showOrderDetail(int id);
+
+    long queryWxOrderListCount();
+
+    List<WxOrder> queryDataByPage();
+
+    List<WxOrder> wxQueryOrderListByUserId(@Param("userId") int userId, @Param("showType") int showType);
+
+
+    int insertOrderReturnId(Order order);
+
+    WxOrder selectWxOrderById(@Param("id") int orderId);
+
 }

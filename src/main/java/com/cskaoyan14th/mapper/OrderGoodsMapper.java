@@ -4,8 +4,11 @@ import com.cskaoyan14th.bean.OrderGoods;
 import com.cskaoyan14th.bean.OrderGoodsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderGoodsMapper {
+
     long countByExample(OrderGoodsExample example);
 
     int deleteByExample(OrderGoodsExample example);

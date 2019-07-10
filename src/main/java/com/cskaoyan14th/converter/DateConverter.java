@@ -11,12 +11,17 @@ import java.util.Date;
  * Date 2019/6/24 Time 17:47
  */
 public class DateConverter implements Converter<String,Date> {
+
 	@Override
 	public Date convert(String s) {
+
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
 		try {
+
 			Date parse = simpleDateFormat.parse(s);
 			return parse;
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

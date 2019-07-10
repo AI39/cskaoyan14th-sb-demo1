@@ -21,37 +21,47 @@ public class KeywordServiceImpl implements KeywordService {
 
     @Autowired
     KeywordMapper keywordMapper;
+
     @Override
     public Page<Keyword> queryKeywordList(int page, int limit, String keyword, String url, String sort, String order) {
+
         PageHelper.startPage(page,limit);
         List<Keyword> keywordList1 = keywordMapper.queryKeywordList(keyword, url, sort, order);
         PageInfo<Keyword> pageInfo = new PageInfo<>(keywordList1);
         Page<Keyword> keywordList = new Page<>(pageInfo.getList(), pageInfo.getTotal());
+
         return keywordList;
     }
 
     @Override
     public Keyword updateKeyword(Keyword keyword) {
+
         keywordMapper.updateByPrimaryKey(keyword);
         Keyword keyword1 = keywordMapper.selectByPrimaryKey(keyword.getId());
+
         return keyword1;
     }
 
     @Override
     public int deleteKeyword(Keyword keyword) {
+
         int delete = keywordMapper.deleteById(keyword.getId());
+
         return delete;
     }
 
     @Override
     public Keyword createKeyword(Keyword keyword) {
+
         long l = System.currentTimeMillis();
         Date date = new Date(l);
 
         keyword.setAddTime(date);
         keyword.setUpdateTime(date);
+
         keywordMapper.inserts(keyword);
         Keyword keyword1 = keywordMapper.selectByPrimaryKey(keyword.getId());
+
         return  keyword1;
     }
 }

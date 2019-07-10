@@ -28,11 +28,11 @@ public interface GoodsService {
 
     Page<Goods> getGoodsPage(int page, int limit, String goodsSn, String name, String sort, String order);
 
-    List<Goods> getNewGoodsList();
+    List<Goods> getNewGoodsList(int newGoodsCount);
 
-    List<FloorGoods> getFloorGoodsList();
+    List<FloorGoods> getFloorGoodsList(int catlogCount, int catlogGoodsCount);
 
-    List<Goods> getHotGoodsList();
+    List<Goods> getHotGoodsList(int hotGoodsCount);
 
     int getGoodsCount();
 
@@ -45,5 +45,12 @@ public interface GoodsService {
 
     Map<String, Object> getCurrentBrotherParentGatogory(int id);
 
+    //在cart/add中使用
+    Goods getGoodByGoodsId(Integer goodsId);
+    GoodsProduct getProductByProductId(Integer productId);
+
     int insertSearchHistory(Integer userId, String keyword);
+
+    int insertFootprintByUserIdAndGoodsId(Integer userId, int goodId);
+
 }

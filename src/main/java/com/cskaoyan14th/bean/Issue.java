@@ -3,6 +3,7 @@ package com.cskaoyan14th.bean;
 import java.util.Date;
 
 public class Issue {
+
     private Integer id;
 
     private String question;

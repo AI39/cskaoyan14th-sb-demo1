@@ -16,6 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/wx")
 public class WxUserController {
+
     @Autowired
     UserService userService;
 
@@ -23,6 +24,7 @@ public class WxUserController {
     @RequestMapping("/auth/login")
     @ResponseBody
     public ResponseVo<Map<String, Object>> login(@RequestBody User user) {
+
         //*******************************
         //根据username和password查询user信息
         User activeUser = userService.getUser(user.getUsername(), user.getPassword());
@@ -56,6 +58,7 @@ public class WxUserController {
     @RequestMapping("auth/logout")
     @ResponseBody
     public ResponseVo<Object> logout(HttpServletRequest request) {
+
         //前端写了一个token放在请求头中
         //*************************
         //获得请求头
@@ -63,11 +66,13 @@ public class WxUserController {
         Integer userId = UserTokenManager.getUserId(tokenKey);
         //通过请求头获得userId，进而可以获得一切关于user的信息
         //**************************
+
         if (userId == null) {
             return new ResponseVo(-1, null, "错误");
         }
         //删除与本地维护用户token相关的数据
         UserTokenManager.removeToken(userId);
+
         return new ResponseVo(0, null, "成功");
     }
 
@@ -76,6 +81,27 @@ public class WxUserController {
     @ResponseBody
     public ResponseVo<Object> logout() {
         return new ResponseVo(-1, null, "错误");
+    }
+
+    /*用户注册时获取验证码，这里好像直接屏蔽了*/
+    @RequestMapping("auth/regCaptcha")
+    @ResponseBody
+    public ResponseVo<Object> regCaptcha(@RequestBody Map<String, Object> requestMap) {
+        return new ResponseVo(701, null, "小程序后台验证码服务不支持");
+    }
+
+    /*用户注册，这里好像直接屏蔽了*/
+    @RequestMapping("auth/register")
+    @ResponseBody
+    public ResponseVo<Object> register(@RequestBody Map<String, Object> requestMap) {
+        return new ResponseVo(703, null, "验证码错误");
+    }
+
+    /*密码重置，这里好像直接屏蔽了*/
+    @RequestMapping("auth/reset")
+    @ResponseBody
+    public ResponseVo<Object> reset(@RequestBody Map<String, Object> requestMap) {
+        return new ResponseVo(703, null, "验证码错误");
     }
 
     /*显示个人页面相关信息*/
@@ -99,7 +125,7 @@ public class WxUserController {
         orderData.put("unpaid", userService.countByOrderStatus((short)101));
         orderData.put("unship", userService.countByOrderStatus((short)201));
         orderData.put("unrecv", userService.countByOrderStatus((short)301));
-        orderData.put("uncomment", 0);                                         //uncomment先空一下
+        orderData.put("uncomment", userService.countByOrderStatus((short)401));
 
         data.put("order", orderData);
         //***********************************

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface GrouponMapper {
+
     long countByExample(GrouponExample example);
 
     int deleteByExample(GrouponExample example);
@@ -27,4 +28,6 @@ public interface GrouponMapper {
     int updateByPrimaryKeySelective(Groupon record);
 
     int updateByPrimaryKey(Groupon record);
+
+    List<Groupon> selectByUserId(@Param("userId") int userId);
 }

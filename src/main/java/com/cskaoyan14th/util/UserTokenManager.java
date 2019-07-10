@@ -11,16 +11,21 @@ import java.util.Map;
  * 维护用户token
  */
 public class UserTokenManager {
+
     private static Map<String, UserToken> tokenMap = new HashMap<>();
+
     private static Map<Integer, UserToken> idMap = new HashMap<>();
 
     public static Integer getUserId(String token) {
+
         UserToken userToken = tokenMap.get(token);
+
         if (userToken == null) {
             return null;
         }
 
         if (userToken.getExpireTime().isBefore(LocalDateTime.now())) {
+
             tokenMap.remove(token);
             idMap.remove(userToken.getUserId());
             return null;
@@ -39,6 +44,7 @@ public class UserTokenManager {
 //        }
 
         String token = CharUtil.getRandomString(32);
+
         while (tokenMap.containsKey(token)) {
             token = CharUtil.getRandomString(32);
         }
@@ -51,21 +57,27 @@ public class UserTokenManager {
         userToken.setUpdateTime(update);
         userToken.setExpireTime(expire);
         userToken.setUserId(id);
+
         tokenMap.put(token, userToken);
+
         idMap.put(id, userToken);
 
         return userToken;
     }
 
     public static String getSessionKey(Integer userId) {
+
         UserToken userToken = idMap.get(userId);
+
         if (userToken == null) {
             return null;
         }
 
         if (userToken.getExpireTime().isBefore(LocalDateTime.now())) {
+
             tokenMap.remove(userToken.getToken());
             idMap.remove(userId);
+
             return null;
         }
 
@@ -73,8 +85,10 @@ public class UserTokenManager {
     }
 
     public static void removeToken(Integer userId) {
+
         UserToken userToken = idMap.get(userId);
         String token = userToken.getToken();
+
         idMap.remove(userId);
         tokenMap.remove(token);
     }

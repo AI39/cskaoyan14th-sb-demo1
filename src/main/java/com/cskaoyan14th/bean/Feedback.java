@@ -1,8 +1,11 @@
 package com.cskaoyan14th.bean;
 
+import java.util.Arrays;
+
 import java.util.Date;
 
 public class Feedback {
+
     private Integer id;
 
     private Integer userId;
@@ -19,7 +22,7 @@ public class Feedback {
 
     private Boolean hasPicture;
 
-    private String picUrls;
+    private String[] picUrls;
 
     private Date addTime;
 
@@ -28,6 +31,7 @@ public class Feedback {
     private Boolean deleted;
 
     public Integer getId() {
+
         return id;
     }
 
@@ -48,7 +52,7 @@ public class Feedback {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getMobile() {
@@ -56,7 +60,7 @@ public class Feedback {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
     public String getFeedType() {
@@ -64,7 +68,7 @@ public class Feedback {
     }
 
     public void setFeedType(String feedType) {
-        this.feedType = feedType == null ? null : feedType.trim();
+        this.feedType = feedType;
     }
 
     public String getContent() {
@@ -72,7 +76,7 @@ public class Feedback {
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
     }
 
     public Integer getStatus() {
@@ -91,12 +95,12 @@ public class Feedback {
         this.hasPicture = hasPicture;
     }
 
-    public String getPicUrls() {
+    public String[] getPicUrls() {
         return picUrls;
     }
 
-    public void setPicUrls(String picUrls) {
-        this.picUrls = picUrls == null ? null : picUrls.trim();
+    public void setPicUrls(String[] picUrls) {
+        this.picUrls = picUrls;
     }
 
     public Date getAddTime() {
@@ -121,5 +125,45 @@ public class Feedback {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public Feedback(Integer id, Integer userId, String username, String mobile, String feedType, String content, Integer status, Boolean hasPicture, String[] picUrls, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+
+        this.userId = userId;
+
+        this.username = username;
+
+        this.mobile = mobile;
+        this.feedType = feedType;
+        this.content = content;
+        this.status = status;
+        this.hasPicture = hasPicture;
+        this.picUrls = picUrls;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
+
+    public Feedback() {
+    }
+
+    @Override
+    public String toString() {
+
+        return "Feedback{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", username='" + username + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", feedType='" + feedType + '\'' +
+                ", content='" + content + '\'' +
+                ", status=" + status +
+                ", hasPicture=" + hasPicture +
+                ", picUrls=" + Arrays.toString(picUrls) +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
     }
 }

@@ -2,12 +2,15 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.Collect;
 import com.cskaoyan14th.bean.CollectExample;
-import java.util.List;
+import com.cskaoyan14th.wrapper.CollectData;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CollectMapper {
+
     long countByExample(CollectExample example);
 
     int deleteByExample(CollectExample example);
@@ -33,5 +36,7 @@ public interface CollectMapper {
     List<Collect> selectCollectListOrder(String sort, String order);
     List<Collect> selectCollectListOrder(@Param("userId") String userId,@Param("valueId") String valueId,
                                          @Param("sort") String sort, @Param("order") String order);
+
+    List<CollectData> selectCollectDataListByUserId(@Param("userId") int userId, @Param("type") int type);
 
 }

@@ -6,6 +6,7 @@ import com.cskaoyan14th.vo.Page;
 import java.util.List;
 
 public interface AddressService {
+
     Page<Address> getPageList(int page, int limit, String sort, String order);
 
     Page<Address> getPageList(int page, int limit, String name, String userId, String sort, String order);
@@ -20,4 +21,6 @@ public interface AddressService {
     Address getDefaultAddress(Integer uid);
 
     Address getCheckedAddress(int addressId);
+
+    Address getAddressById(Integer addressId);
 }
