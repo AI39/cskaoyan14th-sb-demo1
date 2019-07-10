@@ -110,4 +110,9 @@ public class OrderServiceImpl implements OrderService {
             return -1;
         }
     }
+
+    @Override
+    public int insertGoodIntoOrderGoods(OrderGoods orderGoods) {
+        return orderGoodsMapper.insert(orderGoods);
+    }
 }

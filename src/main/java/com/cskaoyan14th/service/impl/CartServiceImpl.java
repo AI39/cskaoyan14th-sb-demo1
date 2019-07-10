@@ -98,6 +98,11 @@ public class CartServiceImpl implements CartService {
         return cartMapper.getCartListByUidNotDeleted(uid);
     }
 
+    @Override
+    public int setDeletedTrueById(Integer id) {
+        return cartMapper.setDeletedTrueById(id);
+    }
+
     /**
      * 立即购买的插入，deleted=true
      * @param deletedCart
