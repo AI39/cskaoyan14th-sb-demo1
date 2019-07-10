@@ -30,5 +30,5 @@ public interface OrderGoodsMapper {
 
     int updateByPrimaryKey(OrderGoods record);
 
-    int deleteOrdergoodsList(int orderId);
+    int deleteOrdergoodsList(Integer orderId);
 }

@@ -1,10 +1,7 @@
 package com.cskaoyan14th.controller.wx;
 
 
-import com.cskaoyan14th.bean.Address;
-import com.cskaoyan14th.bean.Cart;
-import com.cskaoyan14th.bean.Coupon;
-import com.cskaoyan14th.bean.Order;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.util.UserTokenManager;
 
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.lang.System;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -90,10 +88,10 @@ public class WxOrderController {
         return new ResponseVo<>(0,  null, "成功");
     }
 
-<<<<<<< HEAD
+
     @RequestMapping("delete")
     @ResponseBody
-    public ResponseVo<Order> delete(int orderId, HttpServletRequest request){
+    public ResponseVo<Order> delete(@RequestBody Map<String,Object> map, HttpServletRequest request){
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
         //通过请求头获得userId，进而可以获得一切关于user的信息
@@ -102,6 +100,8 @@ public class WxOrderController {
             return new ResponseVo(-1, null, "错误");
         }
         ResponseVo<Order> responseVo = new ResponseVo<>();
+        //获取请求json对象的信息
+        Integer orderId =(Integer) map.get("orderId");
         int delete = orderService.deleteList(orderId);
         if (delete != 0){
             responseVo.setErrmsg("成功");
@@ -112,7 +112,31 @@ public class WxOrderController {
         }
         return responseVo;
     }
-=======
+
+    @RequestMapping("cancel")
+    @ResponseBody
+    public ResponseVo<Order> cancel(@RequestBody Map<String,Object> map, HttpServletRequest request) {
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
+        //通过请求头获得userId，进而可以获得一切关于user的信息
+        //**************************
+        if (userId == null) {
+            return new ResponseVo(-1, null, "错误");
+        }
+        ResponseVo<Order> responseVo = new ResponseVo<>();
+        //获取请求json对象的信息
+        Integer orderId =(Integer) map.get("orderId");
+        int delete = orderService.deleteList(orderId);
+        if (delete != 0){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+        }else{
+            responseVo.setErrmsg("失败");
+            responseVo.setErrno(404);
+        }
+        return responseVo;
+    }
+
     @Autowired
     AddressService addressService;
     @Autowired
@@ -133,7 +157,7 @@ public class WxOrderController {
         Integer grouponLinkId = (Integer) map.get("grouponLinkId");
         Integer grouponRulesId = (Integer) map.get("grouponRulesId");
         String message = (String) map.get("message");
->>>>>>> 87d9c4d5e4e65a8d5e7726240a489b79753f8f60
+
 
 
         /*

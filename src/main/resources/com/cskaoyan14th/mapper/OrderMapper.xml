@@ -683,7 +683,7 @@
         and order_status = 401
       </if>
       and
-      deleted = 0
+      o.deleted = 0
     </where>
   </select>
 

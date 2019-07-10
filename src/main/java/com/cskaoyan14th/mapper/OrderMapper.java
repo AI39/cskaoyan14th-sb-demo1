@@ -51,7 +51,7 @@ public interface OrderMapper {
     WxOrder selectWxOrderById(@Param("id") int orderId);
 
 
-    int deleteList(int orderId);
+    int deleteList(Integer orderId);
 
 
 

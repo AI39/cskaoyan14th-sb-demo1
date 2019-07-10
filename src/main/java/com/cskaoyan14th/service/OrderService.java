@@ -31,7 +31,7 @@ public interface OrderService {
     List<OrderGoods> queryOrderGoodsById(int orderId);
 
 
-    int deleteList(int orderId);
+    int deleteList(Integer orderId);
 
     //order/submit
     int insertOrderReturnId(Order order);

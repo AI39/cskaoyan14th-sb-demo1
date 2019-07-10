@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
 
-    public int deleteList(int orderId) {
+    public int deleteList(Integer orderId) {
         int delete = orderMapper.deleteList(orderId);
         int delete2 = orderGoodsMapper.deleteOrdergoodsList(orderId);
         if (delete == 1 && delete2 == 1) {
