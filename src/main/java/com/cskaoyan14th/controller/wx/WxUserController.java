@@ -99,7 +99,7 @@ public class WxUserController {
         orderData.put("unpaid", userService.countByOrderStatus((short)101));
         orderData.put("unship", userService.countByOrderStatus((short)201));
         orderData.put("unrecv", userService.countByOrderStatus((short)301));
-        orderData.put("uncomment", 0);                                         //uncomment先空一下
+        orderData.put("uncomment", userService.countByOrderStatus((short)401));
 
         data.put("order", orderData);
         //***********************************

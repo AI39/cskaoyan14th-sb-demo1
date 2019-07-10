@@ -257,4 +257,20 @@
     </where>
     order by #{sort} #{order}
   </select>
+
+  <resultMap id="CollectDataMap" type="com.cskaoyan14th.wrapper.CollectData">
+    <result column="c_id" property="id"/>
+    <result column="c_type" property="type"/>
+    <result column="c_value_id" property="valueId"/>
+    <result column="g_brief" property="brief"/>
+    <result column="g_name" property="name"/>
+    <result column="g_pic_url" property="picUrl"/>
+    <result column="g_retail_price" property="retailPrice"/>
+  </resultMap>
+  <select id="selectCollectDataListByUserId" resultMap="CollectDataMap">
+    select c.id as c_id, c.type as c_type, c.value_id as c_value_id, g.brief as g_brief, g.`name` as g_name, g.pic_url as g_pic_url, g.retail_price as g_retail_price
+    from cskaoyan_mall_collect as c
+    left join cskaoyan_mall_goods as g on c.value_id = g.goods_sn
+    where c.user_id = #{userId} and c.type = #{type}
+  </select>
 </mapper>
