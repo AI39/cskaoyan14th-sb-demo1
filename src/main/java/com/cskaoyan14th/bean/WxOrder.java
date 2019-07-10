@@ -1,10 +1,10 @@
 package com.cskaoyan14th.bean;
 
+import com.cskaoyan14th.util.OrderHandleOption;
+
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Yuechao Yang
@@ -284,7 +284,8 @@ public class WxOrder {
 
     private List<OrderGoods> goodsList;
 
-    private Map<String, Boolean> handleOption;
+//    private Map<String, Boolean> handleOption;
+    private OrderHandleOption handleOption;
 
     public enum Deleted {
         NOT_DELETED(new Boolean("0"), "未删除"),
@@ -373,11 +374,11 @@ public class WxOrder {
         this.goodsList = goodsList;
     }
 
-    public Map<String, Boolean> getHandleOption() {
+    public OrderHandleOption getHandleOption() {
         return handleOption;
     }
 
-    public void setHandleOption(Map<String, Boolean> handleOption) {
+    public void setHandleOption(OrderHandleOption handleOption) {
         this.handleOption = handleOption;
     }
 }
