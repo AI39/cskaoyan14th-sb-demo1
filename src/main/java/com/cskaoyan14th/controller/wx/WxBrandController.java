@@ -30,13 +30,13 @@ public class WxBrandController {
         ResponseMapVo responseMapVo = new ResponseMapVo();
         Map<String, Object> data = new HashMap<>();
         List<Brand> WxBrandList = brandService.queryWxBrandList(page, size);
-        data.put("brandList", WxBrandList);
+        data.put("brandList", WxBrandList);                                                                         //把List数组塞进map
         long count = brandService.queryCountBrand();
-        int totalPages = (int)(count / size);
-        if (count / size != 0){
+        int totalPages = (int)(count / size);                                                                       //用来计算页码
+        if (count / size != 0){                                                                                     //如果不能整除，页码加一
             totalPages += 1;
         }
-        data.put("totalPages", totalPages);
+        data.put("totalPages", totalPages);                                                                         //把页码塞进map
         if (data != null){
             responseMapVo.setData(data);
             responseMapVo.setErrno(0);
