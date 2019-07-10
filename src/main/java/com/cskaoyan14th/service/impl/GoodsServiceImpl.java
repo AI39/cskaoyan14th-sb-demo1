@@ -40,6 +40,9 @@ public class GoodsServiceImpl implements GoodsService {
     CollectMapper collectMapper;
     @Autowired
     SearchHistoryMapper searchHistoryMapper;
+    @Autowired
+    FootprintMapper footprintMapper;
+
 
     @Override
     public List<CategoryForGoods> getCategoryForGoods() {
@@ -391,7 +394,7 @@ public class GoodsServiceImpl implements GoodsService {
         CollectExample.Criteria collectExampleCriteria = collectExample.createCriteria();
         collectExampleCriteria.andValueIdEqualTo(id);
         List<Collect> userHasCollect = collectMapper.selectByExample(collectExample);
-        if(userHasCollect == null || userHasCollect.size() == 0) {
+        if(userHasCollect == null || userHasCollect.size() == 0 || userHasCollect.get(0).getType() == 1 ||  userHasCollect.get(0).getDeleted() == true) {
             goodsDetail.setUserHasCollect(0);
         } else {
             goodsDetail.setUserHasCollect(1);
@@ -495,6 +498,7 @@ public class GoodsServiceImpl implements GoodsService {
     public GoodsProduct getProductByProductId(Integer productId) {
         return goodsProductMapper.selectByPrimaryKey(productId);
     }
+    @Override
     public int insertSearchHistory(Integer userId, String keyword) {
         SearchHistory searchHistory = new SearchHistory();
         searchHistory.setAddTime(new Date());
@@ -503,6 +507,19 @@ public class GoodsServiceImpl implements GoodsService {
         searchHistory.setUpdateTime(new Date());
         searchHistory.setUserId(userId);
         int i = searchHistoryMapper.insertSelective(searchHistory);
+        return i;
+    }
+
+    @Override
+    public int insertFootprintByUserIdAndGoodsId(Integer userId, int goodId) {
+        Footprint footprint = new Footprint();
+        Date date = new Date();
+        footprint.setAddTime(date);
+        footprint.setDeleted(false);
+        footprint.setGoodsId(goodId);
+        footprint.setUpdateTime(date);
+        footprint.setUserId(userId);
+        int i = footprintMapper.insertSelective(footprint);
         return i;
     }
 }
