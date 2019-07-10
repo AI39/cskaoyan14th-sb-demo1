@@ -176,7 +176,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResponseVo<List> selectCouponList(int cartId, int grouponRules) {
+    public ResponseVo<List> selectCouponList(int cartId, int grouponRulesId) {
         CouponExample couponExample = new CouponExample();
         CouponExample.Criteria criteria = couponExample.createCriteria();
         criteria.andIdIsNotNull();
@@ -186,6 +186,11 @@ public class TopicServiceImpl implements TopicService {
         responseVo.setErrno(0);
         responseVo.setData(coupons);
         return responseVo;
+    }
+
+    @Override
+    public ResponseVo<PageData> getMyGroupon(int showType) {
+        return null;
     }
 
 
