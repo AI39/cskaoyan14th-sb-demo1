@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BrandExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -41,12 +42,14 @@ public class BrandExample {
     }
 
     public Criteria or() {
+
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
@@ -55,17 +58,20 @@ public class BrandExample {
     }
 
     protected Criteria createCriteriaInternal() {
+
         Criteria criteria = new Criteria();
         return criteria;
     }
 
     public void clear() {
+
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
     }
 
     protected abstract static class GeneratedCriteria {
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -86,6 +92,7 @@ public class BrandExample {
         }
 
         protected void addCriterion(String condition) {
+
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
@@ -93,6 +100,7 @@ public class BrandExample {
         }
 
         protected void addCriterion(String condition, Object value, String property) {
+
             if (value == null) {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
@@ -100,6 +108,7 @@ public class BrandExample {
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
+
             if (value1 == null || value2 == null) {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
@@ -112,6 +121,7 @@ public class BrandExample {
         }
 
         public Criteria andIdIsNotNull() {
+
             addCriterion("id is not null");
             return (Criteria) this;
         }
@@ -142,6 +152,7 @@ public class BrandExample {
         }
 
         public Criteria andIdLessThanOrEqualTo(Integer value) {
+
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }

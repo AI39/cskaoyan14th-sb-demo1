@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Groupon {
+
     private Integer id;
 
     private Integer orderId;

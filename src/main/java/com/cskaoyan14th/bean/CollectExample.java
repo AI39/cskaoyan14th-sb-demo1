@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CollectExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -40,12 +41,15 @@ public class CollectExample {
     }
 
     public Criteria or() {
+
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
+
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
@@ -54,6 +58,7 @@ public class CollectExample {
     }
 
     protected Criteria createCriteriaInternal() {
+
         Criteria criteria = new Criteria();
         return criteria;
     }

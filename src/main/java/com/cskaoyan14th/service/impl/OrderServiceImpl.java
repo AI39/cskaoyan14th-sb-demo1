@@ -102,6 +102,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+
     public int deleteList(int orderId) {
         int delete = orderMapper.deleteList(orderId);
         int delete2 = orderGoodsMapper.deleteOrdergoodsList(orderId);
@@ -111,4 +112,15 @@ public class OrderServiceImpl implements OrderService {
             return 0;
         }
     }
+    @Override
+    public int insertOrderReturnId(Order order) {
+        int insert = orderMapper.insertOrderReturnId(order);
+        if (insert == 1){
+            return order.getId();
+        }else {
+            return -1;
+
+        }
+    }
 }
+

@@ -30,5 +30,10 @@ public interface OrderService {
 
     List<OrderGoods> queryOrderGoodsById(int orderId);
 
+
     int deleteList(int orderId);
+
+    //order/submit
+    int insertOrderReturnId(Order order);
+
 }

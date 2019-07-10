@@ -58,4 +58,9 @@ public class AddressServiceImpl implements AddressService {
     public Address getCheckedAddress(int addressId) {
         return addressMapper.selectByPrimaryKey(addressId);
     }
+
+    @Override
+    public Address getAddressById(Integer addressId) {
+        return addressMapper.getAddressById(addressId);
+    }
 }
