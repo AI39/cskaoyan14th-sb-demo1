@@ -710,7 +710,7 @@
     #{comments,jdbcType=SMALLINT}, #{endTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP},
     #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
-=======
+
   <resultMap id="WxOrderMap2" type="com.cskaoyan14th.bean.WxOrder">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
