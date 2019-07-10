@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CartExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -41,12 +42,14 @@ public class CartExample {
     }
 
     public Criteria or() {
+
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);

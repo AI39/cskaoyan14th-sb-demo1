@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class GoodsExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -41,12 +42,14 @@ public class GoodsExample {
     }
 
     public Criteria or() {
+
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
@@ -55,17 +58,20 @@ public class GoodsExample {
     }
 
     protected Criteria createCriteriaInternal() {
+
         Criteria criteria = new Criteria();
         return criteria;
     }
 
     public void clear() {
+
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
     }
 
     protected abstract static class GeneratedCriteria {
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {

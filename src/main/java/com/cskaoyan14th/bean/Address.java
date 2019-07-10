@@ -3,6 +3,7 @@ package com.cskaoyan14th.bean;
 import java.util.Date;
 
 public class Address {
+
     private Integer id;
 
     private String name;
@@ -22,6 +23,7 @@ public class Address {
     private String area;
 
     private String address;
+
     private String detailedAddress;
 
 

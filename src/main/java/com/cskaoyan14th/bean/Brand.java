@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Brand {
+
     private Integer id;
 
     private String name;
