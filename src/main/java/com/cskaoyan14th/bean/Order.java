@@ -1,5 +1,7 @@
 package com.cskaoyan14th.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -50,6 +52,7 @@ public class Order {
 
     private Date endTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date addTime;
 
     private Date updateTime;
