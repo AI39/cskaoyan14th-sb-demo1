@@ -53,7 +53,7 @@ public class WxGoodsController {
         if(keyword != null && keyword.length() != 0) {
             String token = request.getHeader("X-Litemall-Token");
             Integer userId = UserTokenManager.getUserId(token);
-            if(userId != null) {
+            if(userId != null && userId != 0) {
                 goodsService.insertSearchHistory(userId, keyword);
             }
         }
